@@ -779,6 +779,118 @@
         text-align:center;border-radius:8px;padding:14px;font-weight:700;
     }
 
+    /* =============================================
+       SCARCITY BANNER
+       ============================================= */
+    .scarcity-banner{
+        position:fixed;top:0;left:0;width:100%;z-index:200;
+        background:var(--primary);
+        color:rgba(255,255,255,.9);
+        padding:9px 48px 9px 20px;
+        text-align:center;font-size:.82rem;font-weight:500;
+        display:flex;align-items:center;justify-content:center;gap:10px;
+        border-bottom:2px solid var(--accent);
+        transition:transform .35s cubic-bezier(0.16,1,0.3,1),opacity .35s;
+    }
+    .scarcity-banner.dismissed{transform:translateY(-110%);opacity:0;pointer-events:none;}
+    .banner-dot{
+        width:8px;height:8px;border-radius:50%;
+        background:var(--accent);flex-shrink:0;
+        animation:dotPulse 2s ease-in-out infinite;
+    }
+    @keyframes dotPulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(.7);}}
+    .banner-text strong{color:#fff;}
+    .banner-close{
+        position:absolute;right:14px;top:50%;transform:translateY(-50%);
+        background:none;border:none;color:rgba(255,255,255,.5);
+        font-size:1.3rem;line-height:1;cursor:pointer;transition:color .2s;
+        padding:4px 6px;
+    }
+    .banner-close:hover{color:#fff;}
+
+    /* =============================================
+       TRUST BADGES
+       ============================================= */
+    .trust-section{padding:80px 0;background:var(--bg-dark);}
+    .trust-section .tag{background:rgba(243,112,33,.2);color:#ffb380;}
+    .trust-section .section-title{color:#fff;}
+    .trust-section .section-subtitle{color:rgba(255,255,255,.55);}
+    .trust-badges-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:10px;}
+    .trust-badge{
+        background:rgba(255,255,255,.04);
+        border:1px solid rgba(255,255,255,.10);
+        border-radius:var(--radius-lg);
+        padding:32px 28px 28px;
+        display:flex;flex-direction:column;gap:16px;
+        position:relative;overflow:hidden;
+        transition:var(--transition);
+    }
+    .trust-badge::before{
+        content:'';position:absolute;inset:0;
+        background:linear-gradient(135deg,rgba(243,112,33,.07) 0%,transparent 70%);
+        opacity:0;transition:opacity .4s;
+    }
+    .trust-badge:hover{border-color:rgba(243,112,33,.4);transform:translateY(-4px);}
+    .trust-badge:hover::before{opacity:1;}
+    .trust-badge-icon{
+        width:56px;height:56px;border-radius:14px;
+        background:rgba(243,112,33,.15);
+        display:flex;align-items:center;justify-content:center;
+        font-size:1.5rem;color:var(--accent);
+        border:1px solid rgba(243,112,33,.25);
+    }
+    .trust-badge-body h4{font-size:1rem;color:#fff;margin-bottom:8px;line-height:1.3;}
+    .trust-badge-body p{font-size:.88rem;color:rgba(255,255,255,.55);line-height:1.65;}
+    .trust-badge-stamp{
+        display:inline-block;align-self:flex-start;
+        font-size:.68rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;
+        color:var(--accent);border:1px solid rgba(243,112,33,.35);
+        padding:3px 10px;border-radius:20px;
+    }
+
+    /* =============================================
+       TABLA COMPARATIVA
+       ============================================= */
+    .compare-section{padding:90px 0;background:var(--bg-warm);}
+    .compare-table{
+        max-width:900px;margin:0 auto;
+        border-radius:var(--radius-lg);overflow:hidden;
+        border:1px solid var(--border);
+        box-shadow:var(--shadow-lg);
+    }
+    .compare-header{
+        display:grid;grid-template-columns:220px 1fr 1fr;
+        background:var(--primary);
+    }
+    .compare-header .compare-col-label{padding:18px 20px;}
+    .compare-col{padding:18px 20px;font-weight:700;font-size:.9rem;
+        display:flex;align-items:center;gap:8px;}
+    .compare-col-bad{background:rgba(239,68,68,.12);color:#f87171;}
+    .compare-col-bad i{color:#f87171;}
+    .compare-col-good{background:rgba(34,197,94,.12);color:#4ade80;}
+    .compare-col-good i{color:#4ade80;}
+    .compare-header .compare-col-bad,.compare-header .compare-col-good{font-size:1rem;}
+    .compare-row{
+        display:grid;grid-template-columns:220px 1fr 1fr;
+        border-top:1px solid var(--border);
+        background:#fff;transition:background .2s;
+    }
+    .compare-row:hover{background:#fafafa;}
+    .compare-row .compare-col-label{
+        padding:18px 20px;font-weight:600;font-size:.88rem;
+        color:var(--text);background:var(--bg-warm);
+        border-right:1px solid var(--border);
+        display:flex;align-items:center;
+    }
+    .compare-row .compare-col{
+        padding:16px 20px;font-size:.88rem;line-height:1.5;
+        align-items:flex-start;gap:10px;
+    }
+    .compare-row .compare-col-bad{color:#6B7280;background:#fff8f8;}
+    .compare-row .compare-col-bad i{color:#f87171;flex-shrink:0;margin-top:3px;}
+    .compare-row .compare-col-good{color:var(--text);background:#f0fdf4;}
+    .compare-row .compare-col-good i{color:#22c55e;flex-shrink:0;margin-top:3px;}
+
     @media (max-width:700px){
         .hero h1{font-size:2.3rem;}
         .section-title{font-size:1.7rem;}
@@ -790,6 +902,11 @@
         .insta-grid-fallback{grid-template-columns:repeat(3,1fr);}
         .footer-grid{grid-template-columns:1fr;}
         .hero-wrapper { background-attachment: scroll; }
+        .trust-badges-grid{grid-template-columns:1fr;}
+        .compare-header,.compare-row{grid-template-columns:1fr;}
+        .compare-row .compare-col-label{border-right:none;border-bottom:1px solid var(--border);}
+        .compare-header .compare-col-label{display:none;}
+        .scarcity-banner{font-size:.76rem;padding:9px 40px 9px 12px;}
         .hide-mobile{display:none;}
         .cta-section h2{font-size:1.8rem;}
         .method-grid{grid-template-columns:1fr;}
@@ -802,6 +919,15 @@
 <!-- =============================================
      NAVBAR
      ============================================= -->
+<!-- =============================================
+     SCARCITY BANNER
+     ============================================= -->
+<div id="scarcity-banner" class="scarcity-banner" role="banner" aria-label="Disponibilidad de agenda">
+    <span class="banner-dot"></span>
+    <span class="banner-text">Agenda técnica planificada &mdash; Solo quedan <strong>2 proyectos de reforma integral</strong> disponibles este mes.</span>
+    <button class="banner-close" id="banner-close-btn" aria-label="Cerrar aviso">&times;</button>
+</div>
+
 <header class="navbar">
     <div class="container nav-content">
         <a href="#" class="logo anim-slide-down">
@@ -1068,6 +1194,43 @@
             <div class="guarantee-content">
                 <h4>Garantía de Ejecución Impecable</h4>
                 <p>"Si al terminar la obra encuentras una sola mancha de pintura o rastro de polvo en zona protegida, volvemos a realizar la limpieza industrial sin coste alguno. Nuestra disciplina es nuestra firma."</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- =============================================
+     TRUST BADGES — SELLOS DE GARANTÍA BLINDADA
+     ============================================= -->
+<section class="trust-section">
+    <div class="container">
+        <div class="tag anim-fade-up" style="display:block;text-align:center;margin:0 auto 14px;">Garantías Innegociables</div>
+        <h2 class="section-title anim-fade-up">Lo que nos hace <span class="highlight">diferentes</span></h2>
+        <p class="section-subtitle anim-fade-up">No son promesas de marketing. Son compromisos firmados en cada contrato.</p>
+        <div class="trust-badges-grid">
+            <div class="trust-badge anim-fade-up delay-1">
+                <div class="trust-badge-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                <div class="trust-badge-body">
+                    <h4>Seguro de Responsabilidad Civil</h4>
+                    <p>Cada obra está cubierta por póliza activa. Cualquier daño accidental queda protegido, sin coste ni drama para ti.</p>
+                </div>
+                <div class="trust-badge-stamp">VERIFICADO</div>
+            </div>
+            <div class="trust-badge anim-fade-up delay-2">
+                <div class="trust-badge-icon"><i class="fa-solid fa-helmet-safety"></i></div>
+                <div class="trust-badge-body">
+                    <h4>Plantilla Propia. Cero Subcontrataciones</h4>
+                    <p>Los profesionales que visitan tu casa el día 1 son los mismos que terminan la obra. Sin sorpresas de última hora, sin calidad variable.</p>
+                </div>
+                <div class="trust-badge-stamp">GARANTIZADO</div>
+            </div>
+            <div class="trust-badge anim-fade-up delay-3">
+                <div class="trust-badge-icon"><i class="fa-solid fa-broom"></i></div>
+                <div class="trust-badge-body">
+                    <h4>Limpieza Industrial Post-Obra</h4>
+                    <p>Protocolo estricto de recogida al finalizar cada jornada. Si al terminar encuentras rastro de polvo en zona protegida, volvemos sin coste.</p>
+                </div>
+                <div class="trust-badge-stamp">POR CONTRATO</div>
             </div>
         </div>
     </div>
@@ -1471,6 +1634,49 @@
 </section>
 
 <!-- =============================================
+     TABLA COMPARATIVA — NOSOTROS VS LA INDUSTRIA
+     ============================================= -->
+<section class="compare-section">
+    <div class="container">
+        <div class="tag anim-fade-up" style="display:block;text-align:center;margin:0 auto 14px;">Sin filtros</div>
+        <h2 class="section-title anim-fade-up">Nosotros vs <span class="highlight">La Industria</span></h2>
+        <p class="section-subtitle anim-fade-up">Lo que casi nadie te dice cuando pides tres presupuestos.</p>
+        <div class="compare-table anim-fade-up">
+            <div class="compare-header">
+                <div class="compare-col-label"></div>
+                <div class="compare-col compare-col-bad"><i class="fa-solid fa-triangle-exclamation"></i> La Mayoría</div>
+                <div class="compare-col compare-col-good"><i class="fa-solid fa-circle-check"></i> Nosotros</div>
+            </div>
+            <div class="compare-row">
+                <div class="compare-col-label">Plazos de entrega</div>
+                <div class="compare-col compare-col-bad"><i class="fa-solid fa-xmark"></i> Retrasos sin penalización ni explicación</div>
+                <div class="compare-col compare-col-good"><i class="fa-solid fa-check"></i> Penalización económica por cada día de retraso firmada en contrato</div>
+            </div>
+            <div class="compare-row">
+                <div class="compare-col-label">Precio final</div>
+                <div class="compare-col compare-col-bad"><i class="fa-solid fa-xmark"></i> Presupuesto que crece con "extras" imprevistos a mitad de obra</div>
+                <div class="compare-col compare-col-good"><i class="fa-solid fa-check"></i> Precio cerrado por escrito. El que te decimos es el que pagas</div>
+            </div>
+            <div class="compare-row">
+                <div class="compare-col-label">Limpieza diaria</div>
+                <div class="compare-col compare-col-bad"><i class="fa-solid fa-xmark"></i> Polvo, desorden y muebles sin protección al terminar la jornada</div>
+                <div class="compare-col compare-col-good"><i class="fa-solid fa-check"></i> Protocolo de recogida y protección al cierre de cada día de obra</div>
+            </div>
+            <div class="compare-row">
+                <div class="compare-col-label">Personal en tu casa</div>
+                <div class="compare-col compare-col-bad"><i class="fa-solid fa-xmark"></i> Subcontratistas sin identificar, sin formación ni seguro propio</div>
+                <div class="compare-col compare-col-good"><i class="fa-solid fa-check"></i> Plantilla propia, regulada y asegurada. Los conoces desde el día 1</div>
+            </div>
+            <div class="compare-row">
+                <div class="compare-col-label">Experiencia real</div>
+                <div class="compare-col compare-col-bad"><i class="fa-solid fa-xmark"></i> Empresa de 2 años con página bonita y resultados mediocres</div>
+                <div class="compare-col compare-col-good"><i class="fa-solid fa-check"></i> 30 años de oficio real en el Maresme y Barcelona. Sin marketing vacío</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- =============================================
      CTA CIERRE
      ============================================= -->
 <section class="cta-section">
@@ -1752,6 +1958,36 @@ function initBeforeAfterSlider() {
    ============================================= */
 document.addEventListener('DOMContentLoaded', () => {
     initBeforeAfterSlider();
+
+    /* ---- Scarcity Banner ---- */
+    (function(){
+        const banner  = document.getElementById('scarcity-banner');
+        const closeBtn= document.getElementById('banner-close-btn');
+        const navbar  = document.querySelector('.navbar');
+        if(!banner || !navbar) return;
+
+        function applyOffset(){
+            const h = banner.classList.contains('dismissed') ? 0 : banner.offsetHeight;
+            navbar.style.top = h + 'px';
+            // Keep hero padding in sync
+            const heroWrap = document.querySelector('.hero-wrapper');
+            if(heroWrap) heroWrap.style.paddingTop = (h + 80) + 'px';
+        }
+
+        // Restore dismissed state from session
+        if(sessionStorage.getItem('scarBannerDismissed')){
+            banner.classList.add('dismissed');
+        }
+        applyOffset();
+
+        closeBtn.addEventListener('click', function(){
+            banner.classList.add('dismissed');
+            applyOffset();
+            sessionStorage.setItem('scarBannerDismissed','1');
+        });
+
+        window.addEventListener('resize', applyOffset);
+    })();
 
     /* ---- i18n ---- */
     const dict = {
