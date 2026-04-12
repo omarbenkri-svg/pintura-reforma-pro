@@ -68,7 +68,33 @@
           {"@type":"Offer","itemOffered":{"@type":"Service","name":"Pintura de comunidades y parkings","description":"Pintura de escaleras, parkings y zonas comunes de comunidades de vecinos."}}
         ]
       },
-      "aggregateRating": {"@type":"AggregateRating","ratingValue":"5.0","reviewCount":"47","bestRating":"5"}
+      "aggregateRating": {"@type":"AggregateRating","ratingValue":"5.0","reviewCount":"47","bestRating":"5"},
+      "review": [
+        {
+          "@type": "Review",
+          "author": {"@type":"Person","name":"Ana R."},
+          "datePublished": "2025-10-15",
+          "reviewRating": {"@type":"Rating","ratingValue":"5","bestRating":"5"},
+          "name": "Pintura y acabados impecables en Sarrià",
+          "reviewBody": "Llevábamos años buscando un equipo de pintores que realmente supiera trabajar en pisos de nivel en Sarrià. Con más de 30 años de oficio se nota desde el primer día: protegieron todos los muebles con film, aplicaron dos manos de pintura antipolvo y los acabados en esquinas y molduras son milimétricos. Ninguna agencia que subcontrata llega a este nivel. Totalmente recomendables."
+        },
+        {
+          "@type": "Review",
+          "author": {"@type":"Person","name":"Carlos M."},
+          "datePublished": "2025-11-20",
+          "reviewRating": {"@type":"Rating","ratingValue":"5","bestRating":"5"},
+          "name": "Reforma integral limpia y puntual en el Eixample",
+          "reviewBody": "Reforma integral de 90m² en el Eixample, incluyendo baño completo, cambio de suelos y pintura de toda la vivienda. Terminaron en el plazo exacto que dijeron, sin un solo extra. Lo que más me sorprendió: al final de cada jornada recogían y limpiaban como si no hubieran estado. El precio cerrado se cumplió al céntimo. 30 años de experiencia real, no de folleto."
+        },
+        {
+          "@type": "Review",
+          "author": {"@type":"Person","name":"Jordi T."},
+          "datePublished": "2025-12-05",
+          "reviewRating": {"@type":"Rating","ratingValue":"5","bestRating":"5"},
+          "name": "Alisado de paredes perfecto en Mataró",
+          "reviewBody": "Tenía el gotelé más feo del Maresme y ahora las paredes parecen de revista. El alisado que hicieron en todo el piso de Mataró es espejo puro, sin ondulaciones ni marcas. Explicaron cada paso, avisaron de los tiempos de secado y no dejaron ni rastro de polvo. Se nota que llevan 30 años haciendo esto, no improvisan nada."
+        }
+      ]
     }
     </script>
 
@@ -186,7 +212,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap&font-display=swap" rel="stylesheet">
     <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
 
@@ -424,6 +450,10 @@
     /* =============================================
        BEFORE/AFTER SLIDER
        ============================================= */
+    /* ---- CONTENT-VISIBILITY: below-fold paint optimization ---- */
+    .ba-section,.gallery-section,.reviews-section,.about-section,.insta-section,.faq-section,.cta-section{
+        content-visibility:auto;contain-intrinsic-size:auto 600px;
+    }
     .ba-section{padding:70px 0;background:var(--bg-warm);}
     .ba-slider-container{
         position:relative;width:100%;max-width:900px;margin:0 auto;
@@ -897,7 +927,10 @@
         <div class="services-elite-grid mb-60">
             <div class="service-card-elite anim-fade-up delay-1">
                 <div class="card-image-wrap">
-                    <img src="images/pintura-elite.png" alt="Pintura de Alta Gama" loading="lazy">
+                    <picture>
+                        <source srcset="images/pintura-elite.webp" type="image/webp">
+                        <img src="images/pintura-elite.png" alt="Pintura de Alta Gama" loading="lazy" decoding="async" width="400" height="200">
+                    </picture>
                     <div class="card-badge">Pintura</div>
                 </div>
                 <div class="card-body">
@@ -912,7 +945,7 @@
             </div>
             <div class="service-card-elite anim-fade-up delay-2">
                 <div class="card-image-wrap">
-                    <img src="https://images.unsplash.com/photo-1507089947368-19c1da9775ae?q=80&w=800&auto=format&fit=crop" alt="Reformas Baños y Cocinas" loading="lazy">
+                    <img src="https://images.unsplash.com/photo-1507089947368-19c1da9775ae?q=80&w=800&auto=format&fit=crop&fm=webp" alt="Reformas Baños y Cocinas" loading="lazy" decoding="async" width="400" height="200">
                     <div class="card-badge">Reformas</div>
                 </div>
                 <div class="card-body">
@@ -927,7 +960,10 @@
             </div>
             <div class="service-card-elite anim-fade-up delay-3">
                 <div class="card-image-wrap">
-                    <img src="images/reformas-elite.png" alt="Reformas Integrales" loading="lazy">
+                    <picture>
+                        <source srcset="images/reformas-elite.webp" type="image/webp">
+                        <img src="images/reformas-elite.png" alt="Reformas Integrales" loading="lazy" decoding="async" width="400" height="200">
+                    </picture>
                     <div class="card-badge">Integrales</div>
                 </div>
                 <div class="card-body">
@@ -946,7 +982,10 @@
         <div class="services-elite-grid">
             <div class="service-card-elite anim-fade-up delay-1">
                 <div class="card-image-wrap">
-                    <img src="images/b2b-elite.png" alt="Oficinas y Locales" loading="lazy">
+                    <picture>
+                        <source srcset="images/b2b-elite.webp" type="image/webp">
+                        <img src="images/b2b-elite.png" alt="Oficinas y Locales" loading="lazy" decoding="async" width="400" height="200">
+                    </picture>
                     <div class="card-badge">B2B</div>
                 </div>
                 <div class="card-body">
@@ -961,7 +1000,10 @@
             </div>
             <div class="service-card-elite anim-fade-up delay-2">
                 <div class="card-image-wrap">
-                    <img src="images/comunidades-elite.png" alt="Escaleras y Parkings" loading="lazy">
+                    <picture>
+                        <source srcset="images/comunidades-elite.webp" type="image/webp">
+                        <img src="images/comunidades-elite.png" alt="Escaleras y Parkings" loading="lazy" decoding="async" width="400" height="200">
+                    </picture>
                     <div class="card-badge">Comunidades</div>
                 </div>
                 <div class="card-body">
@@ -976,7 +1018,10 @@
             </div>
             <div class="service-card-elite anim-fade-up delay-3">
                 <div class="card-image-wrap">
-                    <img src="images/especialista-elite.png" alt="Acondicionamiento Técnico" loading="lazy">
+                    <picture>
+                        <source srcset="images/especialista-elite.webp" type="image/webp">
+                        <img src="images/especialista-elite.png" alt="Acondicionamiento Técnico" loading="lazy" decoding="async" width="400" height="200">
+                    </picture>
                     <div class="card-badge">Especialista</div>
                 </div>
                 <div class="card-body">
@@ -1090,8 +1135,8 @@
         <h2 class="section-title anim-fade-up">La Transformación: Antes y Después</h2>
         <p class="section-subtitle anim-fade-up">Desliza para ver la calidad real de nuestra ejecución técnica.</p>
         <div class="ba-slider-container anim-zoom-in">
-            <img src="images/projects/antes.jpeg" class="ba-img ba-before" alt="Antes de la reforma" loading="lazy" decoding="async">
-            <img src="images/projects/despues.jpeg" class="ba-img ba-after" alt="Después de la reforma" loading="lazy" decoding="async">
+            <img src="images/projects/antes.jpeg" class="ba-img ba-before" alt="Antes de la reforma" loading="lazy" decoding="async" width="900" height="460">
+            <img src="images/projects/despues.jpeg" class="ba-img ba-after" alt="Después de la reforma" loading="lazy" decoding="async" width="900" height="460">
             <div class="ba-slider-handle"><i class="fa-solid fa-arrows-left-right"></i></div>
             <div class="ba-label ba-label-before">Estado Inicial</div>
             <div class="ba-label ba-label-after">Entrega Final</div>
@@ -1109,27 +1154,27 @@
         <p class="section-subtitle anim-fade-up">Resultados limpios, modernos y duraderos en viviendas del Maresme y Barcelona.</p>
         <div class="gallery-grid" style="grid-template-columns:repeat(3,1fr);">
             <div class="gallery-item anim-zoom-in delay-1">
-                <img src="images/projects/WhatsApp Image 2026-04-08 at 22.13.20 (1).jpeg" alt="Baño de lujo con detalles verdes y madera" loading="lazy">
+                <img src="images/projects/WhatsApp Image 2026-04-08 at 22.13.20 (1).jpeg" alt="Baño de lujo con detalles verdes y madera" loading="lazy" decoding="async" width="400" height="260">
                 <div class="gallery-overlay"><span>Diseño de Autor</span></div>
             </div>
             <div class="gallery-item anim-zoom-in delay-2">
-                <img src="images/projects/WhatsApp Image 2026-04-08 at 22.13.21.jpeg" alt="Grifería premium y piedra natural" loading="lazy">
+                <img src="images/projects/WhatsApp Image 2026-04-08 at 22.13.21.jpeg" alt="Grifería premium y piedra natural" loading="lazy" decoding="async" width="400" height="260">
                 <div class="gallery-overlay"><span>Detallismo Técnico</span></div>
             </div>
             <div class="gallery-item anim-zoom-in delay-3">
-                <img src="images/projects/WhatsApp Image 2026-04-08 at 22.13.20.jpeg" alt="Revestimientos de alta gama" loading="lazy">
+                <img src="images/projects/WhatsApp Image 2026-04-08 at 22.13.20.jpeg" alt="Revestimientos de alta gama" loading="lazy" decoding="async" width="400" height="260">
                 <div class="gallery-overlay"><span>Acabados Elite</span></div>
             </div>
             <div class="gallery-item anim-zoom-in delay-4">
-                <img src="images/projects/WhatsApp Image 2026-04-08 at 22.13.21 (1).jpeg" alt="Iluminación oculta en reforma" loading="lazy">
+                <img src="images/projects/WhatsApp Image 2026-04-08 at 22.13.21 (1).jpeg" alt="Iluminación oculta en reforma" loading="lazy" decoding="async" width="400" height="260">
                 <div class="gallery-overlay"><span>Interiorismo Moderno</span></div>
             </div>
             <div class="gallery-item anim-zoom-in delay-5">
-                <img src="images/projects/WhatsApp Image 2026-04-08 at 22.13.21 (2).jpeg" alt="Reforma integral baño completo" loading="lazy">
+                <img src="images/projects/WhatsApp Image 2026-04-08 at 22.13.21 (2).jpeg" alt="Reforma integral baño completo" loading="lazy" decoding="async" width="400" height="260">
                 <div class="gallery-overlay"><span>Reforma Integral</span></div>
             </div>
             <div class="gallery-item anim-zoom-in delay-6">
-                <img src="images/projects/WhatsApp Image 2026-04-08 at 22.13.21 (3).jpeg" alt="Acabados de alta gama Maresme" loading="lazy">
+                <img src="images/projects/WhatsApp Image 2026-04-08 at 22.13.21 (3).jpeg" alt="Acabados de alta gama Maresme" loading="lazy" decoding="async" width="400" height="260">
                 <div class="gallery-overlay"><span>Alta Gama</span></div>
             </div>
         </div>
@@ -1243,7 +1288,7 @@
     <div class="container">
         <div class="about-card anim-fade-up delay-1">
             <div class="about-image">
-                <img src="https://images.unsplash.com/photo-1541888086425-d81bb19240f5?q=80&w=800&auto=format&fit=crop" loading="lazy" alt="Equipo de profesionales en reformas">
+                <img src="https://images.unsplash.com/photo-1541888086425-d81bb19240f5?q=80&w=800&auto=format&fit=crop&fm=webp" loading="lazy" decoding="async" alt="Equipo de profesionales en reformas" width="500" height="420">
             </div>
             <div class="about-text">
                 <div class="tag">Quiénes somos</div>
@@ -1294,39 +1339,39 @@
         <div class="insta-embed-wrapper anim-zoom-in">
             <div class="insta-grid-fallback" style="grid-template-columns:repeat(3,1fr);">
                 <div class="insta-post" onclick="window.open('https://www.instagram.com/pintayreformatuobra','_blank')">
-                    <img src="images/materials/WhatsApp Image 2026-04-08 at 19.28.10.jpeg" alt="Materiales" loading="lazy">
+                    <img src="images/materials/WhatsApp Image 2026-04-08 at 19.28.10.jpeg" alt="Materiales" loading="lazy" decoding="async" width="300" height="300">
                     <div class="insta-overlay"><i class="fa-brands fa-instagram"></i></div>
                 </div>
                 <div class="insta-post" onclick="window.open('https://www.instagram.com/pintayreformatuobra','_blank')">
-                    <img src="images/materials/WhatsApp Image 2026-04-08 at 19.28.10 (3).jpeg" alt="Calidad en Obra" loading="lazy">
+                    <img src="images/materials/WhatsApp Image 2026-04-08 at 19.28.10 (3).jpeg" alt="Calidad en Obra" loading="lazy" decoding="async" width="300" height="300">
                     <div class="insta-overlay"><i class="fa-brands fa-instagram"></i></div>
                 </div>
                 <div class="insta-post" onclick="window.open('https://www.instagram.com/pintayreformatuobra','_blank')">
-                    <img src="images/materials/WhatsApp Image 2026-04-08 at 19.28.09 (2).jpeg" alt="Proceso" loading="lazy">
+                    <img src="images/materials/WhatsApp Image 2026-04-08 at 19.28.09 (2).jpeg" alt="Proceso" loading="lazy" decoding="async" width="300" height="300">
                     <div class="insta-overlay"><i class="fa-brands fa-instagram"></i></div>
                 </div>
                 <div class="insta-post" onclick="window.open('https://www.instagram.com/pintayreformatuobra','_blank')">
-                    <img src="images/materials/WhatsApp Image 2026-04-08 at 19.28.09 (6).jpeg" alt="Trabajo en proceso" loading="lazy">
+                    <img src="images/materials/WhatsApp Image 2026-04-08 at 19.28.09 (6).jpeg" alt="Trabajo en proceso" loading="lazy" decoding="async" width="300" height="300">
                     <div class="insta-overlay"><i class="fa-brands fa-instagram"></i></div>
                 </div>
                 <div class="insta-post" onclick="window.open('https://www.instagram.com/pintayreformatuobra','_blank')">
-                    <img src="images/materials/WhatsApp Image 2026-04-08 at 19.28.10 (5).jpeg" alt="Materiales premium" loading="lazy">
+                    <img src="images/materials/WhatsApp Image 2026-04-08 at 19.28.10 (5).jpeg" alt="Materiales premium" loading="lazy" decoding="async" width="300" height="300">
                     <div class="insta-overlay"><i class="fa-brands fa-instagram"></i></div>
                 </div>
                 <div class="insta-post" onclick="window.open('https://www.instagram.com/pintayreformatuobra','_blank')">
-                    <img src="images/materials/WhatsApp Image 2026-04-08 at 19.28.11.jpeg" alt="Resultado final" loading="lazy">
+                    <img src="images/materials/WhatsApp Image 2026-04-08 at 19.28.11.jpeg" alt="Resultado final" loading="lazy" decoding="async" width="300" height="300">
                     <div class="insta-overlay"><i class="fa-brands fa-instagram"></i></div>
                 </div>
                 <div class="insta-post" onclick="window.open('https://www.instagram.com/pintayreformatuobra','_blank')">
-                    <img src="images/materials/WhatsApp Image 2026-04-08 at 19.28.08 (1).jpeg" alt="Obra en progreso" loading="lazy">
+                    <img src="images/materials/WhatsApp Image 2026-04-08 at 19.28.08 (1).jpeg" alt="Obra en progreso" loading="lazy" decoding="async" width="300" height="300">
                     <div class="insta-overlay"><i class="fa-brands fa-instagram"></i></div>
                 </div>
                 <div class="insta-post" onclick="window.open('https://www.instagram.com/pintayreformatuobra','_blank')">
-                    <img src="images/materials/WhatsApp Image 2026-04-08 at 19.28.09 (8).jpeg" alt="Detalle técnico" loading="lazy">
+                    <img src="images/materials/WhatsApp Image 2026-04-08 at 19.28.09 (8).jpeg" alt="Detalle técnico" loading="lazy" decoding="async" width="300" height="300">
                     <div class="insta-overlay"><i class="fa-brands fa-instagram"></i></div>
                 </div>
                 <div class="insta-post" onclick="window.open('https://www.instagram.com/pintayreformatuobra','_blank')">
-                    <img src="images/materials/WhatsApp Image 2026-04-08 at 19.28.10 (7).jpeg" alt="Acabado profesional" loading="lazy">
+                    <img src="images/materials/WhatsApp Image 2026-04-08 at 19.28.10 (7).jpeg" alt="Acabado profesional" loading="lazy" decoding="async" width="300" height="300">
                     <div class="insta-overlay"><i class="fa-brands fa-instagram"></i></div>
                 </div>
             </div>
