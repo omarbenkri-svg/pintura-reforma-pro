@@ -9,7 +9,10 @@
     <meta property="og:title" content="Pintores y Reformas en Maresme, Barcelona y Costa Brava | Presupuesto Gratis">
     <meta property="og:description" content="¿Necesitas pintar o reformar? Te visitamos gratis en Maresme, Barcelona y Costa Brava. Presupuesto cerrado en 48h. 5.0★ Google · +180 proyectos. Llama: 639 058 819.">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="https://pintura-reforma-obra-v1.vercel.app/images/hero-team.png">
+    <meta property="og:image" content="https://bcnproreforma.com/images/hero-team.png">
+    <meta property="og:url" content="https://bcnproreforma.com">
+    <link rel="canonical" href="https://bcnproreforma.com">
+    <link rel="manifest" href="/site.webmanifest">
     <link rel="icon" type="image/png" href="logo .png">
     <link rel="preload" as="image" href="images/hero-team.png" fetchpriority="high">
     <!-- Google Ads Conversion Tracking - reemplaza AW-XXXXXXXXXX con tu ID real -->
@@ -27,11 +30,11 @@
       "@type": "HomeAndConstructionBusiness",
       "name": "Pintura, Reformas y Acabados de Obra",
       "alternateName": "Pintores y Reformistas Maresme Barcelona Costa Brava",
-      "image": "https://pintura-reforma-obra-v1.vercel.app/images/hero-team.png",
+      "image": "https://bcnproreforma.com/images/hero-team.png",
       "description": "¿Necesitas pintar tu piso o reformar tu baño en el Maresme, Barcelona o la Costa Brava? Presupuesto cerrado en 48h, visita gratuita. Más de 180 proyectos completados.",
       "telephone": "+34639058819",
       "email": "Bcnproreforma@gmail.com",
-      "url": "https://pintura-reforma-obra-v1.vercel.app",
+      "url": "https://bcnproreforma.com",
       "sameAs": ["https://www.instagram.com/pintayreformatuobra","https://www.google.com/maps?cid=14927270012635497008"],
       "address": {"@type":"PostalAddress","streetAddress":"Carrer Doctor Emili Masriera 8","addressLocality":"Cabrils","postalCode":"08348","addressRegion":"Barcelona","addressCountry":"ES"},
       "geo": {"@type":"GeoCoordinates","latitude":"41.5275","longitude":"2.3669"},
@@ -111,7 +114,7 @@
       "name": "Pintura, Reformas y Acabados de Obra — Costa Brava",
       "telephone": "+34639058819",
       "email": "Bcnproreforma@gmail.com",
-      "url": "https://pintura-reforma-obra-v1.vercel.app",
+      "url": "https://bcnproreforma.com",
       "sameAs": ["https://www.google.com/maps?cid=COSTA_BRAVA_GBP_CID"],
       "address": {"@type":"PostalAddress","streetAddress":"DIRECCIÓN_COSTA_BRAVA","addressLocality":"Blanes","postalCode":"17300","addressRegion":"Girona","addressCountry":"ES"},
       "geo": {"@type":"GeoCoordinates","latitude":"41.6749","longitude":"2.7907"},
@@ -124,7 +127,7 @@
       ],
       "openingHours": "Mo-Fr 08:00-19:00, Sa 09:00-14:00",
       "priceRange": "$$",
-      "branchOf": {"@type":"HomeAndConstructionBusiness","name":"Pintura, Reformas y Acabados de Obra","url":"https://pintura-reforma-obra-v1.vercel.app"}
+      "branchOf": {"@type":"HomeAndConstructionBusiness","name":"Pintura, Reformas y Acabados de Obra","url":"https://bcnproreforma.com"}
     }
     </script>
     ============================================================ -->
@@ -238,6 +241,15 @@
         --radius:     12px;
         --radius-lg:  20px;
         --transition: 0.3s cubic-bezier(0.16,1,0.3,1);
+        --urgency-bg: #0a1628;
+        --urgency-accent: #FF6B35;
+        --badge-bg: #ffffff;
+        --badge-border: rgba(10, 22, 40, 0.08);
+        --badge-shadow: 0 2px 16px rgba(10, 22, 40, 0.07);
+        --green-check: #16a34a;
+        --red-cross: #dc2626;
+        --table-header-bg: #0a1628;
+        --table-stripe: #f8fafc;
     }
     *{margin:0;padding:0;box-sizing:border-box;}
     html{scroll-behavior:smooth;}
@@ -648,65 +660,6 @@
     }
     .close-modal{position:absolute;top:14px;right:18px;background:none;border:none;color:var(--text-muted);font-size:2rem;cursor:pointer;line-height:1;}
     .close-modal:hover{color:var(--text);}
-    .form-step{display:none;animation:fadeUp .3s forwards;}
-    .form-step.active{display:block;}
-    .form-intro{color:var(--text-muted);margin-bottom:28px;font-size:1rem;}
-    .step-subtitle{color:var(--text-muted);margin-bottom:18px;font-size:.9rem;}
-    .options-grid{display:grid;gap:10px;margin-bottom:28px;}
-    .option-card{
-        background:var(--bg-warm);border:1.5px solid var(--border);border-radius:8px;
-        padding:16px 20px;display:flex;align-items:center;cursor:pointer;transition:.2s;
-    }
-    .option-card:hover,.option-card.selected{background:var(--accent-lt);border-color:var(--accent);}
-    .option-card input[type="radio"]{display:none;}
-    .option-card .icon{font-size:1.4rem;margin-right:16px;color:var(--accent);width:28px;text-align:center;}
-    .option-card .text{font-weight:500;font-size:1rem;color:var(--text);}
-    .option-card.compact{padding:14px;justify-content:center;flex-direction:column;text-align:center;gap:8px;}
-    .option-card.compact .icon{margin:0;}
-    .options-grid.vertical{grid-template-columns:1fr;}
-    .form-actions{display:flex;margin-top:22px;}
-    .form-actions.right{justify-content:flex-end;}
-    .form-actions.between{justify-content:space-between;}
-    .input-group{margin-bottom:16px;}
-    .input-group input{
-        width:100%;padding:14px 16px;background:var(--bg-warm);
-        border:1.5px solid var(--border);color:var(--text);
-        font-family:inherit;font-size:1rem;border-radius:8px;transition:.2s;
-    }
-    .input-group input:focus{border-color:var(--accent);outline:none;background:#fff;}
-    .slider-wrapper{margin-bottom:28px;}
-    .slider-value-display{text-align:center;font-size:1.6rem;font-weight:700;color:var(--accent);margin-bottom:12px;}
-    .slider-value-display span{font-size:2.2rem;}
-    .custom-slider{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:4px;background:var(--border);outline:none;}
-    .custom-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:22px;height:22px;border-radius:50%;background:var(--accent);cursor:pointer;border:3px solid #fff;box-shadow:0 2px 8px rgba(243,112,33,.4);}
-    .slider-labels{display:flex;justify-content:space-between;margin-top:8px;color:var(--text-muted);font-size:.82rem;font-weight:500;}
-    .progress-container{margin-top:36px;width:100%;height:5px;background:var(--border);border-radius:10px;}
-    .progress-bar{height:100%;background:var(--accent);border-radius:10px;transition:width .4s ease;}
-    .loader-box{text-align:center;padding:30px;}
-    .loader-box i{font-size:2.2rem;color:var(--accent);margin-bottom:14px;animation:spin 1s linear infinite;}
-    .loader-box p{color:var(--text);font-weight:500;}
-    @keyframes spin{100%{transform:rotate(360deg);}}
-    .price-reveal{background:var(--bg-warm);border:1.5px solid var(--accent);border-radius:var(--radius);padding:28px;text-align:center;margin-top:16px;}
-    .price-reveal h4{color:var(--primary);margin-bottom:8px;font-size:1rem;text-transform:uppercase;letter-spacing:1px;}
-    .price-range{display:flex;justify-content:center;align-items:center;gap:10px;margin-bottom:18px;}
-    .price-num{font-size:2.4rem;font-weight:800;color:var(--text);}
-    .separator{font-size:2rem;color:var(--text-muted);}
-    .disclaimer{font-size:.85rem;color:var(--text-muted);line-height:1.5;max-width:440px;margin:0 auto;}
-    .disclaimer i{color:#f59e0b;margin-right:4px;}
-
-    /* image cards */
-    .options-grid.luxe{gap:14px;}
-    .image-card{
-        height:110px;position:relative;overflow:hidden;border-radius:10px;
-        background-image:var(--bg-url);background-size:cover;background-position:center;
-        border:2px solid transparent;transition:.4s;display:flex;align-items:flex-end;padding:0!important;
-    }
-    .image-card .card-overlay{position:absolute;inset:0;background:linear-gradient(transparent,rgba(0,0,0,.75));transition:.3s;}
-    .image-card .card-content{position:relative;z-index:2;padding:12px 16px;width:100%;display:flex;align-items:center;gap:12px;color:#fff;}
-    .image-card .icon{margin-right:0;font-size:1.1rem;color:var(--accent);}
-    .image-card .text{font-weight:600;font-size:.95rem;}
-    .image-card:hover{transform:translateY(-2px) scale(1.01);border-color:var(--accent);}
-
     /* =============================================
        FLOATING CONTACT WIDGET
        ============================================= */
@@ -779,117 +732,305 @@
         text-align:center;border-radius:8px;padding:14px;font-weight:700;
     }
 
-    /* =============================================
-       SCARCITY BANNER
-       ============================================= */
-    .scarcity-banner{
-        position:fixed;top:0;left:0;width:100%;z-index:200;
-        background:var(--primary);
-        color:rgba(255,255,255,.9);
-        padding:9px 48px 9px 20px;
-        text-align:center;font-size:.82rem;font-weight:500;
-        display:flex;align-items:center;justify-content:center;gap:10px;
-        border-bottom:2px solid var(--accent);
-        transition:transform .35s cubic-bezier(0.16,1,0.3,1),opacity .35s;
+    /* ── 1. TOP BANNER URGENCIA ─────────────────────────────────── */
+    #urgency-banner {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 9999;
+      background: var(--urgency-bg);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 9px 20px;
+      font-family: 'Inter', -apple-system, sans-serif;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      line-height: 1.4;
+      border-bottom: 2px solid var(--urgency-accent);
+      transform: translateY(-100%);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .scarcity-banner.dismissed{transform:translateY(-110%);opacity:0;pointer-events:none;}
-    .banner-dot{
-        width:8px;height:8px;border-radius:50%;
-        background:var(--accent);flex-shrink:0;
-        animation:dotPulse 2s ease-in-out infinite;
+    #urgency-banner.visible { transform: translateY(0); }
+    #urgency-banner .banner-dot {
+      display: inline-block;
+      width: 7px; height: 7px;
+      background: var(--urgency-accent);
+      border-radius: 50%;
+      animation: pulseDot 1.8s ease-in-out infinite;
+      flex-shrink: 0;
     }
-    @keyframes dotPulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(.7);}}
-    .banner-text strong{color:#fff;}
-    .banner-close{
-        position:absolute;right:14px;top:50%;transform:translateY(-50%);
-        background:none;border:none;color:rgba(255,255,255,.5);
-        font-size:1.3rem;line-height:1;cursor:pointer;transition:color .2s;
-        padding:4px 6px;
+    #urgency-banner .banner-text { text-align: center; }
+    #urgency-banner .banner-highlight {
+      color: var(--urgency-accent);
+      font-weight: 700;
     }
-    .banner-close:hover{color:#fff;}
+    #urgency-banner-close {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.5);
+      cursor: pointer;
+      font-size: 1rem;
+      line-height: 1;
+      padding: 4px;
+      transition: color 0.2s;
+    }
+    #urgency-banner-close:hover { color: #fff; }
 
-    /* =============================================
-       TRUST BADGES
-       ============================================= */
-    .trust-section{padding:80px 0;background:var(--bg-dark);}
-    .trust-section .tag{background:rgba(243,112,33,.2);color:#ffb380;}
-    .trust-section .section-title{color:#fff;}
-    .trust-section .section-subtitle{color:rgba(255,255,255,.55);}
-    .trust-badges-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:10px;}
-    .trust-badge{
-        background:rgba(255,255,255,.04);
-        border:1px solid rgba(255,255,255,.10);
-        border-radius:var(--radius-lg);
-        padding:32px 28px 28px;
-        display:flex;flex-direction:column;gap:16px;
-        position:relative;overflow:hidden;
-        transition:var(--transition);
-    }
-    .trust-badge::before{
-        content:'';position:absolute;inset:0;
-        background:linear-gradient(135deg,rgba(243,112,33,.07) 0%,transparent 70%);
-        opacity:0;transition:opacity .4s;
-    }
-    .trust-badge:hover{border-color:rgba(243,112,33,.4);transform:translateY(-4px);}
-    .trust-badge:hover::before{opacity:1;}
-    .trust-badge-icon{
-        width:56px;height:56px;border-radius:14px;
-        background:rgba(243,112,33,.15);
-        display:flex;align-items:center;justify-content:center;
-        font-size:1.5rem;color:var(--accent);
-        border:1px solid rgba(243,112,33,.25);
-    }
-    .trust-badge-body h4{font-size:1rem;color:#fff;margin-bottom:8px;line-height:1.3;}
-    .trust-badge-body p{font-size:.88rem;color:rgba(255,255,255,.55);line-height:1.65;}
-    .trust-badge-stamp{
-        display:inline-block;align-self:flex-start;
-        font-size:.68rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;
-        color:var(--accent);border:1px solid rgba(243,112,33,.35);
-        padding:3px 10px;border-radius:20px;
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.7); }
     }
 
-    /* =============================================
-       TABLA COMPARATIVA
-       ============================================= */
-    .compare-section{padding:90px 0;background:var(--bg-warm);}
-    .compare-table{
-        max-width:900px;margin:0 auto;
-        border-radius:var(--radius-lg);overflow:hidden;
-        border:1px solid var(--border);
-        box-shadow:var(--shadow-lg);
+    body.banner-visible { padding-top: 38px; }
+
+    /* ── 2. TRUST BADGES ────────────────────────────────────────── */
+    #trust-badges {
+      padding: 52px 20px 56px;
+      background: #f8fafc;
     }
-    .compare-header{
-        display:grid;grid-template-columns:220px 1fr 1fr;
-        background:var(--primary);
+    .trust-badges__label {
+      text-align: center;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #94a3b8;
+      margin-bottom: 28px;
     }
-    .compare-header .compare-col-label{padding:18px 20px;}
-    .compare-col{padding:18px 20px;font-weight:700;font-size:.9rem;
-        display:flex;align-items:center;gap:8px;}
-    .compare-col-bad{background:rgba(239,68,68,.12);color:#f87171;}
-    .compare-col-bad i{color:#f87171;}
-    .compare-col-good{background:rgba(34,197,94,.12);color:#4ade80;}
-    .compare-col-good i{color:#4ade80;}
-    .compare-header .compare-col-bad,.compare-header .compare-col-good{font-size:1rem;}
-    .compare-row{
-        display:grid;grid-template-columns:220px 1fr 1fr;
-        border-top:1px solid var(--border);
-        background:#fff;transition:background .2s;
+    .trust-badges__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      max-width: 960px;
+      margin: 0 auto;
     }
-    .compare-row:hover{background:#fafafa;}
-    .compare-row .compare-col-label{
-        padding:18px 20px;font-weight:600;font-size:.88rem;
-        color:var(--text);background:var(--bg-warm);
-        border-right:1px solid var(--border);
-        display:flex;align-items:center;
+    .trust-badge {
+      background: var(--badge-bg);
+      border: 1px solid var(--badge-border);
+      border-radius: 14px;
+      padding: 24px 22px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      box-shadow: var(--badge-shadow);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      position: relative;
+      overflow: hidden;
     }
-    .compare-row .compare-col{
-        padding:16px 20px;font-size:.88rem;line-height:1.5;
-        align-items:flex-start;gap:10px;
+    .trust-badge::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #FF6B35, #0a1628);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
     }
-    .compare-row .compare-col-bad{color:#6B7280;background:#fff8f8;}
-    .compare-row .compare-col-bad i{color:#f87171;flex-shrink:0;margin-top:3px;}
-    .compare-row .compare-col-good{color:var(--text);background:#f0fdf4;}
-    .compare-row .compare-col-good i{color:#22c55e;flex-shrink:0;margin-top:3px;}
+    .trust-badge:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(10,22,40,0.11); }
+    .trust-badge:hover::after { transform: scaleX(1); }
+    .trust-badge__icon {
+      font-size: 1.8rem;
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .trust-badge__title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #0a1628;
+      margin: 0 0 5px;
+      line-height: 1.3;
+    }
+    .trust-badge__desc {
+      font-size: 0.78rem;
+      color: #64748b;
+      margin: 0;
+      line-height: 1.5;
+    }
+    .trust-badge__seal {
+      position: absolute;
+      top: 14px; right: 14px;
+      font-size: 0.62rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      color: var(--green-check);
+      background: #dcfce7;
+      padding: 2px 7px;
+      border-radius: 20px;
+    }
+
+    /* ── 3. TABLA COMPARATIVA ───────────────────────────────────── */
+    #comparison-table {
+      padding: 64px 20px 72px;
+      background: #fff;
+    }
+    .comparison__header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .comparison__label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #94a3b8;
+      display: block;
+      margin-bottom: 10px;
+    }
+    .comparison__title {
+      font-size: clamp(1.5rem, 4vw, 2.2rem);
+      font-weight: 800;
+      color: #0a1628;
+      margin: 0 0 10px;
+      line-height: 1.2;
+    }
+    .comparison__title span { color: var(--urgency-accent); }
+    .comparison__subtitle {
+      font-size: 0.95rem;
+      color: #64748b;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .comparison-table-wrap {
+      max-width: 900px;
+      margin: 0 auto;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 4px 40px rgba(10,22,40,0.1);
+      border: 1px solid rgba(10,22,40,0.07);
+    }
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .comparison-table thead tr {
+      background: var(--table-header-bg);
+    }
+    .comparison-table thead th {
+      padding: 18px 24px;
+      text-align: left;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .comparison-table thead th:first-child { color: #94a3b8; width: 46%; }
+    .col-resto { color: var(--red-cross) !important; }
+    .col-nosotros {
+      color: #fff !important;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .col-nosotros-badge {
+      background: var(--urgency-accent);
+      color: #fff;
+      font-size: 0.65rem;
+      padding: 2px 8px;
+      border-radius: 20px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+    .comparison-table tbody tr {
+      border-bottom: 1px solid rgba(10,22,40,0.06);
+      transition: background 0.15s;
+    }
+    .comparison-table tbody tr:nth-child(even) { background: var(--table-stripe); }
+    .comparison-table tbody tr:hover { background: #f0f7ff; }
+    .comparison-table tbody td {
+      padding: 16px 24px;
+      vertical-align: middle;
+      font-size: 0.88rem;
+      color: #334155;
+      line-height: 1.4;
+    }
+    .comparison-table tbody td:first-child {
+      font-weight: 600;
+      color: #0a1628;
+      font-size: 0.85rem;
+    }
+    .td-bad, .td-good {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+    }
+    .td-bad__icon { color: var(--red-cross); font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+    .td-good__icon { color: var(--green-check); font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+    .td-bad__text { color: #64748b; }
+    .td-good__text { color: #0a1628; font-weight: 500; }
+
+    .comparison-table tfoot td {
+      padding: 20px 24px;
+      background: linear-gradient(135deg, #0a1628 0%, #1e3a5f 100%);
+      text-align: center;
+    }
+    .comparison-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--urgency-accent);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 13px 28px;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 4px 20px rgba(255,107,53,0.4);
+      letter-spacing: 0.01em;
+    }
+    .comparison-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(255,107,53,0.5);
+    }
+    
+    @media (max-width: 680px) {
+      .trust-badges__grid { grid-template-columns: 1fr; }
+      body.banner-visible { padding-top: 52px; }
+      /* R1: Tabla comparativa responsive */
+      #comparison-table { padding: 40px 12px 48px; }
+      .comparison-table-wrap { border-radius: 12px; }
+      .comparison-table thead { display: none; }
+      .comparison-table tbody tr {
+        display: flex;
+        flex-direction: column;
+        border-bottom: 2px solid #e2e8f0;
+      }
+      .comparison-table tbody td { display: block; padding: 10px 14px; font-size: 0.82rem; }
+      .comparison-table tbody td:first-child {
+        background: #f1f5f9;
+        font-weight: 700;
+        font-size: 0.82rem;
+        padding: 10px 14px;
+        border-bottom: none;
+      }
+      .comparison-table tfoot td { padding: 16px 14px; }
+      .comparison-cta { font-size: 0.82rem; padding: 12px 20px; }
+      /* R3: Modal responsive mobile */
+      #calcModal .modal-content.calc-modal-content {
+        width: 95%;
+        padding: 24px 18px;
+        margin: 16px;
+        max-height: 85vh;
+        border-radius: 16px;
+      }
+      .calc-title { font-size: 1.1rem; }
+      .calc-service-card { height: 75px; }
+      .calc-slider-value { font-size: 1.6rem; }
+      .calc-slider-value span { font-size: 1.8rem; }
+    }
 
     @media (max-width:700px){
         .hero h1{font-size:2.3rem;}
@@ -903,16 +1044,429 @@
         .footer-grid{grid-template-columns:1fr;}
         .hero-wrapper { background-attachment: scroll; }
         .trust-badges-grid{grid-template-columns:1fr;}
-        .compare-header,.compare-row{grid-template-columns:1fr;}
-        .compare-row .compare-col-label{border-right:none;border-bottom:1px solid var(--border);}
-        .compare-header .compare-col-label{display:none;}
         .scarcity-banner{font-size:.76rem;padding:9px 40px 9px 12px;}
         .hide-mobile{display:none;}
         .cta-section h2{font-size:1.8rem;}
         .method-grid{grid-template-columns:1fr;}
         .stats-grid{grid-template-columns:repeat(2,1fr);}
+        /* R4: Hero buttons apilados */
+        .hero-actions { flex-direction:column; gap:12px; width:100%; }
+        .hero-actions .btn-primary,
+        .hero-actions .btn-secondary { width:100%; justify-content:center; text-align:center; }
     }
-    </style>
+    /* R5: Dropdown fix tablet */
+    @media (max-width:900px) and (min-width:701px) {
+        .dropdown-content { min-width: 280px; }
+        .drop-column { min-width: 130px; }
+    }
+    /* =============================================================
+   CALCULADORA MODAL — ESTILOS PARA SISTEMA DE 3 PASOS
+   ============================================================= */
+
+/* ── Overlay del modal ── */
+#calcModal {
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* ── Contenedor del modal ── */
+.modal-content.calc-modal-content {
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+  padding: 32px 28px;
+  max-height: 90vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ── Animación de apertura del modal (Tarea 5) ── */
+#calcModal .modal-content.calc-modal-content {
+  animation: modalSlideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes modalSlideIn {
+  from { opacity: 0; transform: scale(0.95) translateY(10px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* ── Close button ── */
+.calc-modal-content .close-modal {
+  color: #64748b;
+  font-size: 1.8rem;
+}
+.calc-modal-content .close-modal:hover {
+  color: #1a1a2e;
+}
+
+/* ── Columnas del indicador de pasos con etiquetas (Tarea 4) ── */
+.calc-step-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.calc-dot-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ── Indicador de pasos ── */
+.calc-step-indicator {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.calc-dot {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: #94a3b8;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.calc-dot--active {
+  background: #FF6B35;
+  color: #fff;
+  transform: scale(1.15);
+  box-shadow: 0 0 0 4px rgba(255,107,53,0.18);
+}
+
+.calc-dot--done {
+  background: #16a34a;
+  color: #fff;
+}
+
+/* ── Títulos ── */
+.calc-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 0 0 6px 0;
+  color: #1a1a2e;
+}
+
+.calc-subtitle {
+  font-size: 0.92rem;
+  color: #64748b;
+  margin: 0 0 20px 0;
+  line-height: 1.5;
+}
+
+/* ── Campos ── */
+.calc-field {
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+.calc-field label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #1a1a2e;
+}
+
+.calc-field input,
+.calc-field select {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  background: #f8fafc;
+  color: #1a1a2e;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  box-sizing: border-box;
+}
+
+.calc-field input:focus,
+.calc-field select:focus {
+  outline: none;
+  border-color: #FF6B35;
+  box-shadow: 0 0 0 3px rgba(255,107,53,0.12);
+}
+
+.calc-field input::placeholder {
+  color: #94a3b8;
+}
+
+/* ── Botones ── */
+.calc-btn {
+  display: block;
+  width: 100%;
+  padding: 13px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.2s ease, opacity 0.2s ease, transform 0.15s ease;
+  text-align: center;
+  text-decoration: none;
+}
+
+.calc-btn--primary {
+  background: #FF6B35;
+  color: #fff;
+  margin-top: 8px;
+  box-shadow: 0 4px 15px rgba(255, 107, 53, 0.35);
+}
+
+.calc-btn--primary:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 107, 53, 0.5);
+}
+
+/* Tarea 3 — Botón deshabilitado hasta interacción */
+.calc-btn--primary:disabled,
+.calc-btn--disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: scale(0.98);
+}
+.calc-btn--primary:not(:disabled) {
+  animation: btnActivate 0.3s ease-out;
+}
+@keyframes btnActivate {
+  0%   { transform: scale(0.98); opacity: 0.4; }
+  60%  { transform: scale(1.06); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.calc-btn--whatsapp {
+  background: #25d366;
+  color: #fff;
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.35);
+}
+
+.calc-btn--whatsapp:hover {
+  background: #20bd5a;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+}
+
+.calc-btn--ghost {
+  background: transparent;
+  color: #64748b;
+  margin-top: 8px;
+  font-size: 0.88rem;
+}
+
+.calc-btn--ghost:hover {
+  color: #1a1a2e;
+}
+
+/* ── Legal ── */
+.calc-legal {
+  margin: 12px 0 4px;
+  font-size: 0.82rem;
+  color: #64748b;
+}
+
+.calc-legal label {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.calc-legal input[type="checkbox"] {
+  margin-top: 3px;
+  accent-color: #FF6B35;
+}
+
+.calc-legal a {
+  color: #FF6B35;
+  text-decoration: underline;
+}
+
+/* ── Tarjeta de resultado ── */
+.calc-result-card {
+  background: #f8fafc;
+  border: 2px solid #FF6B35;
+  border-radius: 12px;
+  padding: 24px 20px;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.calc-result-label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #64748b;
+  margin-bottom: 10px;
+}
+
+.calc-price-range {
+  display: block;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #FF6B35;
+  line-height: 1.2;
+}
+
+.calc-price-note {
+  display: block;
+  font-size: 0.78rem;
+  color: #94a3b8;
+  margin-top: 8px;
+}
+
+.calc-followup {
+  font-size: 0.92rem;
+  color: #1a1a2e;
+  margin-bottom: 4px;
+  line-height: 1.5;
+}
+
+/* ── Animación de entrada ── */
+.calc-step {
+  animation: calcFadeIn 0.3s ease-out;
+}
+
+@keyframes calcFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Animación de carga (Tarea 2 — Labor Illusion) ── */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ── CALC-1: Tarjetas de servicio con imagen ── */
+.calc-service-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.calc-service-card {
+  position: relative;
+  height: 90px;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  background-size: cover;
+  background-position: center;
+  border: 2.5px solid transparent;
+  transition: border-color 0.3s, transform 0.2s;
+  display: flex;
+  align-items: flex-end;
+}
+.calc-service-card:hover {
+  transform: translateY(-2px) scale(1.01);
+  border-color: rgba(255,107,53,0.5);
+}
+.calc-service-card input[type="radio"] { display: none; }
+.calc-service-card input[type="radio"]:checked ~ .calc-service-overlay {
+  background: linear-gradient(transparent 20%, rgba(255,107,53,0.85));
+}
+.calc-service-card:has(input:checked) {
+  border-color: #FF6B35;
+  box-shadow: 0 4px 16px rgba(255,107,53,0.3);
+}
+.calc-service-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(transparent 30%, rgba(0,0,0,0.7));
+  transition: background 0.3s;
+}
+.calc-service-content {
+  position: relative;
+  z-index: 2;
+  padding: 12px 16px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.calc-service-icon { font-size: 1.3rem; }
+.calc-service-name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+/* ── CALC-2: Slider visual para metros ── */
+.calc-slider-wrap { margin-bottom: 24px; }
+.calc-field-label { display: block; font-size: 0.85rem; font-weight: 600; color: #1a1a2e; margin-bottom: 8px; }
+.calc-slider-value {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 800;
+  color: #FF6B35;
+  margin-bottom: 12px;
+}
+.calc-slider-value span { font-size: 2.4rem; }
+.calc-range-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 4px;
+  background: #e2e8f0;
+  outline: none;
+}
+.calc-range-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #FF6B35;
+  cursor: pointer;
+  border: 3px solid #fff;
+  box-shadow: 0 2px 8px rgba(255,107,53,0.4);
+}
+.calc-range-slider::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #FF6B35;
+  cursor: pointer;
+  border: 3px solid #fff;
+  box-shadow: 0 2px 8px rgba(255,107,53,0.4);
+}
+.calc-slider-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+  font-size: 0.78rem;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+</style>
 </head>
 <body>
 
@@ -920,12 +1474,16 @@
      NAVBAR
      ============================================= -->
 <!-- =============================================
-     SCARCITY BANNER
+     MÓDULO 1 — TOP BANNER DE URGENCIA
      ============================================= -->
-<div id="scarcity-banner" class="scarcity-banner" role="banner" aria-label="Disponibilidad de agenda">
-    <span class="banner-dot"></span>
-    <span class="banner-text">Agenda técnica planificada &mdash; Solo quedan <strong>2 proyectos de reforma integral</strong> disponibles este mes.</span>
-    <button class="banner-close" id="banner-close-btn" aria-label="Cerrar aviso">&times;</button>
+<div id="urgency-banner" role="banner" aria-label="Disponibilidad limitada">
+  <span class="banner-dot" aria-hidden="true"></span>
+  <p class="banner-text">
+    Agenda técnica planificada —
+    <span class="banner-highlight">solo 2 proyectos de reforma integral disponibles este mes.</span>
+    Consulta sin compromiso: <a href="tel:+34639058819" style="color:#FF6B35;text-decoration:none;font-weight:700;" onclick="trackPhoneCall()">639 058 819</a>
+  </p>
+  <button id="urgency-banner-close" aria-label="Cerrar aviso">✕</button>
 </div>
 
 <header class="navbar">
@@ -1045,11 +1603,11 @@
      ============================================= -->
 <section id="servicios" class="services">
     <div class="container">
-        <div class="tag anim-fade-up">Lo que hacemos</div>
-        <h2 class="section-title anim-fade-up">Servicios Especializados</h2>
-        <p class="section-subtitle anim-fade-up">Alta ingeniería aplicada a la pintura y la reforma residencial e industrial en el Maresme y Barcelona.</p>
+        <div class="tag anim-fade-up" data-i18n="services_tag">Lo que hacemos</div>
+        <h2 class="section-title anim-fade-up" data-i18n="services_title">Servicios Especializados</h2>
+        <p class="section-subtitle anim-fade-up" data-i18n="services_subtitle">Alta ingeniería aplicada a la pintura y la reforma residencial e industrial en el Maresme y Barcelona.</p>
 
-        <h3 class="category-title anim-fade-up">Soluciones Residenciales</h3>
+        <h3 class="category-title anim-fade-up" data-i18n="services_cat_residential">Soluciones Residenciales</h3>
         <div class="services-elite-grid mb-60">
             <div class="service-card-elite anim-fade-up delay-1">
                 <div class="card-image-wrap">
@@ -1060,12 +1618,12 @@
                     <div class="card-badge">Pintura</div>
                 </div>
                 <div class="card-body">
-                    <h3>Pintura de Interiores</h3>
-                    <p>Alisados de máxima precisión y acabados decorativos que transforman la percepción de tus espacios.</p>
+                    <h3 data-i18n="service_1_title">Pintura de Interiores</h3>
+                    <p data-i18n="service_1_desc">Alisados de máxima precisión y acabados decorativos que transforman la percepción de tus espacios.</p>
                     <ul class="card-list">
-                        <li><i class="fa-solid fa-check"></i> Alisado y Eliminación de Gotelé</li>
-                        <li><i class="fa-solid fa-check"></i> Pintura Plástica Antipolvo</li>
-                        <li><i class="fa-solid fa-check"></i> Lacado de Puertas y Zócalos</li>
+                        <li><i class="fa-solid fa-check"></i> <span data-i18n="service_1_feat_1">Alisado y Eliminación de Gotelé</span></li>
+                        <li><i class="fa-solid fa-check"></i> <span data-i18n="service_1_feat_2">Pintura Plástica Antipolvo</span></li>
+                        <li><i class="fa-solid fa-check"></i> <span data-i18n="service_1_feat_3">Lacado de Puertas y Zócalos</span></li>
                     </ul>
                 </div>
             </div>
@@ -1075,12 +1633,12 @@
                     <div class="card-badge">Reformas</div>
                 </div>
                 <div class="card-body">
-                    <h3>Baños y Cocinas Pro</h3>
-                    <p>Reformas parciales o integrales con gestión de fontanería, electricidad y mobiliario a medida.</p>
+                    <h3 data-i18n="service_2_title">Baños y Cocinas Pro</h3>
+                    <p data-i18n="service_2_desc">Reformas parciales o integrales con gestión de fontanería, electricidad y mobiliario a medida.</p>
                     <ul class="card-list">
-                        <li><i class="fa-solid fa-check"></i> Sustitución de Bañera por Plato</li>
-                        <li><i class="fa-solid fa-check"></i> Mobiliario de Cocina Premium</li>
-                        <li><i class="fa-solid fa-check"></i> Revestimientos de Alta Resistencia</li>
+                        <li><i class="fa-solid fa-check"></i> <span data-i18n="service_2_feat_1">Sustitución de Bañera por Plato</span></li>
+                        <li><i class="fa-solid fa-check"></i> <span data-i18n="service_2_feat_2">Mobiliario de Cocina Premium</span></li>
+                        <li><i class="fa-solid fa-check"></i> <span data-i18n="service_2_feat_3">Revestimientos de Alta Resistencia</span></li>
                     </ul>
                 </div>
             </div>
@@ -1093,18 +1651,18 @@
                     <div class="card-badge">Integrales</div>
                 </div>
                 <div class="card-body">
-                    <h3>Reformas de Pisos y Casas</h3>
-                    <p>Planificación integral para rehabilitar viviendas vacías o habitadas con mínima molestia.</p>
+                    <h3 data-i18n="service_3_title">Reformas de Pisos y Casas</h3>
+                    <p data-i18n="service_3_desc">Planificación integral para rehabilitar viviendas vacías o habitadas con mínima molestia.</p>
                     <ul class="card-list">
-                        <li><i class="fa-solid fa-check"></i> Cambio de Suelos (Parquet/Cerámico)</li>
-                        <li><i class="fa-solid fa-check"></i> Tabiquería y Pladur</li>
-                        <li><i class="fa-solid fa-check"></i> Climatización e Iluminación</li>
+                        <li><i class="fa-solid fa-check"></i> <span data-i18n="service_3_feat_1">Cambio de Suelos (Parquet/Cerámico)</span></li>
+                        <li><i class="fa-solid fa-check"></i> <span data-i18n="service_3_feat_2">Tabiquería y Pladur</span></li>
+                        <li><i class="fa-solid fa-check"></i> <span data-i18n="service_3_feat_3">Climatización e Iluminación</span></li>
                     </ul>
                 </div>
             </div>
         </div>
 
-        <h3 class="category-title anim-fade-up">Empresas &amp; Zonas Comunes</h3>
+        <h3 class="category-title anim-fade-up" data-i18n="services_cat_business">Empresas &amp; Zonas Comunes</h3>
         <div class="services-elite-grid">
             <div class="service-card-elite anim-fade-up delay-1">
                 <div class="card-image-wrap">
@@ -1115,12 +1673,12 @@
                     <div class="card-badge">B2B</div>
                 </div>
                 <div class="card-body">
-                    <h3>Oficinas y Locales</h3>
-                    <p>Acondicionamiento rápido para negocios. Adaptamos horarios para no frenar tu facturación.</p>
+                    <h3 data-i18n="service_4_title">Oficinas y Locales</h3>
+                    <p data-i18n="service_4_desc">Acondicionamiento rápido para negocios. Adaptamos horarios para no frenar tu facturación.</p>
                     <ul class="card-list">
-                        <li><i class="fa-solid fa-check"></i> Pintura de Grandes Superficies</li>
-                        <li><i class="fa-solid fa-check"></i> Divisiones de Cristal y Madera</li>
-                        <li><i class="fa-solid fa-check"></i> Mantenimiento Preventivo</li>
+                        <li><i class="fa-solid fa-check"></i> <span data-i18n="service_4_feat_1">Pintura de Grandes Superficies</span></li>
+                        <li><i class="fa-solid fa-check"></i> <span data-i18n="service_4_feat_2">Divisiones de Cristal y Madera</span></li>
+                        <li><i class="fa-solid fa-check"></i> <span data-i18n="service_4_feat_3">Mantenimiento Preventivo</span></li>
                     </ul>
                 </div>
             </div>
@@ -1133,12 +1691,12 @@
                     <div class="card-badge">Comunidades</div>
                 </div>
                 <div class="card-body">
-                    <h3>Escaleras y Parkings</h3>
-                    <p>Servicio especializado para administradores de fincas y presidentes de comunidad.</p>
+                    <h3 data-i18n="service_5_title">Escaleras y Parkings</h3>
+                    <p data-i18n="service_5_desc">Servicio especializado para administradores de fincas y presidentes de comunidad.</p>
                     <ul class="card-list">
-                        <li><i class="fa-solid fa-check"></i> Pintura de Suelos Epoxi</li>
-                        <li><i class="fa-solid fa-check"></i> Reparación de Fachadas y Patios</li>
-                        <li><i class="fa-solid fa-check"></i> Mantenimiento de Zonas Nobles</li>
+                        <li><i class="fa-solid fa-check"></i> <span data-i18n="service_5_feat_1">Pintura de Suelos Epoxi</span></li>
+                        <li><i class="fa-solid fa-check"></i> <span data-i18n="service_5_feat_2">Reparación de Fachadas y Patios</span></li>
+                        <li><i class="fa-solid fa-check"></i> <span data-i18n="service_5_feat_3">Mantenimiento de Zonas Nobles</span></li>
                     </ul>
                 </div>
             </div>
@@ -1200,40 +1758,197 @@
 </section>
 
 <!-- =============================================
-     TRUST BADGES — SELLOS DE GARANTÍA BLINDADA
+     MÓDULO 2 — TRUST BADGES (SELLOS DE GARANTÍA)
      ============================================= -->
-<section class="trust-section">
-    <div class="container">
-        <div class="tag anim-fade-up" style="display:block;text-align:center;margin:0 auto 14px;">Garantías Innegociables</div>
-        <h2 class="section-title anim-fade-up">Lo que nos hace <span class="highlight">diferentes</span></h2>
-        <p class="section-subtitle anim-fade-up">No son promesas de marketing. Son compromisos firmados en cada contrato.</p>
-        <div class="trust-badges-grid">
-            <div class="trust-badge anim-fade-up delay-1">
-                <div class="trust-badge-icon"><i class="fa-solid fa-shield-halved"></i></div>
-                <div class="trust-badge-body">
-                    <h4>Seguro de Responsabilidad Civil</h4>
-                    <p>Cada obra está cubierta por póliza activa. Cualquier daño accidental queda protegido, sin coste ni drama para ti.</p>
-                </div>
-                <div class="trust-badge-stamp">VERIFICADO</div>
-            </div>
-            <div class="trust-badge anim-fade-up delay-2">
-                <div class="trust-badge-icon"><i class="fa-solid fa-helmet-safety"></i></div>
-                <div class="trust-badge-body">
-                    <h4>Plantilla Propia. Cero Subcontrataciones</h4>
-                    <p>Los profesionales que visitan tu casa el día 1 son los mismos que terminan la obra. Sin sorpresas de última hora, sin calidad variable.</p>
-                </div>
-                <div class="trust-badge-stamp">GARANTIZADO</div>
-            </div>
-            <div class="trust-badge anim-fade-up delay-3">
-                <div class="trust-badge-icon"><i class="fa-solid fa-broom"></i></div>
-                <div class="trust-badge-body">
-                    <h4>Limpieza Industrial Post-Obra</h4>
-                    <p>Protocolo estricto de recogida al finalizar cada jornada. Si al terminar encuentras rastro de polvo en zona protegida, volvemos sin coste.</p>
-                </div>
-                <div class="trust-badge-stamp">POR CONTRATO</div>
-            </div>
-        </div>
+<section id="trust-badges" aria-label="Garantías y certificaciones">
+  <p class="trust-badges__label" data-i18n="trust_label">Por qué confían en nosotros</p>
+  <div class="trust-badges__grid">
+
+    <div class="trust-badge">
+      <span class="trust-badge__icon" aria-hidden="true">🛡️</span>
+      <div class="trust-badge__content">
+        <h3 class="trust-badge__title" data-i18n="trust_1_title">Seguro de Responsabilidad Civil</h3>
+        <p class="trust-badge__desc" data-i18n="trust_1_desc">Cobertura total en obra. Tu vivienda protegida ante cualquier imprevisto.</p>
+      </div>
+      <span class="trust-badge__seal" data-i18n="trust_1_seal">Verificado</span>
     </div>
+
+    <div class="trust-badge">
+      <span class="trust-badge__icon" aria-hidden="true">📋</span>
+      <div class="trust-badge__content">
+        <h3 class="trust-badge__title" data-i18n="trust_2_title">Precio Cerrado por Contrato</h3>
+        <p class="trust-badge__desc" data-i18n="trust_2_desc">El presupuesto firmado es el precio final. Sin sorpresas ni costes ocultos a media obra.</p>
+      </div>
+      <span class="trust-badge__seal" data-i18n="trust_2_seal">Garantizado</span>
+    </div>
+
+    <div class="trust-badge">
+      <span class="trust-badge__icon" aria-hidden="true">👷</span>
+      <div class="trust-badge__content">
+        <h3 class="trust-badge__title" data-i18n="trust_3_title">Equipo Propio — Cero Subcontrataciones</h3>
+        <p class="trust-badge__desc" data-i18n="trust_3_desc">Solo trabajamos con nuestros operarios regulados. Control total de calidad, sin intermediarios.</p>
+      </div>
+      <span class="trust-badge__seal" data-i18n="trust_3_seal">30 años</span>
+    </div>
+
+    <div class="trust-badge">
+      <span class="trust-badge__icon" aria-hidden="true">🧹</span>
+      <div class="trust-badge__content">
+        <h3 class="trust-badge__title" data-i18n="trust_4_title">Limpieza Industrial Post-Obra</h3>
+        <p class="trust-badge__desc" data-i18n="trust_4_desc">Protocolo de limpieza profesional al finalizar. Entregamos el espacio listo para habitar.</p>
+      </div>
+      <span class="trust-badge__seal" data-i18n="trust_4_seal">Incluida</span>
+    </div>
+
+    <div class="trust-badge">
+      <span class="trust-badge__icon" aria-hidden="true">⏱️</span>
+      <div class="trust-badge__content">
+        <h3 class="trust-badge__title" data-i18n="trust_5_title">Penalización por Retraso</h3>
+        <p class="trust-badge__desc" data-i18n="trust_5_desc">Cada día de demora imputable a nosotros tiene penalización contractual. Tu tiempo vale.</p>
+      </div>
+      <span class="trust-badge__seal" data-i18n="trust_5_seal">Por contrato</span>
+    </div>
+
+    <div class="trust-badge">
+      <span class="trust-badge__icon" aria-hidden="true">⭐</span>
+      <div class="trust-badge__content">
+        <h3 class="trust-badge__title" data-i18n="trust_6_title">4.9★ en Google — Maresme & Barcelona</h3>
+        <p class="trust-badge__desc" data-i18n="trust_6_desc">Más de 30 años en el sector y una reputación construida proyecto a proyecto.</p>
+      </div>
+      <span class="trust-badge__seal" data-i18n="trust_6_seal">4.9 / 5</span>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- =============================================
+     MÓDULO 3 — TABLA COMPARATIVA "NOSOTROS vs LA INDUSTRIA"
+     ============================================= -->
+<section id="comparison-table" aria-label="Comparativa con el sector">
+  <div class="comparison__header">
+    <span class="comparison__label" data-i18n="compare_label">Transparencia total</span>
+    <h2 class="comparison__title" data-i18n="compare_title">Lo que <span>otros no te cuentan</span></h2>
+    <p class="comparison__subtitle" data-i18n="compare_subtitle">Compara antes de decidir. La diferencia entre un trabajo mediocre y uno que dura décadas está en los detalles.</p>
+  </div>
+
+  <div class="comparison-table-wrap">
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th scope="col">Criterio</th>
+          <th scope="col" class="col-resto">❌ El resto del sector</th>
+          <th scope="col">
+            <div class="col-nosotros">
+              ✅ Pinturas Pro
+              <span class="col-nosotros-badge">NUESTRO ESTÁNDAR</span>
+            </div>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-i18n="compare_row_1_label">Cumplimiento de plazos</td>
+          <td>
+            <div class="td-bad">
+              <span class="td-bad__icon">✗</span>
+              <span class="td-bad__text" data-i18n="compare_row_1_bad">Retrasos frecuentes sin consecuencias. "La semana que viene…"</span>
+            </div>
+          </td>
+          <td>
+            <div class="td-good">
+              <span class="td-good__icon">✓</span>
+              <span class="td-good__text" data-i18n="compare_row_1_good">Penalización contractual por cada día de retraso imputable.</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td data-i18n="compare_row_2_label">Transparencia de precio</td>
+          <td>
+            <div class="td-bad">
+              <span class="td-bad__icon">✗</span>
+              <span class="td-bad__text" data-i18n="compare_row_2_bad">Presupuesto orientativo que se infla a media obra con "imprevistos".</span>
+            </div>
+          </td>
+          <td>
+            <div class="td-good">
+              <span class="td-good__icon">✓</span>
+              <span class="td-good__text" data-i18n="compare_row_2_good">Precio cerrado y firmado. Lo que ves es lo que pagas.</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td data-i18n="compare_row_3_label">Personal en obra</td>
+          <td>
+            <div class="td-bad">
+              <span class="td-bad__icon">✗</span>
+              <span class="td-bad__text" data-i18n="compare_row_3_bad">Subcontratistas sin verificar. No sabes quién entra en tu casa.</span>
+            </div>
+          </td>
+          <td>
+            <div class="td-good">
+              <span class="td-good__icon">✓</span>
+              <span class="td-good__text" data-i18n="compare_row_3_good">Equipo 100% propio y regulado. Sin intermediarios, sin sorpresas.</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td data-i18n="compare_row_4_label">Estado tras la obra</td>
+          <td>
+            <div class="td-bad">
+              <span class="td-bad__icon">✗</span>
+              <span class="td-bad__text" data-i18n="compare_row_4_bad">Polvo, escombros y desorden. La limpieza corre de tu cuenta.</span>
+            </div>
+          </td>
+          <td>
+            <div class="td-good">
+              <span class="td-good__icon">✓</span>
+              <span class="td-good__text" data-i18n="compare_row_4_good">Limpieza industrial incluida. Tu espacio listo para entrar a vivir.</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td data-i18n="compare_row_5_label">Cobertura de daños</td>
+          <td>
+            <div class="td-bad">
+              <span class="td-bad__icon">✗</span>
+              <span class="td-bad__text" data-i18n="compare_row_5_bad">Sin seguro. Si hay un daño, el problema es tuyo.</span>
+            </div>
+          </td>
+          <td>
+            <div class="td-good">
+              <span class="td-good__icon">✓</span>
+              <span class="td-good__text" data-i18n="compare_row_5_good">Seguro de Responsabilidad Civil activo en cada proyecto.</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td data-i18n="compare_row_6_label">Calidad de materiales</td>
+          <td>
+            <div class="td-bad">
+              <span class="td-bad__icon">✗</span>
+              <span class="td-bad__text" data-i18n="compare_row_6_bad">Materiales de bajo coste para maximizar margen. Sin transparencia.</span>
+            </div>
+          </td>
+          <td>
+            <div class="td-good">
+              <span class="td-good__icon">✓</span>
+              <span class="td-good__text" data-i18n="compare_row_6_good">Marcas de primera: Valentine, Titanlux, Mapei. Especificado en presupuesto.</span>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="3">
+            <a href="tel:+34639058819" class="comparison-cta" aria-label="Pedir presupuesto sin compromiso" onclick="trackPhoneCall()" data-i18n="compare_cta">
+              📞 Pide tu presupuesto cerrado ahora — sin compromiso
+            </a>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
 </section>
 
 <!-- =============================================
@@ -1241,9 +1956,9 @@
      ============================================= -->
 <section id="proceso" class="process-section">
     <div class="container">
-        <div class="tag anim-fade-up">Nuestro método</div>
-        <h2 class="section-title anim-fade-up">Ingeniería del Resultado</h2>
-        <p class="section-subtitle anim-fade-up">Así transformamos tu visión en una realidad técnica impecable y sin fricción.</p>
+        <div class="tag anim-fade-up" data-i18n="process_tag">Nuestro método</div>
+        <h2 class="section-title anim-fade-up" data-i18n="process_title">Ingeniería del Resultado</h2>
+        <p class="section-subtitle anim-fade-up" data-i18n="process_subtitle">Así transformamos tu visión en una realidad técnica impecable y sin fricción.</p>
         <div class="method-grid">
             <div class="method-item anim-fade-up delay-1">
                 <div class="method-visual">
@@ -1251,8 +1966,8 @@
                     <i class="fa-solid fa-comments"></i>
                 </div>
                 <div class="method-text">
-                    <h4>Escucha Activa y Diagnóstico</h4>
-                    <p>No solo tomamos nota; analizamos tu estilo de vida o negocio para proponer soluciones que maximicen el valor de tu propiedad.</p>
+                    <h4 data-i18n="process_1_title">Escucha Activa y Diagnóstico</h4>
+                    <p data-i18n="process_1_desc">No solo tomamos nota; analizamos tu estilo de vida o negocio para proponer soluciones que maximicen el valor de tu propiedad.</p>
                 </div>
             </div>
             <div class="method-item anim-fade-up delay-2">
@@ -1261,8 +1976,8 @@
                     <i class="fa-solid fa-compass-drafting"></i>
                 </div>
                 <div class="method-text">
-                    <h4>Auditoría Territorial</h4>
-                    <p>Nos desplazamos a tu ubicación para una medición láser precisa y evaluación de la infraestructura invisible.</p>
+                    <h4 data-i18n="process_2_title">Auditoría Territorial</h4>
+                    <p data-i18n="process_2_desc">Nos desplazamos a tu ubicación para una medición láser precisa y evaluación de la infraestructura invisible.</p>
                 </div>
             </div>
             <div class="method-item anim-fade-up delay-3">
@@ -1271,8 +1986,8 @@
                     <i class="fa-solid fa-file-invoice-dollar"></i>
                 </div>
                 <div class="method-text">
-                    <h4>Presupuesto de Máxima Claridad</h4>
-                    <p>Documento cerrado por contrato. Cada céntimo está justificado. Sin sobresaltos ni "extras" de última hora.</p>
+                    <h4 data-i18n="process_3_title">Presupuesto de Máxima Claridad</h4>
+                    <p data-i18n="process_3_desc">Documento cerrado por contrato. Cada céntimo está justificado. Sin sobresaltos ni "extras" de última hora.</p>
                 </div>
             </div>
             <div class="method-item anim-fade-up delay-4">
@@ -1281,8 +1996,8 @@
                     <i class="fa-solid fa-wand-sparkles"></i>
                 </div>
                 <div class="method-text">
-                    <h4>Ejecución Quirúrgica</h4>
-                    <p>Protección total de espacios, cumplimiento estricto de cronograma y entrega con limpieza industrial profunda.</p>
+                    <h4 data-i18n="process_4_title">Ejecución Quirúrgica</h4>
+                    <p data-i18n="process_4_desc">Protección total de espacios, cumplimiento estricto de cronograma y entrega con limpieza industrial profunda.</p>
                 </div>
             </div>
         </div>
@@ -1294,15 +2009,15 @@
      ============================================= -->
 <section class="ba-section">
     <div class="container">
-        <div class="tag anim-fade-up">Resultados reales</div>
-        <h2 class="section-title anim-fade-up">La Transformación: Antes y Después</h2>
-        <p class="section-subtitle anim-fade-up">Desliza para ver la calidad real de nuestra ejecución técnica.</p>
+        <div class="tag anim-fade-up" data-i18n="ba_tag">Resultados reales</div>
+        <h2 class="section-title anim-fade-up" data-i18n="ba_title">La Transformación: Antes y Después</h2>
+        <p class="section-subtitle anim-fade-up" data-i18n="ba_subtitle">Desliza para ver la calidad real de nuestra ejecución técnica.</p>
         <div class="ba-slider-container anim-zoom-in">
             <img src="images/projects/antes.jpeg" class="ba-img ba-before" alt="Antes de la reforma" loading="lazy" decoding="async" width="900" height="460">
             <img src="images/projects/despues.jpeg" class="ba-img ba-after" alt="Después de la reforma" loading="lazy" decoding="async" width="900" height="460">
             <div class="ba-slider-handle"><i class="fa-solid fa-arrows-left-right"></i></div>
-            <div class="ba-label ba-label-before">Estado Inicial</div>
-            <div class="ba-label ba-label-after">Entrega Final</div>
+            <div class="ba-label ba-label-before" data-i18n="ba_before">Estado Inicial</div>
+            <div class="ba-label ba-label-after" data-i18n="ba_after">Entrega Final</div>
         </div>
     </div>
 </section>
@@ -1312,9 +2027,9 @@
      ============================================= -->
 <section id="galeria" class="gallery-section">
     <div class="container">
-        <div class="tag anim-fade-up">Portfolio</div>
-        <h2 class="section-title anim-fade-up">Proyectos Reales</h2>
-        <p class="section-subtitle anim-fade-up">Resultados limpios, modernos y duraderos en viviendas del Maresme y Barcelona.</p>
+        <div class="tag anim-fade-up" data-i18n="gallery_tag">Portfolio</div>
+        <h2 class="section-title anim-fade-up" data-i18n="gallery_title">Proyectos Reales</h2>
+        <p class="section-subtitle anim-fade-up" data-i18n="gallery_subtitle">Resultados limpios, modernos y duraderos en viviendas del Maresme y Barcelona.</p>
         <div class="gallery-grid" style="grid-template-columns:repeat(3,1fr);">
             <div class="gallery-item anim-zoom-in delay-1">
                 <img src="images/projects/WhatsApp Image 2026-04-08 at 22.13.20 (1).jpeg" alt="Baño de lujo con detalles verdes y madera" loading="lazy" decoding="async" width="400" height="260">
@@ -1349,9 +2064,9 @@
      ============================================= -->
 <section class="reviews-section">
     <div class="container">
-        <div class="tag anim-fade-up" style="margin:0 auto 12px;display:block;text-align:center;">Opiniones verificadas</div>
-        <h2 class="section-title anim-fade-up">Lo que opinan nuestros clientes</h2>
-        <p class="section-subtitle anim-fade-up">Reseñas reales de clientes en el Maresme y Barcelona.</p>
+        <div class="tag anim-fade-up" style="margin:0 auto 12px;display:block;text-align:center;" data-i18n="reviews_tag">Opiniones verificadas</div>
+        <h2 class="section-title anim-fade-up" data-i18n="reviews_title">Lo que opinan nuestros clientes</h2>
+        <p class="section-subtitle anim-fade-up" data-i18n="reviews_subtitle">Reseñas reales de clientes en el Maresme y Barcelona.</p>
 
         <div class="reviews-header anim-fade-up">
             <div class="google-badge">
@@ -1363,7 +2078,7 @@
                     <div class="badge-stars">
                         <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                     </div>
-                    <div class="badge-count">47 reseñas en Google</div>
+                    <div class="badge-count" data-i18n="reviews_count">47 reseñas en Google</div>
                 </div>
             </div>
         </div>
@@ -1434,11 +2149,11 @@
         <div class="reviews-cta anim-fade-up">
             <a href="https://www.google.com/maps?cid=14927270012635497008" target="_blank" rel="noopener" class="btn-google">
                 <svg viewBox="0 0 24 24" width="20" height="20"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-                Ver todas las reseñas en Google
+                <span data-i18n="reviews_google_btn">Ver todas las reseñas en Google</span>
             </a>
             &nbsp;&nbsp;
             <a href="https://g.page/r/CTDCegn9UCjPEBM/review" target="_blank" rel="noopener" class="btn-primary" style="display:inline-flex;">
-                <i class="fa-solid fa-star"></i> Déjanos tu reseña
+                <i class="fa-solid fa-star"></i> <span data-i18n="reviews_leave">Déjanos tu reseña</span>
             </a>
         </div>
     </div>
@@ -1454,12 +2169,12 @@
                 <img src="https://images.unsplash.com/photo-1541888086425-d81bb19240f5?q=80&w=800&auto=format&fit=crop&fm=webp" loading="lazy" decoding="async" alt="Equipo de profesionales en reformas" width="500" height="420">
             </div>
             <div class="about-text">
-                <div class="tag">Quiénes somos</div>
-                <h3>30 años de oficio real,<br><span class="highlight">no de catálogo de marketing.</span></h3>
-                <p>Hay muchas empresas que te mandan una foto bonita y luego subcontratan a quien sea. Nosotros no. Llevamos más de 30 años trabajando con las manos, aprendiendo en cada obra, en cada pared, en cada acabado. Eso no se compra en un curso online.</p>
-                <p>Sabemos que dejar entrar a desconocidos en tu casa da respeto. Por eso nuestro estándar mínimo es este: precio que no cambia, obra limpia cada día, y entrega en el plazo acordado. Sin dramas, sin excusas.</p>
+                <div class="tag" data-i18n="about_tag">Quiénes somos</div>
+                <h3 data-i18n="about_title">30 años de oficio real,<br><span class="highlight">no de catálogo de marketing.</span></h3>
+                <p data-i18n="about_p1">Hay muchas empresas que te mandan una foto bonita y luego subcontratan a quien sea. Nosotros no. Llevamos más de 30 años trabajando con las manos, aprendiendo en cada obra, en cada pared, en cada acabado. Eso no se compra en un curso online.</p>
+                <p data-i18n="about_p2">Sabemos que dejar entrar a desconocidos en tu casa da respeto. Por eso nuestro estándar mínimo es este: precio que no cambia, obra limpia cada día, y entrega en el plazo acordado. Sin dramas, sin excusas.</p>
                 <p style="margin-top:8px;"><i class="fa-solid fa-envelope" style="color:var(--accent);margin-right:6px;"></i><a href="mailto:Bcnproreforma@gmail.com" style="color:var(--text);text-decoration:none;">Bcnproreforma@gmail.com</a></p>
-                <div class="signature">— <a href="tel:+34639058819" onclick="trackPhoneCall()" style="color:var(--text);text-decoration:underline;">639 058 819</a> | 30 años en el oficio</div>
+                <div class="signature" data-i18n="about_signature">— <a href="tel:+34639058819" onclick="trackPhoneCall()" style="color:var(--text);text-decoration:underline;">639 058 819</a> | 30 años en el oficio</div>
             </div>
         </div>
     </div>
@@ -1475,11 +2190,11 @@
                 <div class="insta-icon"><i class="fa-brands fa-instagram"></i></div>
                 <div class="insta-handle-text">
                     <strong>@pintayreformatuobra</strong>
-                    <span>Síguenos · obras en directo cada día</span>
+                    <span data-i18n="insta_subtitle">Síguenos · obras en directo cada día</span>
                 </div>
             </div>
             <a href="https://www.instagram.com/pintayreformatuobra" target="_blank" rel="noopener" class="btn-secondary anim-fade-up">
-                <i class="fa-brands fa-instagram"></i> Seguir en Instagram
+                <i class="fa-brands fa-instagram"></i> <span data-i18n="insta_btn">Seguir en Instagram</span>
             </a>
         </div>
 
@@ -1541,9 +2256,9 @@
         </div>
 
         <div class="insta-footer anim-fade-up">
-            <p style="color:var(--text-muted);font-size:.9rem;">Contenido nuevo cada día · obras reales · consejos de mantenimiento</p>
+            <p style="color:var(--text-muted);font-size:.9rem;" data-i18n="insta_footer_text">Contenido nuevo cada día · obras reales · consejos de mantenimiento</p>
             <a href="https://www.instagram.com/pintayreformatuobra" target="_blank" rel="noopener" class="btn-primary" style="background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);border:none;">
-                <i class="fa-brands fa-instagram"></i> Ver perfil completo
+                <i class="fa-brands fa-instagram"></i> <span data-i18n="insta_footer_btn">Ver perfil completo</span>
             </a>
         </div>
     </div>
@@ -1554,149 +2269,108 @@
      ============================================= -->
 <section id="faq" class="faq-section">
     <div class="container">
-        <div class="tag anim-fade-up" style="display:block;text-align:center;margin:0 auto 12px;">Resolvemos tus dudas</div>
-        <h2 class="section-title anim-fade-up">Preguntas Frecuentes</h2>
+        <div class="tag anim-fade-up" style="display:block;text-align:center;margin:0 auto 12px;" data-i18n="faq_tag">Resolvemos tus dudas</div>
+        <h2 class="section-title anim-fade-up" data-i18n="faq_title">Preguntas Frecuentes</h2>
         <div class="faq-accordion">
             <div class="faq-item anim-fade-up delay-1">
                 <button aria-expanded="false" class="faq-question">
-                    <h4>¿Realmente cubrís todo el mobiliario y protegéis el suelo?</h4>
+                    <h4 data-i18n="faq_1_q">¿Realmente cubrís todo el mobiliario y protegéis el suelo?</h4>
                     <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
                 </button>
                 <div class="faq-answer">
-                    <p><strong>Sí, protegemos absolutamente todo.</strong> Agrupamos los muebles en el centro y los forramos con film de polietileno de alta calidad. El suelo se protege con papel de pintor grueso o lona, dependiendo del material (parquet, mármol, etc.). Al terminar, no verás ni una mota de polvo fuera de la zona de obra.</p>
+                    <p data-i18n="faq_1_a"><strong>Sí, protegemos absolutamente todo.</strong> Agrupamos los muebles en el centro y los forramos con film de polietileno de alta calidad. El suelo se protege con papel de pintor grueso o lona, dependiendo del material (parquet, mármol, etc.). Al terminar, no verás ni una mota de polvo fuera de la zona de obra.</p>
                 </div>
             </div>
             <div class="faq-item anim-fade-up delay-2">
                 <button aria-expanded="false" class="faq-question">
-                    <h4>¿El presupuesto tiene algún coste oculto o sorpresas finales?</h4>
+                    <h4 data-i18n="faq_2_q">¿El presupuesto tiene algún coste oculto o sorpresas finales?</h4>
                     <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
                 </button>
                 <div class="faq-answer">
-                    <p><strong>No, cero costes ocultos.</strong> Trabajamos con Precio Cerrado y Firmado. La única opción de que el precio varíe es que solicites un cambio de materiales o una ampliación a posteriori. Si encontramos un vicio oculto te informamos de inmediato con fotos y presupuesto adicional antes de tocar nada.</p>
+                    <p data-i18n="faq_2_a"><strong>No, cero costes ocultos.</strong> Trabajamos con Precio Cerrado y Firmado. La única opción de que el precio varíe es que solicites un cambio de materiales o una ampliación a posteriori. Si encontramos un vicio oculto te informamos de inmediato con fotos y presupuesto adicional antes de tocar nada.</p>
                 </div>
             </div>
             <div class="faq-item anim-fade-up delay-3">
                 <button aria-expanded="false" class="faq-question">
-                    <h4>¿Qué ocurre si la obra se retrasa de la fecha de entrega?</h4>
+                    <h4 data-i18n="faq_3_q">¿Qué ocurre si la obra se retrasa de la fecha de entrega?</h4>
                     <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
                 </button>
                 <div class="faq-answer">
-                    <p><strong>Lo compensamos.</strong> Nuestros plazos son realistas, no prometemos imposibles para ganar el contrato. Si por alguna razón técnica imputable a nosotros hubiera un retraso significativo, lo compensamos económicamente. Nuestra tasa de cumplimiento en fechas es del 98%.</p>
+                    <p data-i18n="faq_3_a"><strong>Lo compensamos.</strong> Nuestros plazos son realistas, no prometemos imposibles para ganar el contrato. Si por alguna razón técnica imputable a nosotros hubiera un retraso significativo, lo compensamos económicamente. Nuestra tasa de cumplimiento en fechas es del 98%.</p>
                 </div>
             </div>
             <div class="faq-item anim-fade-up delay-4">
                 <button aria-expanded="false" class="faq-question">
-                    <h4>¿Pedís dinero por adelantado para empezar?</h4>
+                    <h4 data-i18n="faq_4_q">¿Pedís dinero por adelantado para empezar?</h4>
                     <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
                 </button>
                 <div class="faq-answer">
-                    <p><strong>Un 30% a la firma, nada más.</strong> Lo estándar en el sector es un 30% a la firma del contrato para el acopio de materiales y la reserva de fechas. El resto se divide en certificaciones de obra o al finalizar, dependiendo de la envergadura del proyecto.</p>
+                    <p data-i18n="faq_4_a"><strong>Un 30% a la firma, nada más.</strong> Lo estándar en el sector es un 30% a la firma del contrato para el acopio de materiales y la reserva de fechas. El resto se divide en certificaciones de obra o al finalizar, dependiendo de la envergadura del proyecto.</p>
                 </div>
             </div>
             <div class="faq-item anim-fade-up delay-5">
                 <button aria-expanded="false" class="faq-question">
-                    <h4>¿Cuánto cuesta pintar un piso de 80m² en el Maresme?</h4>
+                    <h4 data-i18n="faq_5_q">¿Cuánto cuesta pintar un piso de 80m² en el Maresme?</h4>
                     <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
                 </button>
                 <div class="faq-answer">
-                    <p><strong>Entre 1.800€ y 3.200€ dependiendo del estado de las paredes y la calidad de la pintura.</strong> Si hay gotelé que eliminar, el precio sube porque hay que alisar todas las superficies antes de pintar. Te hacemos presupuesto cerrado gratis en tu casa.</p>
+                    <p data-i18n="faq_5_a"><strong>Entre 1.800€ y 3.200€ dependiendo del estado de las paredes y la calidad de la pintura.</strong> Si hay gotelé que eliminar, el precio sube porque hay que alisar todas las superficies antes de pintar. Te hacemos presupuesto cerrado gratis en tu casa.</p>
                 </div>
             </div>
             <div class="faq-item anim-fade-up delay-6">
                 <button aria-expanded="false" class="faq-question">
-                    <h4>¿Cuánto tarda una reforma de baño completa?</h4>
+                    <h4 data-i18n="faq_6_q">¿Cuánto tarda una reforma de baño completa?</h4>
                     <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
                 </button>
                 <div class="faq-answer">
-                    <p><strong>Entre 5 y 10 días laborables.</strong> Un baño estándar (5-8m²) con cambio completo de sanitarios, alicatado y grifería lo terminamos en una semana. Baños más grandes o con cambios de distribución pueden llevar hasta 10 días.</p>
+                    <p data-i18n="faq_6_a"><strong>Entre 5 y 10 días laborables.</strong> Un baño estándar (5-8m²) con cambio completo de sanitarios, alicatado y grifería lo terminamos en una semana. Baños más grandes o con cambios de distribución pueden llevar hasta 10 días.</p>
                 </div>
             </div>
             <div class="faq-item anim-fade-up delay-7">
                 <button aria-expanded="false" class="faq-question">
-                    <h4>¿Trabajáis los fines de semana?</h4>
+                    <h4 data-i18n="faq_7_q">¿Trabajáis los fines de semana?</h4>
                     <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
                 </button>
                 <div class="faq-answer">
-                    <p><strong>Los sábados por la mañana sí, los domingos no.</strong> Nuestro horario habitual es de lunes a viernes de 8:00 a 19:00, y sábados de 9:00 a 14:00. Si necesitas un horario especial (por ejemplo, trabajo nocturno en tu local comercial), podemos adaptarnos.</p>
+                    <p data-i18n="faq_7_a"><strong>Los sábados por la mañana sí, los domingos no.</strong> Nuestro horario habitual es de lunes a viernes de 8:00 a 19:00, y sábados de 9:00 a 14:00. Si necesitas un horario especial (por ejemplo, trabajo nocturno en tu local comercial), podemos adaptarnos.</p>
                 </div>
             </div>
             <div class="faq-item anim-fade-up delay-8">
                 <button aria-expanded="false" class="faq-question">
-                    <h4>¿En qué zonas trabajáis?</h4>
+                    <h4 data-i18n="faq_8_q">¿En qué zonas trabajáis?</h4>
                     <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
                 </button>
                 <div class="faq-answer">
-                    <p><strong>Todo el Maresme y Barcelona ciudad.</strong> Cubrimos Mataró, Badalona, Premià de Mar, El Masnou, Cabrils, Vilassar de Mar, Vilassar de Dalt, Alella, Montgat, Tiana y todo Barcelona. La visita de presupuesto es siempre gratuita en estas zonas.</p>
+                    <p data-i18n="faq_8_a"><strong>Todo el Maresme y Barcelona ciudad.</strong> Cubrimos Mataró, Badalona, Premià de Mar, El Masnou, Cabrils, Vilassar de Mar, Vilassar de Dalt, Alella, Montgat, Tiana y todo Barcelona. La visita de presupuesto es siempre gratuita en estas zonas.</p>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- =============================================
-     TABLA COMPARATIVA — NOSOTROS VS LA INDUSTRIA
-     ============================================= -->
-<section class="compare-section">
-    <div class="container">
-        <div class="tag anim-fade-up" style="display:block;text-align:center;margin:0 auto 14px;">Sin filtros</div>
-        <h2 class="section-title anim-fade-up">Nosotros vs <span class="highlight">La Industria</span></h2>
-        <p class="section-subtitle anim-fade-up">Lo que casi nadie te dice cuando pides tres presupuestos.</p>
-        <div class="compare-table anim-fade-up">
-            <div class="compare-header">
-                <div class="compare-col-label"></div>
-                <div class="compare-col compare-col-bad"><i class="fa-solid fa-triangle-exclamation"></i> La Mayoría</div>
-                <div class="compare-col compare-col-good"><i class="fa-solid fa-circle-check"></i> Nosotros</div>
-            </div>
-            <div class="compare-row">
-                <div class="compare-col-label">Plazos de entrega</div>
-                <div class="compare-col compare-col-bad"><i class="fa-solid fa-xmark"></i> Retrasos sin penalización ni explicación</div>
-                <div class="compare-col compare-col-good"><i class="fa-solid fa-check"></i> Penalización económica por cada día de retraso firmada en contrato</div>
-            </div>
-            <div class="compare-row">
-                <div class="compare-col-label">Precio final</div>
-                <div class="compare-col compare-col-bad"><i class="fa-solid fa-xmark"></i> Presupuesto que crece con "extras" imprevistos a mitad de obra</div>
-                <div class="compare-col compare-col-good"><i class="fa-solid fa-check"></i> Precio cerrado por escrito. El que te decimos es el que pagas</div>
-            </div>
-            <div class="compare-row">
-                <div class="compare-col-label">Limpieza diaria</div>
-                <div class="compare-col compare-col-bad"><i class="fa-solid fa-xmark"></i> Polvo, desorden y muebles sin protección al terminar la jornada</div>
-                <div class="compare-col compare-col-good"><i class="fa-solid fa-check"></i> Protocolo de recogida y protección al cierre de cada día de obra</div>
-            </div>
-            <div class="compare-row">
-                <div class="compare-col-label">Personal en tu casa</div>
-                <div class="compare-col compare-col-bad"><i class="fa-solid fa-xmark"></i> Subcontratistas sin identificar, sin formación ni seguro propio</div>
-                <div class="compare-col compare-col-good"><i class="fa-solid fa-check"></i> Plantilla propia, regulada y asegurada. Los conoces desde el día 1</div>
-            </div>
-            <div class="compare-row">
-                <div class="compare-col-label">Experiencia real</div>
-                <div class="compare-col compare-col-bad"><i class="fa-solid fa-xmark"></i> Empresa de 2 años con página bonita y resultados mediocres</div>
-                <div class="compare-col compare-col-good"><i class="fa-solid fa-check"></i> 30 años de oficio real en el Maresme y Barcelona. Sin marketing vacío</div>
-            </div>
-        </div>
-    </div>
-</section>
+
 
 <!-- =============================================
      CTA CIERRE
      ============================================= -->
 <section class="cta-section">
     <div class="container">
-        <div class="tag anim-fade-up">Sin compromiso</div>
-        <h2 class="anim-fade-up">¿Listo para transformar tu espacio?</h2>
-        <p class="anim-fade-up">Visita gratuita en Maresme, Barcelona y Costa Brava. Presupuesto cerrado en 48h. Precio que no cambia.</p>
+        <div class="tag anim-fade-up" data-i18n="cta_tag">Sin compromiso</div>
+        <h2 class="anim-fade-up" data-i18n="cta_title">¿Listo para transformar tu espacio?</h2>
+        <p class="anim-fade-up" data-i18n="cta_desc">Visita gratuita en Maresme, Barcelona y Costa Brava. Presupuesto cerrado en 48h. Precio que no cambia.</p>
         <div class="cta-actions anim-fade-up delay-2">
-            <button class="btn-primary open-modal-btn" style="padding:15px 32px;font-size:1.05rem;">
+            <button class="btn-primary open-modal-btn" style="padding:15px 32px;font-size:1.05rem;" data-i18n="cta_btn_1">
                 <i class="fa-solid fa-calculator"></i> Calcular mi presupuesto
             </button>
-            <a href="https://wa.me/34631714077?text=Hola,%20quiero%20solicitar%20visita%20gratuita." target="_blank" rel="noopener" class="btn-wa-large" onclick="trackWhatsApp()">
+            <a href="https://wa.me/34631714077?text=Hola,%20quiero%20solicitar%20visita%20gratuita." target="_blank" rel="noopener" class="btn-wa-large" onclick="trackWhatsApp()" data-i18n="cta_btn_2">
                 <i class="fa-brands fa-whatsapp"></i> WhatsApp directo
             </a>
         </div>
         <div class="cta-trust anim-fade-up delay-3">
-            <span><i class="fa-solid fa-shield-check"></i> Garantía por escrito</span>
-            <span><i class="fa-solid fa-file-contract"></i> Precio cerrado</span>
-            <span><i class="fa-solid fa-star"></i> 5.0★ Google</span>
-            <span><i class="fa-solid fa-clock"></i> Respuesta en &lt;2h</span>
+            <span><i class="fa-solid fa-shield-check"></i> <span data-i18n="cta_trust_1">Garantía por escrito</span></span>
+            <span><i class="fa-solid fa-file-contract"></i> <span data-i18n="cta_trust_2">Precio cerrado</span></span>
+            <span><i class="fa-solid fa-star"></i> <span data-i18n="cta_trust_3">5.0★ Google</span></span>
+            <span><i class="fa-solid fa-clock"></i> <span data-i18n="cta_trust_4">Respuesta en &lt;2h</span></span>
         </div>
     </div>
 </section>
@@ -1708,42 +2382,42 @@
     <div class="container">
         <div class="footer-grid">
             <div class="footer-brand">
-                <h3><i class="fa-solid fa-house-chimney" style="color:var(--accent);margin-right:8px;"></i>Pintura, Reformas y Acabados de Obra</h3>
-                <p>Referente de confianza en el Maresme y Barcelona. Especialistas en acabados de alta gama y gestión integral de obras residenciales.</p>
+                <h3 data-i18n="footer_brand_title"><i class="fa-solid fa-house-chimney" style="color:var(--accent);margin-right:8px;"></i>Pintura, Reformas y Acabados de Obra</h3>
+                <p data-i18n="footer_brand_desc">Referente de confianza en el Maresme y Barcelona. Especialistas en acabados de alta gama y gestión integral de obras residenciales.</p>
                 <div class="social-links">
                     <a href="https://wa.me/34631714077" target="_blank" aria-label="WhatsApp" onclick="trackWhatsApp()"><i class="fa-brands fa-whatsapp"></i></a>
                     <a href="https://www.instagram.com/pintayreformatuobra" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
                 </div>
             </div>
             <div class="footer-nav">
-                <h4>Servicios Pro</h4>
+                <h4 data-i18n="footer_nav_1_title">Servicios Pro</h4>
                 <ul>
-                    <li><a href="#servicios">Pintura Profesional</a></li>
-                    <li><a href="#servicios">Baños y Cocinas</a></li>
-                    <li><a href="#servicios">Reformas Integrales</a></li>
-                    <li><a href="#servicios">Comunidades y Locales</a></li>
+                    <li><a href="#servicios" data-i18n="footer_nav_1_l1">Pintura Profesional</a></li>
+                    <li><a href="#servicios" data-i18n="footer_nav_1_l2">Baños y Cocinas</a></li>
+                    <li><a href="#servicios" data-i18n="footer_nav_1_l3">Reformas Integrales</a></li>
+                    <li><a href="#servicios" data-i18n="footer_nav_1_l4">Comunidades y Locales</a></li>
                 </ul>
             </div>
             <div class="footer-legal">
-                <h4>Confianza Total</h4>
+                <h4 data-i18n="footer_nav_2_title">Confianza Total</h4>
                 <ul>
-                    <li><i class="fa-solid fa-shield-halved"></i> Garantía por escrito</li>
-                    <li><i class="fa-solid fa-file-contract"></i> Presupuesto cerrado</li>
-                    <li><i class="fa-solid fa-medal"></i> Materiales certificados</li>
-                    <li><i class="fa-solid fa-star"></i> 5.0★ en Google</li>
+                    <li><i class="fa-solid fa-shield-halved"></i> <span data-i18n="footer_nav_2_l1">Garantía por escrito</span></li>
+                    <li><i class="fa-solid fa-file-contract"></i> <span data-i18n="footer_nav_2_l2">Presupuesto cerrado</span></li>
+                    <li><i class="fa-solid fa-medal"></i> <span data-i18n="footer_nav_2_l3">Materiales certificados</span></li>
+                    <li><i class="fa-solid fa-star"></i> <span data-i18n="footer_nav_2_l4">5.0★ en Google</span></li>
                 </ul>
             </div>
             <div class="footer-contact-info">
-                <h4>Contacto Directo</h4>
+                <h4 data-i18n="footer_nav_3_title">Contacto Directo</h4>
                 <p class="contact-item"><i class="fa-solid fa-phone"></i> <a href="tel:+34639058819" style="color:inherit;text-decoration:none;" onclick="trackPhoneCall()">639 058 819</a></p>
                 <p class="contact-item"><i class="fa-solid fa-phone"></i> <a href="tel:+34631714077" style="color:inherit;text-decoration:none;" onclick="trackPhoneCall()">631 714 077</a></p>
                 <p class="contact-item"><i class="fa-brands fa-instagram"></i> @pintayreformatuobra</p>
                 <p class="contact-item"><i class="fa-solid fa-envelope"></i> Bcnproreforma@gmail.com</p>
-                <p class="contact-item"><i class="fa-solid fa-location-dot"></i> Maresme y Barcelona</p>
+                <p class="contact-item"><i class="fa-solid fa-location-dot"></i> <span data-i18n="footer_nav_3_loc">Maresme y Barcelona</span></p>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; <script>document.write(new Date().getFullYear())</script> Pintura, Reformas y Acabados de Obra. Todos los derechos reservados.</p>
+            <p>&copy; <script>document.write(new Date().getFullYear())</script> <span data-i18n="footer_bottom">Pintura, Reformas y Acabados de Obra. Todos los derechos reservados.</span></p>
         </div>
     </div>
 </footer>
@@ -1751,165 +2425,13 @@
 <!-- =============================================
      MODAL CALCULADORA
      ============================================= -->
-<div id="qualify-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-    <div class="modal-content">
+<!-- =============================================
+     MODAL CALCULADORA (LEAD GATE)
+     ============================================= -->
+<div id="calcModal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-content calc-modal-content" style="max-width: 500px; padding-top: 15px;">
         <button class="close-modal" aria-label="Cerrar">&times;</button>
-        <div class="form-container">
-            <div class="form-step active" id="step-1">
-                <h3 id="modal-title" data-i18n="calc_title">Diagnóstico de Alta Calificación</h3>
-                <p class="form-intro" data-i18n="calc_intro">Inicia el proceso para recibir una propuesta profesional ajustada a mercado.</p>
-                <h4 data-i18n="calc_step1_q" style="margin-bottom:16px;font-size:1rem;">1. Selecciona el foco principal de tu proyecto:</h4>
-                <div class="options-grid vertical luxe">
-                    <label class="option-card image-card" style="--bg-url:url('images/materials/WhatsApp Image 2026-04-08 at 19.28.11 (1).jpeg')">
-                        <input type="radio" name="project_type" value="Pintura" required>
-                        <div class="card-overlay"></div>
-                        <div class="card-content"><span class="icon"><i class="fa-solid fa-paint-roller"></i></span><span class="text">Pintura Profesional</span></div>
-                    </label>
-                    <label class="option-card image-card" style="--bg-url:url('images/projects/WhatsApp Image 2026-04-08 at 22.13.21 (1).jpeg')">
-                        <input type="radio" name="project_type" value="BanoCocina">
-                        <div class="card-overlay"></div>
-                        <div class="card-content"><span class="icon"><i class="fa-solid fa-bath"></i></span><span class="text">Baños y Cocinas</span></div>
-                    </label>
-                    <label class="option-card image-card" style="--bg-url:url('images/materials/WhatsApp Image 2026-04-08 at 19.28.09 (5).jpeg')">
-                        <input type="radio" name="project_type" value="Integral">
-                        <div class="card-overlay"></div>
-                        <div class="card-content"><span class="icon"><i class="fa-solid fa-hammer"></i></span><span class="text">Reformas Integrales</span></div>
-                    </label>
-                </div>
-                <div class="form-actions right">
-                    <button class="btn-primary next-step" data-target="step-2">Continuar <i class="fa-solid fa-arrow-right"></i></button>
-                </div>
-            </div>
-
-            <div class="form-step" id="step-2">
-                <h3 style="font-size:1.1rem;margin-bottom:8px;">2. ¿En qué tipo de inmueble se realizará?</h3>
-                <p class="step-subtitle">Ayuda a calcular logística exterior e interior.</p>
-                <div class="options-grid" style="grid-template-columns:repeat(3,1fr);">
-                    <label class="option-card compact"><input type="radio" name="property_type" value="Piso" checked><span class="icon"><i class="fa-solid fa-building"></i></span><span class="text">Piso</span></label>
-                    <label class="option-card compact"><input type="radio" name="property_type" value="Casa"><span class="icon"><i class="fa-solid fa-house"></i></span><span class="text">Casa</span></label>
-                    <label class="option-card compact"><input type="radio" name="property_type" value="Local"><span class="icon"><i class="fa-solid fa-store"></i></span><span class="text">Local</span></label>
-                </div>
-                <div class="form-actions between">
-                    <button class="btn-secondary prev-step" data-target="step-1"><i class="fa-solid fa-arrow-left"></i></button>
-                    <button class="btn-primary next-step" data-target="step-3">Continuar <i class="fa-solid fa-arrow-right"></i></button>
-                </div>
-            </div>
-
-            <div class="form-step" id="step-3">
-                <h3 style="font-size:1.1rem;margin-bottom:8px;">3. Estado actual del inmueble</h3>
-                <p class="step-subtitle">El nivel de protección afecta directamente al coste.</p>
-                <div class="options-grid vertical">
-                    <label class="option-card"><input type="radio" name="property_state" value="Vacio" checked><div class="text"><span>Vacío o Despejado</span><br><small style="color:var(--text-muted);font-size:.82rem;">Fácil acceso para trabajar rápido.</small></div></label>
-                    <label class="option-card"><input type="radio" name="property_state" value="Amueblado"><div class="text"><span>Amueblado / Habitado</span><br><small style="color:var(--text-muted);font-size:.82rem;">Requiere máxima protección.</small></div></label>
-                    <label class="option-card"><input type="radio" name="property_state" value="Dañado"><div class="text"><span>Muy dañado / Derribo</span><br><small style="color:var(--text-muted);font-size:.82rem;">Requiere saneamiento previo.</small></div></label>
-                </div>
-                <div class="form-actions between">
-                    <button class="btn-secondary prev-step" data-target="step-2"><i class="fa-solid fa-arrow-left"></i></button>
-                    <button class="btn-primary next-step" data-target="step-4">Continuar <i class="fa-solid fa-arrow-right"></i></button>
-                </div>
-            </div>
-
-            <div class="form-step" id="step-4">
-                <h3 style="font-size:1.1rem;margin-bottom:8px;">4. Tamaño de la superficie</h3>
-                <div class="slider-wrapper">
-                    <div class="slider-value-display"><span id="m2-output">75</span> m²</div>
-                    <input type="range" id="size-slider" min="10" max="250" value="75" step="5" class="custom-slider">
-                    <div class="slider-labels"><span>10m²</span><span>250m²+</span></div>
-                </div>
-                <h3 style="font-size:1.1rem;margin-bottom:16px;">5. Nivel de acabados</h3>
-                <div class="options-grid" style="grid-template-columns:repeat(2,1fr);">
-                    <label class="option-card compact"><input type="radio" name="quality" value="Estandar" checked><span class="text">Básico / Medio</span></label>
-                    <label class="option-card compact"><input type="radio" name="quality" value="Premium"><span class="text">Alta Gama</span></label>
-                </div>
-                <div class="form-actions between">
-                    <button class="btn-secondary prev-step" data-target="step-3"><i class="fa-solid fa-arrow-left"></i></button>
-                    <button class="btn-primary next-step" data-target="step-5">Continuar <i class="fa-solid fa-arrow-right"></i></button>
-                </div>
-            </div>
-
-            <div class="form-step" id="step-5">
-                <h3 style="font-size:1.1rem;margin-bottom:8px;">¿Frecuencia del pintado?</h3>
-                <div class="options-grid vertical">
-                    <label class="option-card"><input type="radio" name="paint_frequency" value="Regular" checked><span class="text">Refresco (Mismo color)</span></label>
-                    <label class="option-card"><input type="radio" name="paint_frequency" value="Cambio"><span class="text">Cambio de Color / Alisado</span></label>
-                </div>
-                <div class="form-actions between">
-                    <button class="btn-secondary prev-step" data-target="step-4"><i class="fa-solid fa-arrow-left"></i></button>
-                    <button class="btn-primary next-step" data-target="step-6">Continuar <i class="fa-solid fa-arrow-right"></i></button>
-                </div>
-            </div>
-
-            <div class="form-step" id="step-6">
-                <h3 style="font-size:1.1rem;margin-bottom:8px;">¿Incluimos carpintería?</h3>
-                <div class="options-grid" style="grid-template-columns:repeat(2,1fr);">
-                    <label class="option-card compact"><input type="radio" name="carpentry" value="No" checked><span class="text">Solo Paredes</span></label>
-                    <label class="option-card compact"><input type="radio" name="carpentry" value="Si"><span class="text">Paredes + Puertas</span></label>
-                </div>
-                <div class="form-actions between">
-                    <button class="btn-secondary prev-step" data-target="step-5"><i class="fa-solid fa-arrow-left"></i></button>
-                    <button class="btn-primary next-step" data-target="step-7">Continuar <i class="fa-solid fa-arrow-right"></i></button>
-                </div>
-            </div>
-
-            <div class="form-step" id="step-7">
-                <h3 style="font-size:1.1rem;margin-bottom:8px;">¿Añadimos puntos de luz / Pladur?</h3>
-                <div class="options-grid" style="grid-template-columns:repeat(2,1fr);">
-                    <label class="option-card compact"><input type="radio" name="lighting" value="No" checked><span class="text">No</span></label>
-                    <label class="option-card compact"><input type="radio" name="lighting" value="Si"><span class="text">Sí, renovar</span></label>
-                </div>
-                <div class="form-actions between">
-                    <button class="btn-secondary prev-step" data-target="step-6"><i class="fa-solid fa-arrow-left"></i></button>
-                    <button class="btn-primary next-step" data-target="step-8">Continuar <i class="fa-solid fa-arrow-right"></i></button>
-                </div>
-            </div>
-
-            <div class="form-step" id="step-8">
-                <h3 style="font-size:1.1rem;margin-bottom:8px;">¿Para cuándo necesitas tenerlo listo?</h3>
-                <div class="options-grid" style="grid-template-columns:repeat(3,1fr);">
-                    <label class="option-card compact"><input type="radio" name="timeline" value="Urgente"><i class="fa-solid fa-bolt" style="color:#fbbf24"></i><span class="text">Urgente</span></label>
-                    <label class="option-card compact"><input type="radio" name="timeline" value="Medio" checked><i class="fa-solid fa-calendar-days"></i><span class="text">1-3 meses</span></label>
-                    <label class="option-card compact"><input type="radio" name="timeline" value="Flexible"><i class="fa-solid fa-clock"></i><span class="text">Flexible</span></label>
-                </div>
-                <div class="form-actions between">
-                    <button class="btn-secondary prev-step" data-target="step-7"><i class="fa-solid fa-arrow-left"></i></button>
-                    <button class="btn-primary next-step" data-target="step-9">Continuar <i class="fa-solid fa-arrow-right"></i></button>
-                </div>
-            </div>
-
-            <div class="form-step" id="step-9">
-                <h3 style="font-size:1.1rem;margin-bottom:8px;">Generando tu informe...</h3>
-                <p class="form-intro">Déjanos tus datos para vincular el presupuesto a tu expediente.</p>
-                <div class="input-group"><input type="text" id="name" placeholder="Tu nombre" required></div>
-                <div class="input-group"><input type="tel" id="vp-phone" placeholder="Tu teléfono" required></div>
-                <div class="form-actions between">
-                    <button class="btn-secondary prev-step" data-target="step-8"><i class="fa-solid fa-arrow-left"></i></button>
-                    <button id="calculate-btn" class="btn-primary">Emitir Análisis <i class="fa-solid fa-calculator"></i></button>
-                </div>
-            </div>
-
-            <div class="form-step" id="step-10">
-                <div id="calc-loader" class="loader-box hidden">
-                    <i class="fa-solid fa-circle-notch"></i>
-                    <p>Generando Precio Orientativo Local...</p>
-                </div>
-                <div id="step-10-actions" class="price-reveal">
-                    <h4>Estimación Analítica Pro</h4>
-                    <div class="price-range">
-                        <span id="price-min" class="price-num">0€</span>
-                        <span class="separator">—</span>
-                        <span id="price-max" class="price-num">0€</span>
-                    </div>
-                    <p class="disclaimer"><i class="fa-solid fa-circle-info"></i> Aproximación técnica basada en tus respuestas. Envíanos el informe por WhatsApp para confirmar fecha de visita.</p>
-                    <button id="final-submit" class="btn-whatsapp" style="margin-top:18px;" onclick="trackCalculator()">
-                        <i class="fa-brands fa-whatsapp"></i> Agendar Visita por WhatsApp
-                    </button>
-                </div>
-            </div>
-
-            <div class="progress-container">
-                <div class="progress-bar" id="form-progress" style="width:11%;"></div>
-            </div>
-        </div>
+        <!-- Injected by JS -->
     </div>
 </div>
 
@@ -2034,6 +2556,12 @@ document.addEventListener('DOMContentLoaded', () => {
             srv_subtitle: "Alta enginyeria aplicada a la pintura i la reforma residencial i industrial al Maresme i Barcelona.",
             srv_cat_residential: "Solucions Residencials",
             srv_cat_b2b: "Empreses i Zones Comunes",
+            service_5_title: "Escales i Pàrquings",
+            service_5_desc: "Manteniment integral d'escales, pàrquings i zones comunes amb pressupost adaptat a comunitats.",
+            service_5_feat_1: "Pintura de Sòls Epoxi",
+            service_5_feat_2: "Reparació de Façanes i Patis",
+            service_5_feat_3: "Manteniment de Zones Nobles",
+
             // Valores
             val_tag: "Per què triar-nos",
             val_title: "El Nostre Compromís",
@@ -2044,17 +2572,128 @@ document.addEventListener('DOMContentLoaded', () => {
             val_2_desc: "Abans de començar tapem i protegim curosament els teus mobles i terres. Impecable cada dia.",
             val_3_title: "Complim els Terminis",
             val_3_desc: "Sabem com molesta una obra. Per això treballem organitzats per acabar sempre en la data acordada.",
+
+            // Tabla Comparativa
+            compare_label: "Transparència total",
+            compare_title: "El que <span>altres no t'expliquen</span>",
+            compare_subtitle: "Compara abans de decidir. La diferència entre un treball mediocre i un que dura dècades està en els detalls.",
+            compare_row_1_label: "Compliment de terminis",
+            compare_row_1_bad: "Retards freqüents sense conseqüències. 'La setmana que ve…'",
+            compare_row_1_good: "Penalització contractual per cada dia de retard imputable.",
+            compare_row_2_label: "Transparència de preu",
+            compare_row_2_bad: "Pressupost orientatiu que s'infla a mitja obra amb 'imprevistos'.",
+            compare_row_2_good: "Preu tancat i signat. El que veus és el que pagues.",
+            compare_row_3_label: "Personal a l'obra",
+            compare_row_3_bad: "Subcontractistes sense verificar. No saps qui entra a casa teva.",
+            compare_row_3_good: "Equip 100% propi i regulat. Sense intermediaris.",
+            compare_row_4_label: "Estat després de l'obra",
+            compare_row_4_bad: "Pols, runa i desordre. La neteja va a càrrec teu.",
+            compare_row_4_good: "Neteja industrial inclosa. Espai llest per entrar-hi a viure.",
+            compare_row_5_label: "Cobertura de danys",
+            compare_row_5_bad: "Sense assegurança. Si hi ha un dany, el problema és teu.",
+            compare_row_5_good: "Assegurança de Responsabilitat Civil activa en cada projecte.",
+            compare_row_6_label: "Qualitat de materials",
+            compare_row_6_bad: "Materials de baix cost per maximitzar marge.",
+            compare_row_6_good: "Marques de primera: Valentine, Titanlux, Mapei.",
+            compare_cta: "📞 Demana el teu pressupost tancat ara — sense compromís",
+
             // Proceso
-            proc_tag: "El nostre mètode",
-            proc_title: "Enginyeria del Resultat",
-            proc_subtitle: "Així transformem la teva visió en una realitat tècnica impecable.",
+            process_tag: "El nostre mètode",
+            process_title: "Enginyeria del Resultat",
+            process_subtitle: "Així transformem la teva visió en una realitat tècnica impecable i sense fricció.",
+            process_1_title: "Escolta Activa i Diagnòstic",
+            process_1_desc: "Analitzem el teu estil de vida o negoci per proposar solucions que maximitzin el valor de la propietat.",
+            process_2_title: "Auditoria Territorial",
+            process_2_desc: "Ens desplacem a la teva ubicació per una medició làser precisa.",
+            process_3_title: "Pressupost de Màxima Claredat",
+            process_3_desc: "Document tancat per contracte. Sense ensurts d'última hora.",
+            process_4_title: "Execució Quirúrgica",
+            process_4_desc: "Protecció total, compliment de cronograma i neteja industrial profunda.",
+
+            // Antes y Despues
+            ba_tag: "Resultats reals",
+            ba_title: "La Transformació: Abans i Després",
+            ba_subtitle: "Llisca per veure la qualitat real de la nostra execució tècnica.",
+            ba_before: "Estat Inicial",
+            ba_after: "Entrega Final",
+
+            // Galeria
+            gallery_tag: "Portafoli",
+            gallery_title: "Projectes Reals",
+            gallery_subtitle: "Resultats nets i duradors en habitatges del Maresme i Barcelona.",
+
+            // Reseñas
+            reviews_tag: "Opinions verificades",
+            reviews_title: "El que opinen els nostres clients",
+            reviews_subtitle: "Ressenyes reals de clients al Maresme i Barcelona.",
+            reviews_count: "47 ressenyes a Google",
+            reviews_google_btn: "Veure totes les ressenyes a Google",
+            reviews_leave: "Deixa'ns la teva ressenya",
+
+            // Equipo
+            about_tag: "Qui som",
+            about_title: "30 anys d'ofici real,<br><span class=\"highlight\">no de catàleg de màrqueting.</span>",
+            about_p1: "Hi ha moltes empreses que et manen una foto bonica i després subcontracten. Nosaltres no. Portem més de 30 anys treballant amb les mans, aprenent a cada paret.",
+            about_p2: "Sabem que deixar entrar a desconeguts fa respecte. El nostre estàndard mínim és: preu que no canvia, obra neta cada dia i lliurament a temps.",
+            about_signature: "— <a href='tel:+34639058819' onclick='trackPhoneCall()' style='color:var(--text);text-decoration:underline;'>639 058 819</a> | 30 anys a l'ofici",
+
+            // Instagram
+            insta_subtitle: "Segueix-nos · obres en directe cada dia",
+            insta_btn: "Seguir a Instagram",
+            insta_footer_text: "Contingut nou cada dia · obres reals · consells de manteniment",
+            insta_footer_btn: "Veure perfil complet",
+
             // FAQ
             faq_tag: "Resolem els teus dubtes",
             faq_title: "Preguntes Freqüents",
+            faq_1_q: "Realment cobriu tot el mobiliari i protegiu el terra?",
+            faq_1_a: "<strong>Sí, ho protegim absolutament tot.</strong> Els mobles es forren i el terra es protegeix amb paper o lona. Al acabar, no veuràs ni una mota de pols.",
+            faq_2_q: "El pressupost té algun cost ocult o sorpreses finals?",
+            faq_2_a: "<strong>No, zero costos ocults.</strong> Preu Tancat i Signat. Només varia si demanes un canvi o ampliació fora de contracte.",
+            faq_3_q: "Què passa si l'obra es retarda de la data d'entrega?",
+            faq_3_a: "<strong>Ho compensem.</strong> Si hi ha retard imputable a nosaltres, compensem econòmicament. La nostra taxa de compliment és del 98%.",
+            faq_4_q: "Demaneu diners per avançat per començar?",
+            faq_4_a: "<strong>Un 30% a la signatura.</strong> I la resta en certificacions d'obra o al finalitzar.",
+            faq_5_q: "Quant costa pintar un pis de 80m² al Maresme?",
+            faq_5_a: "<strong>Entre 1.800€ i 3.200€.</strong> Depèn de l'estat de les parets i si hi ha gotelé.",
+            faq_6_q: "Quant triga una reforma de bany completa?",
+            faq_6_a: "<strong>Entre 5 i 10 dies feiners.</strong> Un bany estàndard el fem en una setmana.",
+            faq_7_q: "Treballeu els caps de setmana?",
+            faq_7_a: "<strong>Els dissabtes al matí sí, diumenges no.</strong> Per a excepcions, ens podem adaptar.",
+            faq_8_q: "A quines zones treballeu?",
+            faq_8_a: "<strong>Tot el Maresme i Barcelona ciutat.</strong> Visita de pressupost gratuïta en aquestes zones.",
+
             // CTA
             cta_tag: "Sense compromís",
             cta_title: "Preparat per transformar el teu espai?",
-            cta_desc: "Visita gratuïta al Maresme i Barcelona. Pressupost tancat en 48h."
+            cta_desc: "Visita gratuïta al Maresme, Barcelona i Costa Brava. Pressupost tancat en 48h. Preu que no canvia.",
+            cta_btn_1: "<i class='fa-solid fa-calculator'></i> Calcular el meu pressupost",
+            cta_btn_2: "<i class='fa-brands fa-whatsapp'></i> WhatsApp directe",
+            cta_trust_1: "Garantia per escrit",
+            cta_trust_2: "Preu tancat",
+            cta_trust_3: "5.0★ Google",
+            cta_trust_4: "Resposta en <2h",
+
+            // Footer
+            footer_brand_title: "<i class='fa-solid fa-house-chimney' style='color:var(--accent);margin-right:8px;'></i>Pintura, Reformes i Acabats d'Obra",
+            footer_brand_desc: "Referent de confiança al Maresme i Barcelona. Especialistes en acabats d'alta gamma i gestió integral d'obres residencials.",
+            footer_nav_1_title: "Serveis Pro",
+            footer_nav_1_l1: "Pintura Professional",
+            footer_nav_1_l2: "Banys i Cuines",
+            footer_nav_1_l3: "Reformes Integrals",
+            footer_nav_1_l4: "Comunitats i Locals",
+            footer_nav_2_title: "Confiança Total",
+            footer_nav_2_l1: "Garantia per escrit",
+            footer_nav_2_l2: "Pressupost tancat",
+            footer_nav_2_l3: "Materials certificats",
+            footer_nav_2_l4: "5.0★ a Google",
+            footer_nav_3_title: "Contacte Directe",
+            footer_nav_3_loc: "Maresme i Barcelona",
+            footer_bottom: "Pintura, Reformes i Acabats d'Obra. Tots els drets reservats.",
+
+            // Cookies
+            cookie_text: "Utilitzem cookies pròpies per millorar la teva experiència. En continuar navegant acceptes la nostra <a href='#' style='color:var(--accent);text-decoration:underline;'>política de privadesa</a>.",
+            cookie_btn: "Acceptar i tancar"
         }
     };
 
@@ -2099,23 +2738,345 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.anim-split-text').forEach(el => el.classList.add('is-animating'));
     }, 120);
 
-    /* ---- Modal calculadora ---- */
-    const modal     = document.getElementById('qualify-modal');
-    const closeBtn  = document.querySelector('.close-modal');
-    const steps     = document.querySelectorAll('.form-step');
-    const progressBar = document.getElementById('form-progress');
-    const whatsappNum = '34631714077';
-    let finalReport = '';
+    /* ---- Modal calculadora Lead Gate ---- */
+/* =============================================================
+   CALCULADORA DE PRESUPUESTO — SISTEMA DE CAPTURA DE LEAD
+   Proyecto: Pintura, Reformas y Acabados de Obra
+   
+   INSTRUCCIONES:
+   1. Sustituye el JS actual de tu modal de calculadora por este bloque.
+   2. En tu HTML, el modal debe tener un contenedor con id="calcModal"
+      (o adapta el ID en la línea de initCalculatorModal).
+   3. Los precios base están en PRICING_TABLE. Ajústalos a tu negocio.
+   ============================================================= */
 
+(function () {
+  'use strict';
+
+  // ── CONFIGURACIÓN DE PRECIOS (€/m²) ──
+  const PRICING_TABLE = {
+    pintura:    { min: 8,   max: 14,  label: 'Pintura Interior' },
+    bano_cocina:{ min: 280, max: 520, label: 'Baño / Cocina' },
+    integral:   { min: 450, max: 800, label: 'Reforma Integral' }
+  };
+
+  // ── ESTADO INTERNO ──
+  let currentStep = 1;
+  let calcData = { servicio: '', metros: 0, nombre: '', telefono: '', email: '' };
+
+  // ── INIT ──
+  function initCalculatorModal() {
+    const modal = document.getElementById('calcModal');
+    if (!modal) return;
+
+    // Inyectar estructura interna del modal
+    const modalBody = modal.querySelector('.modal-body') || modal.querySelector('.calc-modal-content');
+    if (!modalBody) return;
+
+    modalBody.innerHTML = buildStep1HTML();
+    bindStep1Events(modalBody);
+
+    // Reset al cerrar
+    const closeBtn = modal.querySelector('.modal-close, .close-modal, [data-close-modal]');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', function () {
+        currentStep = 1;
+        calcData = { servicio: '', metros: 0, nombre: '', telefono: '', email: '' };
+        modalBody.innerHTML = buildStep1HTML();
+        bindStep1Events(modalBody);
+      });
+    }
+  }
+
+  // ══════════════════════════════════════════════════════════
+  //  PASO 1 — Selección de servicio + metros cuadrados
+  // ══════════════════════════════════════════════════════════
+  function buildStep1HTML() {
+    return '' +
+      '<div class="calc-step calc-step-1" data-step="1">' +
+        '<div class="calc-step-indicator">' +
+          '<div class="calc-step-col"><div class="calc-dot calc-dot--active">1</div><span class="calc-dot-label">Servicio</span></div>' +
+          '<div class="calc-step-col"><div class="calc-dot">2</div><span class="calc-dot-label">Datos</span></div>' +
+          '<div class="calc-step-col"><div class="calc-dot">3</div><span class="calc-dot-label">Precio</span></div>' +
+        '</div>' +
+        '<h3 class="calc-title">¿Qué servicio necesitas?</h3>' +
+        '<p class="calc-subtitle">Selecciona y obtén un rango de precio orientativo en 30 segundos</p>' +
+
+        '<div class="calc-service-grid">' +
+          '<label class="calc-service-card" style="background-image:url(\'images/materials/WhatsApp Image 2026-04-08 at 19.28.11 (1).jpeg\')">' +
+            '<input type="radio" name="calcServicio" value="pintura">' +
+            '<div class="calc-service-overlay"></div>' +
+            '<div class="calc-service-content"><span class="calc-service-icon">🎨</span><span class="calc-service-name">Pintura</span></div>' +
+          '</label>' +
+          '<label class="calc-service-card" style="background-image:url(\'images/projects/WhatsApp Image 2026-04-08 at 22.13.21 (1).jpeg\')">' +
+            '<input type="radio" name="calcServicio" value="bano_cocina">' +
+            '<div class="calc-service-overlay"></div>' +
+            '<div class="calc-service-content"><span class="calc-service-icon">🚿</span><span class="calc-service-name">Baño / Cocina</span></div>' +
+          '</label>' +
+          '<label class="calc-service-card" style="background-image:url(\'images/materials/WhatsApp Image 2026-04-08 at 19.28.09 (5).jpeg\')">' +
+            '<input type="radio" name="calcServicio" value="integral">' +
+            '<div class="calc-service-overlay"></div>' +
+            '<div class="calc-service-content"><span class="calc-service-icon">🔨</span><span class="calc-service-name">Reforma Integral</span></div>' +
+          '</label>' +
+        '</div>' +
+
+        '<div class="calc-slider-wrap">' +
+          '<label class="calc-field-label">Superficie aproximada</label>' +
+          '<div class="calc-slider-value"><span id="calcMetrosDisplay">75</span> m²</div>' +
+          '<input type="range" id="calcMetros" min="20" max="300" value="75" step="5" class="calc-range-slider">' +
+          '<div class="calc-slider-labels"><span>20 m²</span><span>300+ m²</span></div>' +
+        '</div>' +
+
+        '<button type="button" class="calc-btn calc-btn--primary calc-btn--disabled" id="calcBtnStep1" disabled>' +
+          'Continuar →' +
+        '</button>' +
+      '</div>';
+  }
+
+  function bindStep1Events(container) {
+    var slider = container.querySelector('#calcMetros');
+    var display = container.querySelector('#calcMetrosDisplay');
+    var btn = container.querySelector('#calcBtnStep1');
+
+    // Actualizar display del slider
+    if (slider && display) {
+      slider.addEventListener('input', function() { display.textContent = slider.value; });
+    }
+
+    function validateStep1() {
+      var checked = container.querySelector('input[name="calcServicio"]:checked');
+      var valid = checked !== null;
+      btn.disabled = !valid;
+      btn.classList.toggle('calc-btn--disabled', !valid);
+    }
+
+    container.querySelectorAll('input[name="calcServicio"]').forEach(function(radio) {
+      radio.addEventListener('change', validateStep1);
+    });
+
+    btn.addEventListener('click', function () {
+      var checked = container.querySelector('input[name="calcServicio"]:checked');
+      if (!checked) return;
+      calcData.servicio = checked.value;
+      calcData.metros = parseInt(slider ? slider.value : 75);
+      currentStep = 2;
+      container.innerHTML = buildStep2HTML();
+      bindStep2Events(container);
+    });
+  }
+
+  // ══════════════════════════════════════════════════════════
+  //  PASO 2 — Captura obligatoria de datos de contacto
+  // ══════════════════════════════════════════════════════════
+  function buildStep2HTML() {
+    return '' +
+      '<div class="calc-step calc-step-2" data-step="2">' +
+        '<div class="calc-step-indicator">' +
+          '<div class="calc-step-col"><div class="calc-dot calc-dot--done">✓</div><span class="calc-dot-label">Servicio</span></div>' +
+          '<div class="calc-step-col"><div class="calc-dot calc-dot--active">2</div><span class="calc-dot-label">Datos</span></div>' +
+          '<div class="calc-step-col"><div class="calc-dot">3</div><span class="calc-dot-label">Precio</span></div>' +
+        '</div>' +
+        '<h3 class="calc-title">Tu presupuesto está casi listo</h3>' +
+        '<p class="calc-subtitle">Déjanos tus datos para enviarte el detalle personalizado y mostrarte el rango de precio ahora mismo.</p>' +
+
+        '<div class="calc-field">' +
+          '<label for="calcNombre">Nombre</label>' +
+          '<input type="text" id="calcNombre" placeholder="Tu nombre" required autocomplete="name">' +
+        '</div>' +
+
+        '<div class="calc-field">' +
+          '<label for="calcTelefono">Teléfono</label>' +
+          '<input type="tel" id="calcTelefono" placeholder="Ej: 612 345 678" required autocomplete="tel" ' +
+            'pattern="[0-9]{9,15}" title="Introduce un teléfono válido (mín. 9 dígitos)">' +
+        '</div>' +
+
+        '<div class="calc-field">' +
+          '<label for="calcEmail">Email</label>' +
+          '<input type="email" id="calcEmail" placeholder="tu@email.com" required autocomplete="email">' +
+        '</div>' +
+
+        '<div class="calc-legal">' +
+          '<label>' +
+            '<input type="checkbox" id="calcPrivacidad" required>' +
+            ' Acepto la <a href="privacidad.html" target="_blank" rel="noopener">política de privacidad</a>' +
+          '</label>' +
+        '</div>' +
+
+        '<button type="button" class="calc-btn calc-btn--primary" id="calcBtnStep2" disabled>' +
+          '🔓 Ver mi presupuesto' +
+        '</button>' +
+
+        '<button type="button" class="calc-btn calc-btn--ghost" id="calcBtnBack1">' +
+          '← Volver' +
+        '</button>' +
+      '</div>';
+  }
+
+  function bindStep2Events(container) {
+    var nombre = container.querySelector('#calcNombre');
+    var telefono = container.querySelector('#calcTelefono');
+    var email = container.querySelector('#calcEmail');
+    var privacidad = container.querySelector('#calcPrivacidad');
+    var btn = container.querySelector('#calcBtnStep2');
+    var backBtn = container.querySelector('#calcBtnBack1');
+
+    function validateStep2() {
+      var nameOk = nombre.value.trim().length >= 2;
+      var telOk = /^[0-9]{9,15}$/.test(telefono.value.replace(/\s/g, ''));
+      var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim());
+      var checkOk = privacidad.checked;
+      btn.disabled = !(nameOk && telOk && emailOk && checkOk);
+    }
+
+    nombre.addEventListener('input', validateStep2);
+    telefono.addEventListener('input', validateStep2);
+    email.addEventListener('input', validateStep2);
+    privacidad.addEventListener('change', validateStep2);
+
+    btn.addEventListener('click', function () {
+      calcData.nombre = nombre.value.trim();
+      calcData.telefono = telefono.value.replace(/\s/g, '');
+      calcData.email = email.value.trim();
+
+      // ── Guardar lead (localStorage + evento para backend futuro) ──
+      saveLead(calcData);
+
+      // ── Labor Illusion: estado de carga 1.2s antes de mostrar resultado ──
+      currentStep = 3;
+      container.innerHTML =
+        '<div class="calc-step" data-step="loading">' +
+          '<div class="calc-step-indicator">' +
+            '<div class="calc-step-col"><div class="calc-dot calc-dot--done">✓</div><span class="calc-dot-label">Servicio</span></div>' +
+            '<div class="calc-step-col"><div class="calc-dot calc-dot--done">✓</div><span class="calc-dot-label">Datos</span></div>' +
+            '<div class="calc-step-col"><div class="calc-dot calc-dot--done">✓</div><span class="calc-dot-label">Precio</span></div>' +
+          '</div>' +
+          '<p style="text-align:center;padding:40px 0;color:#64748b;font-size:0.95rem;">' +
+            '<span style="display:inline-block;font-size:2rem;margin-bottom:12px;animation:spin 1s linear infinite;">⏳</span><br>' +
+            'Calculando precio de mercado<br>para tu zona...' +
+          '</p>' +
+        '</div>';
+      setTimeout(function () {
+        container.innerHTML = buildStep3HTML();
+        bindStep3Events(container);
+      }, 1200);
+    });
+
+    backBtn.addEventListener('click', function () {
+      currentStep = 1;
+      container.innerHTML = buildStep1HTML();
+      bindStep1Events(container);
+    });
+  }
+
+  // ══════════════════════════════════════════════════════════
+  //  PASO 3 — Resultado con rango de precios + CTA WhatsApp
+  // ══════════════════════════════════════════════════════════
+  function buildStep3HTML() {
+    var pricing = PRICING_TABLE[calcData.servicio];
+    var minTotal = (pricing.min * calcData.metros).toLocaleString('es-ES');
+    var maxTotal = (pricing.max * calcData.metros).toLocaleString('es-ES');
+
+    // Mensaje pre-rellenado para WhatsApp
+    var waMsg = encodeURIComponent(
+      'Hola, soy ' + calcData.nombre + '. ' +
+      'He usado la calculadora web y me interesa un presupuesto para ' +
+      pricing.label + ' (' + calcData.metros + ' m²). ' +
+      'El rango orientativo era ' + minTotal + '€ – ' + maxTotal + '€. ' +
+      '¿Podemos concretar?'
+    );
+    // ⚠️ SUSTITUYE este número por el tuyo
+    var waLink = 'https://wa.me/34631714077?text=' + waMsg;
+
+    return '' +
+      '<div class="calc-step calc-step-3" data-step="3">' +
+        '<div class="calc-step-indicator">' +
+          '<div class="calc-step-col"><div class="calc-dot calc-dot--done">✓</div><span class="calc-dot-label">Servicio</span></div>' +
+          '<div class="calc-step-col"><div class="calc-dot calc-dot--done">✓</div><span class="calc-dot-label">Datos</span></div>' +
+          '<div class="calc-step-col"><div class="calc-dot calc-dot--active">3</div><span class="calc-dot-label">Precio</span></div>' +
+        '</div>' +
+
+        '<div class="calc-result-card">' +
+          '<span class="calc-result-label">' + pricing.label + ' · ' + calcData.metros + ' m²</span>' +
+          '<div class="calc-result-price">' +
+            '<span class="calc-price-range">' + minTotal + '€ – ' + maxTotal + '€</span>' +
+            '<span class="calc-price-note">*Rango orientativo. El precio final depende de la visita técnica.</span>' +
+          '</div>' +
+        '</div>' +
+
+        '<p class="calc-followup">Gracias, <strong>' + calcData.nombre + '</strong>. ' +
+        'Te contactaremos en menos de 2 horas. Si prefieres respuesta inmediata:</p>' +
+
+        '<a href="' + waLink + '" target="_blank" rel="noopener" class="calc-btn calc-btn--whatsapp" id="calcBtnWA">' +
+          '📲 Pedir presupuesto exacto por WhatsApp' +
+        '</a>' +
+
+        '<button type="button" class="calc-btn calc-btn--ghost" id="calcBtnReset">' +
+          'Calcular otro servicio' +
+        '</button>' +
+      '</div>';
+  }
+
+  function bindStep3Events(container) {
+    var resetBtn = container.querySelector('#calcBtnReset');
+    resetBtn.addEventListener('click', function () {
+      currentStep = 1;
+      calcData = { servicio: '', metros: 0, nombre: '', telefono: '', email: '' };
+      container.innerHTML = buildStep1HTML();
+      bindStep1Events(container);
+    });
+  }
+
+  // ══════════════════════════════════════════════════════════
+  //  PERSISTENCIA DE LEAD
+  // ══════════════════════════════════════════════════════════
+  function saveLead(data) {
+    // 1. LocalStorage como respaldo inmediato
+    var leads = [];
+    try {
+      leads = JSON.parse(localStorage.getItem('calc_leads') || '[]');
+    } catch (e) { leads = []; }
+
+    leads.push({
+      nombre: data.nombre,
+      telefono: data.telefono,
+      email: data.email,
+      servicio: PRICING_TABLE[data.servicio].label,
+      metros: data.metros,
+      timestamp: new Date().toISOString(),
+      fuente: 'calculadora_web'
+    });
+    localStorage.setItem('calc_leads', JSON.stringify(leads));
+
+    // 2. Dispara evento custom para que un listener externo
+    //    (Google Tag Manager, webhook, etc.) lo capture
+    window.dispatchEvent(new CustomEvent('leadCapturado', {
+      detail: leads[leads.length - 1]
+    }));
+
+    // 3. (Opcional) Envío a backend / webhook
+    //    Descomenta cuando tengas endpoint:
+    /*
+    fetch('/api/leads', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(leads[leads.length - 1])
+    }).catch(function(err) {
+      console.warn('Lead guardado en localStorage, fallo en API:', err);
+    });
+    */
+  }
+
+  
     const openModal = (e) => {
         if (e) e.preventDefault();
+        const modal = document.getElementById('calcModal');
         if (!modal) return;
         modal.style.display = 'flex';
         modal.classList.remove('hidden');
         document.body.style.overflow = 'hidden';
-        goToStep('step-1');
     };
     const closeModal = () => {
+        const modal = document.getElementById('calcModal');
         if (!modal) return;
         modal.style.display = 'none';
         modal.classList.add('hidden');
@@ -2125,131 +3086,52 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.open-modal-btn').forEach(btn => {
         btn.addEventListener('click', openModal);
     });
-    if (closeBtn) closeBtn.addEventListener('click', closeModal);
-    window.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
-
-    const goToStep = (targetId) => {
-        steps.forEach(s => s.classList.remove('active'));
-        const next = document.getElementById(targetId);
-        if (next) next.classList.add('active');
-        const num = parseInt(targetId.split('-')[1]);
-        if (progressBar) progressBar.style.width = ((num / steps.length) * 100) + '%';
-    };
-
-    document.querySelectorAll('.next-step').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            e.preventDefault();
-            const currentStep = btn.closest('.form-step');
-            const hasRadios = currentStep.querySelector('input[type="radio"]');
-            if (hasRadios && !currentStep.querySelector('input[type="radio"]:checked')) {
-                alert('Por favor escoge una opción.');
-                return;
-            }
-            goToStep(btn.getAttribute('data-target'));
-        });
-    });
-    document.querySelectorAll('.prev-step').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            e.preventDefault();
-            goToStep(btn.getAttribute('data-target'));
-        });
+    window.addEventListener('click', (e) => { 
+        const modal = document.getElementById('calcModal');
+        if (e.target === modal || e.target.classList.contains('close-modal')) closeModal(); 
     });
 
-    /* ---- Selección visual de option-cards ---- */
-    document.querySelectorAll('.option-card').forEach(card => {
-        const input = card.querySelector('input[type="radio"]');
-        if (!input) return;
-        card.addEventListener('click', () => {
-            const name = input.getAttribute('name');
-            document.querySelectorAll(`input[name="${name}"]`).forEach(r => {
-                r.closest('.option-card').classList.remove('selected');
-                r.checked = false;
-            });
-            input.checked = true;
-            card.classList.add('selected');
-        });
-    });
+  // ── Arranque ──
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCalculatorModal);
+  } else {
+    initCalculatorModal();
+  }
 
-    /* ---- Slider m² ---- */
-    const sizeSlider = document.getElementById('size-slider');
-    const m2Output   = document.getElementById('m2-output');
-    if (sizeSlider && m2Output) {
-        sizeSlider.addEventListener('input', () => { m2Output.textContent = sizeSlider.value; });
+  // ── Focus trap + Escape to close (Tarea E2) ──
+  document.addEventListener('keydown', function(e) {
+    var modal = document.getElementById('calcModal');
+    if (!modal || modal.classList.contains('hidden')) return;
+
+    if (e.key === 'Escape') {
+      modal.style.display = 'none';
+      modal.classList.add('hidden');
+      document.body.style.overflow = '';
+      return;
     }
 
-    /* ---- Motor de cálculo ---- */
-    const calcBtn = document.getElementById('calculate-btn');
-    if (calcBtn) {
-        calcBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            const nameInput  = document.getElementById('name');
-            const phoneInput = document.getElementById('vp-phone');
-            if (!nameInput.value || !phoneInput.value) {
-                alert('Por favor déjanos tu nombre y móvil.');
-                return;
-            }
-            const typeRadio    = document.querySelector('input[name="project_type"]:checked');
-            const propertyRadio= document.querySelector('input[name="property_type"]:checked');
-            const stateRadio   = document.querySelector('input[name="property_state"]:checked');
-            const qualityRadio = document.querySelector('input[name="quality"]:checked');
-            const timelineRadio= document.querySelector('input[name="timeline"]:checked');
-            if (!typeRadio) { alert('Por favor escoge especialidad inicial.'); return; }
+    if (e.key === 'Tab') {
+      var focusable = modal.querySelectorAll('input, select, textarea, button, a[href], [tabindex]:not([tabindex="-1"])');
+      if (focusable.length === 0) return;
+      var first = focusable[0];
+      var last = focusable[focusable.length - 1];
 
-            const type     = typeRadio.value;
-            const property = propertyRadio  ? propertyRadio.value  : 'Piso';
-            const state    = stateRadio     ? stateRadio.value     : 'Vacio';
-            const quality  = qualityRadio   ? qualityRadio.value   : 'Estandar';
-            const timeline = timelineRadio  ? timelineRadio.value  : 'Medio';
-            const m2       = parseInt(sizeSlider ? sizeSlider.value : '75');
-
-            let basePriceM2 = 0;
-            if (type === 'Pintura')    basePriceM2 = quality === 'Premium' ? 25  : 12;
-            else if (type === 'BanoCocina') basePriceM2 = quality === 'Premium' ? 250 : 150;
-            else if (type === 'Integral')   basePriceM2 = quality === 'Premium' ? 950 : 650;
-
-            let total = m2 * basePriceM2;
-            if (property === 'Casa')       total *= 1.15;
-            else if (property === 'Local') total *= 1.10;
-            if (state === 'Amueblado')     total *= 1.10;
-            else if (state === 'Dañado')   total *= 1.25;
-            if (type === 'BanoCocina' && total < 4500) total = 4500;
-
-            const calcMin = Math.round(total * 0.85);
-            const calcMax = Math.round(total * 1.15);
-            const fmt = new Intl.NumberFormat('es-ES');
-            document.getElementById('price-min').textContent = fmt.format(calcMin) + '€';
-            document.getElementById('price-max').textContent = fmt.format(calcMax) + '€';
-
-            finalReport = `*Hola, soy ${nameInput.value}!* 👋\nHe usado la Calculadora de vuestra web. Mi expediente:\n\n` +
-                `*🎯 Foco:* ${type === 'BanoCocina' ? 'Baño y Cocina' : type}\n` +
-                `*🏠 Inmueble:* ${property} — ${m2}m²\n` +
-                `*📦 Estado:* ${state}\n` +
-                `*💎 Calidad:* ${quality}\n` +
-                `*⏳ Urgencia:* ${timeline}\n\n` +
-                `*📊 Estimación:* ${fmt.format(calcMin)}€ — ${fmt.format(calcMax)}€\n\n` +
-                `*📱 Teléfono:* ${phoneInput.value}`;
-
-            const loader  = document.getElementById('calc-loader');
-            const actions = document.getElementById('step-10-actions');
-            if (loader)  { loader.classList.remove('hidden'); }
-            if (actions) { actions.classList.add('hidden'); }
-
-            setTimeout(() => {
-                if (loader)  loader.classList.add('hidden');
-                if (actions) actions.classList.remove('hidden');
-                goToStep('step-10');
-            }, 2200);
-        });
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        }
+      } else {
+        if (document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
     }
+  });
 
-    const submitBtn = document.getElementById('final-submit');
-    if (submitBtn) {
-        submitBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            window.open(`https://wa.me/${whatsappNum}?text=${encodeURIComponent(finalReport)}`, '_blank');
-            closeModal();
-        });
-    }
+})();
+    
 
     /* ---- Hamburger menu mobile ---- */
     const hamburger = document.getElementById('hamburger');
@@ -2296,9 +3178,43 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <!-- Cookie Banner RGPD -->
 <div id="cookie-banner" style="position:fixed;bottom:0;left:0;right:0;background:var(--bg-dark);color:rgba(255,255,255,.85);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;z-index:10000;font-size:.88rem;box-shadow:0 -4px 20px rgba(0,0,0,.2);flex-wrap:wrap;">
-    <p style="margin:0;">Usamos cookies propias para mejorar tu experiencia. Al seguir navegando aceptas nuestra <a href="#" style="color:var(--accent);text-decoration:underline;">política de privacidad</a>.</p>
-    <button onclick="document.getElementById('cookie-banner').style.display='none';localStorage.setItem('cookies_ok','1')" style="background:var(--accent);color:#fff;border:none;padding:10px 24px;border-radius:6px;font-weight:600;cursor:pointer;white-space:nowrap;flex-shrink:0;">Aceptar y cerrar</button>
+    <p style="margin:0;" data-i18n="cookie_text">Usamos cookies propias para mejorar tu experiencia. Al seguir navegando aceptas nuestra <a href="#" style="color:var(--accent);text-decoration:underline;">política de privacidad</a>.</p>
+    <button onclick="document.getElementById('cookie-banner').style.display='none';localStorage.setItem('cookies_ok','1');window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:'cookie_consent',consent_type:'accepted',timestamp:new Date().toISOString()});" style="background:var(--accent);color:#fff;border:none;padding:10px 24px;border-radius:6px;font-weight:600;cursor:pointer;white-space:nowrap;flex-shrink:0;" data-i18n="cookie_btn">Aceptar y cerrar</button>
 </div>
 <script>if(localStorage.getItem('cookies_ok'))document.getElementById('cookie-banner').style.display='none';</script>
+<script>
+(function() {
+  'use strict';
+  const BANNER_KEY = 'urgency_banner_closed';
+  const banner = document.getElementById('urgency-banner');
+  const closeBtn = document.getElementById('urgency-banner-close');
+  if (!banner) return;
+  if (sessionStorage.getItem(BANNER_KEY)) return;
+  requestAnimationFrame(function() {
+    setTimeout(function() {
+      banner.classList.add('visible');
+      document.body.classList.add('banner-visible');
+    }, 800);
+  });
+  closeBtn.addEventListener('click', function() {
+    banner.classList.remove('visible');
+    document.body.classList.remove('banner-visible');
+    sessionStorage.setItem(BANNER_KEY, '1');
+  });
+  var scrolled = false;
+  window.addEventListener('scroll', function() {
+    if (!scrolled && window.scrollY > 600) {
+      scrolled = true;
+      banner.classList.remove('visible');
+      document.body.classList.remove('banner-visible');
+    }
+  }, { passive: true });
+})();
+</script>
+
+<!-- Scripts de Tracking y Webhook (Lead Gate) -->
+<script src="js/lead-webhook.js"></script>
+<script src="js/tracking-unificado.js"></script>
+
 </body>
 </html>

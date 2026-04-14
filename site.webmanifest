@@ -1,0 +1,16 @@
+{
+  "name": "Pintura, Reformas y Acabados de Obra",
+  "short_name": "BCN Pro Reforma",
+  "description": "Pintores y reformistas en Maresme, Barcelona y Costa Brava. Presupuesto cerrado en 48h.",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#0a1628",
+  "theme_color": "#2563EB",
+  "icons": [
+    {
+      "src": "/logo .png",
+      "sizes": "any",
+      "type": "image/png"
+    }
+  ]
+}
