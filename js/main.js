@@ -413,6 +413,30 @@ document.addEventListener('DOMContentLoaded', () => {
             footer_bottom: "Painting, Renovations & Finishes. All rights reserved.",
             cookie_text: "We use our own cookies to improve your experience. By continuing to browse you accept our <a href='#' style='color:var(--accent);text-decoration:underline;'>privacy policy</a>.",
             cookie_btn: "Accept and close",
+            // Trust section
+            trust_label: "Why they trust us",
+            trust_1_title: "Total care of your home",
+            trust_1_desc: "Professional and careful treatment: maximum protection for your furniture, floors and walls.",
+            trust_1_seal: "Included",
+            trust_2_title: "Fixed Price by Contract",
+            trust_2_desc: "The signed quote is the final price. No surprises or hidden costs mid-project.",
+            trust_2_seal: "Guaranteed",
+            trust_3_title: "Own team, direct contact",
+            trust_3_desc: "No middlemen or agencies: the same craftsmen from start to finish. Direct contact with the project manager.",
+            trust_3_seal: "30 years",
+            trust_4_title: "Your home, ready to live in",
+            trust_4_desc: "Deep cleaning at the end of each day and at project completion: we leave everything as we found it, or better.",
+            trust_4_seal: "Every day",
+            trust_5_title: "On-time delivery commitment",
+            trust_5_desc: "We respect your time from day one. Our timelines are realistic and we stick to them.",
+            trust_5_seal: "No excuses",
+            trust_6_title: "30 years of real trade — Maresme & Barcelona",
+            trust_6_desc: "A reputation built project by project, not from a brochure. Over 180 homes transformed.",
+            trust_6_seal: "Since 1994",
+            compare_row_1_good: "We meet agreed deadlines: we respect your time from day one.",
+            compare_row_5_good: "We treat your home like our own: total protection of furniture and surfaces.",
+            process_2_title: "Free home visit",
+            process_2_desc: "We come to you, measure precisely and advise you in person — at no cost and no commitment.",
             // Calculator Keys
             calc_step1_q: "1. Select the main focus of your project:",
             calc_step2_q: "2. What type of property is it?",
@@ -698,33 +722,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-
-    /* ---- SCARCITY BANNER LOGIC ---- */
-    (function(){
-        const banner  = document.getElementById('scarcity-banner');
-        const closeBtn= document.getElementById('banner-close-btn');
-        const navbar  = document.querySelector('.navbar');
-        if(!banner || !navbar) return;
-
-        function applyOffset(){
-            const h = banner.classList.contains('dismissed') ? 0 : banner.offsetHeight;
-            navbar.style.top = h + 'px';
-            const heroWrap = document.querySelector('.hero-wrapper');
-            if(heroWrap) heroWrap.style.paddingTop = (h + 80) + 'px';
-        }
-
-        if(sessionStorage.getItem('scarBannerDismissed')) banner.classList.add('dismissed');
-        applyOffset();
-
-        if(closeBtn) {
-            closeBtn.addEventListener('click', function(){
-                banner.classList.add('dismissed');
-                applyOffset();
-                sessionStorage.setItem('scarBannerDismissed','1');
-            });
-        }
-        window.addEventListener('resize', applyOffset);
-    })();
 
     /* ---- TEXT ANIMATION PREPARATOR ---- */
     const splitTextArray = document.querySelectorAll('.anim-split-text');
