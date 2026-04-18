@@ -1,0 +1,43 @@
+{
+  "_comment": "Error Workflow secundario para Lead Capture. Importar en n8n Cloud. Tras import: (1) reasignar credential Gmail a la OAuth2 de ClarityAudit, (2) activar el toggle. Luego asociarlo al workflow principal: en 'Lead Capture - Reformas' → Settings → Error Workflow → seleccionar este workflow.",
+  "name": "Lead Capture - Error Handler",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "err-trigger-001",
+      "name": "Error Trigger",
+      "type": "n8n-nodes-base.errorTrigger",
+      "typeVersion": 1,
+      "position": [100, 300]
+    },
+    {
+      "parameters": {
+        "sendTo": "Bcnproreforma@gmail.com",
+        "subject": "=⚠️ ERROR — Lead Capture Reformas: {{ $json.error.message }}",
+        "emailType": "html",
+        "message": "=<table style=\"font-family:Arial,sans-serif;font-size:14px;border-collapse:collapse;width:100%;max-width:600px\">\n  <tr style=\"background:#c0392b;color:#fff\">\n    <td colspan=\"2\" style=\"padding:16px 20px;font-size:18px;font-weight:bold\">\n      ⚠️ Fallo en Lead Capture — Reformas\n    </td>\n  </tr>\n  <tr><td style=\"padding:10px 20px;font-weight:bold;width:35%;border-bottom:1px solid #eee\">Workflow</td><td style=\"padding:10px 20px;border-bottom:1px solid #eee\">{{ $json.workflow.name }}</td></tr>\n  <tr><td style=\"padding:10px 20px;font-weight:bold;border-bottom:1px solid #eee\">Nodo fallido</td><td style=\"padding:10px 20px;border-bottom:1px solid #eee\">{{ $json.error.context.nodeName }}</td></tr>\n  <tr><td style=\"padding:10px 20px;font-weight:bold;border-bottom:1px solid #eee\">Error</td><td style=\"padding:10px 20px;border-bottom:1px solid #eee\">{{ $json.error.message }}</td></tr>\n  <tr><td style=\"padding:10px 20px;font-weight:bold;border-bottom:1px solid #eee\">Timestamp</td><td style=\"padding:10px 20px;border-bottom:1px solid #eee\">{{ $now.toISO() }}</td></tr>\n  <tr><td style=\"padding:10px 20px;font-weight:bold\">Ver ejecución</td><td style=\"padding:10px 20px\"><a href=\"{{ $json.execution.url }}\">{{ $json.execution.url }}</a></td></tr>\n  <tr style=\"background:#fff3cd\">\n    <td colspan=\"2\" style=\"padding:12px 20px;font-size:12px;color:#856404\">\n      ⚡ Acción recomendada: revisar la ejecución fallida en n8n Cloud y reenviar el lead manualmente si es necesario.\n    </td>\n  </tr>\n</table>",
+        "options": {}
+      },
+      "id": "err-gmail-001",
+      "name": "Gmail Error Notify",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2,
+      "position": [340, 300],
+      "credentials": {
+        "gmailOAuth2Api": {
+          "id": "USA_LA_CREDENCIAL_DE_CLARITYAUDIT",
+          "_comment": "Reasignar en n8n UI → Credentials tras import",
+          "name": "Gmail"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Error Trigger": {
+      "main": [[{ "node": "Gmail Error Notify", "type": "main", "index": 0 }]]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

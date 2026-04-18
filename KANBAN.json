@@ -1,0 +1,65 @@
+{
+  "proyecto": "Pintura, Reforma y Acabados de Obra — bcnproreforma.com",
+  "fase_actual": "Fase 3 — Cierre del bucle de captura de leads (E2E)",
+  "ultima_actualizacion": "2026-04-18",
+  "tareas_completadas": [
+    "Migración dominio a bcnproreforma.com",
+    "Firma anónima y enlace directo de llamada inyectados",
+    "Trust Badges, Tabla Nosotros vs Industria, Banner Escasez",
+    "Fix QA: 0-bug pass antes de entrega",
+    "Inline BeforeAfterSlider + 5 regression fixes (title, schema, banner, WebP, stats)",
+    "Auditoría i18n — 185 claves ES/CA/EN validadas (2026-04-15)",
+    "lead-webhook.js — BUG #1: eliminado guard !lead.email",
+    "lead-webhook.js — BUG #3: no-cors → cors + log estructurado + guard nombre/telefono",
+    "main.js — Paso email opcional (step-email) entre step-9 y step-10",
+    "main.js — 6 claves i18n calc_email_* en ES/CA/EN",
+    "n8n_workflow_reformas.json — Reescrito: Webhook→Set→IF→[Sheets+Gmail+Respond200]/[Respond400]",
+    "n8n_error_workflow.json — Creado: Error Trigger → Gmail notify",
+    "HANDOFF.md — Actualizado con Setup Google Sheet, Setup Error Workflow, QA E2E Test Plan",
+    "KANBAN.json — Creado"
+  ],
+  "tareas_pendientes": [
+    {
+      "id": "CEO-1",
+      "tarea": "Crear Google Sheet 'Leads_Reformas_2026' con headers exactos",
+      "responsable": "CEO (Omar)",
+      "instrucciones": "Ver HANDOFF.md → ## Setup Google Sheet"
+    },
+    {
+      "id": "CEO-2",
+      "tarea": "Importar n8n_workflow_reformas.json en n8n Cloud y mapear credentials",
+      "responsable": "CEO (Omar)",
+      "instrucciones": "Ver HANDOFF.md → ## Setup Credentials"
+    },
+    {
+      "id": "CEO-3",
+      "tarea": "Importar n8n_error_workflow.json y asociarlo al workflow principal",
+      "responsable": "CEO (Omar)",
+      "instrucciones": "Ver HANDOFF.md → ## Setup Error Workflow"
+    },
+    {
+      "id": "CEO-4",
+      "tarea": "Activar ambos workflows en n8n Cloud (toggle ON)",
+      "responsable": "CEO (Omar)",
+      "instrucciones": "Verificar en n8n Cloud → Executions que el webhook responde"
+    },
+    {
+      "id": "CEO-5",
+      "tarea": "Ejecutar QA E2E — 4 casos de test",
+      "responsable": "CEO (Omar)",
+      "instrucciones": "Ver HANDOFF.md → ## QA E2E — Test Plan"
+    },
+    {
+      "id": "CEO-6",
+      "tarea": "Deploy frontend con vercel --prod",
+      "responsable": "CEO (Omar)",
+      "instrucciones": "Tras QA local exitoso, ejecutar: vercel --prod en el directorio del proyecto"
+    },
+    {
+      "id": "FASE-4",
+      "tarea": "Fase 4 — Reseñas WhatsApp y GBP (pendiente decisión estratégica)",
+      "responsable": "Pendiente",
+      "instrucciones": "Fuera de scope de la Fase 3. Planificar en próxima sesión."
+    }
+  ]
+}

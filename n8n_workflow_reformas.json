@@ -1,0 +1,193 @@
+{
+  "_comment": "Workflow: Lead Capture - Reformas. Importar en n8n Cloud UI (menú → Import from File). Tras import: (1) reasignar credentials 'Google Sheets' y 'Gmail' a las OAuth2 existentes de ClarityAudit, (2) sustituir TU_ID_DE_HOJA_DE_CALCULO por el ID real de la Sheet (string entre /d/ y /edit en la URL), (3) activar el toggle. Ver HANDOFF.md → ## Setup Google Sheet para instrucciones paso a paso.",
+  "name": "Lead Capture - Reformas",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "pintura_reforma_leads",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "e7b0c34a-9b4e-4f3a-9c7d-8e5f2a1b0c9d",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [100, 300],
+      "webhookId": "pintura_reforma_leads"
+    },
+    {
+      "parameters": {
+        "mode": "manual",
+        "includeOther": true,
+        "fields": {
+          "values": [
+            { "name": "email",        "type": "string", "value": "={{ $json.body.email || '' }}" },
+            { "name": "utm_source",   "type": "string", "value": "={{ $json.body.utm_source || 'directo' }}" },
+            { "name": "utm_medium",   "type": "string", "value": "={{ $json.body.utm_medium || 'directo' }}" },
+            { "name": "utm_campaign", "type": "string", "value": "={{ $json.body.utm_campaign || 'directo' }}" }
+          ]
+        }
+      },
+      "id": "b2c3d4e5-f6a7-8b9c-0d1e-2f3a4b5c6d7e",
+      "name": "Sanitize Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3,
+      "position": [300, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "id": "check-nombre",
+              "leftValue": "={{ $json.body.nombre }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "check-telefono",
+              "leftValue": "={{ $json.body.telefono }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      },
+      "id": "c3d4e5f6-a7b8-9c0d-1e2f-3a4b5c6d7e8f",
+      "name": "Validate Required",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [500, 300]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "value": "TU_ID_DE_HOJA_DE_CALCULO",
+          "_comment": "Reemplazar por el ID real. Ver HANDOFF.md → ## Setup Google Sheet",
+          "mode": "id"
+        },
+        "sheetName": {
+          "value": "Leads_Reformas_2026",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "timestamp":    "={{ $now.toISO() }}",
+            "nombre":       "={{ $json.body.nombre }}",
+            "telefono":     "={{ $json.body.telefono }}",
+            "email":        "={{ $json.email }}",
+            "servicio":     "={{ $json.body.servicio }}",
+            "metros":       "={{ $json.body.metros }}",
+            "pagina":       "={{ $json.body.pagina }}",
+            "referrer":     "={{ $json.body.referrer }}",
+            "dispositivo":  "={{ $json.body.dispositivo }}",
+            "utm_source":   "={{ $json.utm_source }}",
+            "utm_medium":   "={{ $json.utm_medium }}",
+            "utm_campaign": "={{ $json.utm_campaign }}",
+            "fuente":       "={{ $json.body.fuente }}"
+          },
+          "matchingColumns": [],
+          "schema": []
+        },
+        "options": {}
+      },
+      "id": "d4e5f6a7-b8c9-0d1e-2f3a-4b5c6d7e8f9a",
+      "name": "Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [720, 200],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "USA_LA_CREDENCIAL_DE_CLARITYAUDIT",
+          "_comment": "Reasignar en n8n UI → Credentials tras import",
+          "name": "Google Sheets"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "Bcnproreforma@gmail.com",
+        "subject": "=🚀 Nuevo lead Reformas — {{ $json.body.nombre }} ({{ $json.body.servicio }})",
+        "emailType": "html",
+        "message": "=<table style=\"font-family:Arial,sans-serif;font-size:14px;border-collapse:collapse;width:100%;max-width:600px\">\n  <tr style=\"background:#1a1a2e;color:#fff\">\n    <td colspan=\"2\" style=\"padding:16px 20px;font-size:18px;font-weight:bold\">\n      🚀 Nuevo Lead — Pintura, Reforma y Acabados de Obra\n    </td>\n  </tr>\n  <tr><td style=\"padding:10px 20px;font-weight:bold;width:40%;border-bottom:1px solid #eee\">Nombre</td><td style=\"padding:10px 20px;border-bottom:1px solid #eee\">{{ $json.body.nombre }}</td></tr>\n  <tr><td style=\"padding:10px 20px;font-weight:bold;border-bottom:1px solid #eee\">Teléfono</td><td style=\"padding:10px 20px;border-bottom:1px solid #eee\"><a href=\"tel:{{ $json.body.telefono }}\">{{ $json.body.telefono }}</a></td></tr>\n  <tr><td style=\"padding:10px 20px;font-weight:bold;border-bottom:1px solid #eee\">Email</td><td style=\"padding:10px 20px;border-bottom:1px solid #eee\">{{ $json.email !== '' ? $json.email : 'Sin email — contactar por teléfono' }}</td></tr>\n  <tr><td style=\"padding:10px 20px;font-weight:bold;border-bottom:1px solid #eee\">Servicio</td><td style=\"padding:10px 20px;border-bottom:1px solid #eee\">{{ $json.body.servicio }}</td></tr>\n  <tr><td style=\"padding:10px 20px;font-weight:bold;border-bottom:1px solid #eee\">Metros</td><td style=\"padding:10px 20px;border-bottom:1px solid #eee\">{{ $json.body.metros }} m²</td></tr>\n  <tr><td style=\"padding:10px 20px;font-weight:bold;border-bottom:1px solid #eee\">Dispositivo</td><td style=\"padding:10px 20px;border-bottom:1px solid #eee\">{{ $json.body.dispositivo }}</td></tr>\n  <tr><td style=\"padding:10px 20px;font-weight:bold;border-bottom:1px solid #eee\">Fuente</td><td style=\"padding:10px 20px;border-bottom:1px solid #eee\">{{ $json.body.fuente }}</td></tr>\n  <tr><td style=\"padding:10px 20px;font-weight:bold;border-bottom:1px solid #eee\">UTM Source</td><td style=\"padding:10px 20px;border-bottom:1px solid #eee\">{{ $json.utm_source }}</td></tr>\n  <tr><td style=\"padding:10px 20px;font-weight:bold;border-bottom:1px solid #eee\">UTM Medium</td><td style=\"padding:10px 20px;border-bottom:1px solid #eee\">{{ $json.utm_medium }}</td></tr>\n  <tr><td style=\"padding:10px 20px;font-weight:bold;border-bottom:1px solid #eee\">UTM Campaign</td><td style=\"padding:10px 20px;border-bottom:1px solid #eee\">{{ $json.utm_campaign }}</td></tr>\n  <tr><td style=\"padding:10px 20px;font-weight:bold;border-bottom:1px solid #eee\">Página</td><td style=\"padding:10px 20px;border-bottom:1px solid #eee\"><a href=\"{{ $json.body.pagina }}\">{{ $json.body.pagina }}</a></td></tr>\n  <tr><td style=\"padding:10px 20px;font-weight:bold;border-bottom:1px solid #eee\">Referrer</td><td style=\"padding:10px 20px;border-bottom:1px solid #eee\">{{ $json.body.referrer }}</td></tr>\n  <tr><td style=\"padding:10px 20px;font-weight:bold\">Timestamp</td><td style=\"padding:10px 20px\">{{ $now.toISO() }}</td></tr>\n  <tr style=\"background:#f7f7f7\">\n    <td colspan=\"2\" style=\"padding:12px 20px;font-size:12px;color:#888\">\n      Lead capturado via Calculadora Reformas — bcnproreforma.com\n    </td>\n  </tr>\n</table>",
+        "options": {}
+      },
+      "id": "e5f6a7b8-c9d0-1e2f-3a4b-5c6d7e8f9a0b",
+      "name": "Gmail Notify",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2,
+      "position": [940, 200],
+      "credentials": {
+        "gmailOAuth2Api": {
+          "id": "USA_LA_CREDENCIAL_DE_CLARITYAUDIT",
+          "_comment": "Reasignar en n8n UI → Credentials tras import",
+          "name": "Gmail"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseCode": 200,
+        "responseBody": "={{ JSON.stringify({status: 'ok', message: 'Lead recibido'}) }}"
+      },
+      "id": "f6a7b8c9-d0e1-2f3a-4b5c-6d7e8f9a0b1c",
+      "name": "Respond 200",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1160, 200]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseCode": 400,
+        "responseBody": "={{ JSON.stringify({error: 'missing_required', message: 'nombre y telefono son obligatorios'}) }}"
+      },
+      "id": "a7b8c9d0-e1f2-3a4b-5c6d-7e8f9a0b1c2d",
+      "name": "Respond 400",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [720, 420]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [[{ "node": "Sanitize Fields", "type": "main", "index": 0 }]]
+    },
+    "Sanitize Fields": {
+      "main": [[{ "node": "Validate Required", "type": "main", "index": 0 }]]
+    },
+    "Validate Required": {
+      "main": [
+        [{ "node": "Google Sheets", "type": "main", "index": 0 }],
+        [{ "node": "Respond 400",   "type": "main", "index": 0 }]
+      ]
+    },
+    "Google Sheets": {
+      "main": [[{ "node": "Gmail Notify", "type": "main", "index": 0 }]]
+    },
+    "Gmail Notify": {
+      "main": [[{ "node": "Respond 200", "type": "main", "index": 0 }]]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

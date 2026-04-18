@@ -13,8 +13,8 @@
 (function () {
   'use strict';
 
-  // ⚠️ SUSTITUYE por tu URL real de Make/Zapier/n8n
-  var WEBHOOK_URL = 'https://hook.eu2.make.com/TU_WEBHOOK_ID_AQUI';
+  // ⚠️ Configurado para n8n Cloud (Producción)
+  var WEBHOOK_URL = 'https://bcnproreforma.app.n8n.cloud/webhook/pintura_reforma_leads';
 
   // ── Configuración ──
   var MAX_RETRIES = 2;
@@ -23,7 +23,10 @@
   // ── Listener principal ──
   window.addEventListener('leadCapturado', function (e) {
     var lead = e.detail;
-    if (!lead || !lead.email) return;
+    if (!lead || !lead.nombre || !lead.telefono) {
+      console.error('[Lead Webhook] Payload inválido — se requiere nombre y telefono.', lead);
+      return;
+    }
 
     // Enriquecer con datos de contexto
     var payload = {
@@ -42,6 +45,7 @@
       utm_campaign: getUTM('utm_campaign')
     };
 
+    console.info('[Lead Webhook] payload:', payload);
     sendToWebhook(payload, 0);
   });
 
@@ -51,7 +55,7 @@
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
-      mode: 'no-cors' // Make/Zapier no siempre devuelven CORS headers
+      mode: 'cors' // n8n Cloud expone CORS — permite detectar errores de red reales
     })
     .then(function () {
       // Con mode: no-cors no podemos leer la respuesta,
@@ -98,7 +102,7 @@
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(lead),
-      mode: 'no-cors'
+      mode: 'cors'
     })
     .then(function () {
       unsent.shift();

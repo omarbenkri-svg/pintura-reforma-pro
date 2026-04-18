@@ -241,7 +241,13 @@ document.addEventListener('DOMContentLoaded', () => {
             calc_prop_casa: "Casa/Adosado",
             calc_prop_local: "Local",
             calc_m2_min: "10m²",
-            calc_m2_max: "250m²+"
+            calc_m2_max: "250m²+",
+            calc_email_titulo: "Tu presupuesto ya está listo",
+            calc_email_subtitulo: "Te lo mandamos también por email — opcional",
+            calc_email_placeholder: "tu@email.com",
+            calc_email_btn_saltar: "Saltar",
+            calc_email_btn_anadir: "Añadir y enviar",
+            calc_email_error_invalido: "Email no válido. Revísalo o salta."
         },
 
         en: {
@@ -464,7 +470,13 @@ document.addEventListener('DOMContentLoaded', () => {
             calc_m2_min: "10sqm",
             calc_m2_max: "250sqm+",
             calc_title: "How much will it cost?",
-            calc_intro: "Answer a few quick questions..."
+            calc_intro: "Answer a few quick questions...",
+            calc_email_titulo: "Your quote is ready",
+            calc_email_subtitulo: "We can also send it by email — optional",
+            calc_email_placeholder: "your@email.com",
+            calc_email_btn_saltar: "Skip",
+            calc_email_btn_anadir: "Add & send",
+            calc_email_error_invalido: "Invalid email. Check it or skip."
         },
 
 
@@ -684,7 +696,13 @@ document.addEventListener('DOMContentLoaded', () => {
             calc_m2_min: "10m²",
             calc_m2_max: "250m²+",
             calc_title: "Quant et costarà?",
-            calc_intro: "Respon unes preguntes ràpides..."
+            calc_intro: "Respon unes preguntes ràpides...",
+            calc_email_titulo: "El teu pressupost ja està llest",
+            calc_email_subtitulo: "Te'l podem enviar per email — opcional",
+            calc_email_placeholder: "el-teu@email.com",
+            calc_email_btn_saltar: "Saltar",
+            calc_email_btn_anadir: "Afegir i enviar",
+            calc_email_error_invalido: "Email no vàlid. Revisa'l o salta."
         }
 
 
@@ -974,6 +992,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             </div>
 
+            <!-- Paso Email: dirección (opcional) -->
+            <div class="form-step hidden" id="step-email">
+                <h3 data-i18n="calc_email_titulo">Tu presupuesto ya está listo</h3>
+                <p class="step-subtitle" data-i18n="calc_email_subtitulo">Te lo mandamos también por email — opcional</p>
+                <div style="margin-bottom:8px;">
+                    <label for="calc-email" style="display:block;margin-bottom:6px;font-weight:600;">Email</label>
+                    <input type="email" id="calc-email" aria-required="false" aria-describedby="calc-email-error" data-i18n-placeholder="calc_email_placeholder" placeholder="tu@email.com" style="width:100%;padding:12px;border-radius:8px;border:1px solid #ddd;box-sizing:border-box;">
+                    <span id="calc-email-error" style="display:none;color:#e53e3e;font-size:.85rem;margin-top:4px;" data-i18n="calc_email_error_invalido">Email no válido. Revísalo o salta.</span>
+                </div>
+                <div class="form-actions" style="display:flex;gap:10px;margin-top:20px;">
+                    <button id="email-skip-btn" class="btn-secondary" style="flex:1;min-height:48px;padding:12px 8px;" data-i18n="calc_email_btn_saltar">Saltar</button>
+                    <button id="email-add-btn" class="btn-primary" style="flex:2;min-height:48px;padding:12px;" data-i18n="calc_email_btn_anadir">Añadir y enviar</button>
+                </div>
+            </div>
+
             <!-- Paso 10: Resultado -->
             <div class="form-step hidden" id="step-10">
                 <div id="calc-loader" class="hidden" style="text-align:center;padding:40px 0;">
@@ -1021,7 +1054,7 @@ document.addEventListener('DOMContentLoaded', () => {
             stepsElems.forEach(s => s.classList.add('hidden'));
             const next = modalContent.querySelector(`#${targetId}`);
             if (next) next.classList.remove('hidden');
-            const num = parseInt(targetId.split('-')[1]) || 1;
+            const num = targetId === 'step-email' ? 9.5 : (parseInt(targetId.split('-')[1]) || 1);
             if (progressBar) progressBar.style.width = ((num / 10) * 100) + '%';
         };
 
@@ -1111,27 +1144,59 @@ document.addEventListener('DOMContentLoaded', () => {
                     `*📊 Estimación:* ${fmt.format(min)}€ - ${fmt.format(max)}€\n` +
                     `*📱 Tel:* ${phoneI.value}`;
 
-                modalContent.querySelector('#calc-loader').classList.remove('hidden');
-                modalContent.querySelector('#step-10-actions').classList.add('hidden');
-                goToStep('step-10');
+                goToStep('step-email');
+            });
+        }
 
-                // Dispatch Custom Event for lead-webhook.js
-                window.dispatchEvent(new CustomEvent('leadCapturado', {
-                    detail: {
-                        nombre: nameI.value,
-                        telefono: phoneI.value,
-                        email: 'no-email@calcs.com', // El form actual no pide email
-                        servicio: type,
-                        metros: m2,
-                        timestamp: new Date().toISOString(),
-                        fuente: 'calculadora_luxe'
-                    }
-                }));
+        // ── Email step: dirección opcional ──
+        const showStep10 = () => {
+            modalContent.querySelector('#calc-loader').classList.remove('hidden');
+            modalContent.querySelector('#step-10-actions').classList.add('hidden');
+            goToStep('step-10');
+            setTimeout(() => {
+                modalContent.querySelector('#calc-loader').classList.add('hidden');
+                modalContent.querySelector('#step-10-actions').classList.remove('hidden');
+            }, 1500);
+        };
 
-                setTimeout(() => {
-                    modalContent.querySelector('#calc-loader').classList.add('hidden');
-                    modalContent.querySelector('#step-10-actions').classList.remove('hidden');
-                }, 1500);
+        const dispatchLead = (email) => {
+            const nameEl = modalContent.querySelector('#calc-name');
+            const phoneEl = modalContent.querySelector('#calc-phone');
+            const typeR = modalContent.querySelector('input[name="project_type"]:checked');
+            window.dispatchEvent(new CustomEvent('leadCapturado', {
+                detail: {
+                    nombre: nameEl ? nameEl.value : '',
+                    telefono: phoneEl ? phoneEl.value : '',
+                    email: email,
+                    servicio: typeR ? typeR.value : 'Pintura',
+                    metros: parseInt(sizeSlider.value),
+                    timestamp: new Date().toISOString(),
+                    fuente: 'calculadora_luxe'
+                }
+            }));
+        };
+
+        const emailSkipBtn = modalContent.querySelector('#email-skip-btn');
+        if (emailSkipBtn) {
+            emailSkipBtn.addEventListener('click', () => {
+                dispatchLead('');
+                showStep10();
+            });
+        }
+
+        const emailAddBtn = modalContent.querySelector('#email-add-btn');
+        if (emailAddBtn) {
+            emailAddBtn.addEventListener('click', () => {
+                const emailInput = modalContent.querySelector('#calc-email');
+                const emailError = modalContent.querySelector('#calc-email-error');
+                const val = emailInput ? emailInput.value.trim() : '';
+                if (val && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
+                    if (emailError) emailError.style.display = 'block';
+                    return;
+                }
+                if (emailError) emailError.style.display = 'none';
+                dispatchLead(val);
+                showStep10();
             });
         }
 
