@@ -3,5 +3,6 @@ Allow: /
 Disallow: /status/
 Disallow: /version_premium/
 Disallow: /version_premium_concept/
+Disallow: /js/
 
 Sitemap: https://bcnproreforma.com/sitemap.xml
