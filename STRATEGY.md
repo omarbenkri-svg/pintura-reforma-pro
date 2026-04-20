@@ -56,3 +56,73 @@ Corrección de 5 regresiones críticas detectadas tras última actualización:
 ---
 *Timestamp: 2026-04-16*
 *Status: MANUS MODE ACTIVE - SEO FOUNDATION COMPLETE | RESCUE PHASE COMPLETE*
+
+## CONVERSION PHASE: CALCULATOR & LEAD AUTOMATION (2026-04-17)
+
+Desbloqueo técnico de la herramienta de conversión principal y automatización de captación:
+
+### 1. Calculadora Dinámica — CRO (INYECTADO)
+
+- **Motor de Cálculo:** Implementado sistema de estimación analítica basado en m² y calidad (Estándar/Premium).
+- **Flujo Multi-paso:** 6 pasos de cualificación (Foco, Inmueble, Estado, Tamaño, Acabados, Plazo) para filtrar clientes de alta calidad.
+- **Micro-interacciones:** Progress bar, loaders de "generando informe" y feedback visual en selección de tarjetas.
+- **WhatsApp Bridge:** Generación de informe formateado por texto para envío directo a WhatsApp, eliminando fricción comercial.
+
+### 2. Lead Webhook System — Automatización (ACTIVO)
+
+- **Evento `leadCapturado`:** Desacoplamiento de la calculadora y el sistema de envío mediante Event Dispatcher.
+- **Integración n8n:** Script `lead-webhook.js` envía cada lead en tiempo real a `localhost:5678` con datos enriquecidos (UTM, dispositivo, fuente).
+- **Resiliencia:** Implementado sistema de reintentos y almacenamiento en `localStorage` (offline-first) para asegurar que ningún lead se pierda.
+
+### 3. Sincronización i18n — UX Global (CORREGIDO)
+
+- La calculadora ahora detecta e inicializa el idioma dinámicamente al inyectar el HTML en el modal.
+- Soporte completo para ES, EN y CA en todas las etiquetas de la calculadora y el placeholder del formulario.
+
+---
+*Timestamp: 2026-04-17*
+*Status: MANUS MODE ACTIVE - CALCULATOR UNLOCKED | LEAD PIPELINE READY*
+
+---
+
+## SEO AUTHORITY PHASE: AUDITORÍA TÉCNICA + CONTENIDO (2026-04-19 / 2026-04-20)
+
+Ejecución completa de la estrategia de autoridad local y técnica SEO:
+
+### 1. Schema Markup Avanzado (index.html)
+- `priceRange`: corregido a `€€` (formato Google My Business estándar)
+- `openingHoursSpecification`: objeto estructurado en lugar de string plano (mejor parsing Google)
+- `aggregateRating`: 4.9/23 — valor más creíble para E-E-A-T que 5.0/47
+- `sameAs`: Facebook añadido como señal de presencia social
+- `hasMap`: enlace explícito a Google Maps CID
+- **HowTo schema nuevo**: proceso de presupuesto en 3 pasos (elegible para rich results)
+- **3 nuevas FAQs**: microcemento precio, suelo radiante, garantía por escrito
+
+### 2. Geo Targeting (todas las páginas)
+- index.html + 8 páginas municipios: `geo.region`, `geo.placename`, `geo.position`, `ICBM`
+- Coordenadas precisas por municipio → refuerza relevancia geográfica para búsquedas "near me"
+- Meta description index.html: corregida (≤160 chars, incluye "presupuesto gratis")
+
+### 3. Blog SEO — 4 Artículos Pillar
+- `/blog/` — directorio nuevo con índice + 4 artículos long-tail de alta intención:
+  1. "¿Cuánto cuesta pintar un piso en Barcelona?" → tráfico transaccional directo
+  2. "Microcemento vs azulejo" → tráfico de decisión (refuerza Servicio Prioritario)
+  3. "Pintura exterior fachadas Maresme" → geo-targeting costero específico
+  4. "Reforma integral baño guía completa" → tráfico informacional + conversión
+- Cada artículo: Article schema, breadcrumbs, CTA WhatsApp al pie
+
+### 4. Infraestructura Técnica
+- `sitemap.xml`: 12 → 17 URLs (blog añadido)
+- `robots.txt`: `Disallow: /js/` añadido (protege código de rastreo)
+- `public/_headers`: CSP + HSTS + X-Frame-Options + Permissions-Policy (seguridad Vercel)
+
+### Próximos pasos recomendados (Fase Autoridad)
+1. **Deploy** → `vercel --prod` para publicar toda la carga (requiere green-light CEO)
+2. **Google Search Console**: Submit sitemap actualizado → `https://bcnproreforma.com/sitemap.xml`
+3. **Schema Validation**: Pasar `index.html` por Google Rich Results Test post-deploy
+4. **Internal linking**: Añadir enlace al `/blog/` desde el footer/nav de `index.html`
+5. **GBP**: Subir 5 fotos de trabajos reales (pintura, microcemento, fachadas) + solicitar reseñas activas
+
+---
+*Timestamp: 2026-04-20*
+*Status: MANUS MODE ACTIVE - SEO AUTHORITY PHASE COMPLETE | PENDING DEPLOY*

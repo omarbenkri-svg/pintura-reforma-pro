@@ -19,6 +19,10 @@ Para evitar la "brecha de activación", el agente DEBE:
 4. **Prioridad Revestimientos**: El foco comercial es Microcemento y Estuco Veneciano.
 5. **Fuente de Verdad i18n**: Todo texto debe residir en `js/main.js` (dict object). No Hardcoding en HTML.
 
+## 🔁 Protocolo de Continuidad
+
+Al iniciar cualquier sesión, el agente DEBE leer primero `HANDOFF.md` en la raíz del proyecto para recuperar el estado de las tareas en curso, decisiones pendientes y bugs detectados entre las diferentes instancias (Cowork / Antigravity / Claude Code).
+
 ## 🔭 Protocolo de Observabilidad Estratégica (POS)
 
 Cada respuesta a una tarea técnica o estratégica DEBE terminar con el bloque estándar de la CLAUDE.md raíz (✅ DONE / ⚠️ PENDING / 🐛 BUGS) más el siguiente bloque adicional:
@@ -37,3 +41,7 @@ Este bloque es obligatorio. No requiere respuesta del usuario.
 - **Infraestructura**: Vercel / GoDaddy.
 - **Fuente de verdad i18n**: `js/main.js` — ES ✅ CA ✅ EN ✅ (185 claves auditadas 2026-04-15).
 - **Punto Crítico**: Mantener compatibilidad SEO/GEO en cada despliegue.
+- **Rama activa**: `feat/lead-capture-e2e-closure` (NO pusheada a master — requiere green-light CEO)
+- **Último commit**: `3e1b229` — SEO audit completo (blog, schema, geo tags, headers)
+- **Pendiente de deploy**: `vercel --prod` tras aprobación
+- **Blog**: `/blog/` creado con 4 artículos — NO enlazado aún desde nav/footer de index.html

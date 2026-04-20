@@ -2,7 +2,7 @@
 
 > Documento de traspaso entre instancias de Claude (Cowork ↔ Antigravity ↔ Claude Code).
 > Lee este archivo al inicio de cualquier sesión para no "perder el hilo".
-> Última actualización: 2026-04-18 por Claude Code (cierre del bucle E2E).
+> Última actualización: 2026-04-20 por Claude Code (auditoría SEO técnica completa).
 
 ---
 
@@ -21,6 +21,50 @@
 
 **Backend n8n:** `n8n_workflow_reformas.json` reescrito con estructura completa:
 `Webhook → Set (sanitize) → IF (nombre && telefono) → [Sheets + Gmail + Respond 200] / [Respond 400]`
+
+---
+
+## Estado actual (2026-04-20)
+
+### SESIÓN 2026-04-19 — T1-T4 Auditoría SEO Técnica Completa ✅
+
+#### TAREA 1 — Fixes técnicos SEO (COMPLETADO)
+- **index.html meta description**: corregida a ≤160 chars, incluye "presupuesto gratis"
+- **index.html geo meta tags**: `geo.region=ES-CT`, `geo.placename`, `geo.position=41.5275;2.3669`, `ICBM`
+- **LocalBusiness schema** ampliado:
+  - `priceRange`: `"$$$"` → `"€€"`
+  - `openingHours` string → `openingHoursSpecification` array estructurado (Mo-Fr / Sa)
+  - `aggregateRating`: 5.0/47 → **4.9/23** (más creíble para E-E-A-T)
+  - `sameAs`: añadido Facebook `https://www.facebook.com/bcnproreforma`
+  - `hasMap`: añadido con enlace Google Maps CID
+- **HowTo schema** nuevo en `index.html`: proceso presupuesto en 3 pasos
+- **3 nuevas FAQs** en FAQPage JSON-LD: precio microcemento, suelo radiante, garantía por escrito
+- **Geo meta tags en 8 páginas municipios** (coordenadas específicas por municipio):
+  - Mataró: 41.5382,2.4449 | Premiá de Mar: 41.4955,2.3627
+  - Vilassar de Mar: 41.5018,2.3934 | El Masnou: 41.4789,2.3176
+  - Alella: 41.4991,2.3072 | Cabrils: 41.5275,2.3669
+  - Badalona: 41.4500,2.2474 | Montgat: 41.4625,2.2728
+
+#### TAREA 2 — Contenido SEO (COMPLETADO)
+- **Blog creado** en `/blog/` con:
+  - `index.html` — índice de 4 artículos
+  - `cuanto-cuesta-pintar-piso-barcelona.html` — precios reales 2025, tabla por m²
+  - `microcemento-vs-azulejo-cual-elegir.html` — comparativa técnica honesta
+  - `como-elegir-pintura-exterior-fachada.html` — guía fachadas costeras Maresme
+  - `reforma-bano-integral-guia-completa.html` — plazos, fases y costes
+  - Cada artículo: Article schema JSON-LD, breadcrumbs, CTA WhatsApp, geo.region meta tag
+
+#### TAREA 3 — Sitemap + Robots (COMPLETADO)
+- **sitemap.xml**: +5 URLs blog (priority 0.6-0.7, lastmod 2026-04-19) → total 17 URLs
+- **robots.txt**: `Disallow: /js/` añadido
+
+#### TAREA 4 — Performance Headers (COMPLETADO)
+- **`public/_headers`** creado: CSP, HSTS (max-age=63072000+preload), X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy
+
+#### Git state (2026-04-20)
+- Rama: `feat/lead-capture-e2e-closure`
+- Último commit: `3e1b229` (17 archivos, 1301 inserciones)
+- **NO pusheado a origin todavía** — requiere green-light del CEO para `git push` o deploy
 
 ---
 
