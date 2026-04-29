@@ -84,7 +84,7 @@ echo ""
 # -----------------------------------------------
 echo ""
 echo "TEST 4: Verificar Google Sheets — abre manualmente:"
-echo "https://docs.google.com/spreadsheets/d/REEMPLAZAR_CON_ID_SHEET/edit"
+echo "https://docs.google.com/spreadsheets/d/1IFAssx08QR-smmgj5Jzjr99aFnTCGZTnfH5KDQ0zQIQ/edit"
 echo "Comprueba que aparecen filas nuevas en 'WhatsApp Leads'"
 
 echo ""

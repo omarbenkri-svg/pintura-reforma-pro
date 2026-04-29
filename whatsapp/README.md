@@ -54,16 +54,28 @@ En el dashboard de Vercel → Settings → Environment Variables, añade:
 
 ---
 
+## PASO 2b — Preparar Google Sheet (ya creada automáticamente)
+
+La hoja se creó automáticamente en Drive como **"BCN Pro Reforma — WhatsApp Leads 2026"**:
+- ID: `1IFAssx08QR-smmgj5Jzjr99aFnTCGZTnfH5KDQ0zQIQ`
+- URL: https://docs.google.com/spreadsheets/d/1IFAssx08QR-smmgj5Jzjr99aFnTCGZTnfH5KDQ0zQIQ/edit
+
+**Acción manual (2 minutos):**
+1. Abre la hoja y renombra la pestaña "Sheet1" → **"WhatsApp Leads"** (doble clic en la pestaña)
+2. Añade estos headers en la fila 1: `Timestamp` | `Telefono` | `Mensaje` | `Tipo_Respuesta` | `Status`
+
+---
+
 ## PASO 3 — Importar workflows en n8n
 
-1. Ve a [bcnproreforma.app.n8n.cloud](https://bcnproreforma.app.n8n.cloud)
+1. Ve a [bcnproreforma.app.n8n.cloud](https://bcnproreforma.app.n8n.cloud) y haz login
 2. Menú → **Workflows** → **Import from file**
 3. Importa en este orden:
-   - `n8n-workflows/workflow-b-verify.json` (verificación GET — debe activarse primero)
+   - `n8n-workflows/workflow-b-verify.json` (verificación GET — activa primero)
    - `n8n-workflows/workflow-a-router.json` (router principal POST)
    - `n8n-workflows/workflow-c-alert.json` (alertas cada 2h)
-4. En **workflow-a-router** y **workflow-c-alert**, reemplaza `REEMPLAZAR_CON_ID_SHEET` con el ID de tu Google Sheet de leads.
-5. Configura credenciales Google Sheets en n8n (OAuth2).
+4. El ID de Google Sheet ya está configurado en los JSONs: `1IFAssx08QR-smmgj5Jzjr99aFnTCGZTnfH5KDQ0zQIQ`
+5. Configura credenciales Google Sheets en n8n (OAuth2) si no las tienes aún.
 6. Activa los 3 workflows (toggle ON).
 
 ---

@@ -1,5 +1,5 @@
 {
-  "_comment": "Workflow: Lead Capture - Reformas. Importar en n8n Cloud UI (menú → Import from File). Tras import: (1) reasignar credentials 'Google Sheets' y 'Gmail' a las OAuth2 existentes de ClarityAudit, (2) sustituir TU_ID_DE_HOJA_DE_CALCULO por el ID real de la Sheet (string entre /d/ y /edit en la URL), (3) activar el toggle. Ver HANDOFF.md → ## Setup Google Sheet para instrucciones paso a paso.",
+  "_comment": "Workflow: Lead Capture - Reformas. Importar en n8n Cloud UI (menú → Import from File). Tras import: (1) reasignar credentials 'Google Sheets' y 'Gmail' a las OAuth2 existentes de ClarityAudit, (2) sustituir 1IFAssx08QR-smmgj5Jzjr99aFnTCGZTnfH5KDQ0zQIQ por el ID real de la Sheet (string entre /d/ y /edit en la URL), (3) activar el toggle. Ver HANDOFF.md → ## Setup Google Sheet para instrucciones paso a paso.",
   "name": "Lead Capture - Reformas",
   "nodes": [
     {
@@ -78,7 +78,7 @@
       "parameters": {
         "operation": "append",
         "documentId": {
-          "value": "TU_ID_DE_HOJA_DE_CALCULO",
+          "value": "1IFAssx08QR-smmgj5Jzjr99aFnTCGZTnfH5KDQ0zQIQ",
           "_comment": "Reemplazar por el ID real. Ver HANDOFF.md → ## Setup Google Sheet",
           "mode": "id"
         },
