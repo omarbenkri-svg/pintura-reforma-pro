@@ -1,0 +1,88 @@
+{
+  "name": "WA-C: Alerta Leads No Respondidos",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 2,
+              "triggerAtHour": 8
+            }
+          ]
+        }
+      },
+      "id": "wc-schedule",
+      "name": "Schedule Every 2h (8-20h)",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "operation": "read",
+        "documentId": { "mode": "url", "value": "REEMPLAZAR_CON_ID_SHEET" },
+        "sheetName": { "mode": "name", "value": "WhatsApp Leads" },
+        "options": {
+          "headerRow": 1
+        }
+      },
+      "id": "wc-read",
+      "name": "Read WhatsApp Leads Sheet",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "functionCode": "const now = new Date();\nconst TWO_HOURS_MS = 2 * 60 * 60 * 1000;\n\nconst pending = $input.all().filter(item => {\n  const row = item.json;\n  if (row.Status !== 'pendiente') return false;\n  const ts = new Date(row.Timestamp);\n  return (now - ts) > TWO_HOURS_MS;\n});\n\nif (pending.length === 0) {\n  return [{ json: { hasPending: false, count: 0 } }];\n}\n\nconst list = pending.map(p =>\n  `• ${p.json.Telefono} — \"${p.json.Mensaje.slice(0, 60)}...\" (${p.json.Timestamp})`\n).join('\\n');\n\nreturn [{ json: {\n  hasPending: true,\n  count: pending.length,\n  list,\n  now: now.toISOString()\n} }];\n"
+      },
+      "id": "wc-filter",
+      "name": "Filter Pending > 2h",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [{ "value1": "={{ $json.hasPending }}", "value2": true }]
+        }
+      },
+      "id": "wc-if",
+      "name": "If Pending Exist",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [900, 300]
+    },
+    {
+      "parameters": {
+        "fromEmail": "bcnproreforma@gmail.com",
+        "toEmail": "bcnproreforma@gmail.com",
+        "subject": "=⚠️ {{ $json.count }} lead(s) WhatsApp sin respuesta > 2h",
+        "emailType": "text",
+        "message": "=Tienes leads de WhatsApp pendientes de respuesta manual:\n\n{{ $json.list }}\n\n👉 Revisa la hoja de cálculo y responde cuanto antes.\n\nEnviado automáticamente por BCN Pro Reforma Bot — {{ $json.now }}"
+      },
+      "id": "wc-alert",
+      "name": "Send Alert Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [1120, 200]
+    }
+  ],
+  "connections": {
+    "Schedule Every 2h (8-20h)": { "main": [[{ "node": "Read WhatsApp Leads Sheet", "type": "main", "index": 0 }]] },
+    "Read WhatsApp Leads Sheet":  { "main": [[{ "node": "Filter Pending > 2h",      "type": "main", "index": 0 }]] },
+    "Filter Pending > 2h":        { "main": [[{ "node": "If Pending Exist",          "type": "main", "index": 0 }]] },
+    "If Pending Exist": {
+      "main": [
+        [{ "node": "Send Alert Email", "type": "main", "index": 0 }],
+        []
+      ]
+    }
+  },
+  "active": false,
+  "settings": { "executionOrder": "v1" },
+  "tags": ["whatsapp", "bcnproreforma"]
+}

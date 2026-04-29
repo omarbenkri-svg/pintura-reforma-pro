@@ -1,0 +1,155 @@
+{
+  "name": "WA-A: Webhook Receiver + Router",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "whatsapp-inbound",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "wa-trigger",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "functionCode": "// Extract WhatsApp message data\nconst body = $input.first().json.body || $input.first().json;\nconst entry = body.entry?.[0];\nconst change = entry?.changes?.[0];\nconst message = change?.value?.messages?.[0];\n\nif (!message) {\n  return [{ json: { skip: true } }];\n}\n\nconst phoneNumber = message.from;\nconst messageText = (message.text?.body || '').toLowerCase().trim();\nconst timestamp = new Date(parseInt(message.timestamp) * 1000);\n\n// Business hours check (Europe/Madrid, UTC+2 in summer)\nconst madridOffset = 2; // adjust for DST if needed\nconst madridHour = (timestamp.getUTCHours() + madridOffset) % 24;\nconst madridMinute = timestamp.getUTCMinutes();\nconst isBusinessHours = (\n  (madridHour > 8 || (madridHour === 8 && madridMinute >= 0)) &&\n  (madridHour < 20 || (madridHour === 20 && madridMinute <= 30))\n);\n\n// Keyword check\nconst KEYWORDS = [\n  'presupuesto','precio','cuánto','cuanto','cuesta','costaría',\n  'reforma','pintura','pintar','acabado','estuco','microcemento',\n  'presupest','preu'\n];\nconst hasKeyword = KEYWORDS.some(kw => messageText.includes(kw));\n\nreturn [{\n  json: {\n    phoneNumber,\n    messageText: message.text?.body || '',\n    isBusinessHours,\n    hasKeyword,\n    timestamp: timestamp.toISOString(),\n    routeType: !isBusinessHours ? 'fuera_horario' : hasKeyword ? 'presupuesto' : 'general'\n  }\n}];\n"
+      },
+      "id": "wa-extractor",
+      "name": "Extract & Route Logic",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "dataType": "string",
+        "value1": "={{ $json.routeType }}",
+        "rules": {
+          "rules": [
+            { "value2": "fuera_horario", "output": 0 },
+            { "value2": "presupuesto",   "output": 1 },
+            { "value2": "general",       "output": 2 }
+          ]
+        },
+        "fallbackOutput": 2
+      },
+      "id": "wa-switch",
+      "name": "Route Switch",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 1,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "functionCode": "const phoneNumber = $input.first().json.phoneNumber;\nconst routeType = $input.first().json.routeType;\n\nconst MESSAGES = {\n  fuera_horario: `¡Hola! 👋 Soy BCN Pro Reforma.\\n\\nHemos recibido tu mensaje. Nuestro horario es 8:00-20:30h. Te contactamos mañana a primera hora.\\n\\nMientras tanto, puedes ver nuestros servicios y calcular tu presupuesto aquí 👇\\n🔗 https://bcnproreforma.com/#calculadora`,\n  presupuesto: `¡Hola! 👋 Gracias por contactar con BCN Pro Reforma.\\n\\nSomos especialistas en pintura, reformas y acabados en Maresme y Barcelona.\\n\\nPara darte un presupuesto ajustado, calcula tu proyecto aquí:\\n🔗 https://bcnproreforma.com/#calculadora\\n\\nO si prefieres, cuéntanos:\\n1️⃣ ¿Qué tipo de trabajo necesitas? (pintura / reforma / acabados)\\n2️⃣ ¿En qué municipio está el inmueble?\\n3️⃣ ¿Cuántos m² aproximadamente?`,\n  general: `¡Hola! 👋 BCN Pro Reforma aquí.\\n\\nRecibimos tu mensaje y te respondemos enseguida.\\n\\nPuedes ver todos nuestros servicios en:\\n🔗 https://bcnproreforma.com`\n};\n\nreturn [{\n  json: {\n    ...($input.first().json),\n    replyText: MESSAGES[routeType] || MESSAGES.general,\n    waPayload: {\n      messaging_product: 'whatsapp',\n      recipient_type: 'individual',\n      to: phoneNumber,\n      type: 'text',\n      text: { preview_url: false, body: MESSAGES[routeType] || MESSAGES.general }\n    }\n  }\n}];\n"
+      },
+      "id": "wa-prepare",
+      "name": "Prepare Reply",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [900, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.facebook.com/v18.0/{{ $env.WA_PHONE_NUMBER_ID }}/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Authorization", "value": "=Bearer {{ $env.WA_ACCESS_TOKEN }}" },
+            { "name": "Content-Type",  "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "bodyParameters": {
+          "parameters": []
+        },
+        "jsonBody": "={{ JSON.stringify($json.waPayload) }}",
+        "options": {}
+      },
+      "id": "wa-send",
+      "name": "Send WhatsApp Reply",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [1120, 300]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": { "mode": "url", "value": "REEMPLAZAR_CON_ID_SHEET" },
+        "sheetName": { "mode": "name", "value": "WhatsApp Leads" },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Timestamp":       "={{ $json.timestamp }}",
+            "Telefono":        "={{ $json.phoneNumber }}",
+            "Mensaje":         "={{ $json.messageText }}",
+            "Tipo_Respuesta":  "={{ $json.routeType }}",
+            "Status":          "pendiente"
+          }
+        }
+      },
+      "id": "wa-sheets",
+      "name": "Log to Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [1340, 200]
+    },
+    {
+      "parameters": {
+        "fromEmail": "bcnproreforma@gmail.com",
+        "toEmail": "bcnproreforma@gmail.com",
+        "subject": "=🔔 Nuevo lead WhatsApp — {{ $json.routeType }}",
+        "emailType": "text",
+        "message": "=Nuevo mensaje WhatsApp recibido:\n\n📱 Teléfono: {{ $json.phoneNumber }}\n💬 Mensaje: {{ $json.messageText }}\n🏷️ Tipo: {{ $json.routeType }}\n🕐 Hora: {{ $json.timestamp }}\n\nRespuesta enviada automáticamente."
+      },
+      "id": "wa-email",
+      "name": "Email Notification",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [1340, 400]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{ \"status\": \"ok\" }",
+        "options": { "responseCode": 200 }
+      },
+      "id": "wa-respond",
+      "name": "Respond 200 OK",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1560, 300]
+    }
+  ],
+  "connections": {
+    "Webhook Trigger":      { "main": [[{ "node": "Extract & Route Logic", "type": "main", "index": 0 }]] },
+    "Extract & Route Logic":{ "main": [[{ "node": "Route Switch",          "type": "main", "index": 0 }]] },
+    "Route Switch": {
+      "main": [
+        [{ "node": "Prepare Reply", "type": "main", "index": 0 }],
+        [{ "node": "Prepare Reply", "type": "main", "index": 0 }],
+        [{ "node": "Prepare Reply", "type": "main", "index": 0 }]
+      ]
+    },
+    "Prepare Reply":    { "main": [[{ "node": "Send WhatsApp Reply",   "type": "main", "index": 0 }]] },
+    "Send WhatsApp Reply": {
+      "main": [[
+        { "node": "Log to Google Sheets", "type": "main", "index": 0 },
+        { "node": "Email Notification",   "type": "main", "index": 0 }
+      ]]
+    },
+    "Log to Google Sheets": { "main": [[{ "node": "Respond 200 OK", "type": "main", "index": 0 }]] },
+    "Email Notification":   { "main": [[{ "node": "Respond 200 OK", "type": "main", "index": 0 }]] }
+  },
+  "active": false,
+  "settings": { "executionOrder": "v1" },
+  "tags": ["whatsapp", "bcnproreforma"]
+}
