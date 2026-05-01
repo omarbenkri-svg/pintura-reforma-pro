@@ -72,8 +72,9 @@ La hoja se creó automáticamente en Drive como **"BCN Pro Reforma — WhatsApp 
 2. Menú → **Workflows** → **Import from file**
 3. Importa en este orden:
    - `n8n-workflows/workflow-b-verify.json` (verificación GET — activa primero)
-   - `n8n-workflows/workflow-a-router.json` (router principal POST)
-   - `n8n-workflows/workflow-c-alert.json` (alertas cada 2h)
+   - `n8n-workflows/workflow-a-router.json` (router principal POST WhatsApp)
+   - `n8n-workflows/workflow-c-alert.json` (alertas leads pendientes cada 2h)
+   - `n8n-workflows/workflow-d-form-leads.json` (leads desde calculadora web)
 4. El ID de Google Sheet ya está configurado en los JSONs: `1IFAssx08QR-smmgj5Jzjr99aFnTCGZTnfH5KDQ0zQIQ`
 5. Configura credenciales Google Sheets en n8n (OAuth2) si no las tienes aún.
 6. Activa los 3 workflows (toggle ON).
@@ -121,9 +122,10 @@ whatsapp/
 ├── config.js                    # Configuración (vars de entorno)
 ├── messages.js                  # Plantillas de mensajes
 ├── n8n-workflows/
-│   ├── workflow-a-router.json   # Webhook POST + router principal
+│   ├── workflow-a-router.json   # Webhook POST + router WhatsApp
 │   ├── workflow-b-verify.json   # Webhook GET verificación Meta
-│   └── workflow-c-alert.json    # Alertas leads pendientes > 2h
+│   ├── workflow-c-alert.json    # Alertas leads pendientes > 2h
+│   └── workflow-d-form-leads.json  # Leads desde calculadora web
 ├── test-webhook.sh              # Tests curl
 └── README.md                    # Este archivo
 ```
@@ -139,6 +141,17 @@ whatsapp/
 | WhatsApp no envía respuesta | Verificar `WA_PHONE_NUMBER_ID` y `WA_ACCESS_TOKEN` en variables n8n |
 | Google Sheets no recibe filas | Reconfigurar credenciales OAuth2 Google en n8n |
 | Email no llega | Configurar credencial SMTP/Gmail en n8n (cuenta bcnproreforma@gmail.com) |
+
+---
+
+## Google Sheet — Pestañas requeridas
+
+La hoja `1IFAssx08QR-smmgj5Jzjr99aFnTCGZTnfH5KDQ0zQIQ` necesita **dos pestañas**:
+
+| Pestaña | Workflow | Headers |
+|---------|----------|---------|
+| `WhatsApp Leads` | WA-A, WA-C | `Timestamp` \| `Telefono` \| `Mensaje` \| `Tipo_Respuesta` \| `Status` |
+| `Form Leads` | WD | `Timestamp` \| `Nombre` \| `Telefono` \| `Email` \| `Servicio` \| `Metros` \| `Fuente` \| `Dispositivo` \| `UTM_Source` \| `UTM_Medium` \| `UTM_Campaign` \| `Pagina` \| `Status` |
 
 ---
 

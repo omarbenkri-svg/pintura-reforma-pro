@@ -88,6 +88,34 @@ echo "https://docs.google.com/spreadsheets/d/1IFAssx08QR-smmgj5Jzjr99aFnTCGZTnfH
 echo "Comprueba que aparecen filas nuevas en 'WhatsApp Leads'"
 
 echo ""
+# -----------------------------------------------
+# TEST 5: Web Form Lead (Workflow D)
+# -----------------------------------------------
+echo ""
+echo "TEST 5: Form lead desde calculadora (POST pintura_reforma_leads)"
+curl -s -X POST "https://bcnproreforma.app.n8n.cloud/webhook/pintura_reforma_leads" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "nombre": "Carlos Prueba",
+    "telefono": "34612000001",
+    "email": "test@test.com",
+    "servicio": "pintura_interior",
+    "metros": 65,
+    "timestamp": "'$(date -u +%Y-%m-%dT%H:%M:%SZ)'",
+    "fuente": "calculadora_web",
+    "pagina": "https://bcnproreforma.com",
+    "referrer": "google",
+    "dispositivo": "desktop",
+    "utm_source": "test",
+    "utm_medium": "curl",
+    "utm_campaign": "test_e2e"
+  }'
+echo ""
+echo "Esperado: {\"status\":\"ok\",\"message\":\"Lead recibido\"}"
+echo "Verificar fila nueva en pestaña 'Form Leads' de la hoja:"
+echo "https://docs.google.com/spreadsheets/d/1IFAssx08QR-smmgj5Jzjr99aFnTCGZTnfH5KDQ0zQIQ/edit"
+
+echo ""
 echo "======================================="
 echo " Tests completados"
 echo "======================================="

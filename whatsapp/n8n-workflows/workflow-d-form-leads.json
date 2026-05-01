@@ -1,0 +1,98 @@
+{
+  "name": "WD: Web Form Leads — Calculadora",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "pintura_reforma_leads",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "wd-trigger",
+      "name": "Webhook Form Leads",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "functionCode": "const body = $input.first().json;\n\n// Validate minimum required fields\nif (!body.telefono) {\n  return [{ json: { skip: true, reason: 'missing_telefono' } }];\n}\n\nreturn [{\n  json: {\n    timestamp:    body.timestamp    || new Date().toISOString(),\n    nombre:       body.nombre       || 'Sin nombre',\n    telefono:     body.telefono,\n    email:        body.email        || '',\n    servicio:     body.servicio     || '',\n    metros:       body.metros       || 0,\n    fuente:       body.fuente       || 'calculadora_web',\n    pagina:       body.pagina       || '',\n    referrer:     body.referrer     || 'directo',\n    dispositivo:  body.dispositivo  || '',\n    utm_source:   body.utm_source   || '',\n    utm_medium:   body.utm_medium   || '',\n    utm_campaign: body.utm_campaign || '',\n    status:       'nuevo'\n  }\n}];\n"
+      },
+      "id": "wd-extract",
+      "name": "Validate & Enrich",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": { "mode": "url", "value": "1IFAssx08QR-smmgj5Jzjr99aFnTCGZTnfH5KDQ0zQIQ" },
+        "sheetName": { "mode": "name", "value": "Form Leads" },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Timestamp":    "={{ $json.timestamp }}",
+            "Nombre":       "={{ $json.nombre }}",
+            "Telefono":     "={{ $json.telefono }}",
+            "Email":        "={{ $json.email }}",
+            "Servicio":     "={{ $json.servicio }}",
+            "Metros":       "={{ $json.metros }}",
+            "Fuente":       "={{ $json.fuente }}",
+            "Dispositivo":  "={{ $json.dispositivo }}",
+            "UTM_Source":   "={{ $json.utm_source }}",
+            "UTM_Medium":   "={{ $json.utm_medium }}",
+            "UTM_Campaign": "={{ $json.utm_campaign }}",
+            "Pagina":       "={{ $json.pagina }}",
+            "Status":       "={{ $json.status }}"
+          }
+        }
+      },
+      "id": "wd-sheets",
+      "name": "Log to Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [680, 200]
+    },
+    {
+      "parameters": {
+        "fromEmail": "bcnproreforma@gmail.com",
+        "toEmail": "bcnproreforma@gmail.com",
+        "subject": "=🔥 Nuevo lead web — {{ $json.servicio || 'consulta' }} · {{ $json.nombre }}",
+        "emailType": "html",
+        "message": "=<h2>🔥 Nuevo lead desde la calculadora web</h2><table style='font-family:sans-serif;font-size:14px'><tr><td><b>Nombre:</b></td><td>{{ $json.nombre }}</td></tr><tr><td><b>Teléfono:</b></td><td><a href='tel:{{ $json.telefono }}'>{{ $json.telefono }}</a></td></tr><tr><td><b>Email:</b></td><td>{{ $json.email }}</td></tr><tr><td><b>Servicio:</b></td><td>{{ $json.servicio }}</td></tr><tr><td><b>Metros:</b></td><td>{{ $json.metros }} m²</td></tr><tr><td><b>Fuente:</b></td><td>{{ $json.fuente }}</td></tr><tr><td><b>Dispositivo:</b></td><td>{{ $json.dispositivo }}</td></tr><tr><td><b>UTM:</b></td><td>{{ $json.utm_source }} / {{ $json.utm_medium }} / {{ $json.utm_campaign }}</td></tr><tr><td><b>Fecha:</b></td><td>{{ $json.timestamp }}</td></tr></table><br><p><a href='https://docs.google.com/spreadsheets/d/1IFAssx08QR-smmgj5Jzjr99aFnTCGZTnfH5KDQ0zQIQ/edit' style='background:#FF6B35;color:white;padding:10px 20px;text-decoration:none;border-radius:5px;'>Ver en Google Sheets</a></p>"
+      },
+      "id": "wd-email",
+      "name": "Email Notification",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [680, 420]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{ \"status\": \"ok\", \"message\": \"Lead recibido\" }",
+        "options": { "responseCode": 200 }
+      },
+      "id": "wd-respond",
+      "name": "Respond 200 OK",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [920, 200]
+    }
+  ],
+  "connections": {
+    "Webhook Form Leads": { "main": [[{ "node": "Validate & Enrich", "type": "main", "index": 0 }]] },
+    "Validate & Enrich": {
+      "main": [[
+        { "node": "Log to Google Sheets", "type": "main", "index": 0 },
+        { "node": "Email Notification",   "type": "main", "index": 0 }
+      ]]
+    },
+    "Log to Google Sheets": { "main": [[{ "node": "Respond 200 OK", "type": "main", "index": 0 }]] },
+    "Email Notification":   { "main": [[]] }
+  },
+  "active": false,
+  "settings": { "executionOrder": "v1" },
+  "tags": ["web-form", "bcnproreforma"]
+}
