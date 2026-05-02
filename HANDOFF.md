@@ -1,6 +1,6 @@
 # HANDOFF — bcnproreforma.com
 
-**Última actualización:** 2026-05-02 por Claude Code (sesión cierre E2E completo)
+**Última actualización:** 2026-05-02 por Claude Code (sesión cierre E2E + email en calculadora)
 **Próximo ejecutor:** Antigravity (IDE Google) o Claude Code
 
 ---
@@ -40,7 +40,7 @@ Punto único de verdad del estado del proyecto. Cualquier agente (Claude Code, C
 
 ## ✅ Hecho (acumulado de todas las sesiones)
 
-### Sesión 2026-05-02 (esta sesión — cierre E2E)
+### Sesión 2026-05-02 (esta sesión — cierre E2E + campo email calculadora)
 - `vercel.json`: 2 redirects 301 para duplicados `/pintor-cabrils.html` y `/pintor-vilassar-de-mar.html` → `/municipios/`
 - `index.html`: OG image corregida a `hero-team.webp` (1200×630), enlace Blog en nav desktop + mobile, footer rutas corregidas
 - **Google Apps Script Web App desplegado** (Versión 1, 2026-05-02 20:49):
@@ -52,6 +52,7 @@ Punto único de verdad del estado del proyecto. Cualquier agente (Claude Code, C
 - `js/lead-webhook.js`: WEBHOOK_URL actualizado al Apps Script (abandonado n8n cloud — trial expirado)
 - **Deploy a producción completado** — `bcnproreforma.com` live con todos los fixes
 - **Test E2E verificado**: 6 filas de test en "Form Leads" confirman que el pipeline funciona
+- **Campo email integrado en Paso 9** de la calculadora (`js/main.js`): nombre + teléfono + email (opcional) en un solo paso. Step-email redundante descartado. `dispatchLead` se llama directamente al pulsar "Emitir Análisis".
 
 ### Código (acumulado sesiones previas)
 - 8 landings municipio en `/municipios/*.html` con JSON-LD, geo tags, interlinking
