@@ -1,7 +1,7 @@
 # HANDOFF — bcnproreforma.com
 
-**Última actualización:** 2026-05-01 por Claude.ai (sesión mentor)
-**Próximo ejecutor:** Claude Code
+**Última actualización:** 2026-05-02 por Claude Code (sesión cierre E2E completo)
+**Próximo ejecutor:** Antigravity (IDE Google) o Claude Code
 
 ---
 
@@ -31,64 +31,67 @@ Punto único de verdad del estado del proyecto. Cualquier agente (Claude Code, C
 ## 🛠️ Stack técnico
 
 - HTML / CSS / JS Vanilla puro (cero frameworks)
-- Hosting: Vercel
-- Lead pipeline: n8n (bcnproreforma.app.n8n.cloud) → Google Sheets + email
-- Tracking: GTM dataLayer (no GA4 directo aún)
-- Repo: git (rama actual feat/lead-capture-e2e-closure)
+- Hosting: Vercel (alias bcnproreforma.com activo)
+- Lead pipeline: **Google Apps Script Web App** → Google Sheets "Form Leads" + Gmail
+- Tracking: `tracking-unificado.js` activo
+- Repo: git (rama `feat/lead-capture-e2e-closure`)
 
 ---
 
 ## ✅ Hecho (acumulado de todas las sesiones)
 
-### Código
+### Sesión 2026-05-02 (esta sesión — cierre E2E)
+- `vercel.json`: 2 redirects 301 para duplicados `/pintor-cabrils.html` y `/pintor-vilassar-de-mar.html` → `/municipios/`
+- `index.html`: OG image corregida a `hero-team.webp` (1200×630), enlace Blog en nav desktop + mobile, footer rutas corregidas
+- **Google Apps Script Web App desplegado** (Versión 1, 2026-05-02 20:49):
+  - URL: `https://script.google.com/macros/s/AKfycbwesZXU9_TUzmSptQnYt4CMJFfB6nHttnDA2XOXdsjyebmUJlaQHEpN0ku6Oum_3lCh/exec`
+  - Acceso: Cualquier usuario (anónimo)
+  - Ejecuta como: bcnproreforma@gmail.com
+  - Escribe en Google Sheets `1IFAssx08QR-smmgj5Jzjr99aFnTCGZTnfH5KDQ0zQIQ` → pestaña "Form Leads"
+  - Envía email de alerta a bcnproreforma@gmail.com por cada lead
+- `js/lead-webhook.js`: WEBHOOK_URL actualizado al Apps Script (abandonado n8n cloud — trial expirado)
+- **Deploy a producción completado** — `bcnproreforma.com` live con todos los fixes
+- **Test E2E verificado**: 6 filas de test en "Form Leads" confirman que el pipeline funciona
+
+### Código (acumulado sesiones previas)
 - 8 landings municipio en `/municipios/*.html` con JSON-LD, geo tags, interlinking
 - Blog en `/blog/` con 4 artículos iniciales + Article schema + breadcrumbs
 - Homepage con JSON-LD LocalBusiness + FAQPage + HowTo, geo meta tags, OG
 - Modal calculadora 3 pasos con lead-gate
 - Página 404 premium con countdown + CTA WhatsApp
-- `lead-webhook.js` dispatcher con retry + localStorage fallback
-- `gtm-tracking.js` para eventos (scroll, tiempo, whatsapp clicks)
-- `tracking-unificado.js` activo (preferido sobre gtm-tracking.js)
+- `lead-webhook.js` dispatcher con retry + localStorage fallback → apunta a Apps Script
+- `tracking-unificado.js` activo
 - Trust badges, tabla comparativa, banner urgencia, zonas servicio
 - `sitemap.xml` (12 URLs) + `robots.txt` + `vercel.json` security headers
-- `public/_headers` con CSP + HSTS + cache rules
-- `whatsapp/n8n-workflows/` — 4 workflows n8n listos para importar: WA-A (router WhatsApp), WA-B (verificación Meta), WA-C (alertas 2h), WD (leads formulario web)
-- `whatsapp/README.md` — guía completa de setup: Meta app, credenciales, import, test E2E
-- `whatsapp/test-webhook.sh` — script de tests curl para los 4 workflows (5 tests)
+- `whatsapp/n8n-workflows/` — 4 workflows n8n archivados (inactivos, n8n trial expirado)
 
 ### Configuraciones externas
 - Google Ads: campaña PMAX "Pintores en Barcelona" → **PAUSADA** (saldo pendiente + targeting incorrecto)
-- Meta Ads: ubicación corregida a "Cabrils + 25mi (40km)" → queda pendiente de publicar por Payment error
+- Meta Ads: ubicación corregida a "Cabrils + 25mi (40km)" → pendiente publicar por Payment error
 - GBP perfil duplicado Premià → eliminado
 - GBP perfil Cabrils → renombrado a "BcnProReforma" pero **SUSPENDIDO** por incumplimiento de directrices
 
 ---
 
-## 🔴 Bugs conocidos pendientes
+## 🔴 Bugs pendientes (reducidos)
 
-1. **Duplicados municipios:** existen `/pintor-*.html` en raíz Y en `/municipios/`. Google penaliza contenido duplicado.
-2. **Footer apunta a rutas viejas** (línea ~2553 de index.html).
-3. **Blog sin enlace visible** en la web (no hay forma de llegar a `/blog/` desde el frontend).
-4. ~~**n8n webhook URL en uso pero workflow no existe aún**~~ ✅ FIXED — Workflow D (`workflow-d-form-leads.json`) creado para `pintura_reforma_leads`. Pendiente solo importar en n8n y activar.
-5. **pintor-mataro.html usa CSS inline** (no comparte municipios.css). Bajo impacto.
-6. **Foto "Quiénes somos" es stock Unsplash** — no auténtico.
-7. **No existe OG image 1200x630** — redes sociales no renderizan preview correcto.
-8. **RESEND_API_KEY no configurada en Vercel** (si el blog o formularios necesitan email).
+1. ~~Duplicados municipios~~ ✅ FIXED — 301 redirects en vercel.json
+2. ~~Footer apunta a rutas viejas~~ ✅ FIXED
+3. ~~Blog sin enlace visible~~ ✅ FIXED — añadido en nav desktop + mobile
+4. ~~n8n webhook URL inoperativo~~ ✅ FIXED — migrado a Google Apps Script
+5. ~~OG image incorrecta~~ ✅ FIXED — hero-team.webp 1200×630
+6. **pintor-mataro.html usa CSS inline** — no comparte municipios.css. Bajo impacto.
+7. **Foto "Quiénes somos" es stock Unsplash** — no auténtico.
+8. **Filas de test en "Form Leads"** — eliminar manualmente las 6 filas de test (rows 2-7) antes de ir a producción real.
 
 ---
 
 ## ⏸️ Pendiente acción humana (solo Omar puede)
 
-1. `vercel --prod` desde terminal local
-1b. Importar 4 workflows en n8n: bcnproreforma.app.n8n.cloud → Workflows → Import from file (orden: B→A→C→D)
-1c. En n8n: configurar credencial Google Sheets (OAuth2) y credencial Email (Gmail SMTP)
-1d. En n8n: activar los 4 workflows (toggle ON)
-1e. En Google Sheets `1IFAssx08QR-smmgj5Jzjr99aFnTCGZTnfH5KDQ0zQIQ`: crear pestaña "Form Leads" con headers: Timestamp|Nombre|Telefono|Email|Servicio|Metros|Fuente|Dispositivo|UTM_Source|UTM_Medium|UTM_Campaign|Pagina|Status
-1f. WhatsApp: crear Meta App en developers.facebook.com → añadir producto WhatsApp → copiar WA_PHONE_NUMBER_ID y WA_ACCESS_TOKEN → añadir como env vars en n8n
-1g. Ejecutar `./whatsapp/test-webhook.sh` tras activar workflows para verificar E2E
+1. **Eliminar filas de test en Google Sheets** "Form Leads" (filas 2-7, son tests de curl)
 2. Pagar saldo pendiente Google Ads (si decide reactivar)
 3. Resolver Payment error Meta Ads (si decide reactivar)
-4. Crear perfil GBP SAB nuevo en `business.google.com/create` (Claude.ai guía vía MCP)
+4. Crear perfil GBP SAB nuevo en `business.google.com/create`
 5. Google Search Console: añadir propiedad + verificar + submit sitemap
 6. Bing Webmaster Tools: importar propiedad desde GSC (1 click)
 7. WhatsApp Business app: auto-respuesta de bienvenida
@@ -98,21 +101,22 @@ Punto único de verdad del estado del proyecto. Cualquier agente (Claude Code, C
 
 ## 🚫 No reintroducir
 
-- No reintroducir páginas `/pintor-*.html` en raíz. Solo en `/municipios/`.
+- No reintroducir páginas `/pintor-*.html` en raíz. Solo en `/municipios/`. Ya tienen redirects 301.
 - No usar nombre "BCN Pro Reforma" en GBP oficial (usar nombre legal).
 - No reactivar Google Ads PMAX sin corregir targeting + keywords negativas.
 - No reactivar Meta Ads sin creativo real (antes/después) + intereses + idioma ES/CA.
 - No usar `gtm-tracking.js` mientras `tracking-unificado.js` esté activo (duplicaría eventos).
+- No volver a n8n cloud (trial expirado, sin intención de pagar). Pipeline = Google Apps Script.
 
 ---
 
 ## 🗺️ Próximas fases
 
-### Fase actual: cierre técnico pre-deploy
-- Limpieza duplicados
-- Footer + enlace blog
-- n8n workflows creados (A,B,C,D) — pendiente import manual + credenciales (ver puntos 1b-1g)
-- Deploy a producción
+### ✅ Fase cierre técnico — COMPLETADA
+- ~~Limpieza duplicados~~ ✅
+- ~~Footer + enlace blog~~ ✅
+- ~~Lead pipeline operativo~~ ✅ (Apps Script → Sheets + email)
+- ~~Deploy a producción~~ ✅
 
 ### Fase siguiente: tracción orgánica (4 semanas)
 - GBP SAB nuevo verificado
