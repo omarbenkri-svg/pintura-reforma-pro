@@ -983,8 +983,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div style="margin-bottom:15px;">
                     <input type="text" id="calc-name" data-i18n-placeholder="calc_placeholder_name" placeholder="Tu nombre" style="width:100%;padding:12px;border-radius:8px;border:1px solid #ddd;">
                 </div>
-                <div style="margin-bottom:20px;">
+                <div style="margin-bottom:15px;">
                     <input type="tel" id="calc-phone" data-i18n-placeholder="calc_placeholder_phone" placeholder="Tu teléfono" style="width:100%;padding:12px;border-radius:8px;border:1px solid #ddd;">
+                </div>
+                <div style="margin-bottom:20px;">
+                    <input type="email" id="calc-email-inline" placeholder="tu@email.com (opcional)" style="width:100%;padding:12px;border-radius:8px;border:1px solid #ddd;box-sizing:border-box;">
+                    <span id="calc-email-inline-error" style="display:none;color:#e53e3e;font-size:.85rem;margin-top:4px;">Email no válido. Corrígelo o déjalo en blanco.</span>
                 </div>
                 <div class="form-actions" style="display:flex;justify-content:space-between;">
                     <button class="btn-secondary prev-step" data-target="step-8"><i class="fa-solid fa-arrow-left"></i></button>
@@ -1110,16 +1114,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 e.preventDefault();
                 const nameI = modalContent.querySelector('#calc-name');
                 const phoneI = modalContent.querySelector('#calc-phone');
+                const emailInline = modalContent.querySelector('#calc-email-inline');
+                const emailInlineError = modalContent.querySelector('#calc-email-inline-error');
                 if (!nameI.value || !phoneI.value) {
                     const activeLang = document.querySelector('.lang-btn.active')?.textContent.toLowerCase().trim() || 'es';
                     const langKey = activeLang.includes('cat') ? 'ca' : 'es';
                     alert(dict[langKey].alert_data || 'Por favor déjanos tu nombre y móvil.');
                     return;
                 }
+                const emailVal = emailInline ? emailInline.value.trim() : '';
+                if (emailVal && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
+                    if (emailInlineError) emailInlineError.style.display = 'block';
+                    return;
+                }
+                if (emailInlineError) emailInlineError.style.display = 'none';
+
                 const typeR = modalContent.querySelector('input[name="project_type"]:checked');
                 const qualityR = modalContent.querySelector('input[name="quality"]:checked');
                 const m2 = parseInt(sizeSlider.value);
-                
+
                 let basePrice = 0;
                 const type = typeR ? typeR.value : 'Pintura';
                 const quality = qualityR ? qualityR.value : 'Estandar';
@@ -1144,7 +1157,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     `*📊 Estimación:* ${fmt.format(min)}€ - ${fmt.format(max)}€\n` +
                     `*📱 Tel:* ${phoneI.value}`;
 
-                goToStep('step-email');
+                dispatchLead(emailVal);
+                showStep10();
             });
         }
 
