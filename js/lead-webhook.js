@@ -14,7 +14,7 @@
   'use strict';
 
   // ⚠️ Configurado para n8n Cloud (Producción)
-  var WEBHOOK_URL = 'https://bcnproreforma.app.n8n.cloud/webhook/pintura_reforma_leads';
+  var WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbwesZXU9_TUzmSptQnYt4CMJFfB6nHttnDA2XOXdsjyebmUJlaQHEpN0ku6Oum_3lCh/exec';
 
   // ── Configuración ──
   var MAX_RETRIES = 2;
