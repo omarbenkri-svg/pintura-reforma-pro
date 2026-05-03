@@ -1,131 +1,158 @@
 # HANDOFF — bcnproreforma.com
 
-**Última actualización:** 2026-05-02 por Claude Code (sesión cierre E2E + email en calculadora)
+**Última actualización:** 2026-05-03 por Claude Code
 **Próximo ejecutor:** Antigravity (IDE Google) o Claude Code
 
 ---
 
 ## 🎯 Qué es este documento
 
-Punto único de verdad del estado del proyecto. Cualquier agente (Claude Code, Claude.ai, Antigravity) lee esto ANTES de actuar. Se actualiza al final de cada sesión.
+Punto único de verdad del estado del proyecto. Cualquier agente lee esto ANTES de actuar.
 
 ---
 
 ## 🏢 Contexto del negocio
 
-- **Cliente:** empresa de pintura, reformas y acabados de obra
-- **Área de servicio:** Maresme + Barcelona (radio ~40km desde Cabrils 08348)
-- **Dominio:** bcnproreforma.com (registrado en GoDaddy)
-- **Nombre legal:** "Pintura, Reforma y Acabado de Obras"
-- **Nombre comercial/marca:** "BCN Pro Reforma"
-- **Tipo de negocio:** SAB (Service Area Business) — no tiene local físico público
-- **Dirección privada (solo verificación GBP):** Carrer Doctor Emili Masriera 8, 1º 2ª, 08348 Cabrils
-- **Contactos:**
-  - WhatsApp: +34 631 71 40 77 → `https://wa.me/34631714077`
-  - Llamadas: +34 639 05 88 19 → `tel:+34639058819`
-  - Email: bcnproreforma@gmail.com
+- **Nombre legal:** Pintura, Reforma y Acabado de Obras
+- **Marca:** BCN Pro Reforma
+- **Dominio:** bcnproreforma.com (GoDaddy)
+- **Tipo:** SAB — sin local físico público
+- **Área:** Maresme + Barcelona (40km desde Cabrils 08348)
+- **WhatsApp:** +34 631 71 40 77 → `https://wa.me/34631714077`
+- **Teléfono:** +34 639 05 88 19 → `tel:+34639058819`
+- **Email:** bcnproreforma@gmail.com
 - **Instagram:** @pintayreformatuobra
+- **Cuenta personal Omar:** omarbenkri@gmail.com (usada para Meta y servicios externos)
 
 ---
 
 ## 🛠️ Stack técnico
 
+### Web (bcnproreforma.com)
 - HTML / CSS / JS Vanilla puro (cero frameworks)
-- Hosting: Vercel (alias bcnproreforma.com activo)
-- Lead pipeline: **Google Apps Script Web App** → Google Sheets "Form Leads" + Gmail
-- Tracking: `tracking-unificado.js` activo
-- Repo: git (rama `feat/lead-capture-e2e-closure`)
+- Hosting: **Vercel** (alias bcnproreforma.com activo)
+- Rama activa: `feat/lead-capture-e2e-closure`
+- Lead pipeline: **Google Apps Script Web App** → Google Sheets + Gmail
+
+### Agente WhatsApp IA (`Escritorio/whatsapp-agentkit/`)
+- FastAPI + SQLite + **Gemini 2.0 Flash** (gratis) + Twilio WhatsApp
+- Estado: código completo, pendiente de credenciales para activar
+- Repositorio: git init hecho, NO subido a GitHub aún
+
+### Herramientas Claude Code
+- `agent-browser` 0.26.0 (vercel-labs) — instalado, scope user
+- Chrome MCP — activo (cuando está conectado)
+- `vercel` CLI 50.x — para deploy
 
 ---
 
-## ✅ Hecho (acumulado de todas las sesiones)
+## ✅ Hecho (acumulado)
 
-### Sesión 2026-05-02 (esta sesión — cierre E2E + campo email calculadora)
-- `vercel.json`: 2 redirects 301 para duplicados `/pintor-cabrils.html` y `/pintor-vilassar-de-mar.html` → `/municipios/`
-- `index.html`: OG image corregida a `hero-team.webp` (1200×630), enlace Blog en nav desktop + mobile, footer rutas corregidas
-- **Google Apps Script Web App desplegado** (Versión 1, 2026-05-02 20:49):
+### Web bcnproreforma.com
+- [x] 8 landings municipio `/municipios/*.html` — JSON-LD, geo tags, interlinking
+- [x] Blog `/blog/` — 4 artículos + Article schema + breadcrumbs
+- [x] Homepage — JSON-LD LocalBusiness + FAQPage + HowTo, OG tags
+- [x] Modal calculadora 3 pasos + lead-gate
+- [x] **Email integrado en Paso 9** de calculadora (nombre + teléfono + email opcional)
+- [x] Página 404 premium — countdown + CTA WhatsApp
+- [x] `lead-webhook.js` → apunta a Google Apps Script Web App
+- [x] `tracking-unificado.js` activo
+- [x] Trust badges, tabla comparativa, banner urgencia
+- [x] `sitemap.xml` (12 URLs) + `robots.txt` + `vercel.json` headers
+- [x] 301 redirects para duplicados municipios (pintor-cabrils, pintor-vilassar-de-mar)
+- [x] Footer rutas corregidas
+- [x] Blog enlace en nav desktop + mobile
+- [x] OG image → `hero-team.webp` 1200×630
+- [x] **Google Apps Script Web App desplegado** — URL activa, acceso anónimo
+  - Sheet ID: `1IFAssx08QR-smmgj5Jzjr99aFnTCGZTnfH5KDQ0zQIQ` → pestaña "Form Leads"
+  - Email alertas: bcnproreforma@gmail.com
   - URL: `https://script.google.com/macros/s/AKfycbwesZXU9_TUzmSptQnYt4CMJFfB6nHttnDA2XOXdsjyebmUJlaQHEpN0ku6Oum_3lCh/exec`
-  - Acceso: Cualquier usuario (anónimo)
-  - Ejecuta como: bcnproreforma@gmail.com
-  - Escribe en Google Sheets `1IFAssx08QR-smmgj5Jzjr99aFnTCGZTnfH5KDQ0zQIQ` → pestaña "Form Leads"
-  - Envía email de alerta a bcnproreforma@gmail.com por cada lead
-- `js/lead-webhook.js`: WEBHOOK_URL actualizado al Apps Script (abandonado n8n cloud — trial expirado)
-- **Deploy a producción completado** — `bcnproreforma.com` live con todos los fixes
-- **Test E2E verificado**: 6 filas de test en "Form Leads" confirman que el pipeline funciona
-- **Campo email integrado en Paso 9** de la calculadora (`js/main.js`): nombre + teléfono + email (opcional) en un solo paso. Step-email redundante descartado. `dispatchLead` se llama directamente al pulsar "Emitir Análisis".
+- [x] **Test E2E verificado** — 6 filas en Form Leads confirman pipeline OK
+- [x] **Deploy a producción** — bcnproreforma.com live (2026-05-02)
+- [x] Auditoría a11y completada
+- [x] Auditoría Alex Hormozi 2.0 completada (ver STRATEGY.md)
 
-### Código (acumulado sesiones previas)
-- 8 landings municipio en `/municipios/*.html` con JSON-LD, geo tags, interlinking
-- Blog en `/blog/` con 4 artículos iniciales + Article schema + breadcrumbs
-- Homepage con JSON-LD LocalBusiness + FAQPage + HowTo, geo meta tags, OG
-- Modal calculadora 3 pasos con lead-gate
-- Página 404 premium con countdown + CTA WhatsApp
-- `lead-webhook.js` dispatcher con retry + localStorage fallback → apunta a Apps Script
-- `tracking-unificado.js` activo
-- Trust badges, tabla comparativa, banner urgencia, zonas servicio
-- `sitemap.xml` (12 URLs) + `robots.txt` + `vercel.json` security headers
-- `whatsapp/n8n-workflows/` — 4 workflows n8n archivados (inactivos, n8n trial expirado)
+### Agente WhatsApp (`whatsapp-agentkit/`)
+- [x] Repo clonado en `Escritorio/whatsapp-agentkit/`
+- [x] Stack construido: FastAPI + Gemini 2.0 Flash + Twilio + SQLite
+- [x] `agent/brain.py` — Gemini 2.0 Flash (google-genai SDK)
+- [x] `agent/memory.py` — historial por teléfono en SQLite
+- [x] `agent/providers/twilio.py` — adaptador Twilio WhatsApp
+- [x] `agent/main.py` — FastAPI webhook server
+- [x] `config/prompts.yaml` — system prompt BCN Pro Reforma
+- [x] `knowledge/bcnproreforma.md` — base de conocimiento completa
+- [x] `tests/test_local.py` — simulador de chat local
+- [x] `Dockerfile` + `requirements.txt` — Railway-ready
+- [x] Dependencias instaladas (Python 3.14 + todos los paquetes)
+- [x] `agent-browser` 0.26.0 instalado globalmente (scope user)
 
 ### Configuraciones externas
-- Google Ads: campaña PMAX "Pintores en Barcelona" → **PAUSADA** (saldo pendiente + targeting incorrecto)
-- Meta Ads: ubicación corregida a "Cabrils + 25mi (40km)" → pendiente publicar por Payment error
-- GBP perfil duplicado Premià → eliminado
-- GBP perfil Cabrils → renombrado a "BcnProReforma" pero **SUSPENDIDO** por incumplimiento de directrices
+- Google Ads PMAX → **PAUSADA** (saldo pendiente + targeting incorrecto)
+- Meta Ads → pendiente Payment error
+- GBP Cabrils → **SUSPENDIDO** por directrices
 
 ---
 
-## 🔴 Bugs pendientes (reducidos)
+## 🔴 Bugs pendientes
 
-1. ~~Duplicados municipios~~ ✅ FIXED — 301 redirects en vercel.json
-2. ~~Footer apunta a rutas viejas~~ ✅ FIXED
-3. ~~Blog sin enlace visible~~ ✅ FIXED — añadido en nav desktop + mobile
-4. ~~n8n webhook URL inoperativo~~ ✅ FIXED — migrado a Google Apps Script
-5. ~~OG image incorrecta~~ ✅ FIXED — hero-team.webp 1200×630
-6. **pintor-mataro.html usa CSS inline** — no comparte municipios.css. Bajo impacto.
-7. **Foto "Quiénes somos" es stock Unsplash** — no auténtico.
-8. **Filas de test en "Form Leads"** — eliminar manualmente las 6 filas de test (rows 2-7) antes de ir a producción real.
+1. **Filas de test en Google Sheets** "Form Leads" (filas 2-7) — eliminar manualmente
+2. **pintor-mataro.html** usa CSS inline — bajo impacto
+3. **Foto "Quiénes somos"** es stock Unsplash — reemplazar con foto real
 
 ---
 
-## ⏸️ Pendiente acción humana (solo Omar puede)
+## ⏸️ Pendiente acción humana
 
-1. **Eliminar filas de test en Google Sheets** "Form Leads" (filas 2-7, son tests de curl)
-2. Pagar saldo pendiente Google Ads (si decide reactivar)
-3. Resolver Payment error Meta Ads (si decide reactivar)
-4. Crear perfil GBP SAB nuevo en `business.google.com/create`
-5. Google Search Console: añadir propiedad + verificar + submit sitemap
-6. Bing Webmaster Tools: importar propiedad desde GSC (1 click)
-7. WhatsApp Business app: auto-respuesta de bienvenida
-8. Instagram bio: enlace `bcnproreforma.com`
+### Prioridad ALTA (desbloquean el agente WhatsApp)
+1. **Gemini API Key** (2 min, gratis): `https://aistudio.google.com/apikey` → login con omarbenkri@gmail.com → "Create API key"
+2. **Twilio Sandbox** (5 min, gratis): `https://www.twilio.com/try-twilio` → signup → Console → Messaging → Try it out → WhatsApp → copiar Account SID + Auth Token
+3. Con esas 3 keys → decírselas a Claude Code → configura `.env`, prueba local, deploy Railway
+
+### Prioridad MEDIA (tracción orgánica)
+4. Eliminar filas test en Google Sheets "Form Leads" (filas 2-7)
+5. GBP SAB nuevo: `business.google.com/create`
+6. Google Search Console: añadir propiedad + submit sitemap
+7. Bing Webmaster Tools: importar desde GSC (1 click)
+8. WhatsApp Business app: auto-respuesta de bienvenida
+9. Instagram bio: enlace `bcnproreforma.com`
+
+### Prioridad BAJA
+10. Pagar saldo Google Ads (si decide reactivar)
+11. Resolver Payment error Meta Ads
 
 ---
 
 ## 🚫 No reintroducir
 
-- No reintroducir páginas `/pintor-*.html` en raíz. Solo en `/municipios/`. Ya tienen redirects 301.
-- No usar nombre "BCN Pro Reforma" en GBP oficial (usar nombre legal).
-- No reactivar Google Ads PMAX sin corregir targeting + keywords negativas.
-- No reactivar Meta Ads sin creativo real (antes/después) + intereses + idioma ES/CA.
-- No usar `gtm-tracking.js` mientras `tracking-unificado.js` esté activo (duplicaría eventos).
-- No volver a n8n cloud (trial expirado, sin intención de pagar). Pipeline = Google Apps Script.
+- No reintroducir `/pintor-*.html` en raíz — ya tienen 301 redirects
+- No usar nombre "BCN Pro Reforma" en GBP (usar nombre legal)
+- No reactivar Google Ads PMAX sin corregir targeting
+- No usar `gtm-tracking.js` (duplicaría eventos con tracking-unificado.js)
+- **No usar n8n** — trial expirado, pipeline = Google Apps Script
 
 ---
 
-## 🗺️ Próximas fases
+## 🗺️ Estado de fases
 
-### ✅ Fase cierre técnico — COMPLETADA
-- ~~Limpieza duplicados~~ ✅
-- ~~Footer + enlace blog~~ ✅
-- ~~Lead pipeline operativo~~ ✅ (Apps Script → Sheets + email)
-- ~~Deploy a producción~~ ✅
+### ✅ COMPLETADA — Cierre técnico web
+- Web live en bcnproreforma.com
+- Pipeline leads operativo (Apps Script → Sheets + email)
+- Calculadora con email integrado
+- Todos los bugs de código resueltos
 
-### Fase siguiente: tracción orgánica (4 semanas)
-- GBP SAB nuevo verificado
+### 🔄 EN CURSO — Agente WhatsApp IA
+- Código completo en `Escritorio/whatsapp-agentkit/`
+- Bloqueado: necesita Gemini API Key + Twilio credentials
+- Siguiente: `.env` → test local → Railway deploy → webhook Twilio
+
+### ⏳ SIGUIENTE — Tracción orgánica (4-8 semanas)
+- GBP SAB verificado + fotos reales
 - Google Search Console + Bing
-- 5 citations locales
+- 5 citations locales (Habitissimo, Páginas Amarillas, Houzz...)
 - Primeras reseñas GBP
-- Fotos reales geotaggeadas
+- Fotos antes/después reales (el mayor gap de conversión)
 
-### Fase futura (cuando haya 300€/mes de presupuesto)
-- Google Ads Search (no PMAX) con keywords high-ticket
-- Meta Ads reactivado con creativo antes/después
+### 🔮 FUTURO (300€+/mes presupuesto)
+- Google Ads Search (no PMAX) — keywords high-intent
+- Meta Ads con vídeo antes/después real
+- Email nurturing para leads con email que no cerraron

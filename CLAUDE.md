@@ -12,6 +12,13 @@
 | **Claude Code (terminal)** | Ejecutor de código + APIs + git + deploy | TODO cambio de archivos, webhooks, comandos |
 | **Antigravity (IDE)** | Revisión visual junto a Omar | Auditoría antes de push, QA visual |
 
+### Herramientas de automatización instaladas
+| Herramienta | Versión | Propósito |
+|---|---|---|
+| `agent-browser` (vercel-labs) | 0.26.0 | Navegación web eficiente (5.7x menos tokens que Chrome MCP) |
+| Chrome MCP (claude-in-chrome) | activo | Automatización browser cuando agent-browser no alcanza |
+| `vercel` CLI | 50.x | Deploy a producción |
+
 ---
 
 ## 📚 Orden de lectura obligatorio al iniciar sesión
@@ -44,9 +51,16 @@ No actuar sobre el código sin leer handoff.md primero.
 - Tras deploy: probar webhook con curl y validar con Lighthouse
 
 ### APIs externas
-- Claude Code gestiona: n8n, Google Sheets API, webhooks
-- Claude.ai gestiona: GBP, Google Ads, Meta Ads, Search Console (vía Chrome MCP)
+- Claude Code gestiona: Google Apps Script, Google Sheets API, webhooks, agente WhatsApp
+- Claude.ai gestiona: GBP, Google Ads, Meta Ads, Search Console (vía Chrome MCP o agent-browser)
+- **n8n DESCARTADO** — trial expirado, sin intención de pagar. Pipeline = Google Apps Script.
 - Nunca tocar credenciales sin confirmar con Omar
+
+### Proyectos activos en el escritorio
+| Carpeta | Descripción |
+|---|---|
+| `Pintura, Reforma y Acabados de Obra/` | Web bcnproreforma.com (Vercel, rama feat/lead-capture-e2e-closure) |
+| `whatsapp-agentkit/` | Agente WhatsApp IA (Gemini 2.0 Flash + Twilio + FastAPI) — pendiente credenciales |
 
 ### Handoff entre sesiones
 - Al terminar cualquier sesión, actualizar `handoff.md`:
@@ -68,7 +82,8 @@ No actuar sobre el código sin leer handoff.md primero.
 - **North Star:** generar leads calificados (high-ticket) para reformas y pintura
 - **Target geográfico:** Maresme + Barcelona, radio 40km desde Cabrils 08348
 - **Target demográfico:** propietarios 30-65 años, no busca-empleos
-- **Conversion path:** Web → calculadora o WhatsApp → lead en n8n → Google Sheets + email
+- **Conversion path:** Web → calculadora o WhatsApp → Google Apps Script → Google Sheets "Form Leads" + email
+- **Agente WhatsApp IA:** (`whatsapp-agentkit/`) responde automáticamente con Gemini 2.0 Flash, escalando a Omar cuando necesario
 - **SEO primero, Ads después** (cuando haya presupuesto sostenido)
 
 ---
