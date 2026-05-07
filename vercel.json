@@ -7,6 +7,16 @@
       "has": [{ "type": "host", "value": "www.bcnproreforma.com" }],
       "destination": "https://bcnproreforma.com/$1",
       "permanent": true
+    },
+    {
+      "source": "/pintor-cabrils.html",
+      "destination": "/municipios/pintor-cabrils.html",
+      "permanent": true
+    },
+    {
+      "source": "/pintor-vilassar-de-mar.html",
+      "destination": "/municipios/pintor-vilassar-de-mar.html",
+      "permanent": true
     }
   ],
   "routes": [
