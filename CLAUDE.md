@@ -95,5 +95,51 @@ No actuar sobre el código sin leer handoff.md primero.
 - Cambiar el dominio o el host
 - Tocar `.env`, `.env.local`, credenciales en Vercel
 - Crear dependencias nuevas (npm install X) sin razón documentada
-- Deploy a producción
+- Deploy a producción **de nuevas features o cambios de diseño** (los deploys de emergencia para solucionar caídas SÍ están permitidos — ver sección "Deploys e Infraestructura")
 - Enviar emails reales desde scripts de prueba
+
+---
+
+## 🔧 Runbook: Debug de caídas en Vercel
+
+Si `curl -sI https://bcnproreforma.com` devuelve algo distinto de `HTTP 200`, sigue este procedimiento:
+
+### Paso 1 — Diagnóstico rápido
+```bash
+curl -sI https://bcnproreforma.com
+# Mira el header X-Vercel-Error para entender el tipo de fallo
+```
+
+### Paso 2 — Verificar el estado del proyecto en Vercel
+```bash
+# Consultar estado del último deploy
+vercel ls --prod
+# Ver logs del último deploy
+vercel logs <deployment-url>
+```
+
+### Paso 3 — Causas conocidas y soluciones
+
+| Síntoma | Causa probable | Solución |
+|---|---|---|
+| `X-Vercel-Error: NOT_FOUND` en TODAS las rutas | Vercel Zero-Config detectó una carpeta `public/` y la sirvió como root, ignorando el `index.html` real en la raíz | Eliminar o vaciar la carpeta `public/` y redesplegar |
+| `X-Vercel-Error: NOT_FOUND` en rutas específicas | `cleanUrls` o `redirects` mal configurados en `vercel.json` | Revisar `vercel.json` y comparar con el último commit funcional |
+| `X-Vercel-Error: DEPLOYMENT_NOT_FOUND` | Proyecto pausado por límite de uso del plan Hobby | Ir a Vercel dashboard → Settings → reactivar |
+| Headers se aplican pero contenido es 404 | Los headers en `vercel.json` se aplican a nivel de edge ANTES de resolver el filesystem | El problema está en la estructura de archivos, no en la config de headers |
+
+### Paso 4 — Redespliegue de emergencia
+```bash
+# Desde la raíz del proyecto
+vercel --prod --yes
+# Verificar
+curl -sI https://bcnproreforma.com
+# Debe devolver HTTP/1.1 200 OK
+```
+
+### Paso 5 — Post-fix
+- Hacer commit del fix con mensaje descriptivo: `fix(vercel): <descripción>`
+- Push a la rama activa
+- Actualizar `HANDOFF.md` con lo que se encontró y se resolvió
+
+### ⚠️ Regla crítica de Vercel Zero-Config
+**NUNCA dejar una carpeta `public/` en la raíz** de este proyecto. Vercel la interpreta como el directorio a servir e ignora todos los demás archivos. Nuestro `index.html` vive en la raíz, no dentro de `public/`.

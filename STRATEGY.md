@@ -1,6 +1,6 @@
 # STRATEGY — bcnproreforma.com
 
-**Última revisión:** 2026-05-02
+**Última revisión:** 2026-05-18
 
 ---
 

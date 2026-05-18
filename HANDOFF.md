@@ -130,6 +130,7 @@ Punto único de verdad del estado del proyecto. Cualquier agente lee esto ANTES 
 - No reactivar Google Ads PMAX sin corregir targeting
 - No usar `gtm-tracking.js` (duplicaría eventos con tracking-unificado.js)
 - **No usar n8n** — trial expirado, pipeline = Google Apps Script
+- **NUNCA crear una carpeta `public/` en la raíz** — Vercel Zero-Config la interpreta como root y deja de servir index.html (esto causó la caída del 2026-05-18). Si necesitas archivos estáticos auxiliares, ponlos en la raíz o en subcarpetas con nombre distinto a `public`.
 
 ---
 
