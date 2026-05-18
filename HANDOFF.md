@@ -1,7 +1,7 @@
 # HANDOFF — bcnproreforma.com
 
-**Última actualización:** 2026-05-03 por Claude Code
-**Próximo ejecutor:** Antigravity (IDE Google) o Claude Code
+**Última actualización:** 2026-05-18 por Antigravity
+**Próximo ejecutor:** Claude Code (Terminal)
 
 ---
 
@@ -71,6 +71,7 @@ Punto único de verdad del estado del proyecto. Cualquier agente lee esto ANTES 
 - [x] **Deploy a producción** — bcnproreforma.com live (2026-05-02)
 - [x] Auditoría a11y completada
 - [x] Auditoría Alex Hormozi 2.0 completada (ver STRATEGY.md)
+- [x] **Bug crítico resuelto (2026-05-18):** Error 404 global en Vercel arreglado. (Se eliminó la carpeta `public/` que Vercel estaba asumiendo erróneamente como root en Zero-Config).
 
 ### Agente WhatsApp (`whatsapp-agentkit/`)
 - [x] Repo clonado en `Escritorio/whatsapp-agentkit/`

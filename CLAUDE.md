@@ -45,8 +45,9 @@ No actuar sobre el código sin leer handoff.md primero.
 - Todo copy en español castellano (web pública)
 - Todo comentario de código y commit en inglés
 
-### Deploys
-- `vercel --prod` SOLO con OK explícito de Omar
+### Deploys e Infraestructura
+- **Empoderamiento de Claude Code:** Tienes autoridad total para debugear y solucionar directamente problemas de infraestructura, Vercel, DNS o enrutamiento. Puedes modificar estructura de carpetas, configuraciones de build, y hacer redespliegues sin depender del IDE Antigravity.
+- `vercel --prod`: Puedes ejecutarlo de forma autónoma para solucionar caídas o errores graves (ej. errores 404 globales). Para pases a producción de nuevas features o cambios de diseño, sigue pidiendo OK de Omar.
 - Antes de deploy: checklist de verificación (grep commands en `handoff.md`)
 - Tras deploy: probar webhook con curl y validar con Lighthouse
 
