@@ -1543,6 +1543,391 @@
   font-weight: 500;
 }
 
+/* Gallery Tabs and real photos visual optimization */
+.gallery-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 0 auto 32px;
+  flex-wrap: wrap;
+  max-width: 800px;
+}
+.gallery-tab {
+  background: transparent;
+  border: 1.5px solid var(--border);
+  color: var(--text-muted);
+  padding: 8px 20px;
+  border-radius: 24px;
+  font-family: inherit;
+  font-size: .88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.gallery-tab:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.gallery-tab.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  transition: all 0.3s ease;
+}
+.gallery-item {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+  aspect-ratio: 4/3;
+  display: block;
+}
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--transition);
+  display: block;
+}
+.gallery-item:hover img {
+  transform: scale(1.05);
+}
+.gallery-item:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
+}
+.gallery-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(15, 25, 35, 0.9) 0%, rgba(15, 25, 35, 0.4) 50%, transparent 100%);
+  opacity: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 16px;
+  transition: var(--transition);
+  z-index: 2;
+}
+.gallery-item:hover .gallery-overlay {
+  opacity: 1;
+}
+.gallery-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+  text-align: center;
+}
+.gallery-badge {
+  background: var(--accent);
+  color: #fff;
+  font-size: .72rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 12px;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  margin-bottom: 2px;
+}
+.gallery-location {
+  color: #fff;
+  font-size: .82rem;
+  font-weight: 600;
+}
+.gallery-desc {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: .78rem;
+  max-width: 260px;
+  line-height: 1.3;
+}
+.gallery-item.hidden-by-filter {
+  display: none;
+}
+@media (max-width: 900px) {
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+  .gallery-tabs {
+    gap: 6px;
+    margin-bottom: 24px;
+  }
+  .gallery-tab {
+    padding: 6px 14px;
+    font-size: 0.8rem;
+  }
+}
+
+/* =========================================================
+   PROJECTS ALBUM GALLERY — 2026
+   ========================================================= */
+.gallery-stats {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin: 0 auto 32px;
+  flex-wrap: wrap;
+}
+.gstat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+.gstat strong {
+  color: var(--text, #1A1A2E);
+  font-size: 1.7rem;
+  font-weight: 800;
+  line-height: 1;
+}
+.gstat span {
+  font-size: .72rem;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--text-muted, #6B7280);
+}
+.gstat-sep {
+  font-size: 1.5rem;
+  color: var(--border, #E8E2D9);
+  line-height: 1;
+  align-self: center;
+}
+.projects-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  margin-top: 16px;
+}
+.project-card {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: pointer;
+  background: #0F1923;
+  box-shadow: 0 4px 18px rgba(0,0,0,.15);
+  transition: transform .38s cubic-bezier(.16,1,.3,1), box-shadow .38s ease;
+  -webkit-tap-highlight-color: transparent;
+  display: block;
+  height: auto;
+}
+.project-card:hover,
+.project-card:focus-visible {
+  transform: translateY(-7px) scale(1.015);
+  box-shadow: 0 20px 48px rgba(0,0,0,.28);
+  outline: none;
+}
+.project-cover {
+  position: relative;
+  padding-top: 133.33%;
+  background: #0F1923;
+  overflow: hidden;
+  width: 100%;
+}
+.project-cover img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform .55s ease;
+  will-change: transform;
+}
+.project-card:hover .project-cover img {
+  transform: scale(1.07);
+}
+.project-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: #F37021;
+  color: #fff;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  padding: 4px 11px;
+  border-radius: 20px;
+  z-index: 4;
+  line-height: 1.5;
+  pointer-events: none;
+}
+.project-count {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(0,0,0,.62);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: #fff;
+  font-size: .72rem;
+  font-weight: 600;
+  padding: 4px 11px;
+  border-radius: 20px;
+  z-index: 4;
+  line-height: 1.5;
+  pointer-events: none;
+}
+.project-meta {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0,0,0,.9) 0%, rgba(0,0,0,.55) 55%, transparent 100%);
+  padding: 56px 16px 18px;
+  z-index: 3;
+  transition: padding .3s ease;
+}
+.project-card:hover .project-meta { padding-bottom: 22px; }
+.project-meta-title {
+  color: #fff;
+  font-size: .98rem;
+  font-weight: 700;
+  line-height: 1.25;
+  margin-bottom: 5px;
+}
+.project-meta-loc {
+  color: rgba(255,255,255,.78);
+  font-size: .77rem;
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+.project-meta-cta {
+  color: #ffb347;
+  font-size: .8rem;
+  font-weight: 700;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity .3s ease, transform .3s ease;
+  display: inline-block;
+}
+.project-card:hover .project-meta-cta { opacity: 1; transform: translateY(0); }
+
+/* LIGHTBOX */
+.lightbox-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.97);
+  z-index: 9900;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overscroll-behavior: contain;
+}
+.lightbox-overlay.lb-open { display: flex; }
+.lb-close {
+  position: absolute;
+  top: 14px; right: 18px;
+  background: none; border: none;
+  color: #fff; font-size: 2.6rem; line-height: 1;
+  cursor: pointer; z-index: 10;
+  padding: 6px 10px; opacity: .65;
+  transition: opacity .2s; border-radius: 8px;
+}
+.lb-close:hover { opacity: 1; background: rgba(255,255,255,.1); }
+.lb-nav {
+  position: absolute; top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.15);
+  color: #fff; font-size: 2.8rem; line-height: 1;
+  padding: 10px 16px; cursor: pointer;
+  border-radius: 10px; z-index: 10;
+  transition: background .2s;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  user-select: none; -webkit-user-select: none;
+}
+.lb-nav:hover { background: rgba(255,255,255,.26); }
+.lb-prev { left: 16px; }
+.lb-next { right: 16px; }
+.lb-content {
+  display: flex; flex-direction: column;
+  align-items: center; width: 100%;
+  max-height: 82vh; padding: 0 90px;
+  box-sizing: border-box; flex: 1;
+}
+.lb-img-wrap {
+  position: relative; flex: 1;
+  display: flex; align-items: center;
+  justify-content: center; width: 100%; min-height: 0;
+}
+#lb-img {
+  max-width: 100%; max-height: 74vh;
+  object-fit: contain; border-radius: 6px;
+  transition: opacity .22s ease;
+  user-select: none; -webkit-user-drag: none; display: block;
+}
+#lb-img.lb-fading { opacity: 0; }
+.lb-loading {
+  display: none; position: absolute;
+  width: 40px; height: 40px;
+  border: 3px solid rgba(255,255,255,.15);
+  border-top-color: rgba(255,255,255,.8);
+  border-radius: 50%;
+  animation: lb-spin .7s linear infinite;
+  pointer-events: none;
+}
+.lb-loading.active { display: block; }
+@keyframes lb-spin { to { transform: rotate(360deg); } }
+.lb-meta {
+  display: flex; align-items: center;
+  justify-content: space-between; width: 100%;
+  padding: 10px 0 6px;
+  color: rgba(255,255,255,.65); font-size: .84rem; gap: 16px;
+}
+.lb-album-name {
+  font-weight: 600; color: #fff;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.lb-counter { font-size: .78rem; flex-shrink: 0; color: rgba(255,255,255,.5); }
+.lb-thumbs {
+  display: flex; gap: 6px; overflow-x: auto;
+  padding: 8px 12px 14px; scroll-behavior: smooth;
+  width: 100%; box-sizing: border-box;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,.2) transparent;
+  flex-shrink: 0;
+}
+.lb-thumbs::-webkit-scrollbar { height: 3px; }
+.lb-thumbs::-webkit-scrollbar-thumb { background: rgba(255,255,255,.2); border-radius: 2px; }
+.lb-thumb {
+  flex: 0 0 58px; height: 58px; border-radius: 6px;
+  overflow: hidden; cursor: pointer; opacity: .38;
+  transition: opacity .2s ease, outline .15s ease;
+  outline: 2px solid transparent; outline-offset: 1px;
+}
+.lb-thumb:hover { opacity: .7; }
+.lb-thumb.active { opacity: 1; outline-color: #F37021; }
+.lb-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+@media (max-width: 1024px) {
+  .projects-grid { grid-template-columns: repeat(2, 1fr); gap: 18px; }
+}
+@media (max-width: 640px) {
+  .projects-grid { grid-template-columns: 1fr; gap: 14px; }
+  .gallery-stats { gap: 10px; }
+  .gstat-sep { display: none; }
+  .gstat strong { font-size: 1.3rem; }
+  .lb-content { padding: 0 52px; }
+  .lb-prev { left: 6px; padding: 8px 12px; font-size: 2.2rem; }
+  .lb-next { right: 6px; padding: 8px 12px; font-size: 2.2rem; }
+  .lb-thumbs { display: none; }
+  #lb-img { max-height: 65vh; }
+}
+
 </style>
 </head>
 <body>
@@ -2151,36 +2536,197 @@
 <section id="galeria" class="gallery-section">
     <div class="container">
         <div class="tag anim-fade-up" data-i18n="gallery_tag">Portfolio</div>
-        <h2 class="section-title anim-fade-up" data-i18n="gallery_title">Proyectos Reales</h2>
-        <p class="section-subtitle anim-fade-up" data-i18n="gallery_subtitle">Resultados limpios, modernos y duraderos en viviendas del Maresme y Barcelona.</p>
-        <div class="gallery-grid" style="grid-template-columns:repeat(3,1fr);">
-            <div class="gallery-item anim-zoom-in delay-1">
-                <img src="images/projects/WhatsApp Image 2026-04-08 at 22.13.20 (1).jpeg" alt="Baño de lujo con detalles verdes y madera" loading="lazy" decoding="async" width="400" height="260">
-                <div class="gallery-overlay"><span>Diseño de Autor</span></div>
-            </div>
-            <div class="gallery-item anim-zoom-in delay-2">
-                <img src="images/projects/WhatsApp Image 2026-04-08 at 22.13.21.jpeg" alt="Grifería premium y piedra natural" loading="lazy" decoding="async" width="400" height="260">
-                <div class="gallery-overlay"><span>Detallismo Técnico</span></div>
-            </div>
-            <div class="gallery-item anim-zoom-in delay-3">
-                <img src="images/projects/WhatsApp Image 2026-04-08 at 22.13.20.jpeg" alt="Revestimientos de alta gama" loading="lazy" decoding="async" width="400" height="260">
-                <div class="gallery-overlay"><span>Acabados Elite</span></div>
-            </div>
-            <div class="gallery-item anim-zoom-in delay-4">
-                <img src="images/projects/WhatsApp Image 2026-04-08 at 22.13.21 (1).jpeg" alt="Iluminación oculta en reforma" loading="lazy" decoding="async" width="400" height="260">
-                <div class="gallery-overlay"><span>Interiorismo Moderno</span></div>
-            </div>
-            <div class="gallery-item anim-zoom-in delay-5">
-                <img src="images/projects/WhatsApp Image 2026-04-08 at 22.13.21 (2).jpeg" alt="Reforma integral baño completo" loading="lazy" decoding="async" width="400" height="260">
-                <div class="gallery-overlay"><span>Reforma Integral</span></div>
-            </div>
-            <div class="gallery-item anim-zoom-in delay-6">
-                <img src="images/projects/WhatsApp Image 2026-04-08 at 22.13.21 (3).jpeg" alt="Acabados de alta gama Maresme" loading="lazy" decoding="async" width="400" height="260">
-                <div class="gallery-overlay"><span>Alta Gama</span></div>
-            </div>
+        <h2 class="section-title anim-fade-up" data-i18n="gallery_title">Nuestros Trabajos Reales</h2>
+        <p class="section-subtitle anim-fade-up" data-i18n="gallery_subtitle">Fotos reales de obras ejecutadas en el Maresme y Barcelona. Sin filtros, sin renders.</p>
+        
+        <!-- Stats bar -->
+        <div class="gallery-stats anim-fade-up">
+            <div class="gstat"><strong>146</strong><span>fotografías reales</span></div>
+            <div class="gstat-sep">·</div>
+            <div class="gstat"><strong>9</strong><span>álbumes de proyecto</span></div>
+            <div class="gstat-sep">·</div>
+            <div class="gstat"><strong>7</strong><span>municipios del Maresme</span></div>
         </div>
+
+        <!-- Tabs de filtro -->
+        <div class="gallery-tabs anim-fade-up">
+            <button class="gallery-tab active" data-filter="all" data-i18n="gallery_filter_all">Todos</button>
+            <button class="gallery-tab" data-filter="reforma" data-i18n="gallery_filter_reforma">Reformas y Baños</button>
+            <button class="gallery-tab" data-filter="acabados" data-i18n="gallery_filter_acabados">Acabados Premium</button>
+            <button class="gallery-tab" data-filter="fachada" data-i18n="gallery_filter_fachada">Fachadas</button>
+            <button class="gallery-tab" data-filter="madera" data-i18n="gallery_filter_madera">Madera</button>
+            <button class="gallery-tab" data-filter="suelos" data-i18n="gallery_filter_suelos">Suelos</button>
+            <button class="gallery-tab" data-filter="comunidad" data-i18n="gallery_filter_comunidad">Comunidades</button>
+        </div>
+
+        <!-- Proyectos por álbum -->
+        <div class="projects-grid">
+
+            <!-- Álbum 1: Reforma Integral de Baño de Lujo -->
+            <div class="gallery-item project-card anim-zoom-in delay-1" data-category="reforma" data-album="bano-lujo">
+                <div class="project-cover">
+                    <img src="scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-22-57-11.jpg"
+                         alt="Reforma integral de baño de lujo en Alella y Cabrils — BCN Pro Reforma"
+                         loading="lazy" decoding="async">
+                </div>
+                <span class="project-badge">Reformas de Baño</span>
+                <span class="project-count">26 fotos</span>
+                <div class="project-meta">
+                    <div class="project-meta-title">Reforma Integral de Baño de Lujo</div>
+                    <div class="project-meta-loc">📍 Alella · Cabrils</div>
+                    <div class="project-meta-cta">Ver álbum completo →</div>
+                </div>
+            </div>
+
+            <!-- Álbum 2: Estuco Veneciano y Alta Decoración -->
+            <div class="gallery-item project-card anim-zoom-in delay-2" data-category="acabados" data-album="estuco">
+                <div class="project-cover">
+                    <img src="scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-22-59-13.jpg"
+                         alt="Estuco veneciano y alta decoración en Montgat y Badalona — BCN Pro Reforma"
+                         loading="lazy" decoding="async">
+                </div>
+                <span class="project-badge">Acabados Premium</span>
+                <span class="project-count">11 fotos</span>
+                <div class="project-meta">
+                    <div class="project-meta-title">Estuco Veneciano y Alta Decoración</div>
+                    <div class="project-meta-loc">📍 Montgat · Badalona</div>
+                    <div class="project-meta-cta">Ver álbum completo →</div>
+                </div>
+            </div>
+
+            <!-- Álbum 3: Baño Rústico-Moderno -->
+            <div class="gallery-item project-card anim-zoom-in delay-3" data-category="reforma" data-album="bano-rustico">
+                <div class="project-cover">
+                    <img src="scratch/fotosweb/PHOTO-2026-05-18-22-54-35.jpg"
+                         alt="Reforma de baño rústico-moderno en Mataró y Vilassar de Mar — BCN Pro Reforma"
+                         loading="lazy" decoding="async">
+                </div>
+                <span class="project-badge">Reformas de Baño</span>
+                <span class="project-count">6 fotos</span>
+                <div class="project-meta">
+                    <div class="project-meta-title">Baño Rústico-Moderno</div>
+                    <div class="project-meta-loc">📍 Mataró · Vilassar de Mar</div>
+                    <div class="project-meta-cta">Ver álbum completo →</div>
+                </div>
+            </div>
+
+            <!-- Álbum 4: Rehabilitación de Fachadas -->
+            <div class="gallery-item project-card anim-zoom-in delay-1" data-category="fachada" data-album="fachadas">
+                <div class="project-cover">
+                    <img src="images/projects/real/rehabilitacion-fachada-mataro-28.webp"
+                         alt="Rehabilitación integral de fachadas en Mataró — BCN Pro Reforma"
+                         loading="lazy" decoding="async">
+                </div>
+                <span class="project-badge">Fachadas</span>
+                <span class="project-count">34 fotos</span>
+                <div class="project-meta">
+                    <div class="project-meta-title">Rehabilitación de Fachadas</div>
+                    <div class="project-meta-loc">📍 Mataró · Vilassar de Mar · Cabrils</div>
+                    <div class="project-meta-cta">Ver álbum completo →</div>
+                </div>
+            </div>
+
+            <!-- Álbum 5: Barnizado y Carpintería de Madera -->
+            <div class="gallery-item project-card anim-zoom-in delay-2" data-category="madera" data-album="madera">
+                <div class="project-cover">
+                    <img src="images/projects/real/barnizado-madera-atico-01.webp"
+                         alt="Barnizado y carpintería de madera en Cabrils y Alella — BCN Pro Reforma"
+                         loading="lazy" decoding="async">
+                </div>
+                <span class="project-badge">Madera</span>
+                <span class="project-count">17 fotos</span>
+                <div class="project-meta">
+                    <div class="project-meta-title">Barnizado y Carpintería de Madera</div>
+                    <div class="project-meta-loc">📍 Cabrils · Alella · El Masnou</div>
+                    <div class="project-meta-cta">Ver álbum completo →</div>
+                </div>
+            </div>
+
+            <!-- Álbum 6: Tejados, Albañilería y Saneamiento -->
+            <div class="gallery-item project-card anim-zoom-in delay-3" data-category="reforma" data-album="tejados">
+                <div class="project-cover">
+                    <img src="scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-22-55-34.jpg"
+                         alt="Reparación de tejados y albañilería en Cabrils y Mataró — BCN Pro Reforma"
+                         loading="lazy" decoding="async">
+                </div>
+                <span class="project-badge">Tejados</span>
+                <span class="project-count">17 fotos</span>
+                <div class="project-meta">
+                    <div class="project-meta-title">Tejados, Albañilería y Saneamiento</div>
+                    <div class="project-meta-loc">📍 Cabrils · Alella · El Masnou · Mataró</div>
+                    <div class="project-meta-cta">Ver álbum completo →</div>
+                </div>
+            </div>
+
+            <!-- Álbum 7: Microcemento y Suelos -->
+            <div class="gallery-item project-card anim-zoom-in delay-1" data-category="suelos" data-album="suelos">
+                <div class="project-cover">
+                    <img src="scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-23-05-21.jpg"
+                         alt="Microcemento y suelos en Montgat y Cabrera de Mar — BCN Pro Reforma"
+                         loading="lazy" decoding="async">
+                </div>
+                <span class="project-badge">Suelos</span>
+                <span class="project-count">8 fotos</span>
+                <div class="project-meta">
+                    <div class="project-meta-title">Microcemento y Suelos</div>
+                    <div class="project-meta-loc">📍 Montgat · Alella · Cabrera de Mar</div>
+                    <div class="project-meta-cta">Ver álbum completo →</div>
+                </div>
+            </div>
+
+            <!-- Álbum 8: Comunidades y Garajes -->
+            <div class="gallery-item project-card anim-zoom-in delay-2" data-category="comunidad" data-album="comunidades">
+                <div class="project-cover">
+                    <img src="images/projects/real/pintura-garaje-comunitario-01.webp"
+                         alt="Pintura de garajes y zonas comunitarias en Vilassar de Mar — BCN Pro Reforma"
+                         loading="lazy" decoding="async">
+                </div>
+                <span class="project-badge">Comunidades</span>
+                <span class="project-count">7 fotos</span>
+                <div class="project-meta">
+                    <div class="project-meta-title">Comunidades y Garajes</div>
+                    <div class="project-meta-loc">📍 Vilassar de Mar</div>
+                    <div class="project-meta-cta">Ver álbum completo →</div>
+                </div>
+            </div>
+
+            <!-- Álbum 9: Gran Álbum de Acabados -->
+            <div class="gallery-item project-card anim-zoom-in delay-3" data-category="acabados" data-album="gran-album">
+                <div class="project-cover">
+                    <img src="scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-23-13-40.jpg"
+                         alt="Gran álbum de acabados de reforma en Cabrils y Alella — BCN Pro Reforma"
+                         loading="lazy" decoding="async">
+                </div>
+                <span class="project-badge">Acabados Premium</span>
+                <span class="project-count">20 fotos</span>
+                <div class="project-meta">
+                    <div class="project-meta-title">Gran Álbum de Acabados de Reforma</div>
+                    <div class="project-meta-loc">📍 Cabrils · Alella · Badalona · Mataró</div>
+                    <div class="project-meta-cta">Ver álbum completo →</div>
+                </div>
+            </div>
+
+        </div><!-- /projects-grid -->
     </div>
 </section>
+
+<!-- LIGHTBOX VISOR DE FOTOS -->
+<div id="lightbox" class="lightbox-overlay" role="dialog" aria-modal="true" aria-label="Visor de fotos" aria-hidden="true" tabindex="-1">
+    <button class="lb-close" id="lb-close" aria-label="Cerrar visor">&times;</button>
+    <button class="lb-nav lb-prev" id="lb-prev" aria-label="Foto anterior">&#8249;</button>
+    <button class="lb-nav lb-next" id="lb-next" aria-label="Foto siguiente">&#8250;</button>
+    <div class="lb-content">
+        <div class="lb-img-wrap">
+            <img id="lb-img" src="" alt="" draggable="false">
+            <div class="lb-loading" id="lb-loading"></div>
+        </div>
+        <div class="lb-meta">
+            <div class="lb-album-name" id="lb-album-name"></div>
+            <div class="lb-counter" id="lb-counter"></div>
+        </div>
+    </div>
+    <div class="lb-thumbs" id="lb-thumbs" aria-label="Miniaturas del álbum"></div>
+</div>
 
 <!-- =============================================
      GOOGLE REVIEWS
@@ -2274,7 +2820,7 @@
     <div class="container">
         <div class="about-card anim-fade-up delay-1">
             <div class="about-image">
-                <img src="https://images.unsplash.com/photo-1541888086425-d81bb19240f5?q=80&w=800&auto=format&fit=crop&fm=webp" loading="lazy" decoding="async" alt="Equipo de profesionales en reformas" width="500" height="420">
+                <img src="images/projects/real/restauracion-madera-exterior-02.webp" loading="lazy" decoding="async" alt="Equipo de profesionales de BCN Pro Reforma trabajando en restauración de madera exterior" width="500" height="420">
             </div>
             <div class="about-text">
                 <div class="tag" data-i18n="about_tag">Quiénes somos</div>
@@ -2325,39 +2871,39 @@
         <div class="insta-embed-wrapper anim-zoom-in">
             <div class="insta-grid-fallback" style="grid-template-columns:repeat(3,1fr);">
                 <div class="insta-post" onclick="window.open('https://www.instagram.com/pintayreformatuobra','_blank')">
-                    <img src="images/materials/WhatsApp Image 2026-04-08 at 19.28.10.jpeg" alt="Materiales" loading="lazy" decoding="async" width="300" height="300">
+                    <img src="images/projects/real/rehabilitacion-fachada-mataro-06.webp" alt="Rehabilitación de fachada y andamios en Mataró" loading="lazy" decoding="async" width="300" height="300">
                     <div class="insta-overlay"><i class="fa-brands fa-instagram"></i></div>
                 </div>
                 <div class="insta-post" onclick="window.open('https://www.instagram.com/pintayreformatuobra','_blank')">
-                    <img src="images/materials/WhatsApp Image 2026-04-08 at 19.28.10 (3).jpeg" alt="Calidad en Obra" loading="lazy" decoding="async" width="300" height="300">
+                    <img src="images/projects/real/barnizado-madera-atico-04.webp" alt="Barnizado de techos de madera en ático" loading="lazy" decoding="async" width="300" height="300">
                     <div class="insta-overlay"><i class="fa-brands fa-instagram"></i></div>
                 </div>
                 <div class="insta-post" onclick="window.open('https://www.instagram.com/pintayreformatuobra','_blank')">
-                    <img src="images/materials/WhatsApp Image 2026-04-08 at 19.28.09 (2).jpeg" alt="Proceso" loading="lazy" decoding="async" width="300" height="300">
+                    <img src="images/projects/real/reforma-escalera-marmol-bano-09.webp" alt="Instalación de peldaños de mármol en escalera" loading="lazy" decoding="async" width="300" height="300">
                     <div class="insta-overlay"><i class="fa-brands fa-instagram"></i></div>
                 </div>
                 <div class="insta-post" onclick="window.open('https://www.instagram.com/pintayreformatuobra','_blank')">
-                    <img src="images/materials/WhatsApp Image 2026-04-08 at 19.28.09 (6).jpeg" alt="Trabajo en proceso" loading="lazy" decoding="async" width="300" height="300">
+                    <img src="images/projects/real/pintura-garaje-comunitario-05.webp" alt="Pintura e higienización de garaje comunitario" loading="lazy" decoding="async" width="300" height="300">
                     <div class="insta-overlay"><i class="fa-brands fa-instagram"></i></div>
                 </div>
                 <div class="insta-post" onclick="window.open('https://www.instagram.com/pintayreformatuobra','_blank')">
-                    <img src="images/materials/WhatsApp Image 2026-04-08 at 19.28.10 (5).jpeg" alt="Materiales premium" loading="lazy" decoding="async" width="300" height="300">
+                    <img src="images/projects/real/suelo-laminado-cocina-02.webp" alt="Instalación de suelo laminado de roble" loading="lazy" decoding="async" width="300" height="300">
                     <div class="insta-overlay"><i class="fa-brands fa-instagram"></i></div>
                 </div>
                 <div class="insta-post" onclick="window.open('https://www.instagram.com/pintayreformatuobra','_blank')">
-                    <img src="images/materials/WhatsApp Image 2026-04-08 at 19.28.11.jpeg" alt="Resultado final" loading="lazy" decoding="async" width="300" height="300">
+                    <img src="images/projects/real/restauracion-madera-exterior-02.webp" alt="Lijado y restauración de madera exterior" loading="lazy" decoding="async" width="300" height="300">
                     <div class="insta-overlay"><i class="fa-brands fa-instagram"></i></div>
                 </div>
                 <div class="insta-post" onclick="window.open('https://www.instagram.com/pintayreformatuobra','_blank')">
-                    <img src="images/materials/WhatsApp Image 2026-04-08 at 19.28.08 (1).jpeg" alt="Obra en progreso" loading="lazy" decoding="async" width="300" height="300">
+                    <img src="images/projects/real/reparacion-tejado-mataro-03.webp" alt="Reparación de tejados en Mataró" loading="lazy" decoding="async" width="300" height="300">
                     <div class="insta-overlay"><i class="fa-brands fa-instagram"></i></div>
                 </div>
                 <div class="insta-post" onclick="window.open('https://www.instagram.com/pintayreformatuobra','_blank')">
-                    <img src="images/materials/WhatsApp Image 2026-04-08 at 19.28.09 (8).jpeg" alt="Detalle técnico" loading="lazy" decoding="async" width="300" height="300">
+                    <img src="images/projects/real/rehabilitacion-fachada-mataro-25.webp" alt="Pintores profesionales en fachada de Mataró" loading="lazy" decoding="async" width="300" height="300">
                     <div class="insta-overlay"><i class="fa-brands fa-instagram"></i></div>
                 </div>
                 <div class="insta-post" onclick="window.open('https://www.instagram.com/pintayreformatuobra','_blank')">
-                    <img src="images/materials/WhatsApp Image 2026-04-08 at 19.28.10 (7).jpeg" alt="Acabado profesional" loading="lazy" decoding="async" width="300" height="300">
+                    <img src="images/projects/real/reforma-escalera-marmol-bano-10.webp" alt="Reforma de baños y estructura de sanitario suspendido" loading="lazy" decoding="async" width="300" height="300">
                     <div class="insta-overlay"><i class="fa-brands fa-instagram"></i></div>
                 </div>
             </div>
@@ -2486,34 +3032,150 @@
 <!-- =============================================
      ZONAS QUE CUBRIMOS
      ============================================= -->
-<section id="zonas-servicio" style="padding:64px 0;background:#f8f9fc;">
-  <div class="container" style="max-width:1100px;margin:0 auto;padding:0 20px;">
-    <h2 style="text-align:center;font-size:clamp(1.5rem,3vw,2rem);font-weight:800;margin-bottom:12px;color:#0a1628;">Pintores y reformas en el Maresme y Barcelona</h2>
-    <p style="text-align:center;color:#5a6a7a;margin-bottom:40px;max-width:560px;margin-left:auto;margin-right:auto;">Cubrimos toda la comarca del Maresme y Barcelona ciudad. Presupuesto gratuito y visita en menos de 24h en todos los municipios.</p>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;">
-      <a href="/municipios/pintor-mataro.html" style="display:block;background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:20px 18px;text-decoration:none;color:#1c2b3a;font-weight:600;transition:box-shadow .2s,border-color .2s;" onmouseover="this.style.borderColor='#FF6B35';this.style.boxShadow='0 4px 16px rgba(255,107,53,.12)'" onmouseout="this.style.borderColor='#e2e8f0';this.style.boxShadow='none'">
-        <span style="font-size:1.4rem;display:block;margin-bottom:6px;">🏙️</span>Mataró<span style="display:block;font-size:.82rem;color:#5a6a7a;font-weight:400;margin-top:4px;">Capital del Maresme</span>
+<section id="zonas-servicio" style="padding:80px 0;background:linear-gradient(180deg,#f8f9fc 0%,#ffffff 100%);border-top:1px solid rgba(0,0,0,0.03);">
+  <style>
+    .zona-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+      margin-top: 40px;
+    }
+    .zona-card {
+      display: block;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 24px 20px;
+      text-decoration: none;
+      color: #1c2b3a;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+    }
+    .zona-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--accent, #FF6B35);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .zona-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255, 107, 53, 0.3);
+      box-shadow: 0 12px 24px -10px rgba(255, 107, 53, 0.15), 0 4px 12px -5px rgba(255, 107, 53, 0.05);
+    }
+    .zona-card:hover::before {
+      opacity: 1;
+    }
+    .zona-card-sede {
+      border: 2px solid #FF6B35;
+      box-shadow: 0 4px 12px rgba(255, 107, 53, 0.06);
+    }
+    .zona-card-sede::before {
+      opacity: 1;
+      width: 6px;
+    }
+    .zona-emoji {
+      font-size: 1.8rem;
+      display: block;
+      margin-bottom: 12px;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.05));
+      transition: transform 0.3s ease;
+    }
+    .zona-card:hover .zona-emoji {
+      transform: scale(1.1) rotate(5deg);
+    }
+    .zona-name-lbl {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #0a1628;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .zona-desc-lbl {
+      display: block;
+      font-size: 0.85rem;
+      color: #5a6a7a;
+      font-weight: 500;
+      margin-top: 6px;
+      line-height: 1.4;
+    }
+    .zona-sede-badge {
+      background: rgba(255, 107, 53, 0.1);
+      color: #FF6B35;
+      font-size: 0.65rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      padding: 2px 6px;
+      border-radius: 4px;
+      letter-spacing: 0.5px;
+    }
+  </style>
+  <div class="container" style="max-width:1100px;margin:0 auto;padding:0 24px;">
+    <h2 style="text-align:center;font-size:clamp(1.75rem,3.5vw,2.25rem);font-weight:800;margin-bottom:12px;color:#0a1628;line-height:1.25;" data-i18n="zones_title">Pintura y Reformas en el Maresme y Barcelona</h2>
+    <p style="text-align:center;color:#5a6a7a;margin-bottom:0;max-width:580px;margin-left:auto;margin-right:auto;font-size:1.05rem;line-height:1.6;" data-i18n="zones_desc">Especialistas locales en el Maresme y Barcelona. Visita técnica y presupuesto gratuito en menos de 24 horas en todos los municipios.</p>
+    
+    <div class="zona-grid">
+      <!-- Cabrils -->
+      <a href="municipios/pintor-cabrils.html" class="zona-card">
+        <span class="zona-emoji">📍</span>
+        <span class="zona-name-lbl">Cabrils</span>
+        <span class="zona-desc-lbl" data-i18n="zona_cabrils_desc">Pintura y Acabados</span>
       </a>
-      <a href="/municipios/pintor-premia-de-mar.html" style="display:block;background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:20px 18px;text-decoration:none;color:#1c2b3a;font-weight:600;transition:box-shadow .2s,border-color .2s;" onmouseover="this.style.borderColor='#FF6B35';this.style.boxShadow='0 4px 16px rgba(255,107,53,.12)'" onmouseout="this.style.borderColor='#e2e8f0';this.style.boxShadow='none'">
-        <span style="font-size:1.4rem;display:block;margin-bottom:6px;">🌊</span>Premiá de Mar<span style="display:block;font-size:.82rem;color:#5a6a7a;font-weight:400;margin-top:4px;">Costa del Maresme</span>
+      
+      <!-- Mataró -->
+      <a href="municipios/pintor-mataro.html" class="zona-card">
+        <span class="zona-emoji">🎨</span>
+        <span class="zona-name-lbl">Mataró</span>
+        <span class="zona-desc-lbl" data-i18n="zona_mataro_desc">Pintura y Reformas</span>
       </a>
-      <a href="/municipios/pintor-vilassar-de-mar.html" style="display:block;background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:20px 18px;text-decoration:none;color:#1c2b3a;font-weight:600;transition:box-shadow .2s,border-color .2s;" onmouseover="this.style.borderColor='#FF6B35';this.style.boxShadow='0 4px 16px rgba(255,107,53,.12)'" onmouseout="this.style.borderColor='#e2e8f0';this.style.boxShadow='none'">
-        <span style="font-size:1.4rem;display:block;margin-bottom:6px;">⚓</span>Vilassar de Mar<span style="display:block;font-size:.82rem;color:#5a6a7a;font-weight:400;margin-top:4px;">Costa tranquila</span>
+
+      <!-- El Masnou -->
+      <a href="municipios/pintor-el-masnou.html" class="zona-card">
+        <span class="zona-emoji">🏠</span>
+        <span class="zona-name-lbl">El Masnou</span>
+        <span class="zona-desc-lbl" data-i18n="zona_masnou_desc">Pintura de Alta Gama</span>
       </a>
-      <a href="/municipios/pintor-el-masnou.html" style="display:block;background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:20px 18px;text-decoration:none;color:#1c2b3a;font-weight:600;transition:box-shadow .2s,border-color .2s;" onmouseover="this.style.borderColor='#FF6B35';this.style.boxShadow='0 4px 16px rgba(255,107,53,.12)'" onmouseout="this.style.borderColor='#e2e8f0';this.style.boxShadow='none'">
-        <span style="font-size:1.4rem;display:block;margin-bottom:6px;">🏡</span>El Masnou<span style="display:block;font-size:.82rem;color:#5a6a7a;font-weight:400;margin-top:4px;">Zona exclusiva</span>
+
+      <!-- Vilassar de Mar -->
+      <a href="municipios/pintor-vilassar-de-mar.html" class="zona-card">
+        <span class="zona-emoji">✨</span>
+        <span class="zona-name-lbl">Vilassar de Mar</span>
+        <span class="zona-desc-lbl" data-i18n="zona_vilassar_desc">Microcemento y Estuco</span>
       </a>
-      <a href="/municipios/pintor-alella.html" style="display:block;background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:20px 18px;text-decoration:none;color:#1c2b3a;font-weight:600;transition:box-shadow .2s,border-color .2s;" onmouseover="this.style.borderColor='#FF6B35';this.style.boxShadow='0 4px 16px rgba(255,107,53,.12)'" onmouseout="this.style.borderColor='#e2e8f0';this.style.boxShadow='none'">
-        <span style="font-size:1.4rem;display:block;margin-bottom:6px;">🍇</span>Alella<span style="display:block;font-size:.82rem;color:#5a6a7a;font-weight:400;margin-top:4px;">Interior tranquilo</span>
+
+      <!-- Premià de Mar -->
+      <a href="municipios/pintor-premia-de-mar.html" class="zona-card">
+        <span class="zona-emoji">🖌️</span>
+        <span class="zona-name-lbl">Premià de Mar</span>
+        <span class="zona-desc-lbl" data-i18n="zona_premia_desc">Alisados y Gotelé</span>
       </a>
-      <a href="/municipios/pintor-cabrils.html" style="display:block;background:#fff;border:2px solid #FF6B35;border-radius:14px;padding:20px 18px;text-decoration:none;color:#1c2b3a;font-weight:600;transition:box-shadow .2s;" onmouseover="this.style.boxShadow='0 4px 16px rgba(255,107,53,.2)'" onmouseout="this.style.boxShadow='none'">
-        <span style="font-size:1.4rem;display:block;margin-bottom:6px;">📍</span>Cabrils<span style="display:block;font-size:.82rem;color:#FF6B35;font-weight:600;margin-top:4px;">Nuestra sede</span>
+
+      <!-- Alella -->
+      <a href="municipios/pintor-alella.html" class="zona-card">
+        <span class="zona-emoji">📐</span>
+        <span class="zona-name-lbl">Alella</span>
+        <span class="zona-desc-lbl" data-i18n="zona_alella_desc">Reformas de Chalets</span>
       </a>
-      <a href="/municipios/pintor-badalona.html" style="display:block;background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:20px 18px;text-decoration:none;color:#1c2b3a;font-weight:600;transition:box-shadow .2s,border-color .2s;" onmouseover="this.style.borderColor='#FF6B35';this.style.boxShadow='0 4px 16px rgba(255,107,53,.12)'" onmouseout="this.style.borderColor='#e2e8f0';this.style.boxShadow='none'">
-        <span style="font-size:1.4rem;display:block;margin-bottom:6px;">🌆</span>Badalona<span style="display:block;font-size:.82rem;color:#5a6a7a;font-weight:400;margin-top:4px;">Segunda ciudad BCN</span>
+
+      <!-- Badalona -->
+      <a href="municipios/pintor-badalona.html" class="zona-card">
+        <span class="zona-emoji">🔨</span>
+        <span class="zona-name-lbl">Badalona</span>
+        <span class="zona-desc-lbl" data-i18n="zona_badalona_desc">Pintores y Reformistas</span>
       </a>
-      <a href="/municipios/pintor-montgat.html" style="display:block;background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:20px 18px;text-decoration:none;color:#1c2b3a;font-weight:600;transition:box-shadow .2s,border-color .2s;" onmouseover="this.style.borderColor='#FF6B35';this.style.boxShadow='0 4px 16px rgba(255,107,53,.12)'" onmouseout="this.style.borderColor='#e2e8f0';this.style.boxShadow='none'">
-        <span style="font-size:1.4rem;display:block;margin-bottom:6px;">🏖️</span>Montgat<span style="display:block;font-size:.82rem;color:#5a6a7a;font-weight:400;margin-top:4px;">Costa mediterránea</span>
+
+      <!-- Montgat -->
+      <a href="municipios/pintor-montgat.html" class="zona-card">
+        <span class="zona-emoji">🛋️</span>
+        <span class="zona-name-lbl">Montgat</span>
+        <span class="zona-desc-lbl" data-i18n="zona_montgat_desc">Revestimientos Premium</span>
       </a>
     </div>
   </div>

@@ -154,8 +154,15 @@ document.addEventListener('DOMContentLoaded', () => {
             ba_before: "Estado Inicial",
             ba_after: "Entrega Final",
             gallery_tag: "Portafolio",
-            gallery_title: "Proyectos Reales",
-            gallery_subtitle: "Resultados limpios y duraderos en viviendas del Maresme y Barcelona.",
+            gallery_title: "Nuestros Trabajos Reales",
+            gallery_subtitle: "Fotos reales de obras ejecutadas en el Maresme y Barcelona. Sin filtros, sin renders.",
+            gallery_filter_all: "Todos",
+            gallery_filter_fachada: "Fachadas",
+            gallery_filter_madera: "Madera",
+            gallery_filter_reforma: "Reformas",
+            gallery_filter_comunidad: "Comunidades",
+            gallery_filter_suelos: "Suelos",
+            gallery_filter_acabados: "Acabados Premium",
             reviews_tag: "Opiniones verificadas",
             reviews_title: "Lo que opinan nuestros clientes",
             reviews_subtitle: "Reseñas reales de clientes en el Maresme y Barcelona.",
@@ -247,7 +254,18 @@ document.addEventListener('DOMContentLoaded', () => {
             calc_email_placeholder: "tu@email.com",
             calc_email_btn_saltar: "Saltar",
             calc_email_btn_anadir: "Añadir y enviar",
-            calc_email_error_invalido: "Email no válido. Revísalo o salta."
+            calc_email_error_invalido: "Email no válido. Revísalo o salta.",
+            zona_cabrils_desc: "Pintura y Acabados",
+            zona_mataro_desc: "Pintura y Reformas",
+            zona_masnou_desc: "Pintura de Alta Gama",
+            zona_vilassar_desc: "Microcemento y Estuco",
+            zona_premia_desc: "Alisados y Gotelé",
+            zona_alella_desc: "Reformas de Chalets",
+            zona_badalona_desc: "Pintores y Reformistas",
+            zona_montgat_desc: "Revestimientos Premium",
+            zones_title: "Pintura y Reformas en el Maresme y Barcelona",
+            zones_desc: "Especialistas locales en el Maresme y Barcelona. Visita técnica y presupuesto gratuito en menos de 24 horas en todos los municipios.",
+            sede_badge: "Local"
         },
 
         en: {
@@ -357,8 +375,15 @@ document.addEventListener('DOMContentLoaded', () => {
             ba_before: "Initial State",
             ba_after: "Final Delivery",
             gallery_tag: "Portfolio",
-            gallery_title: "Real Projects",
-            gallery_subtitle: "Clean, long-lasting results in homes across Maresme and Barcelona.",
+            gallery_title: "Our Real Projects",
+            gallery_subtitle: "Real photos of projects executed in Maresme and Barcelona. No filters, no renders.",
+            gallery_filter_all: "All",
+            gallery_filter_fachada: "Facades",
+            gallery_filter_madera: "Woodwork",
+            gallery_filter_reforma: "Renovations",
+            gallery_filter_comunidad: "Communities",
+            gallery_filter_suelos: "Flooring",
+            gallery_filter_acabados: "Premium Finishes",
             reviews_tag: "Verified reviews",
             reviews_title: "What our clients say",
             reviews_subtitle: "Real reviews from clients in Maresme and Barcelona.",
@@ -476,7 +501,18 @@ document.addEventListener('DOMContentLoaded', () => {
             calc_email_placeholder: "your@email.com",
             calc_email_btn_saltar: "Skip",
             calc_email_btn_anadir: "Add & send",
-            calc_email_error_invalido: "Invalid email. Check it or skip."
+            calc_email_error_invalido: "Invalid email. Check it or skip.",
+            zona_cabrils_desc: "Painting & Finishes",
+            zona_mataro_desc: "Painting & Renovation",
+            zona_masnou_desc: "Premium Painting",
+            zona_vilassar_desc: "Microcement & Stucco",
+            zona_premia_desc: "Popcorn Wall Removal",
+            zona_alella_desc: "High-End Renovations",
+            zona_badalona_desc: "Painters & Builders",
+            zona_montgat_desc: "High-End Coatings",
+            zones_title: "Painting & Renovations in Maresme & Barcelona",
+            zones_desc: "Local specialists in Maresme and Barcelona. Free technical visit and estimate within 24 hours in all municipalities.",
+            sede_badge: "Local"
         },
 
 
@@ -588,8 +624,15 @@ document.addEventListener('DOMContentLoaded', () => {
             ba_before: "Estat Inicial",
             ba_after: "Entrega Final",
             gallery_tag: "Portafoli",
-            gallery_title: "Projectes Reals",
-            gallery_subtitle: "Resultats nets i duradors en habitatges del Maresme i Barcelona.",
+            gallery_title: "Els Nostres Treballs Reals",
+            gallery_subtitle: "Fotos reals d'obres executades al Maresme i Barcelona. Sense filtres, sense renders.",
+            gallery_filter_all: "Tots",
+            gallery_filter_fachada: "Façanes",
+            gallery_filter_madera: "Fusta",
+            gallery_filter_reforma: "Reformes",
+            gallery_filter_comunidad: "Comunitats",
+            gallery_filter_suelos: "Sòls",
+            gallery_filter_acabados: "Acabats Premium",
             trust_label: "Per què confien en nosaltres",
             trust_1_title: "Cura total de la teva llar",
             trust_1_desc: "Tracte professional i curós: màxima protecció per als teus mobles, terres i parets.",
@@ -702,7 +745,18 @@ document.addEventListener('DOMContentLoaded', () => {
             calc_email_placeholder: "el-teu@email.com",
             calc_email_btn_saltar: "Saltar",
             calc_email_btn_anadir: "Afegir i enviar",
-            calc_email_error_invalido: "Email no vàlid. Revisa'l o salta."
+            calc_email_error_invalido: "Email no vàlid. Revisa'l o salta.",
+            zona_cabrils_desc: "Pintura i Acabats",
+            zona_mataro_desc: "Pintura i Reformes",
+            zona_masnou_desc: "Pintura de Gamma Alta",
+            zona_vilassar_desc: "Microciment i Estuc",
+            zona_premia_desc: "Allisats i Gotelé",
+            zona_alella_desc: "Reformes de Xalets",
+            zona_badalona_desc: "Pintors i Reformistes",
+            zona_montgat_desc: "Revestiments Premium",
+            zones_title: "Pintura i Reformes al Maresme i Barcelona",
+            zones_desc: "Especialistes locals al Maresme i Barcelona. Visita tècnica i pressupost gratuït en menys de 24 hores a tots els municipis.",
+            sede_badge: "Local"
         }
 
 
@@ -1269,9 +1323,337 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    /* ---- GALLERY FILTER LOGIC ---- */
+    document.querySelectorAll('.gallery-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+            document.querySelectorAll('.gallery-tab').forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            const filter = tab.dataset.filter;
+            document.querySelectorAll('.gallery-item').forEach(item => {
+                if (filter === 'all' || item.dataset.category === filter) {
+                    item.classList.remove('hidden-by-filter');
+                } else {
+                    item.classList.add('hidden-by-filter');
+                }
+            });
+        });
+    });
+
     // Inicializar idioma al cargar
     const initialLang = document.querySelector('.lang-btn.active')?.textContent.toLowerCase().trim() || 'es';
     window.setLanguage(initialLang);
 
+    // Inicializar lightbox de galería
+    initGalleryLightbox();
+
 });
+
+/* =========================================================
+   GALLERY LIGHTBOX — Albums de proyectos reales 2026
+   ========================================================= */
+
+const ALBUMS = {
+    'bano-lujo': {
+        title: 'Reforma Integral de Baño de Lujo',
+        photos: [
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-22-57-11.jpg',alt:'Reforma integral de baño de lujo – detalle'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-22-57-11_1.jpg',alt:'Alicatado de gran formato en baño de lujo'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-22-57-11_2.jpg',alt:'Instalación de sanitarios suspendidos'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-22-57-11_3.jpg',alt:'Fontanería empotrada en reforma de baño'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-22-57-11_4.jpg',alt:'Acabado de obra en reforma de baño de lujo'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-22-57-11_5.jpg',alt:'Detalle de grifería termostática en baño'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-22-57-11_6.jpg',alt:'Revestimiento de paredes en baño de lujo'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-22-57-11_7.jpg',alt:'Vista general reforma baño de lujo'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-22-57-11_8.jpg',alt:'Espejo y luminaria en baño reformado'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-22-57-11_9.jpg',alt:'Plato de ducha y mamparas en reforma'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-22-57-11_10.jpg',alt:'Pavimento de gran formato en baño'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-22-57-11_12.jpg',alt:'Tabiquería y estructura empotrada'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-22-57-11_13.jpg',alt:'Instalación de muebles de baño'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-22-57-11_14.jpg',alt:'Detalle de acabado en reforma de baño'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-22-57-11_15.jpg',alt:'Entrega final reforma integral de baño'},
+            {src:'images/projects/real/reforma-escalera-marmol-bano-01.webp',alt:'Escalera de mármol en reforma'},
+            {src:'images/projects/real/reforma-escalera-marmol-bano-02.webp',alt:'Mármol pulido en escalera'},
+            {src:'images/projects/real/reforma-escalera-marmol-bano-03.webp',alt:'Detalle de mármol en reforma'},
+            {src:'images/projects/real/reforma-escalera-marmol-bano-04.webp',alt:'Instalación de peldaños de mármol'},
+            {src:'images/projects/real/reforma-escalera-marmol-bano-05.webp',alt:'Reforma de escalera interior'},
+            {src:'images/projects/real/reforma-escalera-marmol-bano-06.webp',alt:'Acabado escalera de mármol'},
+            {src:'images/projects/real/reforma-escalera-marmol-bano-07.webp',alt:'Vista general escalera reformada'},
+            {src:'images/projects/real/reforma-escalera-marmol-bano-08.webp',alt:'Detalle mármol y barandilla'},
+            {src:'images/projects/real/reforma-escalera-marmol-bano-09.webp',alt:'Reforma escalera mármol – proceso'},
+            {src:'images/projects/real/reforma-escalera-marmol-bano-10.webp',alt:'Montaje sanitario suspendido'},
+            {src:'images/projects/real/reforma-escalera-marmol-bano-11.webp',alt:'Entrega reforma escalera y baño'},
+        ]
+    },
+    'estuco': {
+        title: 'Estuco Veneciano y Alta Decoración',
+        photos: [
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-22-59-13.jpg',alt:'Estuco veneciano aplicado en pared – detalle'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-22-59-13_1.jpg',alt:'Textura brillante de estuco veneciano'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-22-59-13_2.jpg',alt:'Alta decoración con estuco en interior'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-22-59-13_3.jpg',alt:'Aplicación de estuco veneciano – proceso'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-22-59-13_4.jpg',alt:'Acabado brillante de estuco en Badalona'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-22-59-13_5.jpg',alt:'Detalle de estuco en pared principal'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-22-59-13_6.jpg',alt:'Efecto mármol con estuco veneciano'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-22-59-13_7.jpg',alt:'Vista general salón con estuco'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-22-59-13_8.jpg',alt:'Estuco en pared de escalera interior'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-22-59-13_9.jpg',alt:'Detalle de lustre en estuco veneciano'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-22-59-13_10.jpg',alt:'Entrega final – estuco veneciano y alta decoración'},
+        ]
+    },
+    'bano-rustico': {
+        title: 'Baño Rústico-Moderno',
+        photos: [
+            {src:'scratch/fotosweb/PHOTO-2026-05-18-22-54-35.jpg',alt:'Baño rústico-moderno – detalle azulejo beige'},
+            {src:'scratch/fotosweb/PHOTO-2026-05-18-22-54-35_1.jpg',alt:'Plato de ducha de pizarra negra'},
+            {src:'scratch/fotosweb/PHOTO-2026-05-18-22-54-35_2.jpg',alt:'Grifería termostática en baño rústico'},
+            {src:'scratch/fotosweb/PHOTO-2026-05-18-22-54-35_3.jpg',alt:'Detalle de alicatado en baño'},
+            {src:'scratch/fotosweb/PHOTO-2026-05-18-22-54-35_4.jpg',alt:'Vista general baño rústico-moderno'},
+            {src:'scratch/fotosweb/PHOTO-2026-05-18-22-54-35_5.jpg',alt:'Acabado final baño rústico-moderno'},
+        ]
+    },
+    'fachadas': {
+        title: 'Rehabilitación de Fachadas',
+        photos: [
+            ...[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28].map(n => ({
+                src: `images/projects/real/rehabilitacion-fachada-mataro-${String(n).padStart(2,'0')}.webp`,
+                alt: `Rehabilitación de fachada en Mataró – foto ${n}`
+            })),
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-23-13-34.jpg',alt:'Pintura de fachada exterior en Vilassar de Mar'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-23-13-34_1.jpg',alt:'Preparación de fachada para pintura'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-23-13-34_2.jpg',alt:'Aplicación de pintura en fachada'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-23-13-34_3.jpg',alt:'Detalle de acabado en fachada exterior'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-23-13-34_4.jpg',alt:'Entrega final fachada pintada'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-23-13-34_5.jpg',alt:'Fachada exterior acabada – Cabrils'},
+        ]
+    },
+    'madera': {
+        title: 'Barnizado y Carpintería de Madera',
+        photos: [
+            ...[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15].map(n => ({
+                src: `images/projects/real/barnizado-madera-atico-${String(n).padStart(2,'0')}.webp`,
+                alt: `Barnizado de madera en ático – foto ${n}`
+            })),
+            {src:'images/projects/real/restauracion-madera-exterior-01.webp',alt:'Restauración de carpintería exterior'},
+            {src:'images/projects/real/restauracion-madera-exterior-02.webp',alt:'Madera exterior restaurada y barnizada'},
+        ]
+    },
+    'tejados': {
+        title: 'Tejados, Albañilería y Saneamiento',
+        photos: [
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-22-55-34.jpg',alt:'Tejado y albañilería en chalet – inicio'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-22-55-34_1.jpg',alt:'Reparación de tejado en Cabrils'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-22-55-34_2.jpg',alt:'Colocación de tejas en tejado'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-22-55-34_3.jpg',alt:'Albañilería en cubierta de chalet'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-22-55-34_4.jpg',alt:'Impermeabilización de tejado'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-22-55-34_5.jpg',alt:'Detalle mortero en tejado'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-22-55-34_6.jpg',alt:'Entrega final tejado reparado'},
+            ...[1,2,3,4,5,6].map(n => ({
+                src: `images/projects/real/reparacion-tejado-mataro-${String(n).padStart(2,'0')}.webp`,
+                alt: `Reparación de tejado en Mataró – foto ${n}`
+            })),
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-22-57-09.jpg',alt:'Preparación y enmasillado de paredes'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-22-57-09_1.jpg',alt:'Acabado de paredes enmasilladas'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-23-13-36.jpg',alt:'Saneamiento de humedades por capilaridad'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-23-13-36_1.jpg',alt:'Tratamiento anti-humedad en muro'},
+        ]
+    },
+    'suelos': {
+        title: 'Microcemento y Suelos',
+        photos: [
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-23-05-21.jpg',alt:'Aplicación de microcemento en suelo – inicio'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-23-05-21_1.jpg',alt:'Microcemento aplicado en suelo de salón'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-23-05-21_2.jpg',alt:'Detalle de textura microcemento'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-23-05-21_3.jpg',alt:'Entrega suelo de microcemento acabado'},
+            ...[1,2,3,4].map(n => ({
+                src: `images/projects/real/suelo-laminado-cocina-${String(n).padStart(2,'0')}.webp`,
+                alt: `Suelo laminado de cocina – foto ${n}`
+            })),
+        ]
+    },
+    'comunidades': {
+        title: 'Comunidades y Garajes',
+        photos: [
+            ...[1,2,3,4,5,6,7].map(n => ({
+                src: `images/projects/real/pintura-garaje-comunitario-${String(n).padStart(2,'0')}.webp`,
+                alt: `Pintura de garaje comunitario – foto ${n}`
+            })),
+        ]
+    },
+    'gran-album': {
+        title: 'Gran Álbum de Acabados de Reforma',
+        photos: [
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-23-13-40.jpg',alt:'Gran álbum de acabados – detalle'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-23-13-40_1.jpg',alt:'Acabados de reforma interior'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-23-13-40_2.jpg',alt:'Detalle pintura en reforma'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-23-13-40_3.jpg',alt:'Acabados de parquet y suelo'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-23-13-40_4.jpg',alt:'Vista general reforma terminada'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-23-13-40_5.jpg',alt:'Detalle de pintura en molduras'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-23-13-40_6.jpg',alt:'Salón reformado con acabados premium'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-23-13-40_7.jpg',alt:'Detalle decorativo en reforma'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-23-13-40_8.jpg',alt:'Cocina reformada con acabados de calidad'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-23-13-40_9.jpg',alt:'Dormitorio pintado y reformado'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-23-13-40_10.jpg',alt:'Pasillo reformado con pintura lisa'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-23-13-40_11.jpg',alt:'Detalle de acabados en reforma de piso'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-23-13-40_12.jpg',alt:'Reforma de piso terminada – salón'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-23-13-40_13.jpg',alt:'Acabados finales en reforma integral'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-23-13-40_14.jpg',alt:'Entrega final gran álbum de acabados'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-23-13-39.jpg',alt:'Pintura de piso moderno – detalle'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-23-13-39_1.jpg',alt:'Piso moderno pintado en blanco roto'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-23-13-39_2.jpg',alt:'Pintura en pisos modernos – Badalona'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-23-13-39_3.jpg',alt:'Acabado final piso moderno pintado'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-23-13-35.jpg',alt:'Detalle de pintura de carpintería interior'},
+        ]
+    }
+};
+
+let lbAlbum = null, lbIndex = 0, lbTouchStartX = 0;
+
+function openLightbox(albumId, startIndex) {
+    startIndex = startIndex || 0;
+    lbAlbum = ALBUMS[albumId];
+    if (!lbAlbum) return;
+    lbIndex = startIndex;
+    var lb = document.getElementById('lightbox');
+    lb.classList.add('lb-open');
+    lb.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    renderLightboxThumbs();
+    loadLightboxPhoto(lbIndex, false);
+    lb.focus();
+}
+
+function closeLightbox() {
+    var lb = document.getElementById('lightbox');
+    lb.classList.remove('lb-open');
+    lb.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    var img = document.getElementById('lb-img');
+    if (img) img.src = '';
+}
+
+function loadLightboxPhoto(idx, animate) {
+    var img = document.getElementById('lb-img');
+    var loading = document.getElementById('lb-loading');
+    var counter = document.getElementById('lb-counter');
+    var albumName = document.getElementById('lb-album-name');
+    if (!lbAlbum || !img) return;
+    var photo = lbAlbum.photos[idx];
+    if (!photo) return;
+
+    if (animate) img.classList.add('lb-fading');
+    loading.classList.add('active');
+
+    var tmp = new Image();
+    tmp.onload = function() {
+        img.src = photo.src;
+        img.alt = photo.alt;
+        img.classList.remove('lb-fading');
+        loading.classList.remove('active');
+    };
+    tmp.onerror = function() {
+        img.classList.remove('lb-fading');
+        loading.classList.remove('active');
+    };
+    tmp.src = photo.src;
+
+    counter.textContent = (idx + 1) + ' / ' + lbAlbum.photos.length;
+    albumName.textContent = lbAlbum.title;
+
+    document.querySelectorAll('.lb-thumb').forEach(function(t, i) {
+        t.classList.toggle('active', i === idx);
+    });
+    var activeThumb = document.querySelector('.lb-thumb.active');
+    if (activeThumb) {
+        activeThumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    }
+}
+
+function navigateLightbox(dir) {
+    if (!lbAlbum) return;
+    lbIndex = (lbIndex + dir + lbAlbum.photos.length) % lbAlbum.photos.length;
+    loadLightboxPhoto(lbIndex, true);
+}
+
+function renderLightboxThumbs() {
+    var strip = document.getElementById('lb-thumbs');
+    if (!strip) return;
+    strip.innerHTML = '';
+    lbAlbum.photos.forEach(function(photo, i) {
+        var div = document.createElement('div');
+        div.className = 'lb-thumb' + (i === lbIndex ? ' active' : '');
+        div.setAttribute('role', 'button');
+        div.setAttribute('tabindex', '0');
+        div.setAttribute('aria-label', 'Ver foto ' + (i + 1));
+        var thumbImg = document.createElement('img');
+        thumbImg.src = photo.src;
+        thumbImg.alt = '';
+        thumbImg.loading = 'lazy';
+        div.appendChild(thumbImg);
+        (function(index) {
+            div.addEventListener('click', function() {
+                lbIndex = index;
+                loadLightboxPhoto(lbIndex, true);
+            });
+        })(i);
+        strip.appendChild(div);
+    });
+}
+
+function initGalleryLightbox() {
+    // Album card click handlers
+    document.querySelectorAll('.project-card').forEach(function(card) {
+        card.setAttribute('tabindex', '0');
+        card.setAttribute('role', 'button');
+        var titleEl = card.querySelector('.project-meta-title');
+        if (titleEl) {
+            card.setAttribute('aria-label', 'Abrir álbum: ' + titleEl.textContent);
+        }
+        card.addEventListener('click', function() {
+            openLightbox(card.dataset.album);
+        });
+        card.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                openLightbox(card.dataset.album);
+            }
+        });
+    });
+
+    // Lightbox controls
+    var closeBtn = document.getElementById('lb-close');
+    var prevBtn = document.getElementById('lb-prev');
+    var nextBtn = document.getElementById('lb-next');
+    var lb = document.getElementById('lightbox');
+
+    if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
+    if (prevBtn) prevBtn.addEventListener('click', function() { navigateLightbox(-1); });
+    if (nextBtn) nextBtn.addEventListener('click', function() { navigateLightbox(1); });
+
+    // Click backdrop to close
+    if (lb) {
+        lb.addEventListener('click', function(e) {
+            if (e.target === lb) closeLightbox();
+        });
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+        var lbEl = document.getElementById('lightbox');
+        if (!lbEl || !lbEl.classList.contains('lb-open')) return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') navigateLightbox(-1);
+        if (e.key === 'ArrowRight') navigateLightbox(1);
+    });
+
+    // Touch swipe
+    if (lb) {
+        lb.addEventListener('touchstart', function(e) {
+            lbTouchStartX = e.changedTouches[0].clientX;
+        }, { passive: true });
+        lb.addEventListener('touchend', function(e) {
+            var dx = e.changedTouches[0].clientX - lbTouchStartX;
+            if (Math.abs(dx) > 50) navigateLightbox(dx < 0 ? 1 : -1);
+        }, { passive: true });
+    }
+}
 
