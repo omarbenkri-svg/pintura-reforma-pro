@@ -1,137 +1,160 @@
-# HANDOFF — Lead Capture n8n Integration
+# HANDOFF — bcnproreforma.com
 
-> Documento de traspaso entre instancias de Claude (Cowork ↔ Antigravity ↔ Claude Code).
-> Lee este archivo al inicio de cualquier sesión para no "perder el hilo".
-> Última actualización: 2026-04-18 por Claude Code (cierre del bucle E2E).
-
----
-
-## Contexto de la tarea en curso
-
-**Objetivo:** Integrar captura de leads de la calculadora web con n8n Cloud → Google Sheets + Gmail.
-
-**Frontend (ya desplegado):**
-- `js/lead-webhook.js` apunta a `https://bcnproreforma.app.n8n.cloud/webhook/pintura_reforma_leads`
-- Evento `leadCapturado` dispara el POST al webhook
-- Payload real enviado:
-  ```json
-  { nombre, telefono, email, servicio, metros, timestamp, fuente,
-    pagina, referrer, dispositivo, utm_source, utm_medium, utm_campaign }
-  ```
-
-**Backend n8n:** `n8n_workflow_reformas.json` reescrito con estructura completa:
-`Webhook → Set (sanitize) → IF (nombre && telefono) → [Sheets + Gmail + Respond 200] / [Respond 400]`
+**Última actualización:** 2026-05-18 por Antigravity
+**Próximo ejecutor:** Claude Code (Terminal)
 
 ---
 
-## Estado actual (2026-04-18)
+## 🎯 Qué es este documento
 
-### HECHO ✅
-
-#### BUG #1 — CORREGIDO (2026-04-18, sesión Cowork)
-Se eliminó el guard `!lead.email` en `js/lead-webhook.js` para permitir leads sin email.
-
-#### BUG #2 — CORREGIDO (2026-04-18, sesión Claude Code)
-`n8n_workflow_reformas.json` reescrito con:
-- Nodo `Set` sanitiza email vacío → `""`, UTMs vacías → `"directo"`
-- Nodo `IF` valida nombre y telefono (no empty) antes de procesar
-- Google Sheets v4.5 con `columns.mappingMode: "defineBelow"` — mapeo explícito campo a campo (13 columnas en orden exacto)
-- Gmail HTML completo con todos los campos; si email vacío → "Sin email — contactar por teléfono"
-- `Respond to Webhook` 200 OK `{status:"ok"}` y 400 `{error:"missing_required"}` en ramas TRUE/FALSE del IF
-- Placeholders `USA_LA_CREDENCIAL_DE_CLARITYAUDIT` y `TU_ID_DE_HOJA_DE_CALCULO` documentados con `_comment`
-
-#### BUG #3 — CORREGIDO (2026-04-18, sesión Claude Code)
-`js/lead-webhook.js`: `mode: 'no-cors'` → `mode: 'cors'` (en `sendToWebhook` y `retryUnsentLeads`).
-Guard reforzado: si `!lead.nombre || !lead.telefono` → `console.error` + return.
-Log estructurado: `console.info('[Lead Webhook] payload:', payload)` antes del fetch.
-
-#### NUEVO — Paso email opcional (2026-04-18, sesión Claude Code)
-`js/main.js`: nuevo paso `step-email` insertado entre step-9 (datos) y step-10 (resultado).
-- Botón "Saltar" → dispatcha `leadCapturado` con `email: ""`
-- Botón "Añadir y enviar" → valida regex email → dispatcha con email o muestra error inline
-- El email nunca bloquea el envío del lead
-- Accesibilidad: `aria-required="false"`, `aria-describedby="calc-email-error"`, `<label for>`
-- Mobile: botones `min-height:48px`, flex gap
-- 6 claves i18n añadidas en ES/CA/EN: `calc_email_titulo`, `calc_email_subtitulo`, `calc_email_placeholder`, `calc_email_btn_saltar`, `calc_email_btn_anadir`, `calc_email_error_invalido`
-
-#### NUEVO — n8n_error_workflow.json (2026-04-18, sesión Claude Code)
-Workflow secundario creado: `Error Trigger → Gmail Error Notify`.
-- Subject: `⚠️ ERROR — Lead Capture Reformas: {error.message}`
-- Body: workflow name, nodo fallido, error message, timestamp, enlace a ejecución fallida
-- Cómo asociar: ver instrucciones en **Setup Error Workflow** más abajo
+Punto único de verdad del estado del proyecto. Cualquier agente lee esto ANTES de actuar.
 
 ---
 
-## Setup Google Sheet (acción del CEO)
+## 🏢 Contexto del negocio
 
-### Paso a paso:
-
-1. Ir a [Google Sheets](https://sheets.google.com) con la cuenta `bcnproreforma@gmail.com`.
-2. Crear una hoja nueva llamada exactamente: `Leads_Reformas_2026`.
-3. En la **fila 1**, pegar los siguientes headers en este orden exacto (una columna por celda):
-
-```
-| A         | B       | C         | D     | E        | F      | G      | H        | I          | J          | K          | L            | M      |
-|-----------|---------|-----------|-------|----------|--------|--------|----------|------------|------------|------------|--------------|--------|
-| timestamp | nombre  | telefono  | email | servicio | metros | pagina | referrer | dispositivo| utm_source | utm_medium | utm_campaign | fuente |
-```
-
-4. Copiar el ID de la hoja desde la URL:
-   - URL ejemplo: `https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms/edit`
-   - ID = `1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms`
-
-5. En n8n Cloud (tras importar `n8n_workflow_reformas.json`):
-   - Abrir el nodo **Google Sheets**
-   - En el campo **Document** → pegar el ID copiado (reemplaza el placeholder `TU_ID_DE_HOJA_DE_CALCULO`)
-   - En **Sheet Name** → escribir `Leads_Reformas_2026`
+- **Nombre legal:** Pintura, Reforma y Acabado de Obras
+- **Marca:** BCN Pro Reforma
+- **Dominio:** bcnproreforma.com (GoDaddy)
+- **Tipo:** SAB — sin local físico público
+- **Área:** Maresme + Barcelona (40km desde Cabrils 08348)
+- **WhatsApp:** +34 631 71 40 77 → `https://wa.me/34631714077`
+- **Teléfono:** +34 639 05 88 19 → `tel:+34639058819`
+- **Email:** bcnproreforma@gmail.com
+- **Instagram:** @pintayreformatuobra
+- **Cuenta personal Omar:** omarbenkri@gmail.com (usada para Meta y servicios externos)
 
 ---
 
-## Setup Error Workflow (acción del CEO)
+## 🛠️ Stack técnico
 
-1. Importar `n8n_error_workflow.json` en n8n Cloud.
-2. Reasignar la credential Gmail al nodo `Gmail Error Notify`.
-3. Activar el toggle del error workflow.
-4. Ir al workflow principal `Lead Capture - Reformas` → **Settings** (panel izquierdo) → **Error Workflow** → seleccionar `Lead Capture - Error Handler`.
-5. Guardar.
+### Web (bcnproreforma.com)
+- HTML / CSS / JS Vanilla puro (cero frameworks)
+- Hosting: **Vercel** (alias bcnproreforma.com activo)
+- Rama activa: `feat/lead-capture-e2e-closure`
+- Lead pipeline: **Google Apps Script Web App** → Google Sheets + Gmail
 
----
+### Agente WhatsApp IA (`Escritorio/whatsapp-agentkit/`)
+- FastAPI + SQLite + **Gemini 2.0 Flash** (gratis) + Twilio WhatsApp
+- Estado: código completo, pendiente de credenciales para activar
+- Repositorio: git init hecho, NO subido a GitHub aún
 
-## Setup Credentials (acción del CEO — ambos workflows)
-
-Tras importar cada JSON, en cada nodo con credential:
-
-| Nodo            | Tipo credential         | Seleccionar               |
-|-----------------|-------------------------|---------------------------|
-| Google Sheets   | Google Sheets OAuth2    | La credential de ClarityAudit existente |
-| Gmail Notify    | Gmail OAuth2            | La credential de ClarityAudit existente |
-| Gmail Error Notify | Gmail OAuth2         | La credential de ClarityAudit existente |
+### Herramientas Claude Code
+- `agent-browser` 0.26.0 (vercel-labs) — instalado, scope user
+- Chrome MCP — activo (cuando está conectado)
+- `vercel` CLI 50.x — para deploy
 
 ---
 
-## QA E2E — Test Plan
+## ✅ Hecho (acumulado)
 
-Ejecutar con `vercel dev` o servidor local en el proyecto. Rellenar la calculadora hasta el final.
+### Web bcnproreforma.com
+- [x] 8 landings municipio `/municipios/*.html` — JSON-LD, geo tags, interlinking
+- [x] Blog `/blog/` — 4 artículos + Article schema + breadcrumbs
+- [x] Homepage — JSON-LD LocalBusiness + FAQPage + HowTo, OG tags
+- [x] Modal calculadora 3 pasos + lead-gate
+- [x] **Email integrado en Paso 9** de calculadora (nombre + teléfono + email opcional)
+- [x] Página 404 premium — countdown + CTA WhatsApp
+- [x] `lead-webhook.js` → apunta a Google Apps Script Web App
+- [x] `tracking-unificado.js` activo
+- [x] Trust badges, tabla comparativa, banner urgencia
+- [x] `sitemap.xml` (12 URLs) + `robots.txt` + `vercel.json` headers
+- [x] 301 redirects para duplicados municipios (pintor-cabrils, pintor-vilassar-de-mar)
+- [x] Footer rutas corregidas
+- [x] Blog enlace en nav desktop + mobile
+- [x] OG image → `hero-team.webp` 1200×630
+- [x] **Google Apps Script Web App desplegado** — URL activa, acceso anónimo
+  - Sheet ID: `1IFAssx08QR-smmgj5Jzjr99aFnTCGZTnfH5KDQ0zQIQ` → pestaña "Form Leads"
+  - Email alertas: bcnproreforma@gmail.com
+  - URL: `https://script.google.com/macros/s/AKfycbwesZXU9_TUzmSptQnYt4CMJFfB6nHttnDA2XOXdsjyebmUJlaQHEpN0ku6Oum_3lCh/exec`
+- [x] **Test E2E verificado** — 6 filas en Form Leads confirman pipeline OK
+- [x] **Deploy a producción** — bcnproreforma.com live (2026-05-02)
+- [x] Auditoría a11y completada
+- [x] Auditoría Alex Hormozi 2.0 completada (ver STRATEGY.md)
+- [x] **Bug crítico resuelto (2026-05-18):** Error 404 global en Vercel arreglado. (Se eliminó la carpeta `public/` que Vercel estaba asumiendo erróneamente como root en Zero-Config).
 
-| # | Caso | Pasos | Output esperado Sheets | Output esperado Gmail |
-|---|------|-------|------------------------|----------------------|
-| 1 | Lead con email | 1. Abrir `http://localhost:3000` (o `https://bcnproreforma.com`) <br>2. Abrir calculadora <br>3. Completar todos los pasos <br>4. En paso email: rellenar `test@ejemplo.com` + clic "Añadir y enviar" | Nueva fila: email = `test@ejemplo.com`, timestamp rellenado, UTMs = "directo" si no hay params | Email recibido en `Bcnproreforma@gmail.com` con todos los campos, email muestra `test@ejemplo.com` |
-| 2 | Lead sin email | 1-3. Igual que caso 1 <br>4. En paso email: clic "Saltar" | Nueva fila: email = vacío (celda vacía) | Email recibido con campo Email = "Sin email — contactar por teléfono" |
-| 3 | Lead con UTM | 1. Abrir URL: `http://localhost:3000?utm_source=test&utm_medium=cpc&utm_campaign=qa` <br>2-4. Igual que caso 1 | Nueva fila: utm_source = "test", utm_medium = "cpc", utm_campaign = "qa" | Email con UTMs correctos |
-| 4 | n8n caído / retry | 1. Desactivar el workflow en n8n Cloud <br>2. Completar el formulario <br>3. Verificar en DevTools → Console: `[Lead Webhook] Error en intento 1` y `[Lead Webhook] Agotados reintentos` <br>4. Verificar `localStorage.getItem('calc_leads_unsent')` contiene el lead <br>5. Re-activar workflow <br>6. Recargar página → el retry automático reenvía | Fila aparece tras retry al recargar | Email recibido tras retry |
+### Agente WhatsApp (`whatsapp-agentkit/`)
+- [x] Repo clonado en `Escritorio/whatsapp-agentkit/`
+- [x] Stack construido: FastAPI + Gemini 2.0 Flash + Twilio + SQLite
+- [x] `agent/brain.py` — Gemini 2.0 Flash (google-genai SDK)
+- [x] `agent/memory.py` — historial por teléfono en SQLite
+- [x] `agent/providers/twilio.py` — adaptador Twilio WhatsApp
+- [x] `agent/main.py` — FastAPI webhook server
+- [x] `config/prompts.yaml` — system prompt BCN Pro Reforma
+- [x] `knowledge/bcnproreforma.md` — base de conocimiento completa
+- [x] `tests/test_local.py` — simulador de chat local
+- [x] `Dockerfile` + `requirements.txt` — Railway-ready
+- [x] Dependencias instaladas (Python 3.14 + todos los paquetes)
+- [x] `agent-browser` 0.26.0 instalado globalmente (scope user)
 
-**Nota para el CEO:** Para los casos 1-3, verificar también en n8n Cloud → Executions que el payload llega correctamente y la respuesta es 200 OK.
+### Configuraciones externas
+- Google Ads PMAX → **PAUSADA** (saldo pendiente + targeting incorrecto)
+- Meta Ads → pendiente Payment error
+- GBP Cabrils → **SUSPENDIDO** por directrices
 
 ---
 
-## Plan de ejecución (pendiente del CEO)
+## 🔴 Bugs pendientes
 
-1. **Crear Google Sheet** → ver `## Setup Google Sheet` arriba.
-2. **Import workflows** en n8n Cloud:
-   - `n8n_workflow_reformas.json` → nombre: `Lead Capture - Reformas`
-   - `n8n_error_workflow.json` → nombre: `Lead Capture - Error Handler`
-3. **Map credentials** → ver `## Setup Credentials` arriba.
-4. **Activar** ambos workflows (toggle ON).
-5. **Asociar Error Workflow** → ver `## Setup Error Workflow` arriba.
-6. **Ejecutar QA E2E** → ver `## QA E2E — Test Plan` arriba.
-7. **Deploy frontend** → `vercel --prod` para publicar los cambios de `js/main.js` y `js/lead-webhook.js`.
+1. **Filas de test en Google Sheets** "Form Leads" (filas 2-7) — eliminar manualmente
+2. **pintor-mataro.html** usa CSS inline — bajo impacto
+3. **Foto "Quiénes somos"** es stock Unsplash — reemplazar con foto real
+
+---
+
+## ⏸️ Pendiente acción humana
+
+### Prioridad ALTA (desbloquean el agente WhatsApp)
+1. **Gemini API Key** (2 min, gratis): `https://aistudio.google.com/apikey` → login con omarbenkri@gmail.com → "Create API key"
+2. **Twilio Sandbox** (5 min, gratis): `https://www.twilio.com/try-twilio` → signup → Console → Messaging → Try it out → WhatsApp → copiar Account SID + Auth Token
+3. Con esas 3 keys → decírselas a Claude Code → configura `.env`, prueba local, deploy Railway
+
+### Prioridad MEDIA (tracción orgánica)
+4. Eliminar filas test en Google Sheets "Form Leads" (filas 2-7)
+5. GBP SAB nuevo: `business.google.com/create`
+6. Google Search Console: añadir propiedad + submit sitemap
+7. Bing Webmaster Tools: importar desde GSC (1 click)
+8. WhatsApp Business app: auto-respuesta de bienvenida
+9. Instagram bio: enlace `bcnproreforma.com`
+
+### Prioridad BAJA
+10. Pagar saldo Google Ads (si decide reactivar)
+11. Resolver Payment error Meta Ads
+
+---
+
+## 🚫 No reintroducir
+
+- No reintroducir `/pintor-*.html` en raíz — ya tienen 301 redirects
+- No usar nombre "BCN Pro Reforma" en GBP (usar nombre legal)
+- No reactivar Google Ads PMAX sin corregir targeting
+- No usar `gtm-tracking.js` (duplicaría eventos con tracking-unificado.js)
+- **No usar n8n** — trial expirado, pipeline = Google Apps Script
+- **NUNCA crear una carpeta `public/` en la raíz** — Vercel Zero-Config la interpreta como root y deja de servir index.html (esto causó la caída del 2026-05-18). Si necesitas archivos estáticos auxiliares, ponlos en la raíz o en subcarpetas con nombre distinto a `public`.
+
+---
+
+## 🗺️ Estado de fases
+
+### ✅ COMPLETADA — Cierre técnico web
+- Web live en bcnproreforma.com
+- Pipeline leads operativo (Apps Script → Sheets + email)
+- Calculadora con email integrado
+- Todos los bugs de código resueltos
+
+### 🔄 EN CURSO — Agente WhatsApp IA
+- Código completo en `Escritorio/whatsapp-agentkit/`
+- Bloqueado: necesita Gemini API Key + Twilio credentials
+- Siguiente: `.env` → test local → Railway deploy → webhook Twilio
+
+### ⏳ SIGUIENTE — Tracción orgánica (4-8 semanas)
+- GBP SAB verificado + fotos reales
+- Google Search Console + Bing
+- 5 citations locales (Habitissimo, Páginas Amarillas, Houzz...)
+- Primeras reseñas GBP
+- Fotos antes/después reales (el mayor gap de conversión)
+
+### 🔮 FUTURO (300€+/mes presupuesto)
+- Google Ads Search (no PMAX) — keywords high-intent
+- Meta Ads con vídeo antes/después real
+- Email nurturing para leads con email que no cerraron

@@ -1,0 +1,49 @@
+{
+  "name": "WA-B: Meta Webhook Verification (GET)",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "GET",
+        "path": "whatsapp-inbound",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "wb-trigger",
+      "name": "Webhook GET Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "functionCode": "const query = $input.first().json.query || {};\nconst mode        = query['hub.mode'];\nconst challenge   = query['hub.challenge'];\nconst verifyToken = query['hub.verify_token'];\nconst EXPECTED    = process.env.WA_VERIFY_TOKEN || 'bcnproreforma_whatsapp_2026';\n\nif (mode === 'subscribe' && verifyToken === EXPECTED) {\n  return [{ json: { challenge, statusCode: 200 } }];\n} else {\n  return [{ json: { error: 'Forbidden', statusCode: 403 } }];\n}\n"
+      },
+      "id": "wb-verify",
+      "name": "Verify Token",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ $json.challenge }}",
+        "options": {
+          "responseCode": "={{ $json.statusCode }}"
+        }
+      },
+      "id": "wb-respond",
+      "name": "Return Challenge",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [680, 300]
+    }
+  ],
+  "connections": {
+    "Webhook GET Trigger": { "main": [[{ "node": "Verify Token",     "type": "main", "index": 0 }]] },
+    "Verify Token":        { "main": [[{ "node": "Return Challenge", "type": "main", "index": 0 }]] }
+  },
+  "active": false,
+  "settings": { "executionOrder": "v1" },
+  "tags": ["whatsapp", "bcnproreforma"]
+}

@@ -7,16 +7,16 @@
       "has": [{ "type": "host", "value": "www.bcnproreforma.com" }],
       "destination": "https://bcnproreforma.com/$1",
       "permanent": true
-    }
-  ],
-  "routes": [
-    {
-      "handle": "filesystem"
     },
     {
-      "src": "/(.*)",
-      "status": 404,
-      "dest": "/404.html"
+      "source": "/pintor-cabrils.html",
+      "destination": "/municipios/pintor-cabrils.html",
+      "permanent": true
+    },
+    {
+      "source": "/pintor-vilassar-de-mar.html",
+      "destination": "/municipios/pintor-vilassar-de-mar.html",
+      "permanent": true
     }
   ],
   "headers": [

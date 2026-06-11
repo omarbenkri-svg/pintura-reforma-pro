@@ -1,58 +1,87 @@
-# STRATEGY: Consolidación Técnica y Dominio Local (SEO)
+# STRATEGY — bcnproreforma.com
 
-## Objetivo
-Lograr la dominancia total en el mercado local de Cabrils y el Maresme, transformando la invisibilidad digital en autoridad premium.
-
-## RESCUE MISSION: Complete SEO Fix (COMPLETADO)
-Se ha ejecutado la estrategia de "Cirugía Mayor" para dotar al negocio de una base técnica invisible pero poderosa:
-- **Unificación de Marca:** Todas las referencias se han ajustado al nombre legal 'Pintura, Reforma y Acabado de Obras'.
-- **Consistencia NAP (Name-Address-Phone):** Unificado el teléfono a 639 058 819 en Web, WhatsApp y Schema.
-- **Autoridad Artisana:** Optimización de H1 y Meta descripciones para posicionar al fundador Mohamed como referente real con 30 años de oficio.
-
-## Niche Gap Strategy: Landing Pages Locales (COMPLETADO)
-Para capturar el tráfico de alta intención en los municipios clave del Maresme, se han creado páginas de aterrizaje específicas:
-1. **Pintor en Cabrils:** Reforzando la sede central y la proximidad extrema.
-2. **Reformas en Mataró:** Orientada al mercado de mayor volumen y reformas integrales.
-3. **Pintor en Vilassar de Mar:** Capturando la demanda de servicios de alta gama en la costa.
-
-## Próximos Pasos (Marketing)
-1. **Google Business Profile (GBP):** Reclamar la ficha con el nombre exacto de la empresa y la dirección de Cabrils verificada.
-2. **Review Acquisition:** Implementar el envío de enlaces de reseña por WhatsApp tras cada entrega de obra. (Ver script `lead-webhook.js`).
-3. **Citations:** Registro en directorios locales (Páginas Amarillas, Habitissimo) manteniendo la consistencia NAP 100%.
+**Última revisión:** 2026-05-18
 
 ---
 
-## RESCUE PHASE: REGRESSION FIX (2026-04-16)
+## 🎯 Objetivo de negocio
 
-Corrección de 5 regresiones críticas detectadas tras última actualización:
-
-### 1. Title Tag — SEO (CORREGIDO)
-- **Antes:** `Pintura, Reforma y Acabado de Obras | Pintores en Cabrils y Maresme`
-- **Después:** `Pintores y Reformas en Maresme y Barcelona | Presupuesto Gratis 48h | Cabrils`
-- **Impacto:** Recupera el gancho comercial "48h" (alta intención de búsqueda), amplía cobertura geográfica (Maresme + Barcelona), y el municipio de Cabrils ancla la relevancia local.
-
-### 2. aggregateRating Schema — Rich Snippets (CORREGIDO)
-- Re-inyectado bloque `aggregateRating` en el JSON-LD principal (`HomeAndConstructionBusiness`).
-- Valores: `ratingValue: 5.0`, `reviewCount: 47`, `bestRating: 5`, `worstRating: 1`.
-- **Impacto:** Sin este bloque Google no muestra estrellas en SERP → pérdida estimada de CTR ~30%.
-
-### 3. Urgency Banner — CRO (CORREGIDO)
-- La lógica JS estaba presente pero incompleta: faltaba el ajuste de posición del navbar cuando el banner es visible.
-- Añadida función `applyNavbarOffset()` que empuja el `.navbar` hacia abajo por la altura exacta del banner, evitando solapamiento.
-- El banner se gestiona via `sessionStorage` para no ser intrusivo en visitas sucesivas.
-
-### 4. WebP Regression — Performance / LCP (CORREGIDO)
-- Convertidos 4 PNGs de la sección de servicios a WebP (quality 85) via Pillow.
-- Archivos generados: `servicio_pintura.webp`, `servicio_bano.webp`, `servicio_microcemento.webp`, `servicio_estuco.webp`.
-- Todos los `<img>` directos reemplazados por `<picture>` con `<source type="image/webp">` + `<img>` PNG como fallback.
-- **Impacto:** Reducción de peso de imagen ~30-50% → LCP mejorado.
-
-### 5. Stats Bar — Prueba Social (CORREGIDO)
-- Recuperado ítem "5.0 ★ Valoración en Google" como 5ª columna del stats-bar.
-- Grid actualizado a `repeat(5,1fr)` en desktop, `repeat(3,1fr)` en tablet, `repeat(2,1fr)` en móvil.
-- Claves i18n `hero_stat_5` añadidas en ES/EN/CA.
-- "Años de oficio" y "Valoración Google" conviven — ambos visibles.
+Posicionar a la empresa como **primera opción digital** para búsquedas de pintura, reformas y acabados en Maresme + Barcelona, generando **leads high-ticket orgánicos** sin depender de ads.
 
 ---
-*Timestamp: 2026-04-16*
-*Status: MANUS MODE ACTIVE - SEO FOUNDATION COMPLETE | RESCUE PHASE COMPLETE*
+
+## 📊 North Star Metric
+
+**Leads calificados por mes vía WhatsApp + calculadora.**
+
+Baseline actual: 0 (preproducción)
+Meta mes 1: 5 leads
+Meta mes 3: 15 leads
+Meta mes 6: 30+ leads
+
+---
+
+## 🏗️ Pilares estratégicos
+
+### 1. SEO local agresivo
+- 8 landings municipio con intent comercial claro
+- Blog long-tail con precios reales por servicio
+- GBP SAB verificado + reseñas
+- Citations locales (Habitissimo, Páginas Amarillas, Houzz...)
+
+### 2. Conversión maximizada en cada visita
+- Trust badges + tabla comparativa + escasez controlada
+- Calculadora con lead-gate obligatorio
+- CTAs WhatsApp omnipresentes
+- 404 premium anti-fuga
+
+### 3. Automatización del pipeline
+- Lead entra → **Google Apps Script Web App** → Google Sheets "Form Leads" + email instantáneo a bcnproreforma@gmail.com
+- Datos capturados: nombre, teléfono, **email** (opcional), servicio, metros, UTMs, dispositivo, página
+- n8n cloud descartado (trial expirado, sin intención de pagar). Apps Script = siempre activo, sin coste.
+- WhatsApp Business con auto-respuesta rápida
+- Seguimiento manual del dueño con plantillas
+
+### 4. Ads solo cuando haya presupuesto sostenido (300€+/mes)
+- Search (no PMAX) con keywords high-intent
+- Meta con targeting geográfico estricto + creativo real
+
+---
+
+## 🎭 Perfil del cliente ideal
+
+- Propietario de vivienda en Maresme o Barcelona
+- 35-60 años
+- Planifica una reforma o pintura (no emergencia)
+- Valora calidad sobre precio mínimo
+- Busca por Google o recomendación
+- Quiere presupuesto por WhatsApp antes de llamar
+
+**Anti-perfil (filtrar):**
+- Busca-empleos (pintores, reformistas buscando trabajo)
+- Alquileres esporádicos
+- Presupuestos meramente informativos sin intención real
+
+---
+
+## 📅 Roadmap
+
+### Q2 2026 (ahora)
+- ✅ Deploy web final — bcnproreforma.com live (2026-05-02)
+- ✅ Pipeline leads operativo — Apps Script → Sheets + email
+- ✅ Calculadora con campo email integrado (paso 9)
+- ⏳ GBP SAB verificado
+- ⏳ GSC + Bing
+- ⏳ Primeras reseñas
+- ⏳ Revisión métricas mes 1
+
+### Q3 2026
+- Segundo round de artículos blog
+- Expansión a 4 municipios más si ROI lo pide
+- Primeras citations locales completadas
+- Posible reactivación Ads con presupuesto
+
+### Q4 2026
+- Meta Ads con creativo profesional
+- Remarketing de visitantes
+- Automatización completa del pipeline
