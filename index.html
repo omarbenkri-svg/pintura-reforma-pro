@@ -294,8 +294,6 @@
         --radius:     12px;
         --radius-lg:  20px;
         --transition: 0.3s cubic-bezier(0.16,1,0.3,1);
-        --urgency-bg: #0a1628;
-        --urgency-accent: #FF6B35;
         --badge-bg: #ffffff;
         --badge-border: rgba(10, 22, 40, 0.08);
         --badge-shadow: 0 2px 16px rgba(10, 22, 40, 0.07);
@@ -807,58 +805,6 @@
         text-align:center;border-radius:8px;padding:14px;font-weight:700;
     }
 
-    /* ── 1. TOP BANNER URGENCIA ─────────────────────────────────── */
-    #urgency-banner {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 9999;
-      background: var(--urgency-bg);
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      padding: 9px 20px;
-      font-family: 'Inter', -apple-system, sans-serif;
-      font-size: 0.82rem;
-      font-weight: 500;
-      letter-spacing: 0.01em;
-      line-height: 1.4;
-      border-bottom: 2px solid var(--urgency-accent);
-      transform: translateY(-100%);
-      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    #urgency-banner.visible { transform: translateY(0); }
-    #urgency-banner .banner-dot {
-      display: inline-block;
-      width: 7px; height: 7px;
-      background: var(--urgency-accent);
-      border-radius: 50%;
-      animation: pulseDot 1.8s ease-in-out infinite;
-      flex-shrink: 0;
-    }
-    #urgency-banner .banner-text { text-align: center; }
-    #urgency-banner .banner-highlight {
-      color: var(--urgency-accent);
-      font-weight: 700;
-    }
-    #urgency-banner-close {
-      position: absolute;
-      right: 14px;
-      top: 50%;
-      transform: translateY(-50%);
-      background: none;
-      border: none;
-      color: rgba(255,255,255,0.5);
-      cursor: pointer;
-      font-size: 1rem;
-      line-height: 1;
-      padding: 4px;
-      transition: color 0.2s;
-    }
-    #urgency-banner-close:hover { color: #fff; }
 
     @keyframes pulseDot {
       0%, 100% { opacity: 1; transform: scale(1); }
@@ -1119,7 +1065,10 @@
         .footer-grid{grid-template-columns:1fr;}
         .hero-wrapper { background-attachment: scroll; }
         .trust-badges-grid{grid-template-columns:1fr;}
-        .scarcity-banner{font-size:.76rem;padding:9px 40px 9px 12px;}
+        /* Compact mobile header */
+        .logo span { display:none; }
+        .logo::after { content:"BCN Reformas"; font-size:.9rem; font-weight:700; color:#002B49; }
+        .navbar { padding:10px 0; }
         .hide-mobile{display:none;}
         .cta-section h2{font-size:1.8rem;}
         .method-grid{grid-template-columns:1fr;}
@@ -1938,15 +1887,6 @@
 <!-- =============================================
      MÓDULO 1 — TOP BANNER DE URGENCIA
      ============================================= -->
-<div id="urgency-banner" role="banner" aria-label="Disponibilidad limitada">
-  <span class="banner-dot" aria-hidden="true"></span>
-  <p class="banner-text">
-    Agenda de proyectos limitada —
-    <span class="banner-highlight">solo 2 reformas integrales más este mes para garantizar nuestra calidad artesanal.</span>
-    Consulta sin compromiso: <a href="tel:+34639058819" style="color:#FF6B35;text-decoration:none;font-weight:700;" onclick="trackPhoneCall()">639 058 819</a>
-  </p>
-  <button id="urgency-banner-close" aria-label="Cerrar aviso">✕</button>
-</div>
 
 <header class="navbar">
     <div class="container nav-content">
@@ -2634,7 +2574,7 @@
                          loading="lazy" decoding="async">
                 </div>
                 <span class="project-badge">Madera</span>
-                <span class="project-count">17 fotos</span>
+                <span class="project-count">18 fotos</span>
                 <div class="project-meta">
                     <div class="project-meta-title">Barnizado y Carpintería de Madera</div>
                     <div class="project-meta-loc">📍 Cabrils · Alella · El Masnou</div>
@@ -2650,7 +2590,7 @@
                          loading="lazy" decoding="async">
                 </div>
                 <span class="project-badge">Tejados</span>
-                <span class="project-count">17 fotos</span>
+                <span class="project-count">15 fotos</span>
                 <div class="project-meta">
                     <div class="project-meta-title">Tejados, Albañilería y Saneamiento</div>
                     <div class="project-meta-loc">📍 Cabrils · Alella · El Masnou · Mataró</div>
@@ -2698,7 +2638,7 @@
                          loading="lazy" decoding="async">
                 </div>
                 <span class="project-badge">Acabados Premium</span>
-                <span class="project-count">20 fotos</span>
+                <span class="project-count">21 fotos</span>
                 <div class="project-meta">
                     <div class="project-meta-title">Gran Álbum de Acabados de Reforma</div>
                     <div class="project-meta-loc">📍 Cabrils · Alella · Badalona · Mataró</div>

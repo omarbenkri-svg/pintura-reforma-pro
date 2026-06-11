@@ -1435,6 +1435,7 @@ const ALBUMS = {
             })),
             {src:'images/projects/real/restauracion-madera-exterior-01.webp',alt:'Restauración de carpintería exterior'},
             {src:'images/projects/real/restauracion-madera-exterior-02.webp',alt:'Madera exterior restaurada y barnizada'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-23-13-35.jpg',alt:'Esmaltado de carpintería interior – puertas y marcos'},
         ]
     },
     'tejados': {
@@ -1451,8 +1452,6 @@ const ALBUMS = {
                 src: `images/projects/real/reparacion-tejado-mataro-${String(n).padStart(2,'0')}.webp`,
                 alt: `Reparación de tejado en Mataró – foto ${n}`
             })),
-            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-22-57-09.jpg',alt:'Preparación y enmasillado de paredes'},
-            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-22-57-09_1.jpg',alt:'Acabado de paredes enmasilladas'},
             {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-23-13-36.jpg',alt:'Saneamiento de humedades por capilaridad'},
             {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-23-13-36_1.jpg',alt:'Tratamiento anti-humedad en muro'},
         ]
@@ -1501,7 +1500,8 @@ const ALBUMS = {
             {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-23-13-39_1.jpg',alt:'Piso moderno pintado en blanco roto'},
             {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-23-13-39_2.jpg',alt:'Pintura en pisos modernos – Badalona'},
             {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-23-13-39_3.jpg',alt:'Acabado final piso moderno pintado'},
-            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-23-13-35.jpg',alt:'Detalle de pintura de carpintería interior'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-22-57-09.jpg',alt:'Preparación y enmasillado de paredes'},
+            {src:'scratch/fotoswebtrabajosrealizados/PHOTO-2026-05-18-22-57-09_1.jpg',alt:'Acabado de paredes enmasilladas'},
         ]
     }
 };
