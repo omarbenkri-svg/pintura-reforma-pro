@@ -1,6 +1,6 @@
 # HANDOFF — bcnproreforma.com
 
-**Última actualización:** 2026-10-17 por Claude Code — `master` en producción (deploy `dpl_8PJtDPMzPgWvKpTEUR9EAZV9Y2Qe`, URL `pintura-reforma-obra-v1-b4d9n7z6s`). Rollback: `vercel promote pintura-reforma-obra-v1-nlgej5n5e-omarbenkri-svgs-projects.vercel.app` (deploy anterior, 2026-06-11).
+**Última actualización:** 2026-10-17 por Claude Code — prototipos en la rama `feat/prototipos-rediseno` (local). `master` en producción (deploy `dpl_8PJtDPMzPgWvKpTEUR9EAZV9Y2Qe`, URL `pintura-reforma-obra-v1-b4d9n7z6s`). Rollback: `vercel promote pintura-reforma-obra-v1-nlgej5n5e-omarbenkri-svgs-projects.vercel.app` (deploy anterior, 2026-06-11).
 **Próximo ejecutor:** Claude Code (Terminal)
 
 ---
@@ -76,6 +76,7 @@ Punto único de verdad del estado del proyecto. Cualquier agente lee esto ANTES 
 - [x] **Archivos internos expuestos — resuelto y desplegado (2026-10-17, `3e00683`):** producción servía `HANDOFF.md`, `CLAUDE.md`, `KANBAN.json`, exports de n8n, `whatsapp/` y `_headers`. Añadidos a `.vercelignore` junto a `prototipos` y `.env*`; verificado 404 en producción.
 - [x] **Verificación post-deploy (2026-10-17):** portada 200; HTML y `main.js` servidos idénticos al repo; 164/164 imágenes 200; prueba del H1 en verde contra bcnproreforma.com (JS, movimiento reducido, sin JS); Lighthouse móvil: Accesibilidad 87, Buenas prácticas 100, SEO 92 (fallos previos, ver bugs 7-9). Webhook NO probado con curl: crearía un lead y enviaría un email reales.
 - [x] **Fotos fuera de git — resuelto (2026-10-17, `118466b`):** las 153 imágenes referenciadas (`scratch/fotosweb*`, `images/projects/real/`, `servicio_*.png`, `*-elite.webp`) solo existían en la copia de OneDrive y en producción. Copiadas al repo (idénticas por md5 a producción); las 164 referencias locales responden 200.
+- [x] **3 prototipos de rediseño (2026-10-17, rama `feat/prototipos-rediseno`, sin push ni deploy):** A · Oficio (plan literal: marfil, azul, cobre, Inter), B · Estudio (interiorismo) y C · Técnico (proceso). 12 páginas cada uno, mismo contenido, fotos propias y formulario con 6 estados simulados (no envía nada). Comparativa en `prototipos/index.html`; plan y resultado en `prototipos/PLAN.md`. Regenerar con `python3 prototipos/_build/build.py`; comprobar con `node prototipos/_build/check-pages.mjs` (216 comprobaciones en verde). Lighthouse móvil: Accesibilidad 100 en las tres portadas. `prototipos/` está excluido del deploy.
 
 ### Agente WhatsApp (`whatsapp-agentkit/`)
 - [x] Repo clonado en `Escritorio/whatsapp-agentkit/`
@@ -114,6 +115,11 @@ Punto único de verdad del estado del proyecto. Cualquier agente lee esto ANTES 
 ---
 
 ## ⏸️ Pendiente acción humana
+
+### Prototipos de rediseño (decisión de Omar)
+- Elegir dirección (A, B o C) en `prototipos/index.html`.
+- Para publicar la elegida: municipio y permiso de cada obra (en la fachada se ve el número de la vivienda; en el álbum de madera, una persona y un cartel con teléfono), quién atiende cada canal y horario, URL del Gremi, FAQ y alcance validados por Mohamed, fotos de interiores/alisados/estucos y retratos, una sola versión de la marca y datos fiscales.
+- Falta conectar el formulario a un receptor real con acuse (Paquete 5 del plan).
 
 ### Prioridad ALTA (desbloquean el agente WhatsApp)
 1. **Gemini API Key** (2 min, gratis): `https://aistudio.google.com/apikey` → login con omarbenkri@gmail.com → "Create API key"
