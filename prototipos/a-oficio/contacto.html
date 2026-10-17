@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Solicitar presupuesto | Prototipo A · BCN ProReforma</title>
+<meta name="description" content="Cuéntanos qué quieres renovar y en qué municipio.">
+<script>document.documentElement.classList.add('js');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+<link rel="stylesheet" href="../shared/base.css">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="../../logo%20.png">
+</head>
+<body class="page-contacto">
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+<div class="proto-bar" role="region" aria-label="Avisos del prototipo">
+  <p><strong>Prototipo A · Oficio.</strong> No envía datos ni está publicado.</p>
+  <a href="../index.html">Comparar prototipos</a>
+  <button type="button" class="review-toggle" aria-pressed="false">Modo revisión</button>
+</div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-name">Pinturas, Reformas y Acabados de Obra</span>
+      <span class="brand-web">BCN ProReforma · Maresme y Barcelona</span>
+    </a>
+    <button type="button" class="menu-toggle" data-menu-toggle aria-expanded="false" aria-controls="menu">
+      <i class="ph ph-list" aria-hidden="true"></i><span>Menú</span>
+    </button>
+    <nav id="menu" class="site-nav" aria-label="Principal">
+      <ul class="nav-list">
+        <li><details class="nav-sub">
+          <summary>Pintura y servicios <i class="ph ph-caret-down" aria-hidden="true"></i></summary>
+          <ul><li><a href="pintura-viviendas.html">Pintura de viviendas</a></li><li><a href="alisados-lacados.html">Alisados y lacados</a></li><li><a href="decorativa-estucos.html">Pintura decorativa y estucos</a></li><li><a href="index.html#otros-servicios">Reformas y acabados</a></li></ul>
+        </details></li>
+        <li><a href="trabajos.html">Trabajos</a></li>
+        <li><a href="empresa.html">Empresa</a></li>
+        <li><a href="contacto.html" aria-current="page">Contacto</a></li>
+      </ul>
+      <a class="nav-phone" href="tel:+34639058819" data-track="phone_click" data-origin="cabecera"><i class="ph ph-phone" aria-hidden="true"></i><span>639 05 88 19</span></a>
+      <a class="btn btn-primary nav-cta" href="contacto.html" data-track="cta_presupuesto" data-origin="cabecera">Solicitar presupuesto</a>
+    </nav>
+  </div>
+</header>
+<main id="contenido">
+<section class="page-head container">
+  <nav class="breadcrumb" aria-label="Migas de pan"><ol><li><a href="index.html">Inicio</a></li><li aria-current="page">Contacto</li></ol></nav>
+  <h1>Solicitar presupuesto</h1>
+  <p class="lead">Cuéntanos qué quieres renovar y en qué municipio. Revisaremos la información para indicarte el siguiente paso.</p>
+  <p class="quick-alt">¿Prefieres hablar? <a href="tel:+34639058819" data-track="phone_click" data-origin="contacto">Llamar al 639 05 88 19</a> o
+    <a href="https://wa.me/34631714077?text=Hola%2C%20os%20escribo%20desde%20la%20web%20%28p%C3%A1gina%20de%20contacto%29.%20Quiero%20pedir%20valoraci%C3%B3n%20para%20un%20trabajo.%20Mi%20municipio%20es%3A%20" data-track="whatsapp_click" data-origin="contacto">escribir por WhatsApp</a>.</p>
+</section>
+
+<div class="contact-layout container">
+  <div class="contact-main">
+    <form class="lead-form" data-lead-form novalidate>
+  <div class="form-alert" role="alert" hidden></div>
+
+  <div class="field">
+    <label for="f-telefono">Teléfono de contacto</label>
+    <input id="f-telefono" name="telefono" type="tel" inputmode="tel" autocomplete="tel" required
+      aria-describedby="hint-telefono err-telefono">
+    <p class="hint" id="hint-telefono">Te llamaremos o escribiremos a este número.</p>
+    <p class="error" id="err-telefono" hidden></p>
+  </div>
+
+  <div class="field">
+    <label for="f-municipio">Municipio de la obra</label>
+    <input id="f-municipio" name="municipio" list="municipios" autocomplete="address-level2" required
+      aria-describedby="err-municipio note-municipio">
+    <datalist id="municipios"><option value="Alella"></option>
+<option value="Arenys de Mar"></option>
+<option value="Argentona"></option>
+<option value="Badalona"></option>
+<option value="Barcelona"></option>
+<option value="Cabrera de Mar"></option>
+<option value="Cabrils"></option>
+<option value="Caldes d&#x27;Estrac"></option>
+<option value="El Masnou"></option>
+<option value="Mataró"></option>
+<option value="Montgat"></option>
+<option value="Premià de Dalt"></option>
+<option value="Premià de Mar"></option>
+<option value="Sant Andreu de Llavaneres"></option>
+<option value="Sant Vicenç de Montalt"></option>
+<option value="Teià"></option>
+<option value="Tiana"></option>
+<option value="Vilassar de Dalt"></option>
+<option value="Vilassar de Mar"></option></datalist>
+    <p class="hint" id="note-municipio" hidden>Comprobaremos si llegamos a tu municipio.</p>
+    <p class="error" id="err-municipio" hidden></p>
+  </div>
+
+  <fieldset class="field choices">
+    <legend>Tipo de trabajo</legend>
+    <div class="choice-grid"><label class="choice"><input type="radio" name="trabajo" value="pintura-vivienda" required aria-describedby="err-trabajo"><span>Pintura de vivienda</span></label>
+<label class="choice"><input type="radio" name="trabajo" value="alisado" required aria-describedby="err-trabajo"><span>Alisar paredes o quitar gotelé</span></label>
+<label class="choice"><input type="radio" name="trabajo" value="lacado" required aria-describedby="err-trabajo"><span>Lacar o barnizar carpinterías</span></label>
+<label class="choice"><input type="radio" name="trabajo" value="decorativa" required aria-describedby="err-trabajo"><span>Pintura decorativa o estuco</span></label>
+<label class="choice"><input type="radio" name="trabajo" value="exterior" required aria-describedby="err-trabajo"><span>Fachada o exterior</span></label>
+<label class="choice"><input type="radio" name="trabajo" value="comunidad" required aria-describedby="err-trabajo"><span>Comunidad, garaje o local</span></label>
+<label class="choice"><input type="radio" name="trabajo" value="reforma" required aria-describedby="err-trabajo"><span>Reforma o reparación</span></label>
+<label class="choice"><input type="radio" name="trabajo" value="otro" required aria-describedby="err-trabajo"><span>Otro trabajo</span></label></div>
+    <p class="error" id="err-trabajo" hidden></p>
+  </fieldset>
+
+  <div class="field">
+    <label for="f-nombre">Nombre <span class="optional">(opcional)</span></label>
+    <input id="f-nombre" name="nombre" autocomplete="given-name">
+  </div>
+
+  <div class="field">
+    <label for="f-descripcion">Qué quieres renovar <span class="optional">(opcional)</span></label>
+    <textarea id="f-descripcion" name="descripcion" rows="4" aria-describedby="hint-descripcion"></textarea>
+    <p class="hint" id="hint-descripcion">Por ejemplo: pintar salón y dos dormitorios, paredes con gotelé.</p>
+  </div>
+
+  <details class="more">
+    <summary>Añadir más detalles <span class="optional">(opcional)</span></summary>
+    <div class="more-grid">
+      <div class="field">
+        <label for="f-superficie">Superficie aproximada</label>
+        <select id="f-superficie" name="superficie">
+          <option value="">Sin indicar</option>
+          <option>No lo sé</option>
+          <option>Menos de 50 m²</option>
+          <option>De 50 a 90 m²</option>
+          <option>De 90 a 150 m²</option>
+          <option>Más de 150 m²</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="f-fecha">Cuándo te gustaría empezar</label>
+        <select id="f-fecha" name="fecha">
+          <option value="">Sin indicar</option>
+          <option>Lo antes posible</option>
+          <option>En los próximos 3 meses</option>
+          <option>Más adelante</option>
+          <option>Todavía no lo sé</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="f-presupuesto">Presupuesto previsto</label>
+        <select id="f-presupuesto" name="presupuesto">
+          <option value="">Prefiero no decirlo</option>
+          <option>Todavía no lo sé</option>
+          <option>Menos de 1.500 €</option>
+          <option>De 1.500 a 5.000 €</option>
+          <option>Más de 5.000 €</option>
+        </select>
+      </div>
+    </div>
+  </details>
+
+  <input type="hidden" name="origen" value="contacto">
+  <input type="hidden" name="ref" value="">
+
+  <p class="privacy-note"><span class="pend" data-note="Texto legal pendiente de revisión">Usaremos estos datos solo para responder a tu solicitud.</span>
+    <a href="privacidad.html">Cómo tratamos tus datos</a>.</p>
+
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary" data-label="Enviar solicitud" data-busy="Enviando…">Enviar solicitud</button>
+    <a class="btn-link" href="https://wa.me/34631714077?text=Hola%2C%20os%20escribo%20desde%20la%20web%20%28formulario%20de%20contacto%29.%20Quiero%20pedir%20valoraci%C3%B3n%20para%20un%20trabajo.%20Mi%20municipio%20es%3A%20" data-wa-dynamic data-track="whatsapp_click" data-origin="contacto"><i class="ph ph-whatsapp-logo" aria-hidden="true"></i> Enviar fotos por WhatsApp</a>
+  </div>
+
+  <div class="demo-panel" role="group" aria-labelledby="demo-title">
+    <p id="demo-title"><strong>Prototipo:</strong> el formulario no envía nada. Elige qué resultado simular:</p>
+    <label class="demo-choice"><input type="radio" name="demo" value="ok" checked> Solicitud recibida</label>
+    <label class="demo-choice"><input type="radio" name="demo" value="error"> Error del receptor</label>
+    <label class="demo-choice"><input type="radio" name="demo" value="network"> Conexión perdida al enviar</label>
+  </div>
+</form>
+
+<section class="form-success" tabindex="-1" hidden aria-labelledby="ok-title">
+  <h2 id="ok-title"><i class="ph ph-check-circle" aria-hidden="true"></i> Solicitud recibida</h2>
+  <p>Tu referencia es <strong class="ok-ref"></strong>.</p>
+  <p>Revisaremos lo que nos cuentas y te contactaremos por teléfono o WhatsApp para indicarte el siguiente paso.</p>
+  <p><a class="btn-link ok-wa" href="#" data-track="whatsapp_click" data-origin="confirmacion"><i class="ph ph-whatsapp-logo" aria-hidden="true"></i> Enviar fotos con tu referencia</a></p>
+</section>
+  </div>
+  <aside class="contact-aside" aria-labelledby="aside-title">
+    <h2 id="aside-title">Otras formas de contactar</h2>
+    <ul class="channel-list" data-pending="Confirmar quién atiende cada canal y en qué horario">
+      <li><span class="channel-label"><i class="ph ph-phone" aria-hidden="true"></i> Llamadas</span>
+        <a href="tel:+34639058819" data-track="phone_click" data-origin="contacto_aside">639 05 88 19</a></li>
+      <li><span class="channel-label"><i class="ph ph-whatsapp-logo" aria-hidden="true"></i> WhatsApp, también para fotos</span>
+        <a href="https://wa.me/34631714077?text=Hola%2C%20os%20escribo%20desde%20la%20web%20%28p%C3%A1gina%20de%20contacto%29.%20Quiero%20pedir%20valoraci%C3%B3n%20para%20un%20trabajo.%20Mi%20municipio%20es%3A%20" data-track="whatsapp_click" data-origin="contacto_aside">631 71 40 77</a></li>
+      <li><span class="channel-label"><i class="ph ph-envelope-simple" aria-hidden="true"></i> Correo</span>
+        <a href="mailto:bcnproreforma@gmail.com">bcnproreforma@gmail.com</a></li>
+    </ul>
+    <p class="hours"><span class="pend" data-note="Indicar horario real de atención telefónica">Horario de atención pendiente de confirmar.</span></p>
+    <h2>Qué pasa después</h2>
+    <ol class="next-steps">
+      <li>Revisamos tu solicitud y te contactamos para concretar lo que necesitas.</li>
+      <li>Si hace falta, acordamos una visita para ver las superficies.</li>
+      <li>Te enviamos el presupuesto por escrito.</li>
+    </ol>
+  </aside>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-about">
+      <p class="footer-brand">Pinturas, Reformas y Acabados de Obra</p>
+      <p>Empresa familiar de pintura con base en Cabrils. Trabajamos en el Maresme y Barcelona.</p>
+    </div>
+    <div>
+      <h2>Contacto</h2>
+      <ul>
+        <li><a href="tel:+34639058819" data-track="phone_click" data-origin="pie">Llamar al 639 05 88 19</a></li>
+        <li><a href="https://wa.me/34631714077?text=Hola%2C%20os%20escribo%20desde%20la%20web%20%28pie%20de%20p%C3%A1gina%29.%20Quiero%20pedir%20valoraci%C3%B3n%20para%20un%20trabajo.%20Mi%20municipio%20es%3A%20" data-track="whatsapp_click" data-origin="pie">WhatsApp 631 71 40 77</a></li>
+        <li><a href="mailto:bcnproreforma@gmail.com">bcnproreforma@gmail.com</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2>La web</h2>
+      <ul>
+        <li><a href="pintura-viviendas.html">Pintura y servicios</a></li>
+        <li><a href="trabajos.html">Trabajos</a></li>
+        <li><a href="empresa.html">Empresa</a></li>
+        <li><a href="../../blog/">Blog</a></li>
+        <li><a href="privacidad.html">Privacidad</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <p>© 2026 Pinturas, Reformas y Acabados de Obra. <span class="pend" data-note="Añadir razón social y NIF en el pie">Datos fiscales pendientes.</span></p>
+  </div>
+</footer>
+<script src="../shared/app.js" defer></script>
+</body>
+</html>
