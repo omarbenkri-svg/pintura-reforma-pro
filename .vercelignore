@@ -15,3 +15,12 @@ convert_images.py
 files.zip
 
 scripts
+prototipos
+.env*
+HANDOFF.md
+CLAUDE.md
+KANBAN.json
+n8n_error_workflow.json
+n8n_workflow_reformas.json
+whatsapp
+_headers
