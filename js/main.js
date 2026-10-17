@@ -795,20 +795,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    /* ---- TEXT ANIMATION PREPARATOR ---- */
-    const splitTextArray = document.querySelectorAll('.anim-split-text');
-    splitTextArray.forEach(el => {
-        const content = el.innerHTML;
-        const newStr = content.split('<br>').map(line => {
-            return line.split('').map((char, index) => {
-                if(char === ' ') return ' ';
-                return `<span class="char" style="animation-delay: ${index * 0.025}s">${char}</span>`;
-            }).join('');
-        }).join('<br>');
-        el.innerHTML = newStr;
-    });
-
     /* ---- INTERSECTION OBSERVERS (SCROLL ANIM) ---- */
+    // The hero H1 is intentionally excluded: essential content must never
+    // depend on JS or an animation to become visible.
     const observerOptions = { threshold: 0.12, rootMargin: "0px 0px -40px 0px" };
     const scrollObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -819,15 +808,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, observerOptions);
 
-    const animElements = document.querySelectorAll('.anim-fade-up, .anim-zoom-in, .anim-slide-right, .anim-split-text');
+    const animElements = document.querySelectorAll('.anim-fade-up, .anim-zoom-in, .anim-slide-right');
     animElements.forEach(el => {
         el.classList.add('anim-target');
         scrollObserver.observe(el);
     });
-
-    setTimeout(() => {
-        document.querySelectorAll('.anim-split-text').forEach(el => el.classList.add('is-animating'));
-    }, 120);
 
     /* ---- HAMBURGER MENU ---- */
     const hamburger = document.getElementById('hamburger');
