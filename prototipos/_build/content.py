@@ -293,6 +293,7 @@ CASES = [
             ("fachada-despues-entrada", "Escalera de entrada y pilar reparado tras la pintura"),
         ],
         "album": "fachadas",
+        "cover": "fachada-despues-general",
         "review": "Antes de publicar: se ve el número de la vivienda en varias fotos. Confirmar permiso del cliente o recortar.",
     },
     {
@@ -320,6 +321,7 @@ CASES = [
             ("madera-despues-exterior", "Carpintería exterior barnizada con brillo"),
         ],
         "album": "madera",
+        "cover": "madera-despues-terraza",
         "review": None,
     },
     {
@@ -344,6 +346,7 @@ CASES = [
             ("garaje-despues-suelo", "Zona de plazas con la pared pintada y el suelo rojo"),
         ],
         "album": "comunidades",
+        "cover": "garaje-despues-pasillo",
         "review": None,
     },
 ]
@@ -369,6 +372,7 @@ ALBUMS = {
         "title": "Fachadas y exteriores",
         "note": "Fotos de reparación y pintura de fachadas.",
         "cover": "fachada-despues-general",
+        "cover_alt": "Fachada terminada en color crema con la puerta del garaje gris",
         "photos": [{"src": "../shared/img/fachada-antes-general-1200.webp",
                     "alt": "Fachada antes de la obra, con el revoque deteriorado"}]
         + _series("rehabilitacion-fachada-mataro",
@@ -378,6 +382,7 @@ ALBUMS = {
         "title": "Carpintería de madera",
         "note": "Barnizado y recuperación de madera exterior.",
         "cover": "madera-despues-terraza",
+        "cover_alt": "Cerramiento de madera barnizado visto desde la terraza",
         "photos": _series("barnizado-madera-atico", range(1, 16),
                           lambda n: "Carpintería de madera antes del barnizado" if n <= 8
                           else "Carpintería de madera barnizada")
@@ -387,6 +392,7 @@ ALBUMS = {
         "title": "Comunidades y garajes",
         "note": "Zonas comunes y garajes.",
         "cover": "garaje-despues-pasillo",
+        "cover_alt": "Pasillo del garaje con las paredes pintadas",
         "photos": _series("pintura-garaje-comunitario", range(1, 8),
                           lambda n: "Pared del garaje desconchada antes de la obra" if n == 1
                           else "Garaje con paredes pintadas y franja de señalización"),
@@ -395,12 +401,14 @@ ALBUMS = {
         "title": "Tejados",
         "note": "Reparación de cubiertas de teja.",
         "cover": "reforma-tejado",
+        "cover_alt": "Reparación de un tejado de teja",
         "photos": _series("reparacion-tejado-mataro", range(1, 7), lambda n: "Reparación de tejado de teja"),
     },
     "reformas": {
         "title": "Reformas",
         "note": "Escalera de mármol y baño.",
         "cover": "reforma-escalera",
+        "cover_alt": "Escalera de mármol reformada",
         "photos": _series("reforma-escalera-marmol-bano", range(1, 12), lambda n: "Reforma de escalera y baño"),
     },
 }
@@ -642,5 +650,5 @@ def contact_form(origin: str = "contacto") -> str:
   <h2 id="ok-title">{icon('check-circle')} Solicitud recibida</h2>
   <p>Tu referencia es <strong class="ok-ref"></strong>.</p>
   <p>Revisaremos lo que nos cuentas y te contactaremos por teléfono o WhatsApp para indicarte el siguiente paso.</p>
-  <p><a class="btn-link ok-wa" href="#" data-track="whatsapp_click" data-origin="confirmacion">{icon('whatsapp-logo')} Enviar fotos con tu referencia</a></p>
+  <p><a class="btn-link ok-wa" href="{wa_url('Hola, os envío fotos para la solicitud que he hecho en la web.')}" data-track="whatsapp_click" data-origin="confirmacion">{icon('whatsapp-logo')} Enviar fotos con tu referencia</a></p>
 </section>"""

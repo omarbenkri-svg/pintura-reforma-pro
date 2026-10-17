@@ -1,6 +1,6 @@
 # Plan — 3 prototipos de la nueva web de BCN ProReforma
 
-**Fecha:** 17 de octubre de 2026 · **Estado:** pendiente del OK de Omar · **Base:** «BCN ProReforma — Plan de diseño, conversión y desarrollo» (17/10/2026)
+**Fecha:** 17 de octubre de 2026 · **Estado:** aprobado por Omar y construido (ver la sección 10) · **Base:** «BCN ProReforma — Plan de diseño, conversión y desarrollo» (17/10/2026)
 
 Prototipos navegables y completos, en local, que no se publican en producción. Los tres comparten el contenido, las fotografías y la lógica de contacto. Solo cambia la dirección visual, para poder comparar en igualdad de condiciones.
 
@@ -131,4 +131,35 @@ Skills por dirección: `design-taste-frontend` y `high-end-visual-design` (las t
 
 ## 9. Fuera de alcance (posible sesión aparte)
 
-Corregir el H1 invisible en producción (Paquete 2) y subir a git las fotos que faltan. Son arreglos de la web actual, independientes de los prototipos.
+Corregir el H1 invisible en producción (Paquete 2) y subir a git las fotos que faltan. Son arreglos de la web actual, independientes de los prototipos. **Hecho y desplegado el 17/10/2026** (ver `HANDOFF.md`).
+
+---
+
+## 10. Resultado (17/10/2026)
+
+**Dónde:** `prototipos/index.html` compara los tres; cada uno vive en `a-oficio/`, `b-estudio/` y `c-tecnico/` (12 páginas cada uno). Servir el repo con `python3 -m http.server 8181` y abrir `http://localhost:8181/prototipos/`.
+
+**Cómo se regeneran:** el contenido común está en `_build/content.py` y cada dirección en `_build/theme_a|b|c.py`; el CSS de cada tema está junto a sus páginas.
+
+```bash
+python3 prototipos/_build/images.py      # fotos optimizadas (solo si cambian las fuentes)
+python3 prototipos/_build/build.py       # regenera las 36 páginas
+node prototipos/_build/check-pages.mjs   # 216 comprobaciones (con el servidor local en marcha)
+```
+
+**Ajustes respecto a este plan, aplicando las skills de diseño:**
+- B usa Newsreader + Geist y una paleta gris piedra fría, pizarra y terracota, en lugar de Fraunces y el beige con terracota previstos: la skill de diseño veta Fraunces y esa paleta como opción por defecto.
+- C usa IBM Plex Sans + Plex Mono (no Inter) para diferenciarse de A, y el cobre de la marca como único acento.
+- La descripción del hero se limita a 12 palabras; la frase sobre Mohamed pasa a su bloque, y el texto de apoyo, al contacto y al cierre.
+- Solo modo claro y solo castellano. Las fuentes se cargan de Google Fonts; en producción, alojarlas en la web.
+- Fotos: se recortó una matrícula legible y las franjas de una captura de móvil. No se aplican filtros: los colores de la pintura deben verse reales.
+
+**Comprobado:**
+- 36 páginas a 320, 390, 768, 1.024 y 1.440 px y sin JavaScript: un H1 visible, sin desbordamiento horizontal, sin imágenes rotas, sin errores de consola, sin alt vacíos, sin `href="#"` y sin rayas.
+- Formulario: los 6 estados; la referencia se mantiene al reintentar y un doble clic produce un solo envío; el servicio llega preseleccionado desde la URL; la medición simulada no lleva datos personales.
+- Lightbox: teclado, vuelta circular y retorno del foco.
+- Lighthouse móvil en las tres portadas: Accesibilidad 100 y Buenas prácticas 100. SEO 66 solo por el `noindex` intencionado.
+
+**No comprobado:** lectores de pantalla reales, Safari en iOS, rendimiento de campo. El formulario no está conectado a ningún receptor.
+
+**Pendiente añadido en la revisión:** en el álbum de madera aparece una persona reconocible y un cartel con un teléfono (esa foto ya está publicada en la web actual).

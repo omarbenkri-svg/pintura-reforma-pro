@@ -152,7 +152,7 @@ def home():
       </article>
       <div class="work-side">
         {"".join(f'''<article class="work-mini reveal" style="--i:{i + 1}">
-          {photo(c["after"][0][0], c["after"][0][1], "(min-width: 1024px) 15vw, 40vw")}
+          {photo(c["cover"], dict(c["after"])[c["cover"]], "(min-width: 1024px) 15vw, 40vw")}
           <div><h3><a href="{c['slug']}.html">{c['title']}</a></h3><p>{c['summary']}</p></div>
         </article>''' for i, c in enumerate((madera, garaje)))}
         <a class="btn-link" href="trabajos.html">Ver todos los trabajos {icon('arrow-right')}</a>
@@ -330,7 +330,7 @@ def works():
     </article>""" for c in CASES)
     albums = "".join(f"""
     <li class="album-card reveal" style="--i:{i}">
-      {photo(a['cover'], a['photos'][0]['alt'], "(min-width: 1024px) 20vw, 50vw")}
+      {photo(a['cover'], a['cover_alt'], "(min-width: 1024px) 20vw, 50vw")}
       <h3>{e(a['title'])}</h3>
       <p>{e(a['note'])}</p>
       {album_trigger(k, f"Ver {len(a['photos'])} fotos", "btn-link")}

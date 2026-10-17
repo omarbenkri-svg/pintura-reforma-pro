@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Prototipos web | BCN ProReforma</title>
+<meta name="description" content="Tres prototipos de la nueva web de BCN ProReforma para comparar: Oficio, Estudio y Técnico.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<link rel="icon" href="../logo%20.png">
+<style>
+  :root {
+    --bg: #F6F6F4; --surface: #FFFFFF; --text: #1B2329; --muted: #56616A; --line: #DADDD9; --accent: #A84821;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 400 1.0625rem/1.55 "Inter", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  img { display: block; max-width: 100%; height: auto; }
+  a { color: inherit; }
+  h1, h2, h3 { margin: 0; letter-spacing: -.02em; line-height: 1.15; text-wrap: balance; }
+  p { margin: 0; }
+  :focus-visible { outline: 3px solid var(--text); outline-offset: 3px; }
+  .container { width: min(100% - 2rem, 76rem); margin-inline: auto; }
+  header { padding-block: clamp(2.5rem, 2rem + 3vw, 4.5rem) 2.5rem; }
+  .kicker { font-weight: 600; color: var(--accent); margin-bottom: 1rem; }
+  h1 { font-size: clamp(2.125rem, 1.4rem + 2.8vw, 3.5rem); max-width: 20ch; margin-bottom: 1.25rem; }
+  .lead { font-size: 1.1875rem; color: var(--muted); max-width: 62ch; }
+  .options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; padding-bottom: 4rem; list-style: none; margin: 0; padding-left: 0; }
+  .option { display: grid; grid-template-rows: auto 1fr; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+  .option img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; border-bottom: 1px solid var(--line); }
+  .option-body { display: grid; gap: .9rem; align-content: start; padding: 1.5rem; }
+  .option h2 { font-size: 1.5rem; }
+  .option h2 span { color: var(--muted); font-weight: 500; }
+  .option .rec { display: inline-block; font-size: .8125rem; font-weight: 600; color: var(--accent); }
+  .option dl { margin: 0; display: grid; gap: .6rem; }
+  .option dt { font-size: .8125rem; font-weight: 600; color: var(--muted); }
+  .option dd { margin: 0; }
+  .option ul { list-style: none; margin: .25rem 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: .4rem 1rem; }
+  .option ul a { font-weight: 600; }
+  .open { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: .7rem 1.25rem; background: var(--text); color: #fff; text-decoration: none; font-weight: 600; border-radius: 6px; }
+  .open:hover { background: #33404a; }
+  section.info { padding-block: 3rem; border-top: 1px solid var(--line); }
+  .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem 4rem; }
+  .info h2 { font-size: 1.5rem; margin-bottom: 1rem; }
+  .info ul, .info ol { margin: 0; padding-left: 1.2rem; display: grid; gap: .5rem; }
+  .info li { color: var(--muted); }
+  .info li strong { color: var(--text); font-weight: 600; }
+  footer { padding-block: 2rem 3rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .9375rem; }
+  @media (max-width: 1023px) { .options { grid-template-columns: 1fr; max-width: 40rem; } }
+  @media (max-width: 767px) { .info-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<header class="container">
+  <p class="kicker">BCN ProReforma · Prototipos para revisar</p>
+  <h1>Tres direcciones visuales para la nueva web</h1>
+  <p class="lead">Los tres prototipos tienen el mismo contenido, las mismas fotos propias y el mismo formulario. Solo cambia el diseño, para que puedas compararlos con justicia. No envían datos y no están publicados.</p>
+</header>
+
+<main id="contenido">
+  <ul class="options container">
+    <li class="option">
+      <img src="shared/img/preview-a-oficio.webp" width="640" height="400" alt="Portada del prototipo A: fondo marfil, titular en azul y foto de una fachada terminada">
+      <div class="option-body">
+        <span class="rec">Recomendado por el plan</span>
+        <h2>A · Oficio <span>Evoluciona la marca actual</span></h2>
+        <dl>
+          <div><dt>Sistema visual</dt><dd>El de la sección 4, tal cual: marfil, azul #162D3B, cobre #A84821 e Inter.</dd></div>
+          <div><dt>Qué transmite</dt><dd>Un oficio serio y cercano. Foto y explicación se alternan; las tarjetas solo sirven para elegir.</dd></div>
+          <div><dt>A vigilar</dt><dd>Es la opción más prudente: menos memorable que B, más cálida que C.</dd></div>
+          <div><dt>Páginas</dt><dd><ul>
+            <li><a href="a-oficio/pintura-viviendas.html">Servicio</a></li>
+            <li><a href="a-oficio/caso-fachada.html">Caso</a></li>
+            <li><a href="a-oficio/trabajos.html">Trabajos</a></li>
+            <li><a href="a-oficio/contacto.html">Contacto</a></li>
+          </ul></dd></div>
+        </dl>
+        <a class="open" href="a-oficio/index.html">Abrir el prototipo A</a>
+      </div>
+    </li>
+    <li class="option">
+      <img src="shared/img/preview-b-estudio.webp" width="640" height="400" alt="Portada del prototipo B: titular grande con letra serif y mosaico de fotos de carpintería barnizada">
+      <div class="option-body">
+        <span class="rec">Alternativa 1</span>
+        <h2>B · Estudio <span>Estética de interiorismo</span></h2>
+        <dl>
+          <div><dt>Sistema visual</dt><dd>Gris piedra frío, pizarra y terracota. Newsreader para titulares y Geist para leer.</dd></div>
+          <div><dt>Qué transmite</dt><dd>Acabados y materiales. Fotografía grande, composiciones asimétricas y mucho espacio.</dd></div>
+          <div><dt>A vigilar</dt><dd>Puede parecer un estudio de decoración más que un oficio de pintura. Necesita muy buenas fotos.</dd></div>
+          <div><dt>Páginas</dt><dd><ul>
+            <li><a href="b-estudio/pintura-viviendas.html">Servicio</a></li>
+            <li><a href="b-estudio/caso-fachada.html">Caso</a></li>
+            <li><a href="b-estudio/trabajos.html">Trabajos</a></li>
+            <li><a href="b-estudio/contacto.html">Contacto</a></li>
+          </ul></dd></div>
+        </dl>
+        <a class="open" href="b-estudio/index.html">Abrir el prototipo B</a>
+      </div>
+    </li>
+    <li class="option">
+      <img src="shared/img/preview-c-tecnico.webp" width="640" height="400" alt="Portada del prototipo C: retícula con líneas finas y la secuencia estado inicial, preparación y acabado de una fachada">
+      <div class="option-body">
+        <span class="rec">Alternativa 2</span>
+        <h2>C · Técnico <span>Proceso y sistema</span></h2>
+        <dl>
+          <div><dt>Sistema visual</dt><dd>Papel, grafito y cobre. IBM Plex Sans y Plex Mono, retícula visible y esquinas rectas.</dd></div>
+          <div><dt>Qué transmite</dt><dd>Método. Cada obra es una ficha técnica y la preparación se explica por capas.</dd></div>
+          <div><dt>A vigilar</dt><dd>Puede resultar frío para quien solo quiere renovar su casa.</dd></div>
+          <div><dt>Páginas</dt><dd><ul>
+            <li><a href="c-tecnico/pintura-viviendas.html">Servicio</a></li>
+            <li><a href="c-tecnico/caso-fachada.html">Caso</a></li>
+            <li><a href="c-tecnico/trabajos.html">Trabajos</a></li>
+            <li><a href="c-tecnico/contacto.html">Contacto</a></li>
+          </ul></dd></div>
+        </dl>
+        <a class="open" href="c-tecnico/index.html">Abrir el prototipo C</a>
+      </div>
+    </li>
+  </ul>
+
+  <section class="info">
+    <div class="container info-grid">
+      <div>
+        <h2>Igual en los tres</h2>
+        <ul>
+          <li><strong>12 páginas:</strong> inicio, tres servicios, trabajos, tres fichas de obra, empresa, contacto, privacidad y 404.</li>
+          <li><strong>Portada en 9 bloques</strong> con el texto propuesto en el plan. El bloque de opiniones queda reservado: no se inventan reseñas.</li>
+          <li><strong>Formulario con 6 estados:</strong> sin completar, campo no válido, enviando, recibida (con referencia), error del receptor y conexión perdida. Reintentar usa la misma referencia para no duplicar.</li>
+          <li><strong>Canales centralizados:</strong> llamadas al 639 05 88 19 y WhatsApp al 631 71 40 77, con mensaje según la página.</li>
+          <li><strong>Sin calculadora</strong> como entrada principal y sin datos sin acreditar (años, obras, plazos).</li>
+          <li><strong>Fotos propias</strong> de tres obras con antes y después. Donde no hay foto propia hay un hueco rotulado.</li>
+        </ul>
+      </div>
+      <div>
+        <h2>Cómo revisarlos</h2>
+        <ol>
+          <li><strong>Modo revisión</strong> (barra superior): resalta y lista cada dato pendiente de confirmar en la página.</li>
+          <li><strong>Formulario:</strong> en Contacto, elige qué resultado simular y envía para ver cada estado.</li>
+          <li><strong>Móvil:</strong> barra inferior con WhatsApp y Llamar, que se oculta al escribir.</li>
+          <li><strong>Desde un servicio o una obra:</strong> el botón lleva al formulario con el trabajo ya elegido.</li>
+        </ol>
+      </div>
+      <div>
+        <h2>Pendiente antes de publicar</h2>
+        <ul>
+          <li><strong>Obras:</strong> municipio real y permiso de cada cliente. En la fachada se ve el número de la vivienda, y en el álbum de madera, una persona reconocible y un cartel con un teléfono.</li>
+          <li><strong>Canales:</strong> quién atiende el teléfono y quién el WhatsApp, y en qué horario.</li>
+          <li><strong>Gremi:</strong> URL exacta de la ficha de Mohamed.</li>
+          <li><strong>Textos:</strong> alcance de cada servicio, preguntas frecuentes y pasos de la obra, validados por Mohamed.</li>
+          <li><strong>Fotos:</strong> interiores, alisados, estucos y retratos de Mohamed y Omar.</li>
+          <li><strong>Marca y legal:</strong> una sola versión del nombre, datos fiscales y texto de privacidad revisado.</li>
+        </ul>
+      </div>
+      <div>
+        <h2>Ajustes y límites de estos prototipos</h2>
+        <ul>
+          <li>La descripción del hero se acorta a 12 palabras; la frase sobre Mohamed pasa a su bloque.</li>
+          <li>Solo modo claro, porque el plan define una paleta clara.</li>
+          <li>Solo en castellano. La versión en catalán queda para la implementación.</li>
+          <li>Las fuentes se cargan de Google Fonts; en producción conviene alojarlas en la web.</li>
+          <li>Comprobado: 36 páginas a 320, 390, 768, 1.024 y 1.440 px y sin JavaScript, sin desbordes, imágenes rotas ni errores de consola.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <p>Plan completo en <code>prototipos/PLAN.md</code>. Los prototipos están excluidos del despliegue de bcnproreforma.com.</p>
+  </div>
+</footer>
+</body>
+</html>
