@@ -1,6 +1,6 @@
 # HANDOFF — bcnproreforma.com
 
-**Última actualización:** 2026-05-18 por Antigravity
+**Última actualización:** 2026-10-17 por Claude Code (rama `fix/h1-visibility-and-photos`, sin push ni deploy)
 **Próximo ejecutor:** Claude Code (Terminal)
 
 ---
@@ -72,6 +72,8 @@ Punto único de verdad del estado del proyecto. Cualquier agente lee esto ANTES 
 - [x] Auditoría a11y completada
 - [x] Auditoría Alex Hormozi 2.0 completada (ver STRATEGY.md)
 - [x] **Bug crítico resuelto (2026-05-18):** Error 404 global en Vercel arreglado. (Se eliminó la carpeta `public/` que Vercel estaba asumiendo erróneamente como root en Zero-Config).
+- [x] **H1 de la portada invisible — resuelto en rama (2026-10-17, `c813941`):** `main.js` metía el H1 (`.anim-split-text`) en `.anim-target{opacity:0}` y nada le devolvía la opacidad; `setLanguage()` además borraba los spans por letra. Se retiró el mecanismo split-text. Prueba de regresión: `node scripts/check-hero-visibility.mjs` (con `python3 -m http.server 8181` en marcha) comprueba opacidad 1 con JS, con movimiento reducido y sin JS. `scripts/` está en `.vercelignore`.
+- [x] **Fotos fuera de git — resuelto en rama (2026-10-17, `118466b`):** las 153 imágenes referenciadas (`scratch/fotosweb*`, `images/projects/real/`, `servicio_*.png`, `*-elite.webp`) solo existían en la copia de OneDrive y en producción. Copiadas al repo (idénticas por md5 a producción); las 164 referencias locales responden 200.
 
 ### Agente WhatsApp (`whatsapp-agentkit/`)
 - [x] Repo clonado en `Escritorio/whatsapp-agentkit/`
@@ -99,6 +101,9 @@ Punto único de verdad del estado del proyecto. Cualquier agente lee esto ANTES 
 1. **Filas de test en Google Sheets** "Form Leads" (filas 2-7) — eliminar manualmente
 2. **pintor-mataro.html** usa CSS inline — bajo impacto
 3. **Foto "Quiénes somos"** es stock Unsplash — reemplazar con foto real
+4. **Texto del H1 distinto con y sin JS** (2026-10-17): el HTML dice «¿Necesitas pintar o reformar tu piso…» y `setLanguage('es')` lo sustituye por `hero_title` del diccionario («Pintura, Reforma y Acabado de Obras en Cabrils y Maresme»). Google puede ver uno y el usuario otro. Decidir cuál es el bueno y unificar.
+5. **Álbumes de galería mal etiquetados** (2026-10-17): «Baño de lujo» muestra la carpintería de madera del ático, «Estuco veneciano» una escalera de mármol y fontanería, «Tejados» el garaje comunitario, «Microcemento» una cocina.
+6. **Imágenes generadas por IA presentadas como propias:** `servicio_*`, `*-elite`, `hero-team` (también la imagen OG).
 
 ---
 
@@ -130,6 +135,8 @@ Punto único de verdad del estado del proyecto. Cualquier agente lee esto ANTES 
 - No reactivar Google Ads PMAX sin corregir targeting
 - No usar `gtm-tracking.js` (duplicaría eventos con tracking-unificado.js)
 - **No usar n8n** — trial expirado, pipeline = Google Apps Script
+- **No ocultar contenido esencial (H1, oferta, contacto) con clases que dependan de JS o de una animación para volver a verse.** Animar solo encima de un estado visible por defecto. No volver a partir titulares en spans por letra.
+- **No hacer `vercel --prod` desde una copia sin las fotos** — las imágenes ya están en git desde `118466b`; desplegar siempre desde este repo.
 - **NUNCA crear una carpeta `public/` en la raíz** — Vercel Zero-Config la interpreta como root y deja de servir index.html (esto causó la caída del 2026-05-18). Si necesitas archivos estáticos auxiliares, ponlos en la raíz o en subcarpetas con nombre distinto a `public`.
 
 ---
