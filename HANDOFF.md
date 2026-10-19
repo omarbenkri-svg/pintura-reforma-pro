@@ -16,6 +16,7 @@ Punto único de verdad del estado del proyecto. Cualquier agente lee esto ANTES 
 - **Titular (según facturas 2022-2023):** Mohamed Ben Mesaud, autónomo (NIF de tipo NIE), domicilio fiscal en Cabrils 08348. No es una sociedad: no hay «razón social» distinta del titular. NIF y dirección completa: en las facturas, no en este repo.
 - **Nombre comercial:** en facturas «Pintura en general y acabados de obra»; en la web «Pintura, Reforma y Acabado de Obras» y «Pinturas, Reformas y Acabados de Obra». Pendiente fijar uno solo.
 - **Marca web:** BCN Pro Reforma
+- **Gremi:** agremiados en el Gremi de Pintors (Gremi d'Empreses de Pintura de Barcelona i Comarques) desde 1994, según Omar. Falta el enlace a la ficha o el certificado.
 - **Dominio:** bcnproreforma.com (GoDaddy)
 - **Tipo:** SAB — sin local físico público
 - **Área:** Maresme + Barcelona (40km desde Cabrils 08348)

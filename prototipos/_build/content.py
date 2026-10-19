@@ -437,8 +437,9 @@ PEOPLE = {
 
 
 def gremi_line() -> str:
-    return pend('Mohamed figura en el directorio del Gremi.',
-                "Comprobar la entrada y enlazar la ficha exacta del Gremi al publicar. No usar logotipo sin permiso")
+    return pend('Agremiados en el Gremi de Pintors de Barcelona desde 1994.',
+                "Dato de Omar (19/10/2026). Nombre oficial: Gremi d'Empreses de Pintura de Barcelona i Comarques. "
+                "Enlazar la ficha del directorio o el certificado de alta al publicar. No usar logotipo sin permiso")
 
 
 PREP_STEPS = [
