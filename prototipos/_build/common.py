@@ -73,7 +73,7 @@ def company_body(theme) -> str:
   {breadcrumb([("index.html", "Inicio"), (None, "Empresa")])}
   <h1>Una empresa familiar de pintura con base en Cabrils</h1>
   <p class="lead">{pend(f"{CONFIG['brand']} es el nombre de la empresa; {CONFIG['brand_web']}, el de su web.",
-                        "Fijar una única versión de la marca: en el repo aparecen «Pintura, Reforma y Acabado de Obras» y «Pinturas, Reformas y Acabados de Obra»")}
+                        "Fijar una única versión de la marca. Facturas 2022-2023: «Pintura en general y acabados de obra», titular Mohamed Ben Mesaud (autónomo). En la web: «Pintura, Reforma y Acabado de Obras» y «Pinturas, Reformas y Acabados de Obra»")}
   Trabajamos en viviendas del Maresme y Barcelona, con la pintura como especialidad.</p>
 </section>
 
@@ -137,7 +137,7 @@ def contact_body(theme) -> str:
   </div>
   <aside class="contact-aside" aria-labelledby="aside-title">
     <h2 id="aside-title">Otras formas de contactar</h2>
-    <ul class="channel-list" {pend_attr("Confirmar quién atiende cada canal y en qué horario")}>
+    <ul class="channel-list" {pend_attr("Confirmar quién atiende cada canal y en qué horario. En las facturas solo figura el 639 05 88 19, el de Mohamed; el 631 71 40 77 no aparece")}>
       <li><span class="channel-label">{icon('phone')} Llamadas</span>
         <a href="{tel_url()}" data-track="phone_click" data-origin="contacto_aside">{CONFIG['tel_display']}</a></li>
       <li><span class="channel-label">{icon('whatsapp-logo')} WhatsApp, también para fotos</span>
@@ -162,7 +162,7 @@ def contact_body(theme) -> str:
 
 def privacy_body(theme) -> str:
     rows = [
-        ("Responsable", pend("Razón social, NIF y domicilio", "Datos fiscales del responsable del tratamiento")),
+        ("Responsable", pend("Mohamed Ben Mesaud, autónomo con domicilio fiscal en Cabrils. NIF y dirección completa pendientes de publicar.", "Contrastado con facturas 2022-2023. Confirmar si se publican el NIF (es un NIE) y el domicilio completo, que el aviso legal suele exigir (LSSI); validar con asesoría")),
         ("Finalidad", "Responder a tu solicitud de presupuesto y, si lo aceptas, gestionar la obra."),
         ("Base legal", pend("Aplicación de medidas precontractuales a petición tuya", "Validar con asesoría")),
         ("Conservación", pend("Plazo de conservación", "Definir plazo y criterio de borrado")),

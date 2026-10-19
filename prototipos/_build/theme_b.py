@@ -72,7 +72,7 @@ def footer() -> str:
     </ul>
   </div>
   <div class="container footer-bottom">
-    <p>© 2026 {CONFIG['brand']} · {CONFIG['brand_web']}. {pend('Datos fiscales pendientes.', 'Añadir razón social y NIF en el pie')}</p>
+    <p>© 2026 {CONFIG['brand']} · {CONFIG['brand_web']}. {pend('Datos fiscales pendientes.', 'Titular según facturas: Mohamed Ben Mesaud, autónomo. Añadir titular y NIF en el pie o en un aviso legal')}</p>
   </div>
 </footer>"""
 

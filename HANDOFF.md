@@ -13,13 +13,14 @@ Punto único de verdad del estado del proyecto. Cualquier agente lee esto ANTES 
 
 ## 🏢 Contexto del negocio
 
-- **Nombre legal:** Pintura, Reforma y Acabado de Obras
-- **Marca:** BCN Pro Reforma
+- **Titular (según facturas 2022-2023):** Mohamed Ben Mesaud, autónomo (NIF de tipo NIE), domicilio fiscal en Cabrils 08348. No es una sociedad: no hay «razón social» distinta del titular. NIF y dirección completa: en las facturas, no en este repo.
+- **Nombre comercial:** en facturas «Pintura en general y acabados de obra»; en la web «Pintura, Reforma y Acabado de Obras» y «Pinturas, Reformas y Acabados de Obra». Pendiente fijar uno solo.
+- **Marca web:** BCN Pro Reforma
 - **Dominio:** bcnproreforma.com (GoDaddy)
 - **Tipo:** SAB — sin local físico público
 - **Área:** Maresme + Barcelona (40km desde Cabrils 08348)
 - **WhatsApp:** +34 631 71 40 77 → `https://wa.me/34631714077`
-- **Teléfono:** +34 639 05 88 19 → `tel:+34639058819`
+- **Teléfono:** +34 639 05 88 19 → `tel:+34639058819` (el que figura en las facturas, de Mohamed; el WhatsApp no aparece en ellas)
 - **Email:** bcnproreforma@gmail.com
 - **Instagram:** @pintayreformatuobra
 - **Cuenta personal Omar:** omarbenkri@gmail.com (usada para Meta y servicios externos)

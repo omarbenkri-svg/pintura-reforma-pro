@@ -72,7 +72,7 @@ def footer() -> str:
     </ul>
   </div>
   <div class="container footer-bottom">
-    <p>© 2026 {CONFIG['brand']}. {pend('Datos fiscales pendientes.', 'Añadir razón social y NIF en el pie')}</p>
+    <p>© 2026 {CONFIG['brand']}. {pend('Datos fiscales pendientes.', 'Titular según facturas: Mohamed Ben Mesaud, autónomo. Añadir titular y NIF en el pie o en un aviso legal')}</p>
   </div>
 </footer>"""
 
@@ -238,7 +238,7 @@ def home():
       <p>{HERO['support']}</p>
       {contact_actions("inicio_final", None, "contacto.html?origen=inicio_final")}
     </div>
-    <dl class="cta-data" {pend_attr("Confirmar quién atiende cada canal y en qué horario")}>
+    <dl class="cta-data" {pend_attr("Confirmar quién atiende cada canal y en qué horario. En las facturas solo figura el 639 05 88 19, el de Mohamed; el 631 71 40 77 no aparece")}>
       <div><dt>Llamadas</dt><dd><a href="{tel_url()}" data-track="phone_click" data-origin="inicio_final">{CONFIG['tel_display']}</a></dd></div>
       <div><dt>WhatsApp y fotos</dt><dd><a href="{wa_url(wa_message('inicio'))}" data-track="whatsapp_click" data-origin="inicio_final">{CONFIG['wa_display']}</a></dd></div>
       <div><dt>Zona</dt><dd>Maresme y Barcelona, unos 40 km desde Cabrils</dd></div>
