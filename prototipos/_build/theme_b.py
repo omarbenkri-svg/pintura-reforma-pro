@@ -8,7 +8,7 @@ from content import (
     CONFIG, SERVICES, SERVICE_BY_SLUG, SECONDARY, CASES, CASE_BY_SLUG, ALBUMS, HERO, PEOPLE,
     PREP_STEPS, PROCESS, FAQ, FAQ_NOTE, CTA_LABEL, WA_LABEL, CALL_LABEL,
     e, pend, pend_attr, wa_url, wa_message, tel_url, contact_url, photo, placeholder, icon,
-    album_trigger, gremi_line,
+    album_trigger, gremi_line, case_pair, video_block, rich, svc_hero, svc_slots, svc_gallery,
 )
 from common import breadcrumb, contact_actions
 
@@ -52,7 +52,7 @@ def header(active: str) -> str:
 def footer() -> str:
     return f"""<footer class="site-footer">
   <div class="container footer-top">
-    <p class="footer-statement">Pintura y acabados para viviendas del Maresme y Barcelona, desde Cabrils.</p>
+    <p class="footer-statement">Pintura, estucos y microcemento para viviendas del Maresme y Barcelona. Desde Cabrils, en el Gremi de Pintors desde {CONFIG['since']}.</p>
     <a class="btn btn-primary" href="contacto.html" data-track="cta_presupuesto" data-origin="pie">{CTA_LABEL}</a>
   </div>
   <div class="container footer-grid">
@@ -69,22 +69,22 @@ def footer() -> str:
     <ul>
       <li><a href="../../blog/">Blog</a></li>
       <li><a href="privacidad.html">Privacidad</a></li>
+      <li><a href="aviso-legal.html">Aviso legal</a></li>
     </ul>
   </div>
   <div class="container footer-bottom">
-    <p>© 2026 {CONFIG['brand']} · {CONFIG['brand_web']}. {pend('Datos fiscales pendientes.', 'Titular según facturas: Mohamed Ben Mesaud, autónomo. Añadir titular y NIF en el pie o en un aviso legal')}</p>
+    <p>© 2026 {CONFIG['legal_name']} · {CONFIG['brand']}. <a href="aviso-legal.html">Aviso legal</a></p>
   </div>
 </footer>"""
 
 
 def spread(c, flip=False) -> str:
     """Large 'after' photo with the 'before' photo overlapping its corner."""
-    a_name, a_alt = c["after"][0]
-    b_name, b_alt = c["before"][0]
+    (b_name, b_alt, b_lab), (a_name, a_alt, a_lab) = case_pair(c)
     return f"""<article class="spread{' is-flipped' if flip else ''} reveal">
   <div class="spread-media">
-    <figure class="spread-after">{photo(a_name, a_alt, "(min-width: 1024px) 55vw, 100vw")}<figcaption>Después</figcaption></figure>
-    <figure class="spread-before">{photo(b_name, b_alt, "(min-width: 1024px) 22vw, 45vw")}<figcaption>Antes</figcaption></figure>
+    <figure class="spread-after">{photo(a_name, a_alt, "(min-width: 1024px) 55vw, 100vw")}<figcaption>{a_lab}</figcaption></figure>
+    <figure class="spread-before">{photo(b_name, b_alt, "(min-width: 1024px) 22vw, 45vw")}<figcaption>{b_lab}</figcaption></figure>
   </div>
   <div class="spread-text">
     <p class="meta">{e(c['service'])} · {c['municipio']}</p>
@@ -96,7 +96,7 @@ def spread(c, flip=False) -> str:
 
 
 def qa_columns(items, note=FAQ_NOTE) -> str:
-    rows = "".join(f'<div class="qa reveal" style="--i:{i % 2}"><h3>{e(q)}</h3><p>{e(a)}</p></div>'
+    rows = "".join(f'<div class="qa reveal" style="--i:{i % 2}"><h3>{e(q)}</h3><p>{rich(a)}</p></div>'
                    for i, (q, a) in enumerate(items))
     return f'<div class="qa-grid" {pend_attr(note)}>{rows}</div>'
 
@@ -105,7 +105,7 @@ def qa_columns(items, note=FAQ_NOTE) -> str:
 
 
 def home():
-    fachada, madera, garaje = CASES
+    bano, fachada, madera, garaje = (CASE_BY_SLUG[k] for k in ("caso-bano-microcemento", "caso-fachada", "caso-carpinteria-madera", "caso-garaje-comunitario"))
     body = f"""
 <section class="hero">
   <div class="container">
@@ -117,10 +117,10 @@ def home():
     </div>
   </div>
   <div class="hero-mosaic container">
-    <figure class="m-main">{photo("madera-despues-cristaleras", "Cerramiento de madera barnizado con cristaleras en un ático", "(min-width: 1024px) 60vw, 100vw", priority=True)}</figure>
-    <figure class="m-side">{photo("madera-despues-marco", "Detalle del marco de madera barnizado junto al ladrillo", "(min-width: 1024px) 30vw, 50vw")}</figure>
-    <figure class="m-side">{photo("fachada-despues-esquina", "Esquina de fachada terminada en color crema", "(min-width: 1024px) 30vw, 50vw")}</figure>
-    <p class="m-caption">Barnizado de madera y fachada reparada. Obras propias.</p>
+    <figure class="m-main">{photo("mc-suelo-escalones", "Suelo de microcemento en un salón con escalones revestidos", "(min-width: 1024px) 60vw, 100vw", priority=True)}</figure>
+    <figure class="m-side">{photo("mc-bano-ducha-desague", "Ducha de obra de microcemento con desagüe lineal", "(min-width: 1024px) 30vw, 50vw")}</figure>
+    <figure class="m-side">{photo("mc-terraza-escalera", "Terraza y escalera exterior de microcemento", "(min-width: 1024px) 30vw, 50vw")}</figure>
+    <p class="m-caption">Suelo, baño y terraza de microcemento. Obras propias.</p>
   </div>
 </section>
 
@@ -139,13 +139,13 @@ def home():
 <section class="cases-home" aria-labelledby="cases-title">
   <div class="container">
     <h2 id="cases-title" class="section-title">Trabajos, del estado inicial al acabado</h2>
-    {spread(fachada)}
+    {spread(bano)}
     <div class="case-pair">
       {"".join(f'''<article class="case-card reveal" style="--i:{i}">
         <a href="{c['slug']}.html" class="case-card-media">{photo(c['cover'], dict(c['after'])[c['cover']], "(min-width: 1024px) 40vw, 100vw")}</a>
         <p class="meta">{e(c['service'])}</p>
         <h3><a href="{c['slug']}.html">{c['title']}</a></h3>
-        <p>{c['summary']}</p></article>''' for i, c in enumerate((madera, garaje)))}
+        <p>{c['summary']}</p></article>''' for i, c in enumerate((fachada, madera)))}
     </div>
     <a class="btn-link more" href="trabajos.html">Todos los trabajos {icon('arrow-right')}</a>
   </div>
@@ -153,7 +153,7 @@ def home():
 
 <section class="services" id="servicios" aria-labelledby="services-title">
   <div class="container">
-    <h2 id="services-title" class="section-title">Pintura especializada</h2>
+    <h2 id="services-title" class="section-title">Pintura, estucos y microcemento</h2>
     <ol class="service-index">
       {"".join(f'''<li class="reveal" style="--i:{i}"><a href="{s['slug']}.html">
         <span class="si-n" aria-hidden="true">{i + 1}</span>
@@ -222,7 +222,6 @@ def home():
 
 
 def service(s):
-    first, *more = s["photos"]
     case = CASE_BY_SLUG.get(s["case"]) if s["case"] else None
     origin = f"servicio_{s['slug']}"
     related = spread(case) if case else (
@@ -239,12 +238,12 @@ def service(s):
     {contact_actions(origin, s['name'], contact_url(s['form'], origin))}
   </div>
 </section>
-<div class="container svc-wide">{placeholder(first[0], first[1], "wide-slot")}</div>
+<div class="container svc-wide">{svc_hero(s, "100vw", "wide-slot")}</div>
 
 <section class="svc-split container" aria-labelledby="inc-title">
   <h2 id="inc-title" class="split-title">Qué incluye</h2>
   <ul class="inc-list" {pend_attr("Alcance pendiente de validar con Mohamed")}>
-    {"".join(f'<li class="reveal" style="--i:{i % 3}">{e(x)}</li>' for i, x in enumerate(s['includes']))}
+    {"".join(f'<li class="reveal" style="--i:{i % 3}">{rich(x)}</li>' for i, x in enumerate(s['includes']))}
   </ul>
 </section>
 
@@ -257,7 +256,7 @@ def service(s):
 
 <section class="svc-photos container" aria-labelledby="ph-title">
   <h2 id="ph-title" class="section-title">Así trabajamos</h2>
-  <div class="slot-row">{"".join(placeholder(t, d) for t, d in more)}</div>
+  <div class="slot-row">{svc_gallery(s)}{"".join(placeholder(t, d) for t, d in svc_slots(s))}</div>
   {related}
 </section>
 
@@ -296,7 +295,7 @@ def works():
   <h1>Trabajos</h1>
   <p class="lead">Obras documentadas con su estado inicial, la preparación y el resultado. Más abajo, fotos agrupadas por tipo de trabajo.</p>
 </section>
-<section class="container works-spreads" aria-label="Casos documentados">{spreads}</section>
+<section class="container works-spreads" aria-labelledby="ws-title"><h2 id="ws-title" class="section-title">Obras documentadas</h2>{spreads}</section>
 <section class="albums" aria-labelledby="albums-title">
   <div class="container">
     <h2 id="albums-title" class="section-title">Álbumes por tipo de trabajo</h2>
@@ -339,8 +338,7 @@ def case(c):
 </section>
 
 <div class="case-compare container">
-  <figure>{photo(c['before'][0][0], c['before'][0][1], "(min-width: 1024px) 45vw, 100vw", priority=True)}<figcaption>Antes. {e(c['before'][0][1])}</figcaption></figure>
-  <figure>{photo(c['after'][0][0], c['after'][0][1], "(min-width: 1024px) 45vw, 100vw", priority=True)}<figcaption>Después. {e(c['after'][0][1])}</figcaption></figure>
+  {"".join(f'<figure>{photo(n, a, "(min-width: 1024px) 45vw, 100vw", priority=True)}<figcaption>{lab}. {e(a)}</figcaption></figure>' for n, a, lab in case_pair(c))}
 </div>
 
 <section class="chapter container" aria-labelledby="ch-before">
@@ -360,6 +358,7 @@ def case(c):
   <h2 id="ch-after" class="split-title">Resultado</h2>
   <div class="chapter-body">
     <p class="chapter-text">{c['finish']}</p>
+    {video_block(c)}
     <div class="masonry">{figs(c['after'][1:], "(min-width: 1024px) 30vw, 50vw")}</div>
     <p>{album_trigger(c['album'], f"Ver las {len(ALBUMS[c['album']]['photos'])} fotos del álbum", "btn-link")}</p>
   </div>

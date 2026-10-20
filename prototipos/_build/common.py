@@ -62,19 +62,18 @@ def contact_actions(origin: str, service_name: str | None = None, contact_href: 
 def company_body(theme) -> str:
     m, o = PEOPLE["mohamed"], PEOPLE["omar"]
     principles = [
-        ("Presupuesto por escrito", "Con la preparación, los materiales, la protección y lo que no incluye."),
-        ("La vivienda protegida", "Suelos, muebles y carpinterías cubiertos durante toda la obra."),
-        ("Un único contacto", "Omar coordina contigo fechas, cambios y dudas."),
-        ("Revisión final contigo", "Repasamos el trabajo juntos antes de darlo por terminado."),
+        ("Precio cerrado y por escrito", "El presupuesto detalla preparación, materiales, protección y lo que no incluye. Si algo cambia, lo hablamos antes."),
+        ("La casa protegida", "Suelos, muebles y carpinterías cubiertos durante toda la obra, y limpieza al final de cada jornada."),
+        ("Equipo propio", "Los mismos oficiales de principio a fin, sin subcontratas ni intermediarios."),
+        ("Un único contacto", "Omar coordina contigo fechas, cambios y dudas; Mohamed responde de la ejecución."),
     ]
     towns = "".join(f"<li>{e(t)}</li>" for t in MUNICIPIOS)
     return f"""
 <section class="page-head container">
   {breadcrumb([("index.html", "Inicio"), (None, "Empresa")])}
-  <h1>Una empresa familiar de pintura con base en Cabrils</h1>
-  <p class="lead">{pend(f"{CONFIG['brand']} es el nombre de la empresa; {CONFIG['brand_web']}, el de su web.",
-                        "Fijar una única versión de la marca. Facturas 2022-2023: «Pintura en general y acabados de obra», titular Mohamed Ben Mesaud (autónomo). En la web: «Pintura, Reforma y Acabado de Obras» y «Pinturas, Reformas y Acabados de Obra»")}
-  Trabajamos en viviendas del Maresme y Barcelona, con la pintura como especialidad.</p>
+  <h1>BCN ProReforma: pintores en Cabrils desde {CONFIG['since']}</h1>
+  <p class="lead">{CONFIG['brand']} es la marca de {CONFIG['legal_name']}, el oficio de {CONFIG['holder']}.
+  Pintamos, estucamos y aplicamos microcemento en viviendas del Maresme y Barcelona. {gremi_line()}</p>
 </section>
 
 <section class="people container" aria-labelledby="people-title">
@@ -85,7 +84,6 @@ def company_body(theme) -> str:
       <h3>{m['name']}</h3>
       <p class="role">{m['role']}</p>
       <p>{m['text']}</p>
-      <p class="gremi">{gremi_line()}</p>
     </div>
   </article>
   <article class="person reveal" style="--i:1">
@@ -98,7 +96,7 @@ def company_body(theme) -> str:
   </article>
 </section>
 
-<section class="principles container" aria-labelledby="principles-title" {pend_attr("Compromisos pendientes de validar con Mohamed y Omar")}>
+<section class="principles container" aria-labelledby="principles-title" {pend_attr("Compromisos tomados de la web actual: validar con Mohamed y Omar")}>
   <h2 id="principles-title">Cómo trabajamos</h2>
   <ul class="principle-list">
     {"".join(f'<li class="reveal" style="--i:{i}"><h3>{e(t)}</h3><p>{e(d)}</p></li>' for i, (t, d) in enumerate(principles))}
@@ -127,6 +125,7 @@ def contact_body(theme) -> str:
   {breadcrumb([("index.html", "Inicio"), (None, "Contacto")])}
   <h1>{CTA_LABEL}</h1>
   <p class="lead">Cuéntanos qué quieres renovar y en qué municipio. Revisaremos la información para indicarte el siguiente paso.</p>
+  <p class="quick-alt">Atendemos a particulares, comunidades y empresas. No es una oferta de empleo.</p>
   <p class="quick-alt">¿Prefieres hablar? <a href="{tel_url()}" data-track="phone_click" data-origin="contacto">{CALL_LABEL} al {CONFIG['tel_display']}</a> o
     <a href="{wa_url(wa_message('página de contacto'))}" data-track="whatsapp_click" data-origin="contacto">escribir por WhatsApp</a>.</p>
 </section>
@@ -162,7 +161,7 @@ def contact_body(theme) -> str:
 
 def privacy_body(theme) -> str:
     rows = [
-        ("Responsable", pend("Mohamed Ben Mesaud, autónomo con domicilio fiscal en Cabrils. NIF y dirección completa pendientes de publicar.", "Contrastado con facturas 2022-2023. Confirmar si se publican el NIF (es un NIE) y el domicilio completo, que el aviso legal suele exigir (LSSI); validar con asesoría")),
+        ("Responsable", f"{CONFIG['holder']} ({CONFIG['legal_name']}), NIF {CONFIG['nif']}, {CONFIG['fiscal_address']}."),
         ("Finalidad", "Responder a tu solicitud de presupuesto y, si lo aceptas, gestionar la obra."),
         ("Base legal", pend("Aplicación de medidas precontractuales a petición tuya", "Validar con asesoría")),
         ("Conservación", pend("Plazo de conservación", "Definir plazo y criterio de borrado")),
@@ -185,6 +184,34 @@ def privacy_body(theme) -> str:
 """
 
 
+# ---------------------------------------------------------------- legal notice
+
+
+def legal_body(theme) -> str:
+    rows = [
+        ("Titular", f"{CONFIG['holder']}, empresario autónomo"),
+        ("Nombre comercial", f"{CONFIG['legal_name']}, que opera con la marca {CONFIG['brand']}"),
+        ("NIF", CONFIG["nif"]),
+        ("Domicilio fiscal", CONFIG["fiscal_address"]),
+        ("Contacto", f"{CONFIG['email']} · {CONFIG['tel_display']}"),
+        ("Actividad", "Pintura, revestimientos decorativos, microcemento y acabados de obra"),
+        ("Asociación", pend(f"Gremi d'Empreses de Pintura de Barcelona i Comarques, desde {CONFIG['since']}", "Confirmar con el certificado del Gremi")),
+    ]
+    dl = "".join(f"<dt>{t}</dt><dd>{d}</dd>" for t, d in rows)
+    return f"""
+<section class="page-head container narrow">
+  {breadcrumb([("index.html", "Inicio"), (None, "Aviso legal")])}
+  <h1>Aviso legal</h1>
+  <p class="lead" {pend_attr("Texto base: revisar con la gestoría antes de publicar")}>Datos del titular de esta web, según la Ley 34/2002 de servicios de la sociedad de la información.</p>
+</section>
+<section class="legal container narrow">
+  <dl class="legal-list">{dl}</dl>
+  <h2>Uso de la web</h2>
+  <p>Los textos y las fotografías de esta web son de {CONFIG['brand']} y muestran obras propias. No se pueden reutilizar sin permiso.</p>
+</section>
+"""
+
+
 # ---------------------------------------------------------------- 404
 
 
@@ -196,6 +223,7 @@ def notfound_body(theme) -> str:
   <ul class="notfound-links">
     <li><a href="index.html">Inicio</a></li>
     <li><a href="pintura-viviendas.html">Pintura de viviendas</a></li>
+    <li><a href="microcemento.html">Microcemento</a></li>
     <li><a href="trabajos.html">Trabajos</a></li>
     <li><a href="contacto.html">{CTA_LABEL}</a></li>
   </ul>

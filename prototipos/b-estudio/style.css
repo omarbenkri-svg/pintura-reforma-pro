@@ -327,3 +327,10 @@ figcaption { font-size: .875rem; color: var(--muted); margin-top: .6rem; }
   .album-strip { grid-auto-columns: 72%; }
   .actions .btn { width: 100%; }
 }
+
+/* ---------- iteration 2: own photos in services, gallery, video ---------- */
+.wide-slot img { width: 100%; aspect-ratio: 16 / 9; max-height: 72vh; object-fit: cover; border-radius: var(--radius-m); }
+.slot-row figure img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radius-m); }
+.slot-row .slot-frame { aspect-ratio: 4 / 5; }
+.case-video { max-width: 22rem; margin: 0 0 2rem; }
+.case-video video { width: 100%; height: auto; border-radius: var(--radius-m); background: var(--text); }

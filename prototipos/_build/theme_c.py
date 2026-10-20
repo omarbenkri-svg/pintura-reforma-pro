@@ -9,7 +9,7 @@ from content import (
     CONFIG, SERVICES, SERVICE_BY_SLUG, SECONDARY, CASES, CASE_BY_SLUG, ALBUMS, HERO, PEOPLE,
     PREP_STEPS, PROCESS, FAQ, FAQ_NOTE, CTA_LABEL, WA_LABEL, CALL_LABEL,
     e, pend, pend_attr, wa_url, wa_message, tel_url, contact_url, photo, placeholder, icon,
-    album_trigger, gremi_line,
+    album_trigger, gremi_line, case_pair, video_block, rich, svc_hero, svc_slots, svc_gallery,
 )
 from common import breadcrumb, contact_actions
 
@@ -29,7 +29,7 @@ def header(active: str) -> str:
   <div class="container header-inner">
     <a class="brand" href="index.html"{cur("index")}>
       <span class="brand-name">{CONFIG['brand']}</span>
-      <span class="brand-tag">Pintura y acabados · {CONFIG['base']}</span>
+      <span class="brand-tag">{CONFIG['tagline']} · {CONFIG['base']}</span>
     </a>
     <button type="button" class="menu-toggle" data-menu-toggle aria-expanded="false" aria-controls="menu">
       {icon('list')}<span>Menú</span>
@@ -56,7 +56,7 @@ def footer() -> str:
   <div class="container footer-grid">
     <div class="f-cell f-brand">
       <p class="f-name">{CONFIG['brand']}</p>
-      <p>Empresa familiar de pintura. Base en Cabrils, trabajos en el Maresme y Barcelona.</p>
+      <p>{CONFIG['tagline']}. Empresa familiar con base en Cabrils, en el Gremi de Pintors desde {CONFIG['since']}.</p>
     </div>
     <dl class="f-cell f-data">
       <div><dt>Llamadas</dt><dd><a href="{tel_url()}" data-track="phone_click" data-origin="pie">{CONFIG['tel_display']}</a></dd></div>
@@ -69,16 +69,17 @@ def footer() -> str:
       <li><a href="empresa.html">Empresa</a></li>
       <li><a href="../../blog/">Blog</a></li>
       <li><a href="privacidad.html">Privacidad</a></li>
+      <li><a href="aviso-legal.html">Aviso legal</a></li>
     </ul>
   </div>
   <div class="container footer-bottom">
-    <p>© 2026 {CONFIG['brand']}. {pend('Datos fiscales pendientes.', 'Titular según facturas: Mohamed Ben Mesaud, autónomo. Añadir titular y NIF en el pie o en un aviso legal')}</p>
+    <p>© 2026 {CONFIG['legal_name']} · {CONFIG['brand']}.</p>
   </div>
 </footer>"""
 
 
 def faq_table(items, note=FAQ_NOTE) -> str:
-    rows = "".join(f'<div class="faq-row"><dt>{e(q)}</dt><dd>{e(a)}</dd></div>' for q, a in items)
+    rows = "".join(f'<div class="faq-row"><dt>{e(q)}</dt><dd>{rich(a)}</dd></div>' for q, a in items)
     return f'<dl class="faq-table" {pend_attr(note)}>{rows}</dl>'
 
 
@@ -90,7 +91,7 @@ def label(text: str) -> str:
 
 
 def home():
-    fachada = CASES[0]
+    fachada = CASE_BY_SLUG["caso-fachada"]
     m, o = PEOPLE["mohamed"], PEOPLE["omar"]
     seq = [
         (fachada["before"][1], "Estado inicial"),
@@ -105,8 +106,7 @@ def home():
     case_rows = "".join(f"""
       <li class="case-line reveal" style="--i:{i}">
         <div class="cl-thumbs">
-          {photo(c['before'][0][0], c['before'][0][1], "(min-width: 1024px) 10vw, 30vw")}
-          {photo(c['cover'], dict(c['after'])[c['cover']], "(min-width: 1024px) 10vw, 30vw")}
+          {"".join(photo(n, a, "(min-width: 1024px) 10vw, 30vw") for n, a, _ in case_pair(c))}
         </div>
         <div class="cl-text">
           <p class="label">{e(c['service'])}</p>
@@ -120,7 +120,7 @@ def home():
         <tr>
           <th scope="row"><a href="{s['slug']}.html">{e(s['name'])}</a></th>
           <td>{e(s['short'])}</td>
-          <td><ul>{"".join(f"<li>{e(x)}</li>" for x in s['includes'][:3])}</ul></td>
+          <td><ul>{"".join(f"<li>{rich(x)}</li>" for x in s['includes'][:3])}</ul></td>
           <td><a class="row-go" href="{s['slug']}.html" aria-label="Ver {e(s['name'])}">{icon('arrow-right')}</a></td>
         </tr>""" for s in SERVICES)
     layers = [
@@ -174,7 +174,7 @@ def home():
 
 <section class="services" id="servicios" aria-labelledby="services-title">
   <div class="container">
-    <h2 id="services-title">Pintura especializada</h2>
+    <h2 id="services-title">Pintura, estucos y microcemento</h2>
     <table class="svc-table">
       <caption class="sr-only">Servicios de pintura: para qué sirven y qué incluyen</caption>
       <thead><tr><th scope="col">Servicio</th><th scope="col">Para qué</th><th scope="col">Incluye, entre otros</th><th scope="col"><span class="sr-only">Enlace</span></th></tr></thead>
@@ -253,15 +253,13 @@ def home():
 
 
 def service(s):
-    first, *more = s["photos"]
     case = CASE_BY_SLUG.get(s["case"]) if s["case"] else None
     origin = f"servicio_{s['slug']}"
     case_dd = f'<a href="{case["slug"]}.html">{e(case["title"])}</a>' if case else pend(
         "Todavía no publicado", "Documentar un caso propio de este servicio")
     related = (
         f"""<a class="related" href="{case['slug']}.html">
-          {photo(case['before'][0][0], case['before'][0][1], "(min-width: 1024px) 20vw, 50vw")}
-          {photo(case['cover'], dict(case['after'])[case['cover']], "(min-width: 1024px) 20vw, 50vw")}
+          {"".join(photo(n, a, "(min-width: 1024px) 20vw, 50vw") for n, a, _ in case_pair(case))}
           <span class="related-text"><span class="label">Obra documentada</span><span class="related-title">{case['title']}</span><span class="seq-more">Ver la ficha {icon('arrow-right')}</span></span>
         </a>""" if case else ""
     )
@@ -289,7 +287,7 @@ def service(s):
 <section class="container block" aria-labelledby="inc-title">
   <h2 id="inc-title">Qué incluye</h2>
   <ol class="inc-grid" {pend_attr("Alcance pendiente de validar con Mohamed")}>
-    {"".join(f'<li><span class="n" aria-hidden="true">{i + 1}</span>{e(x)}</li>' for i, x in enumerate(s['includes']))}
+    {"".join(f'<li><span class="n" aria-hidden="true">{i + 1}</span>{rich(x)}</li>' for i, x in enumerate(s['includes']))}
   </ol>
 </section>
 
@@ -304,7 +302,7 @@ def service(s):
 
 <section class="container block" aria-labelledby="ph-title">
   <h2 id="ph-title">Fotos de obra</h2>
-  <div class="slot-grid">{placeholder(first[0], first[1])}{"".join(placeholder(t, d) for t, d in more)}</div>
+  <div class="slot-grid">{svc_hero(s, "(min-width: 1024px) 30vw, 100vw", priority=False)}{svc_gallery(s)}{"".join(placeholder(t, d) for t, d in svc_slots(s))}</div>
   {related}
 </section>
 
@@ -336,7 +334,7 @@ def service(s):
 def works():
     rows = "".join(f"""
       <tr>
-        <td class="t-thumbs">{photo(c['before'][0][0], c['before'][0][1], "120px")}{photo(c['cover'], dict(c['after'])[c['cover']], "120px")}</td>
+        <td class="t-thumbs">{"".join(photo(n, a, "120px") for n, a, _ in case_pair(c))}</td>
         <th scope="row"><a href="{c['slug']}.html">{c['title']}</a><span>{c['summary']}</span></th>
         <td>{e(c['service'])}</td>
         <td>{c['municipio']}</td>
@@ -417,6 +415,7 @@ def case(c):
     {stage("Estado inicial", c['before'], "s-before")}
     {stage("Durante la obra", c['process'], "s-proc")}
     {stage("Acabado", c['after'], "s-after")}
+    {video_block(c)}
     <p>{album_trigger(c['album'], f"Ver las {len(ALBUMS[c['album']]['photos'])} fotos del álbum {ALBUMS[c['album']]['title'].lower()}", "btn-link")}</p>
   </div>
 </div>

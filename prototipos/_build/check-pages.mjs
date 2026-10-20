@@ -19,7 +19,7 @@ import { fileURLToPath } from 'node:url';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const PROTO = join(HERE, '..');
-const BASE = 'http://localhost:8181/prototipos';
+const BASE = `http://localhost:${process.env.PORT || 8181}/prototipos`;
 const CHROME = process.env.CHROME_PATH || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 const PORT = 9334;
 const WIDTHS = [320, 390, 768, 1024, 1440];
@@ -67,6 +67,12 @@ const PROBE = `(async () => {
     emptyAlt: [...document.images].filter((i) => !i.closest('dialog') && !(i.getAttribute('alt') || '').trim()).length,
     hashLinks: document.querySelectorAll('a[href="#"]').length,
     dashes: (text.match(/[\\u2013\\u2014]/g) || []).length,
+    headingSkips: (() => { const out = []; let prev = 0;
+      document.querySelectorAll('main h1, main h2, main h3, main h4, main h5, main h6').forEach((h) => {
+        const lvl = +h.tagName[1]; if (prev && lvl > prev + 1) out.push('h' + prev + '>h' + lvl + ' "' + h.textContent.trim().slice(0, 30) + '"'); prev = lvl; });
+      return out; })(),
+    title: document.title,
+    description: (document.querySelector('meta[name=description]') || {}).content || '',
   };
 })()`;
 
@@ -118,6 +124,7 @@ const profile = mkdtempSync(join(tmpdir(), 'proto-check-'));
 const chrome = spawn(CHROME, ['--headless=new', `--remote-debugging-port=${PORT}`, `--user-data-dir=${profile}`,
   '--no-first-run', '--no-default-browser-check', '--hide-scrollbars'], { stdio: 'ignore' });
 let failures = 0, checks = 0;
+const seenTitles = new Set();
 try {
   for (let i = 0; i < 50; i++) { try { if ((await fetch(`http://127.0.0.1:${PORT}/json/version`)).ok) break; } catch {} await sleep(200); }
   for (const theme of THEMES) {
@@ -136,6 +143,11 @@ try {
         if (r.hashLinks) p.push(`${r.hashLinks} href=#`);
         if (r.dashes) p.push(`${r.dashes} dashes`);
         if (r.errors.length) p.push(`errors: ${[...new Set(r.errors)].join(' | ')}`);
+        if (r.headingSkips.length) p.push(`heading order: ${r.headingSkips.join(', ')}`);
+        if (width === 1440) {
+          if (seenTitles.has(r.title)) p.push(`duplicate title "${r.title}"`); seenTitles.add(r.title);
+          if (!r.description) p.push('no meta description');
+        }
         if (p.length) { failures++; console.log(`FAIL ${theme}/${page} @${width}: ${p.join('; ')}`); }
       }
       const off = await checkPage(url, 1280, true);

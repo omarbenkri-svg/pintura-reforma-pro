@@ -351,3 +351,13 @@ figcaption { font-size: .875rem; color: var(--muted); margin-top: .5rem; }
   .work-mini { grid-template-columns: 6.5rem 1fr; }
   .actions .btn { width: 100%; }
 }
+
+/* ---------- iteration 2: own photos in services, gallery, video ---------- */
+.svc-hero-photo img { width: 100%; aspect-ratio: 4 / 5; max-height: min(70vh, 620px); object-fit: cover; border-radius: var(--radius-m); }
+.svc-photo-row figure img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: var(--radius-s); }
+.svc-photo-row .slot-frame { aspect-ratio: 3 / 4; }
+.case-video { max-width: 22rem; margin-bottom: 1.5rem; }
+.case-video video { width: 100%; height: auto; border-radius: var(--radius-m); background: var(--text); }
+.service-lead { grid-row: 1 / -1; }
+@media (max-width: 1023px) { .svc-hero-photo img { aspect-ratio: 4 / 3; max-height: 52vh; } }
+.service-lead img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius-s); margin-bottom: .75rem; }

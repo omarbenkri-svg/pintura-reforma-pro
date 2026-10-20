@@ -26,8 +26,15 @@ CONFIG = {
     "wa": "34631714077",
     "wa_display": "631 71 40 77",
     "email": "bcnproreforma@gmail.com",
-    "brand": "Pinturas, Reformas y Acabados de Obra",
+    # Public brand (Omar, 20/10/2026) and the registered name for legal texts.
+    "brand": "BCN ProReforma",
     "brand_web": "BCN ProReforma",
+    "tagline": "Pintura, estucos y microcemento",
+    "legal_name": "Pintura, Reformas y Acabados de Obra",
+    "holder": "Mohamed Ben Mesaud",
+    "nif": "X-1397024-G",
+    "fiscal_address": "C/ Doctor Masriera, 8, bajo 2, 08348 Cabrils (Barcelona)",
+    "since": "1994",
     "base": "Cabrils",
     "area": "Maresme y Barcelona",
 }
@@ -117,14 +124,17 @@ PAGES = {
     "index": "Inicio",
     "pintura-viviendas": "Pintura de viviendas",
     "alisados-lacados": "Alisados y lacados",
-    "decorativa-estucos": "Pintura decorativa y estucos",
+    "microcemento": "Microcemento",
+    "decorativa-estucos": "Estucos y pintura decorativa",
     "trabajos": "Trabajos",
+    "caso-bano-microcemento": "Caso: baño de microcemento",
     "caso-fachada": "Caso: fachada",
     "caso-carpinteria-madera": "Caso: carpintería de madera",
     "caso-garaje-comunitario": "Caso: garaje comunitario",
     "empresa": "Empresa",
     "contacto": "Solicitar presupuesto",
     "privacidad": "Privacidad",
+    "aviso-legal": "Aviso legal",
     "404": "Página no encontrada",
 }
 
@@ -140,106 +150,156 @@ CALL_LABEL = "Llamar"
 
 # ---------------------------------------------------------------- services
 
+WEB = "Viene de la web actual: confirmar con Mohamed antes de publicar"
+
 SERVICES = [
     {
         "slug": "pintura-viviendas",
         "form": "pintura-vivienda",
         "name": "Pintura de viviendas",
-        "short": "Pisos y casas, completos o por estancias: paredes, techos, puertas y radiadores.",
-        "h1": "Pintura de viviendas en el Maresme y Barcelona",
-        "intro": "Renovamos la pintura de pisos y casas, completos o por estancias, preparando cada superficie antes de pintar.",
+        "title": "Pintores para pisos y casas en el Maresme y Barcelona",
+        "short": "Pisos y casas, enteros o por estancias: paredes, techos, puertas y radiadores, con la casa protegida.",
+        "h1": "Pintura de pisos y casas en el Maresme y Barcelona",
+        "intro": "Pintamos viviendas enteras o por estancias. Antes de abrir un bote tapamos muebles y suelos, reparamos grietas y golpes y preparamos cada pared para que el color quede uniforme y dure.",
+        "hero": ("fachada-despues-general", "Fachada de una vivienda reparada y pintada por nuestro equipo"),
+        "gallery": [],
         "includes": [
-            "Protección de suelos, muebles y carpinterías antes de empezar",
-            "Reparación de grietas, golpes y agujeros",
-            "Lijado e imprimación donde el soporte lo necesita",
-            "Paredes y techos con el acabado y el color que elijas",
-            "Puertas, marcos y radiadores, si se incluyen en el presupuesto",
-            "Limpieza y retirada de protecciones al terminar",
+            "Protección de suelos, muebles, puertas y enchufes antes de empezar",
+            "Reparación de grietas, golpes, agujeros y desconchados",
+            "Lijado e imprimación allí donde el soporte lo pide",
+            "Paredes y techos con el color y el acabado que elijas (mate, satinado o antimanchas)",
+            "Puertas, marcos, zócalos y radiadores, si los incluimos en el presupuesto",
+            "Limpieza diaria y retirada de protecciones al terminar",
         ],
         "factors": [
-            ("Superficie y altura", "Metros de pared y techo, no solo de suelo."),
-            ("Estado de las paredes", "Gotelé, grietas, humedades o pintura antigua que se desprende."),
-            ("Vivienda vacía o amueblada", "Mover y proteger muebles lleva tiempo."),
-            ("Cambio de color", "Pasar de un color intenso a uno claro puede pedir más manos."),
+            ("Superficie real", "Se calculan los metros de pared y techo, no solo los del suelo."),
+            ("Estado de las paredes", "Gotelé, grietas, humedades o pintura vieja que se levanta."),
+            ("Vivienda vacía o amueblada", "Mover y proteger muebles añade horas de trabajo."),
+            ("Cambio de color", "Pasar de un tono oscuro a uno claro puede pedir una mano más."),
         ],
         "photos": [
-            ("Salón o dormitorio terminado con luz natural", "La imagen principal de este servicio. Mejor en una vivienda vacía o recién entregada."),
-            ("Protección de suelo y muebles antes de pintar", "Demuestra el cuidado de la casa, que es lo que más pregunta el cliente."),
-            ("Grieta reparada antes de la pintura", "Misma pared, antes y después de la preparación."),
+            ("Salón o dormitorio terminado con luz natural", "La foto que más ayuda a vender este servicio: una estancia recién pintada y vacía."),
+            ("Muebles y suelo protegidos antes de pintar", "Enseña el cuidado de la casa, que es lo primero que pregunta el cliente."),
+            ("Grieta reparada antes de la pintura", "La misma pared antes y después de prepararla."),
         ],
         "case": None,
         "faq": [
-            ("¿Tengo que vaciar la vivienda?", "No es necesario. Movemos lo imprescindible y protegemos suelos y muebles. En la visita acordamos si conviene retirar algo."),
-            ("¿Cuántas manos de pintura dais?", "Depende del soporte y del color. Lo indicamos por escrito en el presupuesto para que sepas qué se va a hacer."),
+            ("¿Tengo que vaciar la vivienda?", "No. Juntamos los muebles en el centro de cada estancia y los cubrimos; el suelo se protege con papel grueso o lona según sea parqué, mármol o baldosa."),
+            ("¿Cuántas manos de pintura dais?", "Las que pida el soporte y el color, normalmente dos. Lo dejamos escrito en el presupuesto para que sepas exactamente qué se va a hacer."),
+        ],
+    },
+    {
+        "slug": "microcemento",
+        "form": "microcemento",
+        "name": "Microcemento",
+        "title": "Microcemento en baños, suelos y terrazas en el Maresme y Barcelona",
+        "short": "Baños, suelos, escaleras y terrazas con un revestimiento continuo, sin juntas, aplicado a mano.",
+        "h1": "Microcemento en baños, suelos y terrazas",
+        "intro": "Revestimos suelos, paredes, platos de ducha, encimeras y escaleras con microcemento: una superficie continua, sin juntas, que se aplica a mano capa a capa. Es la forma de renovar un baño o un salón sin levantar el suelo existente cuando el soporte lo permite.",
+        "hero": ("mc-bano-ducha-desague", "Ducha de obra revestida de microcemento con desagüe lineal"),
+        "gallery": [
+            ("mc-suelo-escalones", "Suelo de microcemento en un salón con escalones revestidos"),
+            ("mc-terraza-escalera", "Terraza y escalera exterior revestidas de microcemento"),
+            ("mc-bano-general", "Baño con suelo de microcemento satinado y ducha con mampara"),
+            ("mc-gris-ducha", "Plato de ducha de microcemento gris oscuro, antes de montar la grifería"),
+            ("mc-suelo-ladrillo", "Suelo de microcemento junto a una pared de ladrillo visto"),
+            ("mc-proceso-base", "Fase intermedia del sistema, antes de las capas de acabado"),
+        ],
+        "includes": [
+            "Revisión del soporte y reparación de grietas o piezas sueltas",
+            pend("Aplicación sobre la baldosa existente, sin levantarla, cuando está firme", WEB),
+            pend("Malla de fibra y capas de base que dan resistencia al revestimiento", WEB),
+            "Platos de ducha de obra, hornacinas, bancos y encimeras revestidos",
+            "Capas de acabado en el color elegido",
+            pend("Sellado final que protege del agua y de las manchas", WEB),
+        ],
+        "factors": [
+            ("Superficie y piezas", "Suelo, paredes, plato de ducha, encimera o escalones: cada pieza lleva su trabajo."),
+            ("Estado del soporte", "Baldosa firme, grietas, humedad o desniveles que haya que corregir antes."),
+            ("Interior o exterior", "Una terraza necesita un sistema preparado para sol, lluvia y cambios de temperatura."),
+            ("Acabado", "Color, liso o con aguas, mate o satinado."),
+        ],
+        "photos": [],
+        "case": "caso-bano-microcemento",
+        "faq": [
+            ("¿Se puede aplicar microcemento sobre el azulejo?", pend("En muchos casos sí, siempre que la baldosa esté firme y bien pegada. Lo comprobamos en la visita.", WEB)),
+            ("¿Qué mantenimiento necesita?", pend("Limpieza con productos neutros y sin abrasivos. Te explicamos cómo cuidarlo al entregar la obra.", "Validar con Mohamed")),
+        ],
+    },
+    {
+        "slug": "decorativa-estucos",
+        "form": "decorativa",
+        "name": "Estucos y pintura decorativa",
+        "title": "Estuco veneciano y pintura decorativa en el Maresme y Barcelona",
+        "short": "Estuco a la cal, veladuras y acabados con aguas para paredes que tienen que lucir.",
+        "h1": "Estucos y pintura decorativa",
+        "intro": "El estuco y los acabados decorativos se trabajan a mano, con llana y espátula. Por eso dependen tanto del oficio como de la preparación: una pared mal preparada se nota más bajo un estuco que bajo una pintura lisa.",
+        "hero": ("deco-pared-aguas", "Pared con acabado decorativo de aguas en tonos gris y verde"),
+        "gallery": [],
+        "includes": [
+            "Muestra del acabado sobre la pared antes de aplicarlo entero",
+            "Preparación del soporte hasta dejarlo plano y firme",
+            pend("Estuco veneciano a la cal, espatulado en varias capas", WEB),
+            "Veladuras y acabados con aguas",
+            pend("Protección final con ceras cuando el acabado lo pide", WEB),
+        ],
+        "factors": [
+            ("Técnica", "Cada estuco o efecto tiene su número de capas y su tiempo de secado."),
+            ("Superficie", "Una pared de acento o una estancia entera."),
+            ("Estado del soporte", "Un estuco necesita una pared muy plana: si no lo está, hay que alisarla antes."),
+        ],
+        "photos": [
+            ("Estuco terminado con luz rasante", "La luz lateral muestra la profundidad y el brillo del estuco."),
+            ("Aplicación con llana durante la obra", "Enseña el oficio, no solo el resultado."),
+        ],
+        "case": None,
+        "faq": [
+            ("¿Puedo ver el acabado antes de decidir?", "Sí. Hacemos una muestra sobre tu pared antes de aplicarlo en toda la superficie."),
+            ("¿Qué diferencia hay entre estuco y microcemento?", "El estuco es un acabado decorativo de pared, con brillo y profundidad. El microcemento es un revestimiento resistente que también sirve para suelos, duchas y encimeras."),
         ],
     },
     {
         "slug": "alisados-lacados",
         "form": "alisado",
         "name": "Alisados y lacados",
-        "short": "Quitar gotelé, alisar paredes y lacar o barnizar puertas y carpinterías.",
-        "h1": "Alisado de paredes y lacado de carpinterías",
-        "intro": "Eliminamos el gotelé o alisamos paredes irregulares, y renovamos puertas, armarios y carpinterías con acabado lacado o barnizado.",
+        "title": "Quitar gotelé y lacar puertas en el Maresme y Barcelona",
+        "short": "Fuera el gotelé, paredes lisas y puertas, armarios y carpinterías lacados o barnizados.",
+        "h1": "Quitar gotelé, alisar paredes y lacar carpinterías",
+        "intro": "Eliminamos el gotelé o lo tapamos hasta dejar la pared lisa, y renovamos puertas, armarios y carpinterías de madera con lacado, esmalte o barniz.",
+        "hero": ("madera-despues-terraza", "Carpintería de madera de un ático barnizada de nuevo"),
+        "gallery": [],
         "includes": [
             "Retirada o tapado del gotelé según el estado de la pared",
-            "Enlucido y lijado hasta dejar la superficie lisa",
+            "Enlucido y lijado hasta dejar una superficie lisa, sin ondulaciones",
             "Imprimación antes de la pintura final",
-            "Lijado y preparación de puertas, marcos y armarios",
+            "Lijado y preparación de puertas, marcos, zócalos y armarios",
             "Lacado o esmaltado de carpinterías interiores",
             "Barnizado de madera interior y exterior",
         ],
         "factors": [
             ("Tipo de gotelé", "No es lo mismo un gotelé fino que uno grueso o pintado varias veces."),
-            ("Número de piezas", "Puertas, marcos y frentes de armario, por unidad."),
+            ("Número de piezas", "Puertas, marcos y frentes de armario se presupuestan por unidad."),
             ("Estado de la madera", "Barniz levantado, golpes o madera agrisada por el sol."),
             ("Acabado", "Mate, satinado o brillo; color o madera vista."),
         ],
         "photos": [
             ("Pared con gotelé antes y después del alisado", "Tiene que ser la misma pared para poder compararla."),
-            ("Puerta lacada terminada, detalle del canto", "El canto y las molduras muestran la calidad del lacado."),
+            ("Puerta lacada terminada, detalle del canto", "El canto y las molduras delatan la calidad del lacado."),
         ],
         "case": "caso-carpinteria-madera",
         "faq": [
-            ("¿Se puede quitar el gotelé sin hacer obra?", "En la mayoría de paredes se puede tapar y alisar sin picar. Lo valoramos al ver el estado del gotelé."),
-            ("¿Laqueáis las puertas en casa o en taller?", "Lo concretamos según el número de piezas y el acabado que busques."),
-        ],
-    },
-    {
-        "slug": "decorativa-estucos",
-        "form": "decorativa",
-        "name": "Pintura decorativa y estucos",
-        "short": "Estucos y acabados decorativos para paredes que tienen que lucir.",
-        "h1": "Pintura decorativa y estucos",
-        "intro": "Aplicamos estucos y acabados decorativos en paredes interiores. En estos trabajos, la preparación del soporte se nota todavía más.",
-        "includes": [
-            "Muestra del acabado antes de aplicarlo en toda la pared",
-            "Preparación del soporte, que en estos acabados se nota más",
-            "Estucos y efectos texturados",
-            "Protección final cuando el acabado lo requiere",
-        ],
-        "factors": [
-            ("Técnica", "Cada estuco o efecto tiene su tiempo de aplicación."),
-            ("Superficie", "Una pared de acento o toda una estancia."),
-            ("Estado del soporte", "Un estuco necesita una pared muy bien preparada."),
-        ],
-        "photos": [
-            ("Pared estucada terminada, con luz rasante", "La luz lateral muestra la textura del acabado."),
-            ("Aplicación con llana durante la obra", "Enseña el oficio, no solo el resultado."),
-        ],
-        "case": None,
-        "faq": [
-            ("¿Puedo ver el acabado antes de decidir?", "Sí. Preparamos una muestra antes de aplicarlo en toda la superficie."),
-            ("¿Qué técnicas hacéis?", "Te enseñamos ejemplos de los acabados que trabajamos cuando hablemos de tu pared."),
+            ("¿Se puede quitar el gotelé sin hacer obra?", "En la mayoría de paredes se tapa y se alisa sin picar. Lo decidimos al ver el tipo de gotelé y el estado de la pared."),
+            ("¿Laqueáis las puertas en casa o en taller?", "Depende del número de piezas y del acabado que busques. Lo concretamos en el presupuesto."),
         ],
     },
 ]
 SERVICE_BY_SLUG = {s["slug"]: s for s in SERVICES}
 
 SECONDARY = [
-    ("Fachadas y exteriores", "Reparación del revoque y pintura de fachadas, muros y rejas.", "caso-fachada"),
-    ("Comunidades y garajes", "Escaleras, zonas comunes y garajes, con señalización.", "caso-garaje-comunitario"),
-    ("Reformas de baño y cocina", "Coordinamos la obra y nos ocupamos de los acabados.", None),
-    ("Albañilería y reparaciones", "Pequeñas obras, tabiques, humedades y tejados.", None),
+    ("Fachadas y exteriores", "Saneamos el revoque y pintamos fachadas, muros y rejas.", "caso-fachada"),
+    ("Comunidades y garajes", "Escaleras, zonas comunes y garajes, con su señalización.", "caso-garaje-comunitario"),
+    ("Reformas de baño y cocina", "Coordinamos la obra completa y nos ocupamos de los acabados.", None),
+    ("Humedades y reparaciones", "Buscamos la filtración, la reparamos y dejamos la pared lista para pintar.", None),
 ]
 
 # Form values for "tipo de trabajo" (radio group).
@@ -247,7 +307,8 @@ WORK_TYPES = [
     ("pintura-vivienda", "Pintura de vivienda"),
     ("alisado", "Alisar paredes o quitar gotelé"),
     ("lacado", "Lacar o barnizar carpinterías"),
-    ("decorativa", "Pintura decorativa o estuco"),
+    ("microcemento", "Microcemento"),
+    ("decorativa", "Estuco o pintura decorativa"),
     ("exterior", "Fachada o exterior"),
     ("comunidad", "Comunidad, garaje o local"),
     ("reforma", "Reforma o reparación"),
@@ -264,7 +325,39 @@ MUNICIPIOS = [
 # ---------------------------------------------------------------- cases
 REAL = "../../images/projects/real"
 
+GROUPED = "Agrupado por las fotos (mismo plato, desagüe y color). Mohamed debe confirmar que es una sola obra, el municipio y el año"
+
 CASES = [
+    {
+        "slug": "caso-bano-microcemento",
+        "form": "microcemento",
+        "title": "Baño de microcemento con ducha de obra",
+        "service": "Microcemento",
+        "summary": "Suelo, paredes y plato de ducha en un mismo revestimiento continuo, con desagüe lineal y murete de obra.",
+        "municipio": pend("No publicado", GROUPED),
+        "need": pend("Baño revestido entero de microcemento: suelo, paredes, ducha a ras de suelo, murete y encimera de obra.",
+                     "Indicar qué había antes (azulejo, plato, bañera): no hay fotos del estado inicial"),
+        "prep": pend("Reparación del soporte, formación de la pendiente de la ducha hacia el desagüe lineal y capas de base antes del acabado.",
+                     "Validar con Mohamed: sistema y capas aplicados"),
+        "finish": "Revestimiento continuo en tono arena claro, sin juntas entre suelo, paredes y ducha.",
+        "product": pend("Sistema de microcemento pendiente de indicar", "Indicar marca o sistema, si Mohamed quiere citarlo"),
+        "before": [],
+        "process": [
+            ("mc-bano-obra", "Pared de la encimera revestida, antes de montar sanitarios y grifería"),
+            ("mc-bano-encimera", "Encimera de obra y pared terminadas, con la toma de agua todavía a la vista"),
+        ],
+        "after": [
+            ("mc-bano-ducha-desague", "Ducha a ras de suelo con desagüe lineal, revestida de microcemento"),
+            ("mc-bano-ducha-esquina", "Esquina de la ducha con la pendiente hacia el desagüe"),
+            ("mc-bano-murete", "Murete de obra y banco revestidos junto a la ducha"),
+            ("mc-bano-mampara", "Ducha con la mampara de vidrio montada"),
+            ("mc-bano-luz", "El baño terminado con luz natural de la ventana"),
+        ],
+        "video": ("mc-bano-recorrido", "Recorrido por el baño terminado: banco, paredes y ducha"),
+        "album": "microcemento",
+        "cover": "mc-bano-ducha-desague",
+        "review": None,
+    },
     {
         "slug": "caso-fachada",
         "form": "exterior",
@@ -353,6 +446,48 @@ CASES = [
 CASE_BY_SLUG = {c["slug"]: c for c in CASES}
 
 
+def case_pair(c):
+    """Two photos that summarise a case: (name, alt, label) for start and end."""
+    if c["before"]:
+        first = (*c["before"][0], "Antes")
+    else:
+        first = (*c["process"][0], "Durante la obra")
+    return first, (c["cover"], dict(c["after"])[c["cover"]], "Terminado" if not c["before"] else "Después")
+
+
+def video_block(c, cls: str = "case-video") -> str:
+    if not c.get("video"):
+        return ""
+    name, caption = c["video"]
+    return (f'<figure class="{cls}"><video controls muted playsinline preload="none" '
+            f'poster="../shared/media/{name}.jpg" width="480" height="848">'
+            f'<source src="../shared/media/{name}.mp4" type="video/mp4"></video>'
+            f'<figcaption>{e(caption)}. Vídeo sin sonido.</figcaption></figure>')
+
+
+def svc_hero(s, sizes: str, cls: str = "", priority: bool = True) -> str:
+    """Own photo for the service header, or the labelled slot if there is none."""
+    if s.get("hero"):
+        n, a = s["hero"]
+        return f'<figure class="{cls}">{photo(n, a, sizes, priority=priority)}<figcaption>{e(a)}. Obra propia.</figcaption></figure>'
+    t, d = s["photos"][0]
+    return placeholder(t, d, cls)
+
+
+def svc_slots(s) -> list:
+    """Photo slots still pending after the header photo."""
+    return s["photos"] if s.get("hero") else s["photos"][1:]
+
+
+def svc_gallery(s, sizes: str = "(min-width: 1024px) 30vw, 50vw") -> str:
+    return "".join(f'<figure>{photo(n, a, sizes)}<figcaption>{e(a)}</figcaption></figure>' for n, a in s.get("gallery", []))
+
+
+def rich(text: str) -> str:
+    """Escape plain copy but keep our own pend() markup."""
+    return text if text.startswith('<span class="pend"') else e(text)
+
+
 def _series(prefix: str, numbers, alt_for) -> list[dict]:
     return [{"src": f"{REAL}/{prefix}-{n:02d}.webp", "alt": alt_for(n)} for n in numbers]
 
@@ -367,7 +502,37 @@ def _fachada_alt(n: int) -> str:
     return "Fachada terminada en color crema"
 
 
+SHARED_IMG = "../shared/img"
+MC_ALBUM = [
+    ("mc-bano-ducha-desague", "Ducha a ras de suelo con desagüe lineal"),
+    ("mc-bano-ducha-esquina", "Esquina de la ducha con la pendiente hacia el desagüe"),
+    ("mc-bano-murete", "Murete de obra y banco revestidos"),
+    ("mc-bano-mampara", "Ducha con mampara"),
+    ("mc-bano-luz", "Baño terminado con luz natural"),
+    ("mc-bano-obra", "Pared revestida antes de montar sanitarios"),
+    ("mc-bano-encimera", "Encimera de obra revestida"),
+    ("mc-bano-general", "Baño con suelo satinado y ducha con mampara"),
+    ("mc-bano-banco", "Banco de obra revestido bajo la ventana"),
+    ("mc-gris-pared", "Pared de ducha en microcemento gris oscuro, en obra"),
+    ("mc-gris-ducha", "Plato de ducha de microcemento gris oscuro"),
+    ("mc-proceso-base", "Fase intermedia del sistema, antes de las capas de acabado"),
+    ("mc-proceso-suelo", "Suelo de vivienda durante la aplicación"),
+    ("mc-suelo-escalones", "Suelo de salón con escalones revestidos"),
+    ("mc-suelo-ladrillo", "Suelo junto a una pared de ladrillo visto"),
+    ("mc-suelo-salon", "Suelo continuo en una estancia amplia"),
+    ("mc-terraza-escalera", "Terraza y escalera exterior"),
+    ("mc-terraza", "Terraza revestida de microcemento"),
+    ("deco-pared-aguas", "Pared con acabado decorativo de aguas"),
+]
+
 ALBUMS = {
+    "microcemento": {
+        "title": "Microcemento y acabados decorativos",
+        "note": "Baños, suelos, terrazas y paredes de varias obras.",
+        "cover": "mc-suelo-escalones",
+        "cover_alt": "Suelo de microcemento en un salón con escalones revestidos",
+        "photos": [{"src": f"{SHARED_IMG}/{n}-1200.webp", "alt": a} for n, a in MC_ALBUM],
+    },
     "fachadas": {
         "title": "Fachadas y exteriores",
         "note": "Fotos de reparación y pintura de fachadas.",
@@ -416,9 +581,9 @@ ALBUMS = {
 # ---------------------------------------------------------------- home copy
 
 HERO = {
-    "eyebrow": "Pintura especializada · Maresme y Barcelona",
-    "h1": "Pintura especializada para renovar tu vivienda en el Maresme.",
-    "desc": "Interiores, alisados, estucos y lacados, con atención al soporte y al detalle.",
+    "eyebrow": "BCN ProReforma · Pintores desde 1994",
+    "h1": "Pintura, estucos y microcemento en el Maresme y Barcelona",
+    "desc": "Empresa familiar de Cabrils. Preparamos cada superficie a conciencia antes de pintar, estucar o aplicar microcemento.",
     "support": "Cuéntanos qué quieres renovar y en qué municipio. Revisaremos la información para indicarte el siguiente paso.",
 }
 
@@ -426,12 +591,12 @@ PEOPLE = {
     "mohamed": {
         "name": "Mohamed Ben Mesaud",
         "role": "Responsable del oficio",
-        "text": "Valora el estado de cada superficie, decide cómo prepararla y supervisa la ejecución de la obra.",
+        "text": "Pintor desde hace más de treinta años. Valora cada superficie, decide cómo prepararla y está en la obra hasta el último repaso.",
     },
     "omar": {
         "name": "Omar Ben Mesaud",
         "role": "Atención y coordinación",
-        "text": "Atiende tu consulta, organiza la visita y el presupuesto y es tu contacto durante la obra.",
+        "text": "Atiende tu consulta, organiza la visita y el presupuesto, y es tu contacto durante toda la obra.",
     },
 }
 
@@ -457,18 +622,23 @@ PROCESS = [
 ]
 
 FAQ = [
+    ("¿Protegéis los muebles y el suelo?",
+     pend("Sí. Juntamos los muebles en el centro y los cubrimos con plástico; el suelo se protege con papel grueso o lona según el material. Al terminar retiramos todo y limpiamos.", WEB)),
+    ("¿El precio puede cambiar durante la obra?",
+     pend("El presupuesto firmado es el precio. Solo cambia si nos pides algo nuevo o si aparece un daño oculto: en ese caso te lo enseñamos con fotos y un presupuesto aparte antes de tocar nada.", WEB)),
+    ("¿Cuánto cuesta pintar un piso de 80 m²?",
+     pend("Como orientación, entre 1.800 y 3.200 €, según el estado de las paredes y la pintura elegida. Si hay gotelé que alisar, sube. El precio exacto lo da el presupuesto.",
+          "Rango de la web actual: validar con presupuestos recientes y aclarar si incluye IVA")),
     ("¿Puedo pedir presupuesto sin que vengáis a casa?",
-     "Puedes enviarnos fotos y medidas aproximadas por WhatsApp para una primera orientación. Para un presupuesto cerrado normalmente necesitamos ver la obra."),
-    ("¿Qué incluye el presupuesto?",
-     "La preparación de las superficies, los materiales, la protección de la vivienda, lo que no está incluido y cómo se gestionan los cambios durante la obra."),
-    ("¿Tengo que vaciar la vivienda?",
-     "No. Movemos lo necesario y protegemos suelos y muebles. En la visita acordamos qué conviene retirar."),
+     "Puedes enviarnos fotos y medidas aproximadas por WhatsApp para una primera orientación. Para cerrar un precio necesitamos ver la obra."),
+    ("¿Pedís un adelanto?",
+     pend("Un 30 % a la firma, para materiales y reserva de fechas. El resto, durante la obra o al terminar, según su tamaño.", WEB)),
+    ("¿Qué horario tenéis en obra?",
+     pend("De lunes a viernes de 8:00 a 19:00 y sábados de 9:00 a 14:00. En locales podemos adaptarnos a otros horarios.", WEB)),
     ("¿En qué zona trabajáis?",
-     "En el Maresme y Barcelona, en un radio aproximado de 40 km desde Cabrils. Si no tienes claro si llegamos a tu municipio, pregúntanos."),
-    ("¿Cuánto se tarda en pintar un piso?",
-     "Depende de la superficie, del estado de las paredes y de si está amueblado. El calendario se indica en el presupuesto."),
+     "En el Maresme y Barcelona, en un radio de unos 40 km desde Cabrils. Si no tienes claro si llegamos a tu municipio, pregúntanos."),
     ("¿Hacéis también reformas?",
-     "Sí: baños, cocinas, albañilería y reparaciones. Nuestra especialidad es la pintura y los acabados."),
+     "Sí: baños, cocinas, humedades y reparaciones. Nuestra especialidad son la pintura, los estucos y el microcemento."),
 ]
 FAQ_NOTE = "Respuestas en borrador: validar con Mohamed antes de publicar"
 

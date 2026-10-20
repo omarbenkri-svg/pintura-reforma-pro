@@ -347,3 +347,9 @@ figcaption { font-size: .875rem; color: var(--muted); margin-top: .5rem; }
   .legal-list dt { border-bottom: 0; padding-bottom: 0; }
   .actions .btn { width: 100%; }
 }
+
+/* ---------- iteration 2: own photos in services, gallery, video ---------- */
+.slot-grid figure img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; }
+.slot-grid .slot-frame { aspect-ratio: 3 / 4; }
+.case-video { max-width: 20rem; margin: 0 0 2rem; }
+.case-video video { width: 100%; height: auto; background: var(--rule); }

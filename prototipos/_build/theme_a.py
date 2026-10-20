@@ -7,7 +7,7 @@ from content import (
     CONFIG, SERVICES, SERVICE_BY_SLUG, SECONDARY, CASES, CASE_BY_SLUG, ALBUMS, HERO, PEOPLE,
     PREP_STEPS, PROCESS, FAQ, FAQ_NOTE, CTA_LABEL, WA_LABEL, CALL_LABEL,
     e, pend, pend_attr, wa_url, wa_message, tel_url, contact_url, photo, placeholder, icon,
-    album_trigger, gremi_line,
+    album_trigger, gremi_line, case_pair, video_block, rich, svc_hero, svc_slots, svc_gallery,
 )
 from common import breadcrumb, contact_actions
 
@@ -30,7 +30,7 @@ def header(active: str) -> str:
   <div class="container header-inner">
     <a class="brand" href="index.html"{cur("index")}>
       <span class="brand-name">{CONFIG['brand']}</span>
-      <span class="brand-web">{CONFIG['brand_web']} · {CONFIG['area']}</span>
+      <span class="brand-web">{CONFIG['tagline']} · {CONFIG['area']}</span>
     </a>
     <button type="button" class="menu-toggle" data-menu-toggle aria-expanded="false" aria-controls="menu">
       {icon('list')}<span>Menú</span>
@@ -57,7 +57,7 @@ def footer() -> str:
   <div class="container footer-grid">
     <div class="footer-about">
       <p class="footer-brand">{CONFIG['brand']}</p>
-      <p>Empresa familiar de pintura con base en Cabrils. Trabajamos en el Maresme y Barcelona.</p>
+      <p>{CONFIG['tagline']}. Empresa familiar con base en Cabrils, en el Gremi de Pintors desde {CONFIG['since']}.</p>
     </div>
     <div>
       <h2>Contacto</h2>
@@ -75,11 +75,12 @@ def footer() -> str:
         <li><a href="empresa.html">Empresa</a></li>
         <li><a href="../../blog/">Blog</a></li>
         <li><a href="privacidad.html">Privacidad</a></li>
+        <li><a href="aviso-legal.html">Aviso legal</a></li>
       </ul>
     </div>
   </div>
   <div class="container footer-bottom">
-    <p>© 2026 {CONFIG['brand']}. {pend('Datos fiscales pendientes.', 'Titular según facturas: Mohamed Ben Mesaud, autónomo. Añadir titular y NIF en el pie o en un aviso legal')}</p>
+    <p>© 2026 {CONFIG['legal_name']} · {CONFIG['brand']}.</p>
   </div>
 </footer>"""
 
@@ -88,17 +89,16 @@ def footer() -> str:
 
 
 def before_after(c, cls="ba") -> str:
-    b_name, b_alt = c["before"][0]
-    a_name, a_alt = c["after"][0]
+    (b_name, b_alt, b_lab), (a_name, a_alt, a_lab) = case_pair(c)
     return f"""<div class="{cls}">
-  <figure>{photo(b_name, b_alt, "(min-width: 1024px) 25vw, 50vw")}<figcaption>Antes</figcaption></figure>
-  <figure>{photo(a_name, a_alt, "(min-width: 1024px) 25vw, 50vw")}<figcaption>Después</figcaption></figure>
+  <figure>{photo(b_name, b_alt, "(min-width: 1024px) 25vw, 50vw")}<figcaption>{b_lab}</figcaption></figure>
+  <figure>{photo(a_name, a_alt, "(min-width: 1024px) 25vw, 50vw")}<figcaption>{a_lab}</figcaption></figure>
 </div>"""
 
 
 def faq_list(items, note=FAQ_NOTE) -> str:
     rows = "".join(
-        f'<details class="faq-item"><summary>{e(q)}</summary><p>{e(a)}</p></details>' for q, a in items
+        f'<details class="faq-item"><summary>{e(q)}</summary><p>{rich(a)}</p></details>' for q, a in items
     )
     return f'<div class="faq-list" {pend_attr(note)}>{rows}</div>'
 
@@ -107,7 +107,7 @@ def faq_list(items, note=FAQ_NOTE) -> str:
 
 
 def home():
-    fachada, madera, garaje = CASES
+    feature, *minis = CASES
     m = PEOPLE["mohamed"]
     services = SERVICES
     lead, *rest = services
@@ -121,8 +121,8 @@ def home():
       {contact_actions("inicio_hero", None, "contacto.html?origen=inicio")}
     </div>
     <figure class="hero-photo">
-      {photo("fachada-despues-general", "Fachada de una vivienda reparada y pintada en color crema", "(min-width: 1024px) 40vw, 100vw", priority=True)}
-      <figcaption>Fachada reparada y pintada. Obra propia.</figcaption>
+      {photo("mc-bano-ducha-desague", "Ducha de obra revestida de microcemento, con desagüe lineal", "(min-width: 1024px) 40vw, 100vw", priority=True)}
+      <figcaption>Ducha de microcemento. Obra propia.</figcaption>
     </figure>
   </div>
 </section>
@@ -144,17 +144,17 @@ def home():
     <h2 id="works-title">Trabajos con antes y después</h2>
     <div class="works-grid">
       <article class="work-feature reveal">
-        {before_after(fachada)}
+        {before_after(feature)}
         <div class="work-text">
-          <h3><a href="{fachada['slug']}.html">{fachada['title']}</a></h3>
-          <p>{fachada['summary']}</p>
+          <h3><a href="{feature['slug']}.html">{feature['title']}</a></h3>
+          <p>{feature['summary']}</p>
         </div>
       </article>
       <div class="work-side">
         {"".join(f'''<article class="work-mini reveal" style="--i:{i + 1}">
           {photo(c["cover"], dict(c["after"])[c["cover"]], "(min-width: 1024px) 15vw, 40vw")}
           <div><h3><a href="{c['slug']}.html">{c['title']}</a></h3><p>{c['summary']}</p></div>
-        </article>''' for i, c in enumerate((madera, garaje)))}
+        </article>''' for i, c in enumerate(minis))}
         <a class="btn-link" href="trabajos.html">Ver todos los trabajos {icon('arrow-right')}</a>
       </div>
     </div>
@@ -163,10 +163,10 @@ def home():
 
 <section class="services" id="servicios" aria-labelledby="services-title">
   <div class="container">
-    <h2 id="services-title">Pintura especializada</h2>
+    <h2 id="services-title">Pintura, estucos y microcemento</h2>
     <div class="services-grid">
       <a class="service-card service-lead reveal" href="{lead['slug']}.html">
-        {placeholder(lead['photos'][0][0], lead['photos'][0][1])}
+        {photo(lead['hero'][0], lead['hero'][1], "(min-width: 1024px) 35vw, 100vw") if lead.get('hero') else placeholder(lead['photos'][0][0], lead['photos'][0][1])}
         <h3>{lead['name']}</h3>
         <p>{lead['short']}</p>
         <span class="card-link">Ver el servicio {icon('arrow-right')}</span>
@@ -242,7 +242,6 @@ def home():
 
 
 def service(s):
-    first, *more = s["photos"]
     case = CASE_BY_SLUG.get(s["case"]) if s["case"] else None
     origin = f"servicio_{s['slug']}"
     related = (
@@ -267,14 +266,14 @@ def service(s):
       <p class="lead">{s['intro']}</p>
       {contact_actions(origin, s['name'], contact_url(s['form'], origin))}
     </div>
-    {placeholder(first[0], first[1], "svc-hero-photo")}
+    {svc_hero(s, "(min-width: 1024px) 40vw, 100vw", "svc-hero-photo")}
   </div>
 </section>
 
 <section class="svc-includes container" aria-labelledby="inc-title">
   <h2 id="inc-title">Qué incluye</h2>
   <ul class="check-list" {pend_attr("Alcance pendiente de validar con Mohamed")}>
-    {"".join(f'<li>{icon("check")}<span>{e(i)}</span></li>' for i in s['includes'])}
+    {"".join(f'<li>{icon("check")}<span>{rich(i)}</span></li>' for i in s['includes'])}
   </ul>
 </section>
 
@@ -290,7 +289,7 @@ def service(s):
 <section class="svc-photos container" aria-labelledby="ph-title">
   <h2 id="ph-title">Así trabajamos</h2>
   <div class="svc-photo-row">
-    {"".join(placeholder(t, d) for t, d in more)}
+    {svc_gallery(s)}{"".join(placeholder(t, d) for t, d in svc_slots(s))}
   </div>
   {related}
 </section>
@@ -415,6 +414,7 @@ def case(c):
   <h2 id="st-after">Resultado</h2>
   <p class="step-text">{c['finish']} {c['product']}.</p>
   {gallery(c['after'][1:], 'g-after')}
+  {video_block(c)}
   <p>{album_trigger(c['album'], f"Ver las {len(ALBUMS[c['album']]['photos'])} fotos del álbum {ALBUMS[c['album']]['title'].lower()}", "btn-link")}</p>
 </section>
 
