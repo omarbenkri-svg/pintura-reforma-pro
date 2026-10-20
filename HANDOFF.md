@@ -121,7 +121,7 @@ Punto único de verdad del estado del proyecto. Cualquier agente lee esto ANTES 
 ### Iteración 2 (20/10/2026)
 - Fase 1 hecha en `feat/prototipos-rediseno` (`ad0c4a8`): fotos de microcemento reveladas, servicio y caso de microcemento, texto reescrito, marca BCN ProReforma y aviso legal. Plan: `prototipos/PLAN-ITERACION-2.md`.
 - **Desplegado 20/10/2026** (`master` 34317e8, deploy `pintura-reforma-obra-v1-64qjxrdm1`; rollback: `vercel promote pintura-reforma-obra-v1-b4d9n7z6s-omarbenkri-svgs-projects.vercel.app`): robots abierto a todos los rastreadores, canónicas y sitemap sin `.html` ni barra final (15 URLs, todas 200), 308 de los duplicados y del enlace roto de Mataró. Verificado en vista previa y en producción.
-- Omar: elegir prototipo; confirmar si la valoración 4,9/23 y las reseñas con nombre de la web actual son reales; crear GA4 y Search Console (fase 4).
+- Omar confirma (20/10/2026) que la valoración 4,9/23 y las 4 reseñas con nombre de la web actual son reales, del antiguo Perfil de Empresa de Google: **se mantienen**. Pendiente: elegir prototipo; crear GA4 y Search Console (fase 4).
 
 ### Prototipos de rediseño (decisión de Omar)
 - Elegir dirección (A, B o C) en `prototipos/index.html`.
