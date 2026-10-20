@@ -67,7 +67,7 @@ def company_body(theme) -> str:
         ("Equipo propio", "Los mismos oficiales de principio a fin, sin subcontratas ni intermediarios."),
         ("Un único contacto", "Omar coordina contigo fechas, cambios y dudas; Mohamed responde de la ejecución."),
     ]
-    towns = "".join(f'<li><a href="{"/" if PROD else "../../"}municipios/{MUNI_PAGES[t]}.html">{e(t)}</a></li>' if t in MUNI_PAGES else f"<li>{e(t)}</li>" for t in MUNICIPIOS)
+    towns = "".join(f'<li><a href="{"/municipios/" + MUNI_PAGES[t] if PROD else "../../municipios/" + MUNI_PAGES[t] + ".html"}">{e(t)}</a></li>' if t in MUNI_PAGES else f"<li>{e(t)}</li>" for t in MUNICIPIOS)
     return f"""
 <section class="page-head container">
   {breadcrumb([("index.html", "Inicio"), (None, "Empresa")])}
