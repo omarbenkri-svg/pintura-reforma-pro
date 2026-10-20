@@ -6,7 +6,7 @@ where the visitor chooses a service or a job.
 from content import (
     CONFIG, SERVICES, SERVICE_BY_SLUG, SECONDARY, CASES, CASE_BY_SLUG, ALBUMS, HERO, PEOPLE,
     PREP_STEPS, PROCESS, FAQ, FAQ_NOTE, CTA_LABEL, WA_LABEL, CALL_LABEL,
-    e, pend, pend_attr, wa_url, wa_message, tel_url, contact_url, photo, placeholder, icon,
+    PROD, RATING, REVIEWS, e, pend, pend_attr, wa_url, wa_message, tel_url, contact_url, photo, placeholder, icon,
     album_trigger, gremi_line, case_pair, video_block, rich, svc_hero, svc_slots, svc_gallery,
 )
 from common import breadcrumb, contact_actions
@@ -103,6 +103,22 @@ def faq_list(items, note=FAQ_NOTE) -> str:
     return f'<div class="faq-list" {pend_attr(note)}>{rows}</div>'
 
 
+def reviews_block() -> str:
+    if not PROD:
+        return f"""<section class="reviews container" aria-labelledby="reviews-title" {pend_attr("Opiniones: publicar solo reseñas con procedencia comprobada y permiso")}>
+  <h2 id="reviews-title">Opiniones de clientes</h2>
+  <p>Este espacio mostrará opiniones de clientes con su procedencia y su permiso. No publicamos reseñas que no podamos acreditar.</p>
+</section>"""
+    quotes = "".join(f'<figure class="quote"><blockquote><p>{e(t)}</p></blockquote><figcaption>{e(n)}, reseña en Google</figcaption></figure>' for n, t in REVIEWS)
+    return f"""<section class="reviews-live" aria-labelledby="reviews-title">
+  <div class="container">
+    <h2 id="reviews-title">Lo que dicen nuestros clientes</h2>
+    <p class="rating"><strong>{RATING['value'].replace('.', ',')} de 5</strong> en Google, con {RATING['count']} reseñas.</p>
+    <div class="quote-grid">{quotes}</div>
+  </div>
+</section>"""
+
+
 # ---------------------------------------------------------------- home
 
 
@@ -129,7 +145,7 @@ def home():
 
 <section class="oficio" aria-labelledby="oficio-title">
   <div class="container oficio-grid">
-    {placeholder("Mohamed trabajando en una obra", "Retrato en obra, con luz natural.", "oficio-photo")}
+    {('<figure class="oficio-photo">' + photo("fachada-proceso-pintor", "Pintor del equipo trabajando en la reparación de una fachada", "(min-width: 1024px) 40vw, 100vw") + '<figcaption>En obra: reparación de una fachada antes de pintarla.</figcaption></figure>') if PROD else placeholder("Mohamed trabajando en una obra", "Retrato en obra, con luz natural.", "oficio-photo")}
     <div class="oficio-text reveal">
       <h2 id="oficio-title">{m['name']}, al frente del oficio</h2>
       <p>Una empresa familiar con trato directo durante todo el proyecto. Mohamed valora cada superficie y supervisa la obra; Omar te atiende y coordina visitas y presupuestos.</p>
@@ -206,10 +222,7 @@ def home():
   </div>
 </section>
 
-<section class="reviews container" aria-labelledby="reviews-title" {pend_attr("Opiniones: publicar solo reseñas con procedencia comprobada y permiso")}>
-  <h2 id="reviews-title">Opiniones de clientes</h2>
-  <p>Este espacio mostrará opiniones de clientes con su procedencia y su permiso. No publicamos reseñas que no podamos acreditar.</p>
-</section>
+{reviews_block()}
 
 <section class="others" id="otros-servicios" aria-labelledby="others-title">
   <div class="container">

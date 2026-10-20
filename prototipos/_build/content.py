@@ -9,6 +9,8 @@ from __future__ import annotations
 
 from html import escape
 from pathlib import Path
+import os
+import re
 from urllib.parse import quote
 import json
 
@@ -17,6 +19,18 @@ from PIL import Image
 ROOT = Path(__file__).resolve().parents[2]
 PROTO = ROOT / "prototipos"
 IMG_DIR = PROTO / "shared" / "img"
+
+# BUILD_MODE=prod renders the public site: no review marks, no photo slots,
+# no demo panel, absolute asset paths. Default renders the prototypes.
+PROD = os.environ.get("BUILD_MODE") == "prod"
+ASSET = "/assets" if PROD else "../shared"
+IMG_URL = f"{ASSET}/img"
+MEDIA_URL = f"{ASSET}/media"
+SITE = "https://bcnproreforma.com"
+# Apps Script web app that already writes leads to the "Form Leads" sheet.
+LEAD_ENDPOINT = "https://script.google.com/macros/s/AKfycbwesZXU9_TUzmSptQnYt4CMJFfB6nHttnDA2XOXdsjyebmUJlaQHEpN0ku6Oum_3lCh/exec"
+GA_ID = os.environ.get("GA_ID", "")          # e.g. G-XXXXXXX, empty = no analytics
+GSC_TOKEN = os.environ.get("GSC_TOKEN", "")  # Search Console HTML-tag token
 
 # ---------------------------------------------------------------- channels
 # Single source of truth for contact destinations (plan section 9).
@@ -47,13 +61,19 @@ def e(text: str) -> str:
 
 
 def pend(text: str, note: str) -> str:
-    """Inline text pending confirmation. Highlighted in review mode."""
+    """Inline text pending confirmation. Highlighted in review mode.
+
+    In the public build the review note disappears; text that only says
+    something is pending is dropped altogether.
+    """
+    if PROD:
+        return "" if re.search(r"pendientes?( de (indicar|confirmar))?\.?$", text.strip(), re.I) else text
     return f'<span class="pend" data-note="{e(note)}">{text}</span>'
 
 
 def pend_attr(note: str) -> str:
     """Attribute for a whole block pending confirmation."""
-    return f'data-pending="{e(note)}"'
+    return "" if PROD else f'data-pending="{e(note)}"'
 
 
 def wa_url(message: str) -> str:
@@ -95,14 +115,16 @@ def photo(name: str, alt: str, sizes: str = "(min-width: 1024px) 50vw, 100vw",
     load = 'loading="eager" fetchpriority="high"' if priority else 'loading="lazy"'
     c = f' class="{cls}"' if cls else ""
     return (
-        f'<img{c} src="../shared/img/{name}-1200.webp" '
-        f'srcset="../shared/img/{name}-640.webp 640w, ../shared/img/{name}-1200.webp 1200w" '
+        f'<img{c} src="{IMG_URL}/{name}-1200.webp" '
+        f'srcset="{IMG_URL}/{name}-640.webp 640w, {IMG_URL}/{name}-1200.webp 1200w" '
         f'sizes="{sizes}" width="{w}" height="{h}" alt="{e(alt)}" {load} decoding="async">'
     )
 
 
 def placeholder(label: str, detail: str, cls: str = "") -> str:
     """Labelled slot for an own photo that does not exist yet (plan section 5, option 1)."""
+    if PROD:
+        return ""
     return (
         f'<figure class="slot {cls}" {pend_attr("Foto propia pendiente: " + label)}>'
         f'<div class="slot-frame" role="img" aria-label="Espacio reservado para una foto propia: {e(label)}">'
@@ -157,7 +179,7 @@ SERVICES = [
         "slug": "pintura-viviendas",
         "form": "pintura-vivienda",
         "name": "Pintura de viviendas",
-        "title": "Pintores para pisos y casas en el Maresme y Barcelona",
+        "title": "Pintores de pisos y casas en el Maresme",
         "short": "Pisos y casas, enteros o por estancias: paredes, techos, puertas y radiadores, con la casa protegida.",
         "h1": "Pintura de pisos y casas en el Maresme y Barcelona",
         "intro": "Pintamos viviendas enteras o por estancias. Antes de abrir un bote tapamos muebles y suelos, reparamos grietas y golpes y preparamos cada pared para que el color quede uniforme y dure.",
@@ -192,7 +214,7 @@ SERVICES = [
         "slug": "microcemento",
         "form": "microcemento",
         "name": "Microcemento",
-        "title": "Microcemento en baños, suelos y terrazas en el Maresme y Barcelona",
+        "title": "Microcemento en el Maresme y Barcelona",
         "short": "Baños, suelos, escaleras y terrazas con un revestimiento continuo, sin juntas, aplicado a mano.",
         "h1": "Microcemento en baños, suelos y terrazas",
         "intro": "Revestimos suelos, paredes, platos de ducha, encimeras y escaleras con microcemento: una superficie continua, sin juntas, que se aplica a mano capa a capa. Es la forma de renovar un baño o un salón sin levantar el suelo existente cuando el soporte lo permite.",
@@ -230,7 +252,7 @@ SERVICES = [
         "slug": "decorativa-estucos",
         "form": "decorativa",
         "name": "Estucos y pintura decorativa",
-        "title": "Estuco veneciano y pintura decorativa en el Maresme y Barcelona",
+        "title": "Estuco veneciano y pintura decorativa en Barcelona",
         "short": "Estuco a la cal, veladuras y acabados con aguas para paredes que tienen que lucir.",
         "h1": "Estucos y pintura decorativa",
         "intro": "El estuco y los acabados decorativos se trabajan a mano, con llana y espátula. Por eso dependen tanto del oficio como de la preparación: una pared mal preparada se nota más bajo un estuco que bajo una pintura lisa.",
@@ -262,7 +284,7 @@ SERVICES = [
         "slug": "alisados-lacados",
         "form": "alisado",
         "name": "Alisados y lacados",
-        "title": "Quitar gotelé y lacar puertas en el Maresme y Barcelona",
+        "title": "Quitar gotelé y lacar puertas en el Maresme",
         "short": "Fuera el gotelé, paredes lisas y puertas, armarios y carpinterías lacados o barnizados.",
         "h1": "Quitar gotelé, alisar paredes y lacar carpinterías",
         "intro": "Eliminamos el gotelé o lo tapamos hasta dejar la pared lisa, y renovamos puertas, armarios y carpinterías de madera con lacado, esmalte o barniz.",
@@ -323,7 +345,7 @@ MUNICIPIOS = [
 ]
 
 # ---------------------------------------------------------------- cases
-REAL = "../../images/projects/real"
+REAL = "/images/projects/real" if PROD else "../../images/projects/real"
 
 GROUPED = "Agrupado por las fotos (mismo plato, desagüe y color). Mohamed debe confirmar que es una sola obra, el municipio y el año"
 
@@ -395,7 +417,7 @@ CASES = [
         "title": "Barnizado de la carpintería de madera de un ático",
         "service": "Lacados y barnizados",
         "summary": "Marcos y vigas agrisados por el sol. Lijado y barniz para recuperar la madera.",
-        "municipio": pend("Municipio pendiente", "Indicar municipio del ático"),
+        "municipio": pend("No publicado", "Indicar municipio del ático"),
         "need": "Los marcos, montantes y vigas del cerramiento de madera del ático estaban agrisados y con el barniz perdido por el sol.",
         "prep": pend("Lijado de la madera hasta retirar el barniz deteriorado y limpieza antes de aplicar.",
                      "Validar con Mohamed: preparación realizada"),
@@ -423,7 +445,7 @@ CASES = [
         "title": "Pintura de un garaje comunitario",
         "service": "Comunidades y garajes",
         "summary": "Paredes desconchadas en la parte baja. Reparación, zócalo gris y franja de señalización.",
-        "municipio": pend("Municipio pendiente", "Indicar municipio y si se puede nombrar la comunidad"),
+        "municipio": pend("No publicado", "Indicar municipio y si se puede nombrar la comunidad"),
         "need": "Las paredes del garaje tenían la pintura y el revestimiento desconchados en la parte baja, con material suelto en el suelo.",
         "prep": pend("Retirada del material suelto y reparación de las zonas desconchadas antes de pintar.",
                      "Validar con Mohamed: preparación realizada"),
@@ -460,8 +482,8 @@ def video_block(c, cls: str = "case-video") -> str:
         return ""
     name, caption = c["video"]
     return (f'<figure class="{cls}"><video controls muted playsinline preload="none" '
-            f'poster="../shared/media/{name}.jpg" width="480" height="848">'
-            f'<source src="../shared/media/{name}.mp4" type="video/mp4"></video>'
+            f'poster="{MEDIA_URL}/{name}.jpg" width="480" height="848">'
+            f'<source src="{MEDIA_URL}/{name}.mp4" type="video/mp4"></video>'
             f'<figcaption>{e(caption)}. Vídeo sin sonido.</figcaption></figure>')
 
 
@@ -502,7 +524,7 @@ def _fachada_alt(n: int) -> str:
     return "Fachada terminada en color crema"
 
 
-SHARED_IMG = "../shared/img"
+SHARED_IMG = IMG_URL
 MC_ALBUM = [
     ("mc-bano-ducha-desague", "Ducha a ras de suelo con desagüe lineal"),
     ("mc-bano-ducha-esquina", "Esquina de la ducha con la pendiente hacia el desagüe"),
@@ -538,7 +560,7 @@ ALBUMS = {
         "note": "Fotos de reparación y pintura de fachadas.",
         "cover": "fachada-despues-general",
         "cover_alt": "Fachada terminada en color crema con la puerta del garaje gris",
-        "photos": [{"src": "../shared/img/fachada-antes-general-1200.webp",
+        "photos": [{"src": f"{IMG_URL}/fachada-antes-general-1200.webp",
                     "alt": "Fachada antes de la obra, con el revoque deteriorado"}]
         + _series("rehabilitacion-fachada-mataro",
                   [*range(1, 8), *range(11, 20), *range(21, 29)], _fachada_alt),
@@ -640,6 +662,22 @@ FAQ = [
     ("¿Hacéis también reformas?",
      "Sí: baños, cocinas, humedades y reparaciones. Nuestra especialidad son la pintura, los estucos y el microcemento."),
 ]
+# Real reviews from the old Google Business Profile (confirmed by Omar, 20/10/2026).
+RATING = {"value": "4.9", "count": 23}
+REVIEWS = [
+    ("Marta Gómez", "Vinieron recomendados por un amigo para empapelar y pintar el piso. Han sido muy finos trabajando, muy educados y dejaron todo limpio cada día."),
+    ("Jordi C.", "Una empresa muy seria. Me cambiaron el suelo de toda la casa y reformaron el baño. Presupuesto detallado, cumplieron el plazo y el resultado es excelente."),
+    ("Roberto S.", "Reformaron mi local comercial de noche para no interrumpir mi horario. Increíble la rapidez y el compromiso."),
+    ("Elena M.", "Eliminaron el gotelé de todo el salón y pasillo. El acabado es liso espejo, nada de ondulaciones. Muy profesionales y limpios."),
+]
+
+# Municipio pages that already exist on the live site (internal links).
+MUNI_PAGES = {
+    "Alella": "pintor-alella", "Badalona": "pintor-badalona", "Cabrils": "pintor-cabrils",
+    "El Masnou": "pintor-el-masnou", "Mataró": "pintor-mataro", "Montgat": "pintor-montgat",
+    "Premià de Mar": "pintor-premia-de-mar", "Vilassar de Mar": "pintor-vilassar-de-mar",
+}
+
 FAQ_NOTE = "Respuestas en borrador: validar con Mohamed antes de publicar"
 
 # ---------------------------------------------------------------- shared markup
@@ -666,6 +704,8 @@ def head(title: str, description: str, theme_css: str, fonts_url: str, letter: s
 
 
 def proto_bar(letter: str, name: str) -> str:
+    if PROD:
+        return ""
     return f"""<div class="proto-bar" role="region" aria-label="Avisos del prototipo">
   <p><strong>Prototipo {letter} · {e(name)}.</strong> No envía datos ni está publicado.</p>
   <a href="../index.html">Comparar prototipos</a>
@@ -713,7 +753,7 @@ def album_trigger(key: str, label: str, cls: str = "") -> str:
 
 
 def scripts() -> str:
-    return '<script src="../shared/app.js" defer></script>'
+    return f'<script src="{ASSET}/js/app.js" defer></script>' if PROD else '<script src="../shared/app.js" defer></script>'
 
 
 def contact_form(origin: str = "contacto") -> str:
@@ -724,7 +764,14 @@ def contact_form(origin: str = "contacto") -> str:
         for v, t in WORK_TYPES
     )
     options = "\n".join(f'<option value="{e(m)}"></option>' for m in MUNICIPIOS)
-    return f"""<form class="lead-form" data-lead-form novalidate>
+    endpoint = f' data-endpoint="{LEAD_ENDPOINT}"' if PROD else ""
+    demo = "" if PROD else """  <div class="demo-panel" role="group" aria-labelledby="demo-title">
+    <p id="demo-title"><strong>Prototipo:</strong> el formulario no envía nada. Elige qué resultado simular:</p>
+    <label class="demo-choice"><input type="radio" name="demo" value="ok" checked> Solicitud recibida</label>
+    <label class="demo-choice"><input type="radio" name="demo" value="error"> Error del receptor</label>
+    <label class="demo-choice"><input type="radio" name="demo" value="network"> Conexión perdida al enviar</label>
+  </div>"""
+    return f"""<form class="lead-form" data-lead-form{endpoint} novalidate>
   <div class="form-alert" role="alert" hidden></div>
 
   <div class="field">
@@ -809,12 +856,7 @@ def contact_form(origin: str = "contacto") -> str:
     <a class="btn-link" href="{wa_url(wa_message('formulario de contacto'))}" data-wa-dynamic data-track="whatsapp_click" data-origin="contacto">{icon('whatsapp-logo')} {WA_LABEL}</a>
   </div>
 
-  <div class="demo-panel" role="group" aria-labelledby="demo-title">
-    <p id="demo-title"><strong>Prototipo:</strong> el formulario no envía nada. Elige qué resultado simular:</p>
-    <label class="demo-choice"><input type="radio" name="demo" value="ok" checked> Solicitud recibida</label>
-    <label class="demo-choice"><input type="radio" name="demo" value="error"> Error del receptor</label>
-    <label class="demo-choice"><input type="radio" name="demo" value="network"> Conexión perdida al enviar</label>
-  </div>
+{demo}
 </form>
 
 <section class="form-success" tabindex="-1" hidden aria-labelledby="ok-title">

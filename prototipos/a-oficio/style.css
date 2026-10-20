@@ -361,3 +361,16 @@ figcaption { font-size: .875rem; color: var(--muted); margin-top: .5rem; }
 .service-lead { grid-row: 1 / -1; }
 @media (max-width: 1023px) { .svc-hero-photo img { aspect-ratio: 4 / 3; max-height: 52vh; } }
 .service-lead img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius-s); margin-bottom: .75rem; }
+
+/* ---------- public site: real reviews ---------- */
+.reviews-live { padding-block: var(--section); background: var(--surface); border-block: 1px solid var(--line); }
+.reviews-live h2 { margin-bottom: .5rem; }
+.rating { color: var(--muted); margin-bottom: 2rem; }
+.rating strong { color: var(--text); }
+.quote-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); gap: 1.5rem; }
+.quote { margin: 0; padding: 1.5rem; background: var(--bg); border-radius: var(--radius-m); display: grid; gap: .75rem; align-content: space-between; }
+.quote blockquote { margin: 0; }
+.quote figcaption { font-weight: 600; color: var(--text); margin: 0; }
+.oficio-photo img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radius-m); }
+.town-list a { text-decoration: none; }
+.town-list a:hover { text-decoration: underline; }

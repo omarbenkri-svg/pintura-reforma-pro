@@ -307,12 +307,68 @@
     setAlert('', '');
     setBusy(true);
     window.track('lead_submit', { trabajo: form.elements.trabajo.value, origen: form.elements.origen.value });
+    if (form.dataset.endpoint) { realSend(); return; }
     var outcome = (form.querySelector('input[name="demo"]:checked') || {}).value || 'ok';
     window.setTimeout(function () {
       setBusy(false);
       if (outcome === 'ok') done();
       else failure(outcome);
     }, 1400);
+  }
+
+  /* Real delivery to the Apps Script receiver. text/plain avoids a CORS
+   * preflight that Apps Script cannot answer. Only a readable 2xx answer
+   * counts as received; an error answer keeps the data; a lost connection
+   * is reported as unconfirmed (it may or may not have arrived). */
+  function payload() {
+    var el = form.elements;
+    var q = new URLSearchParams(location.search);
+    return {
+      ref: el.ref.value,
+      nombre: el.nombre.value.trim(),
+      telefono: el.telefono.value.trim(),
+      email: '',
+      municipio: el.municipio.value.trim(),
+      servicio: selectedLabel(),
+      descripcion: el.descripcion.value.trim(),
+      metros: el.superficie.value,
+      fecha_deseada: el.fecha.value,
+      presupuesto: el.presupuesto.value,
+      fuente: 'web_v2_formulario',
+      origen: el.origen.value,
+      pagina: location.pathname,
+      referrer: document.referrer || 'directo',
+      dispositivo: window.matchMedia('(max-width: 767px)').matches ? 'movil' : 'escritorio',
+      utm_source: q.get('utm_source') || '',
+      utm_medium: q.get('utm_medium') || '',
+      utm_campaign: q.get('utm_campaign') || '',
+      timestamp: new Date().toISOString()
+    };
+  }
+  function realSend() {
+    var ctrl = 'AbortController' in window ? new AbortController() : null;
+    var timer = window.setTimeout(function () { if (ctrl) ctrl.abort(); }, 20000);
+    fetch(form.dataset.endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload()),
+      redirect: 'follow',
+      signal: ctrl ? ctrl.signal : undefined
+    }).then(function (res) {
+      if (!res.ok) throw new Error('http ' + res.status);
+      return res.text();
+    }).then(function (text) {
+      var data = null;
+      try { data = JSON.parse(text); } catch (err) { /* plain-text answer is fine */ }
+      window.clearTimeout(timer);
+      setBusy(false);
+      if (data && (data.ok === false || data.status === 'error' || data.result === 'error')) failure('error');
+      else done();
+    }).catch(function (err) {
+      window.clearTimeout(timer);
+      setBusy(false);
+      failure(/^http /.test(err.message) ? 'error' : 'network');
+    });
   }
 
   form.addEventListener('submit', function (ev) {

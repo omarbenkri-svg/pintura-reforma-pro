@@ -19,11 +19,13 @@ import { fileURLToPath } from 'node:url';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const PROTO = join(HERE, '..');
-const BASE = `http://localhost:${process.env.PORT || 8181}/prototipos`;
+const BASE = `http://localhost:${process.env.PORT || 8181}${process.argv.includes('--site') ? '' : '/prototipos'}`;
 const CHROME = process.env.CHROME_PATH || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 const PORT = 9334;
 const WIDTHS = [320, 390, 768, 1024, 1440];
-const THEMES = ['a-oficio', 'b-estudio', 'c-tecnico'];
+const SITE_MODE = process.argv.includes('--site');
+const THEMES = SITE_MODE ? ['.'] : ['a-oficio', 'b-estudio', 'c-tecnico'];
+const SITE_PAGES = ['index', 'pintura-viviendas', 'microcemento', 'decorativa-estucos', 'alisados-lacados', 'trabajos', 'caso-bano-microcemento', 'caso-fachada', 'caso-carpinteria-madera', 'caso-garaje-comunitario', 'empresa', 'contacto', 'privacidad', 'aviso-legal', '404'].map((p) => p + '.html');
 const SHOTS = process.argv.includes('--shots');
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -128,9 +130,9 @@ const seenTitles = new Set();
 try {
   for (let i = 0; i < 50; i++) { try { if ((await fetch(`http://127.0.0.1:${PORT}/json/version`)).ok) break; } catch {} await sleep(200); }
   for (const theme of THEMES) {
-    const pages = readdirSync(join(PROTO, theme)).filter((f) => f.endsWith('.html')).sort();
+    const pages = SITE_MODE ? SITE_PAGES : readdirSync(join(PROTO, theme)).filter((f) => f.endsWith('.html')).sort();
     for (const page of pages) {
-      const url = `${BASE}/${theme}/${page}`;
+      const url = SITE_MODE ? `${BASE}/${page}` : `${BASE}/${theme}/${page}`;
       for (const width of WIDTHS) {
         const r = await checkPage(url, width);
         checks++;
