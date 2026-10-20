@@ -118,6 +118,13 @@ Punto único de verdad del estado del proyecto. Cualquier agente lee esto ANTES 
 
 ## ⏸️ Pendiente acción humana
 
+### Web v2 (20/10/2026, rama `feat/web-v2`, NO en producción)
+- Omar delegó la elección: **prototipo A · Oficio**. Generado con `python3 prototipos/_build/build_site.py` en la raíz (15 páginas, `/assets`, sitemap 28 URLs, `llms.txt`). Municipios y blog se mantienen y se enlazan.
+- Vista previa verificada: 28/28 URLs del sitemap 200, 68 enlaces internos sin redirecciones, redirecciones antiguas OK. Lighthouse móvil portada: 100/100/100. `check-pages.mjs --site`: 90 comprobaciones OK.
+- **Antes de publicar:** OK de Omar al diseño (es cambio de diseño, requiere OK) y una prueba real del formulario desde la vista previa (envía al Apps Script → hoja y email).
+- GA4/Search Console: código listo; reconstruir con `GA_ID=G-… GSC_TOKEN=… python3 prototipos/_build/build_site.py` cuando Omar cree las cuentas.
+- Kit del Perfil de Empresa: `prototipos/kit-google/` (nombre del perfil = nombre de alta, no BCN ProReforma).
+
 ### Iteración 2 (20/10/2026)
 - Fase 1 hecha en `feat/prototipos-rediseno` (`ad0c4a8`): fotos de microcemento reveladas, servicio y caso de microcemento, texto reescrito, marca BCN ProReforma y aviso legal. Plan: `prototipos/PLAN-ITERACION-2.md`.
 - **Desplegado 20/10/2026** (`master` 34317e8, deploy `pintura-reforma-obra-v1-64qjxrdm1`; rollback: `vercel promote pintura-reforma-obra-v1-b4d9n7z6s-omarbenkri-svgs-projects.vercel.app`): robots abierto a todos los rastreadores, canónicas y sitemap sin `.html` ni barra final (15 URLs, todas 200), 308 de los duplicados y del enlace roto de Mataró. Verificado en vista previa y en producción.
