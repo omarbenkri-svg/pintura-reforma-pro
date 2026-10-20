@@ -118,6 +118,11 @@ Punto único de verdad del estado del proyecto. Cualquier agente lee esto ANTES 
 
 ## ⏸️ Pendiente acción humana
 
+### Iteración 2 (20/10/2026)
+- Fase 1 hecha en `feat/prototipos-rediseno` (`ad0c4a8`): fotos de microcemento reveladas, servicio y caso de microcemento, texto reescrito, marca BCN ProReforma y aviso legal. Plan: `prototipos/PLAN-ITERACION-2.md`.
+- Rama `fix/seo-urgente` lista para desplegar con OK: robots, canónicas, sitemap y redirecciones.
+- Omar: elegir prototipo; confirmar si la valoración 4,9/23 y las reseñas con nombre de la web actual son reales; crear GA4 y Search Console (fase 4).
+
 ### Prototipos de rediseño (decisión de Omar)
 - Elegir dirección (A, B o C) en `prototipos/index.html`.
 - Para publicar la elegida: municipio y permiso de cada obra (en la fachada se ve el número de la vivienda; en el álbum de madera, una persona y un cartel con teléfono), quién atiende cada canal y horario, URL del Gremi, FAQ y alcance validados por Mohamed, fotos de interiores/alisados/estucos y retratos, una sola versión de la marca y datos fiscales.

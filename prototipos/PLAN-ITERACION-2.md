@@ -1,6 +1,6 @@
 # Iteración 2 — de prototipo a web publicada, con SEO, GEO y medición
 
-**Fecha:** 20/10/2026 · **Estado:** pendiente del OK de Omar · **Sustituye a:** la sección 5 de `PLAN-MATERIAL-MICROCEMENTO.md` (Omar pide que decida yo lo pendiente)
+**Fecha:** 20/10/2026 · **Estado:** aprobado; fase 1 hecha (`ad0c4a8`) y arreglos urgentes preparados en la rama `fix/seo-urgente` · **Sustituye a:** la sección 5 de `PLAN-MATERIAL-MICROCEMENTO.md` (Omar pide que decida yo lo pendiente)
 
 ---
 
@@ -161,3 +161,19 @@ Según `CLAUDE.md`, el Perfil de Empresa lo gestiona Claude.ai con el navegador;
 | 7 | Informe de palabras clave con datos reales (3-4 semanas después) | Search Console con datos |
 
 Commits atómicos y sin push ni despliegue sin tu OK (Carapace). Cada entrega se cierra con el informe ✅/⚠️/🐛.
+
+---
+
+## 10. Decisiones de Omar (20/10/2026)
+
+- **Prototipo:** lo elige tras ver la fase 1.
+- **Marca:** **BCN ProReforma** de cara al público; «Pintura, Reformas y Acabados de Obra» (nombre de alta) en aviso legal, privacidad, facturas y presupuestos. Posicionamiento: pintura, con especialistas en estucos y microcemento.
+- **Aviso legal:** se publican NIF y domicilio fiscal, de forma discreta (página propia enlazada desde el pie).
+- **Fotos:** las del AirDrop son todo el material de Mohamed por ahora. Pendiente decidido por mí (sección 1).
+
+## 11. Estado al cerrar la fase 1
+
+- 45 páginas (15 por prototipo), 270 comprobaciones en verde (encabezados sin saltos, títulos únicos, sin desbordes, imágenes rotas ni errores).
+- `revelado.html` enseña cada foto original junto a la revelada.
+- Rama `fix/seo-urgente` (desde `master`, sin desplegar): `robots.txt` abierto a todos los rastreadores, canónicas y sitemap sin `.html`, 301 de los duplicados y del enlace roto de Mataró.
+- **Pregunta abierta:** la valoración 4,9/23 del schema y las 4 reseñas con nombre de la portada actual, ¿vienen del antiguo perfil de Google? Si no son reales hay que quitarlas.
