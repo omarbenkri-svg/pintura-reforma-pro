@@ -1,8 +1,36 @@
+# bcnproreforma.com: every crawler may read the whole public site,
+# including search engines and AI assistants that cite sources.
 User-agent: *
 Allow: /
-Disallow: /status/
-Disallow: /version_premium/
-Disallow: /version_premium_concept/
-Disallow: /js/
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
 
 Sitemap: https://bcnproreforma.com/sitemap.xml
