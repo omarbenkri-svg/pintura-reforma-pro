@@ -118,6 +118,11 @@ Punto único de verdad del estado del proyecto. Cualquier agente lee esto ANTES 
 
 ## ⏸️ Pendiente acción humana
 
+### Municipios v2 en producción (21/10/2026)
+- 8 páginas `/municipios/pintor-*` regeneradas con el diseño y el enfoque nuevos (`prototipos/_build/municipios.py`). Deploy `qpmp73hp3`; rollback: `vercel promote pintura-reforma-obra-v1-fy9d0l6a4-omarbenkri-svgs-projects.vercel.app`.
+- Plan por roles: `prototipos/PLAN-ROLES.md`. Kits: `prototipos/kit-google/` (Perfil de Empresa, directorios, Apps Script).
+- Omar: pegar `apps-script-leads.gs` en el Apps Script de «Form Leads» (nueva versión de la misma implementación); OK para GA4 y Bing; sesión en la cuenta propietaria del Perfil de Empresa.
+
 ### Web v2 EN PRODUCCIÓN (21/10/2026)
 - `master` e69cc83 desplegado (deploy `pintura-reforma-obra-v1-fy9d0l6a4`). Rollback: `vercel promote pintura-reforma-obra-v1-7k30d99od-omarbenkri-svgs-projects.vercel.app`.
 - Verificado en producción: 28/28 URLs del sitemap 200, redirecciones OK, `/prototipos` y archivos internos 404, etiqueta de Search Console presente, sin «empleo»/«gratis».
