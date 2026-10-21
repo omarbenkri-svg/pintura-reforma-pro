@@ -118,6 +118,12 @@ Punto único de verdad del estado del proyecto. Cualquier agente lee esto ANTES 
 
 ## ⏸️ Pendiente acción humana
 
+### Web v2 EN PRODUCCIÓN (21/10/2026)
+- `master` e69cc83 desplegado (deploy `pintura-reforma-obra-v1-fy9d0l6a4`). Rollback: `vercel promote pintura-reforma-obra-v1-7k30d99od-omarbenkri-svgs-projects.vercel.app`.
+- Verificado en producción: 28/28 URLs del sitemap 200, redirecciones OK, `/prototipos` y archivos internos 404, etiqueta de Search Console presente, sin «empleo»/«gratis».
+- Regenerar la web: `python3 prototipos/_build/build_site.py` (rama de trabajo `feat/web-v2`, luego merge a master).
+- Pendiente: prueba real del formulario (Omar), GA4 (`GA_ID`), Perfil de Empresa (cuenta propietaria), páginas de municipios y blog con el diseño nuevo.
+
 ### Search Console (21/10/2026)
 - Propiedad `https://bcnproreforma.com/` verificada con etiqueta HTML en la cuenta `omarbenkri@gmail.com`; sitemap enviado. **No quitar la meta `google-site-verification`** (está en `master` y en el generador de la v2).
 
