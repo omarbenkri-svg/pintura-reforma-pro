@@ -334,3 +334,7 @@ figcaption { font-size: .875rem; color: var(--muted); margin-top: .6rem; }
 .slot-row .slot-frame { aspect-ratio: 4 / 5; }
 .case-video { max-width: 22rem; margin: 0 0 2rem; }
 .case-video video { width: 100%; height: auto; border-radius: var(--radius-m); background: var(--text); }
+
+/* GEO: company facts block */
+.facts-block { padding-bottom: var(--section); }
+.facts-block h2 { margin-bottom: 1.25rem; }

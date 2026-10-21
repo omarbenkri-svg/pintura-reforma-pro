@@ -374,3 +374,7 @@ figcaption { font-size: .875rem; color: var(--muted); margin-top: .5rem; }
 .oficio-photo img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radius-m); }
 .town-list a { text-decoration: none; }
 .town-list a:hover { text-decoration: underline; }
+
+/* GEO: company facts block */
+.facts-block { padding-bottom: var(--section); }
+.facts-block h2 { margin-bottom: 1.25rem; }

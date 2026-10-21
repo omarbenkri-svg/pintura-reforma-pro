@@ -179,9 +179,9 @@ SERVICES = [
         "slug": "pintura-viviendas",
         "form": "pintura-vivienda",
         "name": "Pintura de viviendas",
-        "title": "Pintores de pisos y casas en el Maresme",
-        "short": "Pisos y casas, enteros o por estancias: paredes, techos, puertas y radiadores, con la casa protegida.",
-        "h1": "Pintura de pisos y casas en el Maresme y Barcelona",
+        "title": "Empresa de pintura de casas y pisos en el Maresme",
+        "short": "Casas y pisos enteros o por estancias: paredes, techos, puertas y fachadas, con la vivienda protegida.",
+        "h1": "Pintura de casas y pisos en el Maresme y Barcelona",
         "intro": "Pintamos viviendas enteras o por estancias. Antes de abrir un bote tapamos muebles y suelos, reparamos grietas y golpes y preparamos cada pared para que el color quede uniforme y dure.",
         "hero": ("fachada-despues-general", "Fachada de una vivienda reparada y pintada por nuestro equipo"),
         "gallery": [],
@@ -603,9 +603,9 @@ ALBUMS = {
 # ---------------------------------------------------------------- home copy
 
 HERO = {
-    "eyebrow": "BCN ProReforma · Pintores desde 1994",
-    "h1": "Pintura, estucos y microcemento en el Maresme y Barcelona",
-    "desc": "Empresa familiar de Cabrils. Preparamos cada superficie a conciencia antes de pintar, estucar o aplicar microcemento.",
+    "eyebrow": "BCN ProReforma · Empresa familiar desde 1994",
+    "h1": "Pintura, estucos y microcemento para casas y pisos del Maresme y Barcelona",
+    "desc": "Proyectos de pintura y revestimiento con la preparación y el acabado cuidados de principio a fin.",
     "support": "Cuéntanos qué quieres renovar y en qué municipio. Revisaremos la información para indicarte el siguiente paso.",
 }
 
@@ -648,9 +648,10 @@ FAQ = [
      pend("Sí. Juntamos los muebles en el centro y los cubrimos con plástico; el suelo se protege con papel grueso o lona según el material. Al terminar retiramos todo y limpiamos.", WEB)),
     ("¿El precio puede cambiar durante la obra?",
      pend("El presupuesto firmado es el precio. Solo cambia si nos pides algo nuevo o si aparece un daño oculto: en ese caso te lo enseñamos con fotos y un presupuesto aparte antes de tocar nada.", WEB)),
-    ("¿Cuánto cuesta pintar un piso de 80 m²?",
-     pend("Como orientación, entre 1.800 y 3.200 €, según el estado de las paredes y la pintura elegida. Si hay gotelé que alisar, sube. El precio exacto lo da el presupuesto.",
-          "Rango de la web actual: validar con presupuestos recientes y aclarar si incluye IVA")),
+    ("¿De qué depende el precio?",
+     "De la superficie real que hay que tratar, del estado de las paredes, de la técnica y el acabado elegidos y de los accesos. Por eso damos un presupuesto cerrado y por escrito después de ver la obra, no un precio por metro a ciegas."),
+    ("¿Cuánto dura un baño de microcemento?",
+     pend("Bien aplicado sobre un soporte sano y con el sellado adecuado, muchos años. Al no tener juntas, es fácil de limpiar. Te explicamos el mantenimiento al entregar la obra.", "Validar con Mohamed")),
     ("¿Puedo pedir presupuesto sin que vengáis a casa?",
      "Puedes enviarnos fotos y medidas aproximadas por WhatsApp para una primera orientación. Para cerrar un precio necesitamos ver la obra."),
     ("¿Pedís un adelanto?",
@@ -805,12 +806,23 @@ def contact_form(origin: str = "contacto") -> str:
   <div class="field">
     <label for="f-descripcion">Qué quieres renovar <span class="optional">(opcional)</span></label>
     <textarea id="f-descripcion" name="descripcion" rows="4" aria-describedby="hint-descripcion"></textarea>
-    <p class="hint" id="hint-descripcion">Por ejemplo: pintar salón y dos dormitorios, paredes con gotelé.</p>
+    <p class="hint" id="hint-descripcion">Por ejemplo: baño de microcemento en una casa de Alella, o pintar un piso de 120 m² con gotelé.</p>
   </div>
 
   <details class="more">
     <summary>Añadir más detalles <span class="optional">(opcional)</span></summary>
     <div class="more-grid">
+      <div class="field">
+        <label for="f-inmueble">Tipo de inmueble</label>
+        <select id="f-inmueble" name="inmueble">
+          <option value="">Sin indicar</option>
+          <option>Piso</option>
+          <option>Casa unifamiliar</option>
+          <option>Ático o dúplex</option>
+          <option>Local u oficina</option>
+          <option>Comunidad de propietarios</option>
+        </select>
+      </div>
       <div class="field">
         <label for="f-superficie">Superficie aproximada</label>
         <select id="f-superficie" name="superficie">
@@ -837,9 +849,10 @@ def contact_form(origin: str = "contacto") -> str:
         <select id="f-presupuesto" name="presupuesto">
           <option value="">Prefiero no decirlo</option>
           <option>Todavía no lo sé</option>
-          <option>Menos de 1.500 €</option>
-          <option>De 1.500 a 5.000 €</option>
-          <option>Más de 5.000 €</option>
+          <option>Menos de 3.000 €</option>
+          <option>De 3.000 a 10.000 €</option>
+          <option>De 10.000 a 30.000 €</option>
+          <option>Más de 30.000 €</option>
         </select>
       </div>
     </div>

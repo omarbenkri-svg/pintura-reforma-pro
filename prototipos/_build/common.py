@@ -76,6 +76,19 @@ def company_body(theme) -> str:
   Pintamos, estucamos y aplicamos microcemento en viviendas del Maresme y Barcelona. {gremi_line()}</p>
 </section>
 
+<section class="facts-block container" aria-labelledby="facts-title">
+  <h2 id="facts-title">Datos de la empresa</h2>
+  <dl class="legal-list">
+    <dt>Marca</dt><dd>{CONFIG['brand']}</dd>
+    <dt>Empresa</dt><dd>{CONFIG['legal_name']}, de {CONFIG['holder']}</dd>
+    <dt>Desde</dt><dd>{CONFIG['since']}, en el Gremi de Pintors de Barcelona</dd>
+    <dt>Especialidades</dt><dd>Pintura de casas y pisos, microcemento, estuco veneciano y pintura decorativa</dd>
+    <dt>Base</dt><dd>Cabrils (Barcelona)</dd>
+    <dt>Zona de trabajo</dt><dd>Maresme y Barcelona</dd>
+    <dt>Contacto</dt><dd>{CONFIG['tel_display']} · {CONFIG['email']}</dd>
+  </dl>
+</section>
+
 <section class="people container" aria-labelledby="people-title">
   <h2 id="people-title" class="sr-only">Quién te atiende</h2>
   <article class="person reveal">
@@ -105,7 +118,7 @@ def company_body(theme) -> str:
 
 <section class="area container" aria-labelledby="area-title">
   <h2 id="area-title">Dónde trabajamos</h2>
-  <p>En el Maresme y Barcelona, en un radio aproximado de 40 km desde Cabrils. Estos son algunos de los municipios donde atendemos:</p>
+  <p>En el Maresme y Barcelona, en un radio aproximado de 40 km desde Cabrils: casas y pisos de Alella, Teià, Cabrils, Sant Andreu de Llavaneres, Sant Vicenç de Montalt, Premià de Dalt, Vilassar de Dalt, Cabrera de Mar y Argentona, y en Barcelona, sobre todo en Sant Gervasi, Sarrià y Pedralbes. Estos son los municipios donde atendemos:</p>
   <ul class="town-list">{towns}</ul>
 </section>
 
@@ -125,7 +138,7 @@ def contact_body(theme) -> str:
   {breadcrumb([("index.html", "Inicio"), (None, "Contacto")])}
   <h1>{CTA_LABEL}</h1>
   <p class="lead">Cuéntanos qué quieres renovar y en qué municipio. Revisaremos la información para indicarte el siguiente paso.</p>
-  <p class="quick-alt">Atendemos a particulares, comunidades y empresas. No es una oferta de empleo.</p>
+  <p class="quick-alt">Trabajamos para propietarios, comunidades y empresas que quieren renovar su casa, su piso o su local.</p>
   <p class="quick-alt">¿Prefieres hablar? <a href="{tel_url()}" data-track="phone_click" data-origin="contacto">{CALL_LABEL} al {CONFIG['tel_display']}</a> o
     <a href="{wa_url(wa_message('página de contacto'))}" data-track="whatsapp_click" data-origin="contacto">escribir por WhatsApp</a>.</p>
 </section>

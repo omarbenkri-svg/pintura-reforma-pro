@@ -331,6 +331,7 @@
       municipio: el.municipio.value.trim(),
       servicio: selectedLabel(),
       descripcion: el.descripcion.value.trim(),
+      inmueble: el.inmueble.value,
       metros: el.superficie.value,
       fecha_deseada: el.fecha.value,
       presupuesto: el.presupuesto.value,

@@ -57,7 +57,7 @@
   <nav class="breadcrumb" aria-label="Migas de pan"><ol><li><a href="/">Inicio</a></li><li aria-current="page">Contacto</li></ol></nav>
   <h1>Solicitar presupuesto</h1>
   <p class="lead">Cuéntanos qué quieres renovar y en qué municipio. Revisaremos la información para indicarte el siguiente paso.</p>
-  <p class="quick-alt">Atendemos a particulares, comunidades y empresas. No es una oferta de empleo.</p>
+  <p class="quick-alt">Trabajamos para propietarios, comunidades y empresas que quieren renovar su casa, su piso o su local.</p>
   <p class="quick-alt">¿Prefieres hablar? <a href="tel:+34639058819" data-track="phone_click" data-origin="contacto">Llamar al 639 05 88 19</a> o
     <a href="https://wa.me/34631714077?text=Hola%2C%20os%20escribo%20desde%20la%20web%20%28p%C3%A1gina%20de%20contacto%29.%20Quiero%20pedir%20valoraci%C3%B3n%20para%20un%20trabajo.%20Mi%20municipio%20es%3A%20" data-track="whatsapp_click" data-origin="contacto">escribir por WhatsApp</a>.</p>
 </section>
@@ -124,12 +124,23 @@
   <div class="field">
     <label for="f-descripcion">Qué quieres renovar <span class="optional">(opcional)</span></label>
     <textarea id="f-descripcion" name="descripcion" rows="4" aria-describedby="hint-descripcion"></textarea>
-    <p class="hint" id="hint-descripcion">Por ejemplo: pintar salón y dos dormitorios, paredes con gotelé.</p>
+    <p class="hint" id="hint-descripcion">Por ejemplo: baño de microcemento en una casa de Alella, o pintar un piso de 120 m² con gotelé.</p>
   </div>
 
   <details class="more">
     <summary>Añadir más detalles <span class="optional">(opcional)</span></summary>
     <div class="more-grid">
+      <div class="field">
+        <label for="f-inmueble">Tipo de inmueble</label>
+        <select id="f-inmueble" name="inmueble">
+          <option value="">Sin indicar</option>
+          <option>Piso</option>
+          <option>Casa unifamiliar</option>
+          <option>Ático o dúplex</option>
+          <option>Local u oficina</option>
+          <option>Comunidad de propietarios</option>
+        </select>
+      </div>
       <div class="field">
         <label for="f-superficie">Superficie aproximada</label>
         <select id="f-superficie" name="superficie">
@@ -156,9 +167,10 @@
         <select id="f-presupuesto" name="presupuesto">
           <option value="">Prefiero no decirlo</option>
           <option>Todavía no lo sé</option>
-          <option>Menos de 1.500 €</option>
-          <option>De 1.500 a 5.000 €</option>
-          <option>Más de 5.000 €</option>
+          <option>Menos de 3.000 €</option>
+          <option>De 3.000 a 10.000 €</option>
+          <option>De 10.000 a 30.000 €</option>
+          <option>Más de 30.000 €</option>
         </select>
       </div>
     </div>
