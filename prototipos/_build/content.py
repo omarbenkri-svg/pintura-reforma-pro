@@ -30,7 +30,7 @@ SITE = "https://bcnproreforma.com"
 # Apps Script web app that already writes leads to the "Form Leads" sheet.
 LEAD_ENDPOINT = "https://script.google.com/macros/s/AKfycbwesZXU9_TUzmSptQnYt4CMJFfB6nHttnDA2XOXdsjyebmUJlaQHEpN0ku6Oum_3lCh/exec"
 GA_ID = os.environ.get("GA_ID", "")          # e.g. G-XXXXXXX, empty = no analytics
-GSC_TOKEN = os.environ.get("GSC_TOKEN", "")  # Search Console HTML-tag token
+GSC_TOKEN = os.environ.get("GSC_TOKEN", "_vAbmPpA_KpYUrFHzVa3JaKAFexYPc2WFajtJuf2Ly8")  # verified 21/10/2026, keep it
 
 # ---------------------------------------------------------------- channels
 # Single source of truth for contact destinations (plan section 9).

@@ -118,6 +118,9 @@ Punto único de verdad del estado del proyecto. Cualquier agente lee esto ANTES 
 
 ## ⏸️ Pendiente acción humana
 
+### Search Console (21/10/2026)
+- Propiedad `https://bcnproreforma.com/` verificada con etiqueta HTML en la cuenta `omarbenkri@gmail.com`; sitemap enviado. **No quitar la meta `google-site-verification`** (está en `master` y en el generador de la v2).
+
 ### Web v2 (20/10/2026, rama `feat/web-v2`, NO en producción)
 - Omar delegó la elección: **prototipo A · Oficio**. Generado con `python3 prototipos/_build/build_site.py` en la raíz (15 páginas, `/assets`, sitemap 28 URLs, `llms.txt`). Municipios y blog se mantienen y se enlazan.
 - Vista previa verificada: 28/28 URLs del sitemap 200, 68 enlaces internos sin redirecciones, redirecciones antiguas OK. Lighthouse móvil portada: 100/100/100. `check-pages.mjs --site`: 90 comprobaciones OK.
