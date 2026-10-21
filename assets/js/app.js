@@ -193,6 +193,7 @@
     if (pre) pre.checked = true;
   }
   if (params.get('origen')) form.elements.origen.value = params.get('origen');
+  if (params.get('municipio')) form.elements.municipio.value = params.get('municipio');
 
   var rules = {
     telefono: function () {

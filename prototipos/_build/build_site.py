@@ -23,6 +23,7 @@ import build  # noqa: E402
 import common  # noqa: E402
 import content as C  # noqa: E402
 import theme_a as T  # noqa: E402
+import municipios as M  # noqa: E402
 
 ROOT = C.ROOT
 ASSETS = ROOT / "assets"
@@ -96,13 +97,13 @@ def schema_for(key: str, title: str) -> list:
 
 # ---------------------------------------------------------------- page shell
 
-def head(key: str, title: str, desc: str) -> str:
-    path = "/" if key == "index" else f"/{key}"
+def head(key: str, title: str, desc: str, path: str = None, extra_ld=None) -> str:
+    path = path or ("/" if key == "index" else f"/{key}")
     full = f"{title} | {CFG['brand']}" if key != "index" else f"{title} | {CFG['brand']}"
     robots = "noindex" if key == "404" else "index, follow"
     ld = "".join(
         f'<script type="application/ld+json">{json.dumps({"@context": "https://schema.org", **b}, ensure_ascii=False)}</script>\n'
-        for b in schema_for(key, title))
+        for b in (extra_ld if extra_ld is not None else schema_for(key, title)))
     gsc = f'<meta name="google-site-verification" content="{C.GSC_TOKEN}">\n' if C.GSC_TOKEN else ""
     ga = ""
     if C.GA_ID:
@@ -149,8 +150,8 @@ def clean_links(html: str) -> str:
     return html.replace('href="/index"', 'href="/"').replace('href="/index#', 'href="/#').replace('href="/index?', 'href="/?')
 
 
-def page(key, title, desc, body, albums, origin) -> str:
-    parts = [head(key, title, desc), f'<body class="page-{key}{" has-mobile-bar" if key != "contacto" else ""}">',
+def page(key, title, desc, body, albums, origin, path=None, extra_ld=None) -> str:
+    parts = [head(key, title, desc, path, extra_ld), f'<body class="page-{key}{" has-mobile-bar" if key != "contacto" else ""}">',
              C.skip_link(), T.header(key), f'<main id="contenido">{body}</main>', T.footer()]
     if key != "contacto":
         parts.append(C.mobile_bar(origin))
@@ -208,12 +209,96 @@ def llms() -> None:
     (ROOT / "llms.txt").write_text("\n".join(lines) + "\n")
 
 
+def town_page(t) -> str:
+    name, slug = t["name"], t["slug"]
+    origin = f"municipio_{slug}"
+    cta = f"/contacto?origen={origin}&amp;municipio={name.replace(' ', '%20')}"
+    svcs = [C.SERVICE_BY_SLUG[k] for k in t["services"]]
+    cards = "".join(
+        f'<li><h3><a href="/{s["slug"]}">{C.e(s["name"])} en {C.e(name)}</a></h3><p>{C.e(s["short"])}</p>'
+        f'<a href="/{s["slug"]}">Ver el servicio</a></li>' for s in svcs)
+    cases = "".join(f"""
+    <article class="case-row">
+      {T.before_after(c)}
+      <div class="case-row-text">
+        <p class="kicker">{C.e(c['service'])} · obra propia</p>
+        <h3><a href="/{c['slug']}">{c['title']}</a></h3>
+        <p>{c['summary']}</p>
+      </div>
+    </article>""" for c in C.CASES[:2])
+    others = "".join(f'<li><a href="/municipios/{o["slug"]}">{C.e(o["name"])}</a></li>' for o in M.TOWNS if o is not t)
+    pn, pa = t["photo"], {**dict(sum([c["after"] + c["process"] + c["before"] for c in C.CASES], [])),
+                          **dict(C.MC_ALBUM)}.get(t["photo"], "Obra propia")
+    body = f"""
+<section class="svc-hero">
+  <div class="container svc-hero-grid">
+    <div>
+      {common.breadcrumb([("/", "Inicio"), ("/empresa", "Zonas"), (None, name)])}
+      <h1>Pintura, estucos y microcemento en {C.e(name)}</h1>
+      <p class="lead">{C.e(t['intro'])}</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="{cta}" data-track="cta_presupuesto" data-origin="{origin}">{C.CTA_LABEL}</a>
+        <a class="btn-link" href="{C.wa_url(C.wa_message(origin) + name)}" data-track="whatsapp_click" data-origin="{origin}">{C.icon('whatsapp-logo')} {C.WA_LABEL}</a>
+      </div>
+    </div>
+    <figure class="svc-hero-photo">{C.photo(pn, pa, "(min-width: 1024px) 40vw, 100vw", priority=True)}<figcaption>{C.e(pa)}. Obra propia.</figcaption></figure>
+  </div>
+</section>
+<section class="svc-includes container" aria-labelledby="loc-title">
+  <h2 id="loc-title">Lo que tenemos en cuenta en {C.e(name)}</h2>
+  {''.join(f'<p class="step-text">{C.e(x)}</p>' for x in t['local'])}
+</section>
+<section class="others" aria-labelledby="srv-title">
+  <div class="container">
+    <h2 id="srv-title">Qué hacemos en {C.e(name)}</h2>
+    <ul class="others-list">{cards}</ul>
+  </div>
+</section>
+<section class="cases container" aria-labelledby="cs-title">
+  <h2 id="cs-title">Obras documentadas</h2>
+  {cases}
+  <p><a class="btn-link" href="/trabajos">Ver todos los trabajos {C.icon('arrow-right')}</a></p>
+</section>
+<section class="svc-faq" aria-labelledby="fq-title">
+  <div class="container faq-grid">
+    <div>
+      <h2 id="fq-title">Preguntas sobre obras en {C.e(name)}</h2>
+      {T.faq_list(M.faq(name))}
+    </div>
+    <aside class="final-cta">
+      <h2>Pide presupuesto en {C.e(name)}</h2>
+      <p>Cuéntanos qué quieres renovar. Si tienes fotos, envíalas por WhatsApp.</p>
+      <a class="btn btn-primary" href="{cta}" data-track="cta_presupuesto" data-origin="{origin}_final">{C.CTA_LABEL}</a>
+      <a class="btn-link" href="tel:{CFG['tel']}" data-track="phone_click" data-origin="{origin}">{C.icon('phone')} {C.CALL_LABEL} al {CFG['tel_display']}</a>
+      <p class="also">Otras zonas:</p>
+      <ul class="also-list">{others}</ul>
+    </aside>
+  </div>
+</section>
+"""
+    title = f"Pintura, estucos y microcemento en {name}"
+    desc = f"{t['intro'][:150]}"
+    ld = [
+        {"@type": "Service", "name": title, "url": f"{SITE}/municipios/{slug}", "provider": {"@id": f"{SITE}/#negocio"},
+         "areaServed": {"@type": "City", "name": name},
+         "serviceType": ["Pintura de viviendas", "Microcemento", "Estuco veneciano", "Alisado de paredes"]},
+        {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}}
+                                             for q, a in M.faq(name)]},
+        {"@type": "BreadcrumbList", "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Inicio", "item": f"{SITE}/"},
+            {"@type": "ListItem", "position": 2, "name": name, "item": f"{SITE}/municipios/{slug}"}]},
+    ]
+    return page(f"municipio-{slug}", title, desc, body, None, origin, path=f"/municipios/{slug}", extra_ld=ld)
+
+
 def main() -> None:
     copy_assets()
     keys = []
     for key, title, desc, body, albums, origin in build.pages_for(T):
         (ROOT / f"{key}.html").write_text(page(key, title, desc, body, albums, origin), encoding="utf-8")
         keys.append(key)
+    for t in M.TOWNS:
+        (ROOT / "municipios" / f"{t['slug']}.html").write_text(town_page(t), encoding="utf-8")
     sitemap(keys)
     llms()
     print(f"web pública: {len(keys)} páginas en la raíz, assets en /assets"
