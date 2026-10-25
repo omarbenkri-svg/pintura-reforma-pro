@@ -1,6 +1,6 @@
 # HANDOFF — bcnproreforma.com
 
-**Última actualización:** 2026-10-17 por Claude Code — prototipos en la rama `feat/prototipos-rediseno` (local). `master` en producción (deploy `dpl_8PJtDPMzPgWvKpTEUR9EAZV9Y2Qe`, URL `pintura-reforma-obra-v1-b4d9n7z6s`). Rollback: `vercel promote pintura-reforma-obra-v1-nlgej5n5e-omarbenkri-svgs-projects.vercel.app` (deploy anterior, 2026-06-11).
+**Última actualización:** 2026-10-25 por Claude Code — **web caída por DNS** (ver «Incidencia DNS» abajo). Web v2 en Vercel intacta; rama de trabajo `feat/web-v2`, igualada con `master`.
 **Próximo ejecutor:** Claude Code (Terminal)
 
 ---
@@ -33,7 +33,7 @@ Punto único de verdad del estado del proyecto. Cualquier agente lee esto ANTES 
 ### Web (bcnproreforma.com)
 - HTML / CSS / JS Vanilla puro (cero frameworks)
 - Hosting: **Vercel** (alias bcnproreforma.com activo)
-- Rama activa: `feat/lead-capture-e2e-closure`
+- Rama activa: `feat/web-v2` (luego merge a `master`)
 - Lead pipeline: **Google Apps Script Web App** → Google Sheets + Gmail
 
 ### Agente WhatsApp IA (`Escritorio/whatsapp-agentkit/`)
@@ -113,10 +113,27 @@ Punto único de verdad del estado del proyecto. Cualquier agente lee esto ANTES 
 8. **`/municipios/reformas-mataro.html` da 404** (el archivo está en la raíz como `reformas-mataro.html`).
 9. **`robots.txt` bloquea `/js/`:** Google no puede ejecutar el JS al renderizar (idioma, galería). Lighthouse a11y: diálogo `#calcModal` sin nombre, contrastes bajos (etiquetas, pie, botón de cookies), orden de encabezados, `<main>` ausente, logo sin texto accesible.
 10. **Token de verificación del webhook de WhatsApp estuvo público** (`whatsapp/config.js`, `test-webhook.sh`) hasta el 2026-10-17. Si ese webhook está en uso, rotar `WA_VERIFY_TOKEN`.
+11. **Omar y Mohamed en la web v2, contra su preferencia** (25/10): Inicio y Empresa dicen «Omar te atiende y coordina» y «Mohamed Ben Mesaud, al frente del oficio», con tarjeta de Omar en Empresa. Omar pidió (20/10) no figurar y que Mohamed salga solo de forma discreta, vía su ficha en el directorio del Gremi. Corregir en `prototipos/_build/` y regenerar.
+12. **«Empresa familiar desde 1994»** en Inicio y Empresa: el dato de Omar es «agremiado desde 1994», no la fundación. El directorio del Gremi no muestra la fecha.
+13. **`aggregateRating` 4,9/23 en el JSON-LD** de Inicio, Empresa y Contacto: Google no muestra estrellas autoatribuidas de `LocalBusiness`, y las reseñas deben verse en la página. Valorar quitarlo.
+14. **«Trabajos con antes y después»** en la portada, pero el caso del baño no tiene fotos del «antes».
 
 ---
 
 ## ⏸️ Pendiente acción humana
+
+### 🔴 Incidencia DNS — web caída (detectada 25/10/2026)
+- Síntoma: todas las rutas de bcnproreforma.com y www devuelven 200 con una página «Coming Soon!» de 932 bytes, `noindex`, servida por Cloudflare (`ss-product-id: aab-v1`).
+- Causa: en GoDaddy, el registro A `@` apunta a `160.153.0.26` (IP de GoDaddy) en vez de a Vercel. `www` es CNAME a `@`, así que hereda el fallo. Vercel marca el dominio `misconfigured: true`. El dominio está activo (vence 2027-04-13) y los nameservers siguen siendo de GoDaddy.
+- Vercel está bien: `pintura-reforma-obra-v1.vercel.app` sirve el `index.html` del repo idéntico byte a byte.
+- Codex no lo cambió (sus sesiones no tocan DNS ni despliegan). El cambio se hizo en el panel de GoDaddy, posiblemente al conectar un producto suyo (creador de webs o apps).
+- Arreglo (Omar, en GoDaddy → DNS): A `@` → `216.198.79.1` (recomendada por Vercel; `76.76.21.21` también vale), borrar cualquier otro A `@`; CNAME `www` → `cname.vercel-dns.com`. Desconectar el producto de GoDaddy que reclame el dominio para que no vuelva a sobrescribirlo. Verificar con `curl -sI https://bcnproreforma.com` (debe responder Vercel) y `get_domain_config` (`misconfigured: false`).
+
+### Trabajo de Codex (ChatGPT), 17-21/10/2026 — solo local
+- Carpeta `~/Desktop/⭐ bcnproreforma/` (sin git). Prototipos propios (Oficio, Estudio, Técnico), una versión «Fusión» y una «candidata» de 24 páginas en `prototipos/candidata/`, con `noindex`, sin publicar. Generador `prototipos/scripts/build.py`; 10 pruebas `node --test qa/*.test.mjs` en verde (25/10).
+- La candidata usa el mismo endpoint de Apps Script y campos compatibles con `apps-script-leads.gs` (solo marca éxito si la respuesta trae `ok: true`).
+- Cambia URLs respecto a la v2 (p. ej. `caso-madera`, `caso-garaje`, `pintura-decorativa`, `servicios`, `elige-acabado`, `materiales`) y no incluye blog ni municipios: si se adopta, hacen falta 301.
+- Su auditoría de nuestros prototipos (`documentos/auditoria-prototipos-claude-2026-10-21.md`) detecta problemas que siguen en la v2: bugs 11-14.
 
 ### Municipios v2 en producción (21/10/2026)
 - 8 páginas `/municipios/pintor-*` regeneradas con el diseño y el enfoque nuevos (`prototipos/_build/municipios.py`). Deploy `qpmp73hp3`; rollback: `vercel promote pintura-reforma-obra-v1-fy9d0l6a4-omarbenkri-svgs-projects.vercel.app`.
@@ -173,6 +190,7 @@ Punto único de verdad del estado del proyecto. Cualquier agente lee esto ANTES 
 
 - No reintroducir `/pintor-*.html` en raíz — ya tienen 301 redirects
 - No usar nombre "BCN Pro Reforma" en GBP (usar nombre legal)
+- **No poner a Omar en la web ni dar protagonismo a Mohamed** (sin retratos ni tarjetas personales). Mohamed, solo la referencia discreta a su ficha del Gremi.
 - No reactivar Google Ads PMAX sin corregir targeting
 - No usar `gtm-tracking.js` (duplicaría eventos con tracking-unificado.js)
 - **No usar n8n** — trial expirado, pipeline = Google Apps Script
