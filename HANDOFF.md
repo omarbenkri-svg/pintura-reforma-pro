@@ -1,6 +1,6 @@
 # HANDOFF — bcnproreforma.com
 
-**Última actualización:** 2026-10-25 por Claude Code — **web caída por DNS** (ver «Incidencia DNS» abajo). Web v2 en Vercel intacta; rama de trabajo `feat/web-v2`, igualada con `master`.
+**Última actualización:** 2026-10-26 por Claude Code — incidencia DNS **resuelta** (ver abajo). Web v2 en producción; rama de trabajo `feat/web-v2`, igualada con `master`.
 **Próximo ejecutor:** Claude Code (Terminal)
 
 ---
@@ -122,7 +122,10 @@ Punto único de verdad del estado del proyecto. Cualquier agente lee esto ANTES 
 
 ## ⏸️ Pendiente acción humana
 
-### 🔴 Incidencia DNS — web caída (detectada 25/10/2026)
+### ✅ Incidencia DNS — web caída (detectada 25/10/2026, resuelta 26/10/2026)
+- **Resuelto:** Claude Code cambió en GoDaddy, desde el Chrome de Omar y con su OK, el registro A `@` de `160.153.0.26` a `216.198.79.1` y el CNAME `www` de `bcnproreforma.com.` a `cname.vercel-dns.com.`. No tocó ningún otro registro.
+- Verificado: nameservers de GoDaddy, 1.1.1.1 y 8.8.8.8 con los valores nuevos; portada 200 servida por Vercel e idéntica byte a byte a `index.html`; `www` hace 308 a la raíz; rutas principales 200; `HANDOFF.md` 404; certificado Let's Encrypt válido hasta el 13/01/2027; Vercel `misconfigured: false` en raíz y www.
+- **Riesgo abierto:** GoDaddy → `bcnproreforma.com` → Productos sigue mostrando «Conectaste un sitio web a bcnproreforma.com» y un certificado SSL de GoDaddy (de ahí el CNAME `_acme-challenge` a Cloudflare). Si ese sitio se publica o se resincroniza, puede volver a cambiar el A. Desconectarlo requiere OK de Omar.
 - Síntoma: todas las rutas de bcnproreforma.com y www devuelven 200 con una página «Coming Soon!» de 932 bytes, `noindex`, servida por Cloudflare (`ss-product-id: aab-v1`).
 - Causa: en GoDaddy, el registro A `@` apunta a `160.153.0.26` (IP de GoDaddy) en vez de a Vercel. `www` es CNAME a `@`, así que hereda el fallo. Vercel marca el dominio `misconfigured: true`. El dominio está activo (vence 2027-04-13) y los nameservers siguen siendo de GoDaddy.
 - Vercel está bien: `pintura-reforma-obra-v1.vercel.app` sirve el `index.html` del repo idéntico byte a byte.
