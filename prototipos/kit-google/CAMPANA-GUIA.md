@@ -4,6 +4,14 @@ La idea: una foto bonita abre la conversación, pero lo que hace que el acabado 
 
 No hacen falta sesiones nuevas, imágenes generadas, descuentos ni mensajes en masa. Se usan las fotos de obras ya incluidas en este repositorio y la [guía de acabados](https://bcnproreforma.com/guia-acabados) **solo después de que se publique**. Antes de mostrar una foto, comprobar el permiso y que no se vean números de vivienda, personas o datos de clientes. La foto 05 no se presenta como estuco hasta confirmar su técnica.
 
+## Lo que vimos en otras webs el 28/10/2026
+
+- [Pintor Barcelona](https://www.pintor-bcn.es/servicios/estuco-veneciano/) ya explica diferencias entre acabados, publica un precio orientativo desde 45 €/m² y lleva a WhatsApp desde la primera pantalla. Por eso una comparación genérica o un botón de presupuesto al final no bastan para destacar.
+- [BOP](https://www.bop.cat/blog/reforma-de-viviendas/pintura-o-microcemento-paredes/) compara pintura y microcemento según uso, mantenimiento y coste. La idea de «qué material elegir» tampoco es exclusiva.
+- [Rigual Pintors](https://www.rigualpintors.com/) presenta una trayectoria desde 1915 y un catálogo amplio. BCN ProReforma no necesita competir inventando años ni servicios: puede enseñar decisiones concretas sobre obras propias.
+
+La diferencia que proponemos **probar**, no dar por ganada, es una serie reconocible: foto real, lo que no se ve, la pregunta que habría que hacer y un camino corto a consulta. La guía permite pasar esa pregunta a alguien que todavía no va a reformar. La nueva llamada a contacto en la primera pantalla deja salir del cuestionario a quien ya tiene fotos y quiere avanzar.
+
 ## Secuencia lista para publicar
 
 | Semana | Pieza y material existente | Texto público | Enlace |

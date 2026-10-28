@@ -60,6 +60,8 @@ goal.addEventListener('change', () => { if (!result.hidden) render({focus: false
 
 const closingLink = document.querySelector('.guide-close a[href^="/contacto"]');
 if (closingLink) closingLink.href = `/contacto?origen=${contactOrigin}`;
+const heroLink = document.getElementById('guide-hero-contact');
+if (heroLink) heroLink.href = `/contacto?origen=${contactOrigin}`;
 
 share.addEventListener('click', async () => {
   if (['localhost', '127.0.0.1'].includes(location.hostname)) {

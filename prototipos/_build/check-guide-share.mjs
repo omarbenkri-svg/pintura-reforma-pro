@@ -57,11 +57,13 @@ try {
     title: document.getElementById('guide-title').textContent,
     resultHidden: document.getElementById('guide-result').hidden,
     shareHidden: document.getElementById('guide-share').hidden,
+    hero: document.getElementById('guide-hero-contact').getAttribute('href'),
     contact: document.getElementById('guide-contact').getAttribute('href')
   }))()`);
   assert.match(initial.title, /Estuco/);
   assert.equal(initial.resultHidden, false);
   assert.equal(initial.shareHidden, false);
+  assert.match(initial.hero, /origen=guia_compartida/);
   assert.match(initial.contact, /servicio=decorativa&origen=guia_compartida/);
 
   const shared = await evaluate(`(async () => {
@@ -98,11 +100,13 @@ try {
   await sleep(600);
   const campaign = await evaluate(`(() => ({
     contact: document.getElementById('guide-contact').getAttribute('href'),
+    hero: document.getElementById('guide-hero-contact').getAttribute('href'),
     closing: document.querySelector('.guide-close a').getAttribute('href'),
     title: document.getElementById('guide-title').textContent
   }))()`);
   assert.match(campaign.title, /revestimiento continuo/);
   assert.match(campaign.contact, /origen=guia_instagram/);
+  assert.match(campaign.hero, /origen=guia_instagram/);
   assert.match(campaign.closing, /origen=guia_instagram/);
   console.log('PASS: shared selection, native share URL, updated result, referred contact and campaign origin');
 } finally {

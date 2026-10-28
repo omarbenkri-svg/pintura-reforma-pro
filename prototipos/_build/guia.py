@@ -24,7 +24,7 @@ def body():
       <p class="eyebrow">Guía para guardar o pasar</p>
       <h1>Una foto bonita no decide el acabado.</h1>
       <p class="lead">Lo decide dónde va, cómo está la base y el uso que tendrá. Elige un espacio y lo que buscas. Te contamos qué mirar antes de pedir presupuesto.</p>
-      <a class="btn btn-primary" href="#orientacion">Encontrar una orientación</a>
+      <div class="actions guide-hero-actions"><a class="btn btn-primary" href="#orientacion">Encontrar una orientación</a><a class="btn-link" id="guide-hero-contact" href="/contacto?origen=guia_acabados" data-track="cta_presupuesto" data-origin="guia_acabados">Ya tengo fotos: consultar mi caso</a></div>
     </div>
     <figure>{photo('mc-suelo-escalones', 'Pavimento continuo y escalones de una obra propia', '(min-width: 1024px) 42vw, 100vw', priority=True)}<figcaption>Obra propia · Pavimento y escalones</figcaption></figure>
   </div>
