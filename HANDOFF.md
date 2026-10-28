@@ -139,7 +139,9 @@ Punto único de verdad del estado del proyecto. Cualquier agente lee esto ANTES 
 ### ✅ Incidencia DNS — web caída (detectada 25/10/2026, resuelta 26/10/2026)
 - **Resuelto:** Claude Code cambió en GoDaddy, desde el Chrome de Omar y con su OK, el registro A `@` de `160.153.0.26` a `216.198.79.1` y el CNAME `www` de `bcnproreforma.com.` a `cname.vercel-dns.com.`. No tocó ningún otro registro.
 - Verificado: nameservers de GoDaddy, 1.1.1.1 y 8.8.8.8 con los valores nuevos; portada 200 servida por Vercel e idéntica byte a byte a `index.html`; `www` hace 308 a la raíz; rutas principales 200; `HANDOFF.md` 404; certificado Let's Encrypt válido hasta el 13/01/2027; Vercel `misconfigured: false` en raíz y www.
-- **Riesgo abierto:** GoDaddy → `bcnproreforma.com` → Productos sigue mostrando «Conectaste un sitio web a bcnproreforma.com» y un certificado SSL de GoDaddy (de ahí el CNAME `_acme-challenge` a Cloudflare). Si ese sitio se publica o se resincroniza, puede volver a cambiar el A. Desconectarlo requiere OK de Omar.
+- **Origen y cierre (28/10/2026):** el dominio estaba conectado a un borrador de **GoDaddy Airo AI Builder** («BCN Pro Reforma», editado por última vez el 23/10/2026, `siteId 302g1oovi0`). Con OK de Omar, Claude Code lo desconectó en Airo → Dominio → Manage Domains → Desconectar dominio; Omar introdujo el código SMS. El borrador sigue existiendo solo en `302g1oovi0.c36.airoapp.ai`; volver a conectar el dominio exige «Upgrade to Connect Domain». No borrar el borrador sin preguntar.
+- Tras desconectar: A `@` y CNAME `www` siguen en Vercel (GoDaddy, 1.1.1.1 y 8.8.8.8), portada 200 desde Vercel, `misconfigured: false`. GoDaddy retiró el CNAME `_acme-challenge` de Airo y quedó un TXT `@` `v=spf1 include:secureserver.net ~all` añadido por GoDaddy (inofensivo: el dominio no tiene correo; no se tocó). La ficha de Productos de GoDaddy puede seguir diciendo «Conectaste un sitio web» un tiempo.
+- **No crear webs en GoDaddy/Airo con este dominio:** al conectarlo, GoDaddy reescribe el registro A y tumba la web de Vercel.
 - Síntoma: todas las rutas de bcnproreforma.com y www devuelven 200 con una página «Coming Soon!» de 932 bytes, `noindex`, servida por Cloudflare (`ss-product-id: aab-v1`).
 - Causa: en GoDaddy, el registro A `@` apunta a `160.153.0.26` (IP de GoDaddy) en vez de a Vercel. `www` es CNAME a `@`, así que hereda el fallo. Vercel marca el dominio `misconfigured: true`. El dominio está activo (vence 2027-04-13) y los nameservers siguen siendo de GoDaddy.
 - Vercel está bien: `pintura-reforma-obra-v1.vercel.app` sirve el `index.html` del repo idéntico byte a byte.
@@ -207,6 +209,7 @@ Punto único de verdad del estado del proyecto. Cualquier agente lee esto ANTES 
 
 - No reintroducir `/pintor-*.html` en raíz — ya tienen 301 redirects
 - No usar nombre "BCN Pro Reforma" en GBP (usar nombre legal)
+- **No conectar `bcnproreforma.com` a GoDaddy Airo ni a ningún creador de webs de GoDaddy** (reescribe el registro A; causa de la caída del 23-26/10/2026).
 - **No poner a Omar en la web ni dar protagonismo a Mohamed** (sin retratos ni tarjetas personales). Mohamed, solo la referencia discreta a su ficha del Gremi.
 - No reactivar Google Ads PMAX sin corregir targeting
 - No usar `gtm-tracking.js` (duplicaría eventos con tracking-unificado.js)
