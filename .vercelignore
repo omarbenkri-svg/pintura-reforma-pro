@@ -24,3 +24,22 @@ n8n_error_workflow.json
 n8n_workflow_reformas.json
 whatsapp
 _headers
+
+# Legacy source material not referenced by the public v2 pages.
+# Keep these files in Git; only exclude them from deployment uploads.
+scratch
+images/materials
+/js
+/css
+
+# Obsolete concept images and raw imports. Public pages use curated assets.
+/images/hero-team.png
+/images/*-elite.png
+/images/*-elite.webp
+/images/projects/servicio_*
+/images/projects/WhatsApp Image*
+/images/projects/antes.jpeg
+/images/projects/despues.jpeg
+
+# Unpublished page scaffold with placeholder content.
+/municipios/template.html
