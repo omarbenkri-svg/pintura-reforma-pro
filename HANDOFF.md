@@ -7,13 +7,15 @@
 
 ## Iteración local 2026-10-28 — guía de acabados y GEO
 
-- Esta copia de trabajo está en `Desktop/⭐ bcnproreforma/sitio-integracion`, clon local de `Developer/pintura-reforma-pro`. El repositorio original no se ha editado.
+- La integración se preparó en `Desktop/⭐ bcnproreforma/sitio-integracion` y quedó incorporada al repositorio real `Developer/pintura-reforma-pro` en los commits locales `18f09b0` y `abfe62e`. Los cambios preexistentes en `.gitignore` y `.claude/` permanecen intactos.
 - Generador `prototipos/_build/build_site.py` actualizado: crea `/guia-acabados`, la enlaza desde la portada, navegación y pie, y la añade al sitemap y a `llms.txt`. La guía compara pintura, estucos y microcemento, muestra obras propias y ofrece una ficha PDF sin registro. Los 12 casos del selector son locales; el formulario de contacto existente permanece intacto.
 - Presentación comercial corregida: Omar no aparece en portada ni Empresa; Mohamed queda reservado a los datos legales y a la referencia discreta al directorio del Gremi. «Desde 1994» identifica la antigüedad en el Gremi según datos de la empresa, no la fundación del negocio.
 - Datos estructurados: la guía tiene `Article` y `BreadcrumbList`; se retiraron de `HousePainter` el `founder` y `aggregateRating`, que daban protagonismo o podían interpretarse como valoración propia no apta para ese marcado.
 - Verificación: 144 comprobaciones con Chrome en 24 páginas y cinco anchos más JS desactivado, todas en verde; 12 combinaciones del selector, enlaces/recursos locales, JSON-LD y `git diff --check` también comprobados. El cambio final de copy del Gremi se revalidó estáticamente tras esa pasada visual.
 - Continuación de recomendación orgánica: el botón de compartir usa Web Share cuando está disponible y copia el enlace como alternativa. Un enlace con `espacio` y `busco` abre la respuesta seleccionada; `origen=compartida` se transmite al contacto como `guia_compartida`. Solo viajan esas elecciones, sin datos personales. Prueba dedicada: `PORT=8183 node prototipos/_build/check-guide-share.mjs` con servidor local en 8183.
-- **Pendiente para publicación:** revisar el diff local, integrar los cambios en el repositorio original y obtener el OK de Omar antes de desplegar esta nueva funcionalidad. No afirmar que la página ya esté indexada ni citada por asistentes. Configurar medición real si se desea atribuir contactos originados en la guía; `window.track` sigue siendo simulada sin `GA_ID`.
+- Campaña orgánica «Lo que no se ve en la foto» preparada en `prototipos/kit-google/CAMPANA-GUIA.md` con textos y fotos existentes. El kit del Perfil de Empresa ya no da protagonismo a Omar y Mohamed ni promete que un baño puede renovarse sin levantar el suelo. Publicar fotos solo con permiso y sin datos identificables.
+- La guía acepta `canal=perfil|instagram|whatsapp|alianza` y pasa el valor validado al formulario como `guia_<canal>`. Los enlaces compartidos prevalecen como `guia_compartida`. La prueba `check-guide-share.mjs` comprueba el recorrido en Chrome sin enviar un lead.
+- **Pendiente para publicación:** obtener el OK de Omar para push y despliegue de esta nueva funcionalidad. No afirmar que la página ya esté indexada ni citada por asistentes. El formulario registra `guia_acabados`, `guia_compartida` o `guia_<canal>`; las visitas y los clics aún no se miden porque `window.track` es simulado y falta `GA_ID`.
 
 ---
 
@@ -125,9 +127,9 @@ Punto único de verdad del estado del proyecto. Cualquier agente lee esto ANTES 
 8. **`/municipios/reformas-mataro.html` da 404** (el archivo está en la raíz como `reformas-mataro.html`).
 9. **`robots.txt` bloquea `/js/`:** Google no puede ejecutar el JS al renderizar (idioma, galería). Lighthouse a11y: diálogo `#calcModal` sin nombre, contrastes bajos (etiquetas, pie, botón de cookies), orden de encabezados, `<main>` ausente, logo sin texto accesible.
 10. **Token de verificación del webhook de WhatsApp estuvo público** (`whatsapp/config.js`, `test-webhook.sh`) hasta el 2026-10-17. Si ese webhook está en uso, rotar `WA_VERIFY_TOKEN`.
-11. **Omar y Mohamed en la web v2, contra su preferencia** (25/10): Inicio y Empresa dicen «Omar te atiende y coordina» y «Mohamed Ben Mesaud, al frente del oficio», con tarjeta de Omar en Empresa. Omar pidió (20/10) no figurar y que Mohamed salga solo de forma discreta, vía su ficha en el directorio del Gremi. Corregir en `prototipos/_build/` y regenerar.
-12. **«Empresa familiar desde 1994»** en Inicio y Empresa: el dato de Omar es «agremiado desde 1994», no la fundación. El directorio del Gremi no muestra la fecha.
-13. **`aggregateRating` 4,9/23 en el JSON-LD** de Inicio, Empresa y Contacto: Google no muestra estrellas autoatribuidas de `LocalBusiness`, y las reseñas deben verse en la página. Valorar quitarlo.
+11. **Omar y Mohamed en la web v2:** corregido en `18f09b0`, pendiente de despliegue. Inicio y Empresa ya no les dan protagonismo.
+12. **«Empresa familiar desde 1994»:** corregido en `18f09b0`, pendiente de despliegue. La fecha se atribuye a la agremiación según la empresa, no a la fundación.
+13. **`aggregateRating` autoatribuido en JSON-LD:** retirado en `18f09b0`, pendiente de despliegue.
 14. **«Trabajos con antes y después»** en la portada, pero el caso del baño no tiene fotos del «antes».
 
 ---

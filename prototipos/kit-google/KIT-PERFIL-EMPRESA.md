@@ -30,9 +30,9 @@ En la lista de Google, busca la más parecida a cada una:
 - **Web:** https://bcnproreforma.com
 - **Horario:** lunes a viernes de 8:00 a 19:00, sábado de 9:00 a 14:00 (el de la web actual; cámbialo si no es el real).
 
-## 5. Descripción (717 caracteres, pegar tal cual)
+## 5. Descripción (690 caracteres, pegar tal cual)
 
-> Empresa familiar de pintores con base en Cabrils, en el Gremi de Pintors de Barcelona desde 1994. Con la marca BCN ProReforma pintamos pisos y casas, aplicamos estuco veneciano y pintura decorativa, y revestimos baños, suelos, escaleras y terrazas con microcemento continuo, sin juntas. También quitamos gotelé, lacamos puertas y carpinterías y nos ocupamos de fachadas, comunidades, humedades y reformas de baño y cocina. Antes de empezar protegemos muebles y suelos y reparamos el soporte, porque de la preparación depende que el acabado dure. Presupuesto por escrito, con la preparación, los materiales y lo que no incluye. Trabajamos en el Maresme y Barcelona. Pide presupuesto por teléfono, WhatsApp o en la web.
+> Empresa familiar de pintores con base en Cabrils, agremiada en el Gremi de Pintors de Barcelona desde 1994, según datos de la empresa. Con la marca BCN ProReforma pintamos pisos y casas, trabajamos estucos venecianos, marmolizados y Portland, y aplicamos microcemento en baños, suelos y escaleras cuando el soporte y el uso lo permiten. También alisamos paredes, lacamos carpinterías y trabajamos en fachadas y comunidades. Antes de elegir el acabado revisamos la base, la exposición al agua y el uso del espacio. Protegemos la casa y detallamos la preparación y los materiales en el presupuesto. Trabajamos en el Maresme y Barcelona. Puedes consultarnos por teléfono, WhatsApp o en la web.
 
 ## 6. Servicios (nombre y descripción)
 
@@ -40,7 +40,7 @@ En la lista de Google, busca la más parecida a cada una:
 |---|---|
 | Pintura de pisos y casas | Viviendas enteras o por estancias: paredes, techos, puertas y radiadores. Protegemos muebles y suelos, reparamos grietas y golpes y preparamos cada pared antes de pintar. |
 | Microcemento | Baños, suelos, escaleras y terrazas con un revestimiento continuo, sin juntas, aplicado a mano. Platos de ducha de obra, hornacinas y encimeras. |
-| Estuco veneciano y pintura decorativa | Estuco a la cal, veladuras y acabados con aguas. Hacemos una muestra en tu pared antes de aplicarlo. |
+| Estuco veneciano y pintura decorativa | Estucos venecianos, marmolizados y Portland, además de veladuras y acabados con aguas. Revisamos el soporte y acordamos el efecto y el tono antes de aplicar. |
 | Quitar gotelé y alisar paredes | Retiramos o tapamos el gotelé y dejamos la pared lisa, sin ondulaciones, lista para pintar. |
 | Lacado de puertas y carpinterías | Lacado o esmaltado de puertas, marcos y armarios, y barnizado de madera interior y exterior. |
 | Fachadas y exteriores | Saneamos el revoque y pintamos fachadas, muros y rejas. |
@@ -49,13 +49,16 @@ En la lista de Google, busca la más parecida a cada una:
 
 ## 7. Fotos (carpeta `fotos/`, en JPG)
 
-Sube las 12. El orden recomendado está en el nombre de cada archivo: la 01 es la mejor para la portada del perfil. Todas son obras propias, reveladas sin retocar el acabado. Como logotipo puedes usar `logo .png` de la raíz del repo.
+Las 12 fotos están preparadas en la carpeta. Antes de subir cada una, comprueba el permiso de publicación y que no exponga datos identificables de clientes. El orden sugerido está en el nombre; como logotipo puedes usar `logo .png` de la raíz del repo.
 
 ## 8. Primeras publicaciones (una por semana)
 
-1. **Microcemento en baño.** «Ducha de obra revestida de microcemento con desagüe lineal: suelo, paredes y plato en una sola superficie, sin juntas. ¿Quieres renovar tu baño sin levantar el suelo? Pide presupuesto.» Foto 01. Botón «Llamar».
-2. **Desde 1994.** «Somos pintores en el Gremi de Pintors de Barcelona desde 1994. Empresa familiar de Cabrils: Mohamed en la obra y Omar contigo de principio a fin.» Foto 08. Botón «Más información» (enlace a la página de empresa).
-3. **Fachada antes y después.** «Pilar y muro con el revoque desprendido: saneado, reparación y pintura nueva.» Fotos 07 y 06. Botón «Más información» (enlace a la ficha de la obra).
+1. **Antes de elegir el acabado.** «Pintura, estuco o microcemento: la foto ayuda a imaginarlo, pero la base y el uso deciden. Hemos reunido seis preguntas para no ir a ciegas. Guárdalas para cuando toque.» Enlace a `https://bcnproreforma.com/guia-acabados` una vez publicada. Sin foto nueva.
+2. **Microcemento en baño.** «En esta ducha el acabado continuo se ve de un vistazo. Lo que no se ve en la foto también importa: soporte, impermeabilización, pendientes y encuentros. Si tienes un baño en mente, cuéntanos cómo está ahora.» Foto 01, si está autorizada. Enlace a la guía con `?espacio=bano&busco=continuidad` una vez publicada.
+3. **Estucos.** «El veneciano, el marmolizado y el Portland no buscan el mismo efecto. Antes del color, toca hablar de la pared, la luz y el acabado que quieres ver de cerca.» Enlace a `https://bcnproreforma.com/decorativa-estucos`. No atribuir una técnica concreta a la foto 05 sin confirmarla.
+4. **Trabajo de base.** «Antes de pintar una fachada, miramos qué partes del revestimiento están sueltas y qué necesita reparación. El color viene después.» Fotos 07 y 06 solo con permiso y sin datos identificables. Enlace a la ficha de la obra.
+
+El recorrido orgánico y los textos para compartir están en `CAMPANA-GUIA.md`. No publicar los enlaces de la guía hasta que el despliegue esté aprobado y la URL responda en producción.
 
 ## 9. Reseñas reales
 

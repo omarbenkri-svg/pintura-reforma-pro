@@ -94,7 +94,17 @@ try {
   }))()`);
   assert.equal(contact.selected, 'microcemento');
   assert.equal(contact.origin, 'guia_compartida');
-  console.log('PASS: shared selection, native share URL, updated result and preselected referred contact');
+  await send('Page.navigate', {url: `http://bcnproreforma.test:${httpPort}/guia-acabados.html?espacio=suelo&busco=continuidad&canal=instagram`});
+  await sleep(600);
+  const campaign = await evaluate(`(() => ({
+    contact: document.getElementById('guide-contact').getAttribute('href'),
+    closing: document.querySelector('.guide-close a').getAttribute('href'),
+    title: document.getElementById('guide-title').textContent
+  }))()`);
+  assert.match(campaign.title, /revestimiento continuo/);
+  assert.match(campaign.contact, /origen=guia_instagram/);
+  assert.match(campaign.closing, /origen=guia_instagram/);
+  console.log('PASS: shared selection, native share URL, updated result, referred contact and campaign origin');
 } finally {
   ws?.close();
   chrome.kill();

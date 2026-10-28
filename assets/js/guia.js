@@ -8,6 +8,8 @@ const share = document.getElementById('guide-share');
 const shareStatus = document.getElementById('guide-share-status');
 const params = new URLSearchParams(location.search);
 const fromShare = params.get('origen') === 'compartida';
+const channel = ['perfil', 'instagram', 'whatsapp', 'alianza'].includes(params.get('canal')) ? params.get('canal') : null;
+const contactOrigin = fromShare ? 'guia_compartida' : channel ? `guia_${channel}` : 'guia_acabados';
 let hasSelection = spaces.includes(params.get('espacio')) && goals.includes(params.get('busco'));
 
 if (spaces.includes(params.get('espacio'))) space.value = params.get('espacio');
@@ -36,8 +38,7 @@ function render({focus = true, updateUrl = true} = {}) {
     'guide-caveat': guidance.caveat,
   })) document.getElementById(id).textContent = value;
   document.getElementById('guide-detail').href = guidance.detail;
-  const origin = fromShare ? 'guia_compartida' : 'guia_acabados';
-  document.getElementById('guide-contact').href = `/contacto?servicio=${encodeURIComponent(guidance.service)}&origen=${origin}`;
+  document.getElementById('guide-contact').href = `/contacto?servicio=${encodeURIComponent(guidance.service)}&origen=${contactOrigin}`;
   const message = `Hola, os escribo desde la guía de acabados. Quiero valorar ${guidance.title.toLowerCase()}. Mi municipio es: `;
   document.getElementById('guide-wa').href = `https://wa.me/34631714077?text=${encodeURIComponent(message)}`;
   result.hidden = false;
@@ -45,7 +46,8 @@ function render({focus = true, updateUrl = true} = {}) {
   hasSelection = true;
   if (updateUrl) {
     const url = new URL(location.href);
-    url.search = new URLSearchParams({espacio: space.value, busco: goal.value, ...(fromShare ? {origen: 'compartida'} : {})}).toString();
+    url.search = new URLSearchParams({espacio: space.value, busco: goal.value,
+      ...(fromShare ? {origen: 'compartida'} : channel ? {canal: channel} : {})}).toString();
     history.replaceState(null, '', url);
   }
   if (typeof window.track === 'function') window.track('guide_result', {espacio: space.value, busco: goal.value});
@@ -56,10 +58,8 @@ if (hasSelection) render({focus: false, updateUrl: false});
 space.addEventListener('change', () => { if (!result.hidden) render({focus: false}); });
 goal.addEventListener('change', () => { if (!result.hidden) render({focus: false}); });
 
-if (fromShare) {
-  const closingLink = document.querySelector('.guide-close a[href^="/contacto"]');
-  if (closingLink) closingLink.href = '/contacto?origen=guia_compartida';
-}
+const closingLink = document.querySelector('.guide-close a[href^="/contacto"]');
+if (closingLink) closingLink.href = `/contacto?origen=${contactOrigin}`;
 
 share.addEventListener('click', async () => {
   if (['localhost', '127.0.0.1'].includes(location.hostname)) {
