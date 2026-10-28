@@ -22,7 +22,7 @@ def pages_for(theme):
     yield "trabajos", "Trabajos", "Obras documentadas con su estado inicial, la preparación y el resultado.", *theme.works(), "trabajos"
     for c in CASES:
         yield c["slug"], c["title"], c["summary"], *theme.case(c), c["slug"]
-    yield "empresa", "Empresa familiar de pintura en Cabrils desde 1994", "BCN ProReforma, empresa familiar de pintura, estucos y microcemento con base en Cabrils y en el Gremi de Pintors desde 1994.", common.company_body(theme), None, "empresa"
+    yield "empresa", "Pintores y especialistas en acabados en Cabrils", "BCN ProReforma: pintura, estucos y microcemento en el Maresme y Barcelona. Agremiados en el Gremi de Pintors desde 1994, según datos de la empresa.", common.company_body(theme), None, "empresa"
     yield "contacto", PAGES["contacto"], "Cuéntanos qué quieres renovar y en qué municipio.", common.contact_body(theme), None, "contacto"
     yield "privacidad", "Privacidad", "Cómo tratamos los datos de quien nos pide presupuesto.", common.privacy_body(theme), None, "privacidad"
     yield "aviso-legal", "Aviso legal", "Titular, NIF y datos de contacto de BCN ProReforma.", common.legal_body(theme), None, "aviso-legal"

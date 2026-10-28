@@ -25,7 +25,7 @@ const PORT = 9334;
 const WIDTHS = [320, 390, 768, 1024, 1440];
 const SITE_MODE = process.argv.includes('--site');
 const THEMES = SITE_MODE ? ['.'] : ['a-oficio', 'b-estudio', 'c-tecnico'];
-const SITE_PAGES = ['index', 'pintura-viviendas', 'microcemento', 'decorativa-estucos', 'alisados-lacados', 'trabajos', 'caso-bano-microcemento', 'caso-fachada', 'caso-carpinteria-madera', 'caso-garaje-comunitario', 'empresa', 'contacto', 'privacidad', 'aviso-legal', '404', ...['cabrils', 'alella', 'el-masnou', 'mataro', 'premia-de-mar', 'vilassar-de-mar', 'montgat', 'badalona'].map((m) => 'municipios/pintor-' + m)].map((p) => p + '.html');
+const SITE_PAGES = ['index', 'pintura-viviendas', 'microcemento', 'decorativa-estucos', 'alisados-lacados', 'trabajos', 'guia-acabados', 'caso-bano-microcemento', 'caso-fachada', 'caso-carpinteria-madera', 'caso-garaje-comunitario', 'empresa', 'contacto', 'privacidad', 'aviso-legal', '404', ...['cabrils', 'alella', 'el-masnou', 'mataro', 'premia-de-mar', 'vilassar-de-mar', 'montgat', 'badalona'].map((m) => 'municipios/pintor-' + m)].map((p) => p + '.html');
 const SHOTS = process.argv.includes('--shots');
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 

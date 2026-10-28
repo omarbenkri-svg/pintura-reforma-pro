@@ -603,7 +603,7 @@ ALBUMS = {
 # ---------------------------------------------------------------- home copy
 
 HERO = {
-    "eyebrow": "BCN ProReforma · Empresa familiar desde 1994",
+    "eyebrow": "BCN ProReforma · Oficio familiar en Cabrils",
     "h1": "Pintura, estucos y microcemento para casas y pisos del Maresme y Barcelona",
     "desc": "Proyectos de pintura y revestimiento con la preparación y el acabado cuidados de principio a fin.",
     "support": "Cuéntanos qué quieres renovar y en qué municipio. Revisaremos la información para indicarte el siguiente paso.",
@@ -624,9 +624,9 @@ PEOPLE = {
 
 
 def gremi_line() -> str:
-    return pend('Agremiados en el Gremi de Pintors de Barcelona desde 1994.',
-                "Dato de Omar (19/10/2026). Nombre oficial: Gremi d'Empreses de Pintura de Barcelona i Comarques. "
-                "Enlazar la ficha del directorio o el certificado de alta al publicar. No usar logotipo sin permiso")
+    return pend('Agremiados en el Gremi de Pintors de Barcelona desde 1994 (dato facilitado por la empresa). '
+                '<a href="https://www.gremipintors.com/directori">Ver el directorio oficial</a>.',
+                "La pertenencia se comprueba en el directorio; la fecha de alta es un dato facilitado por la empresa. No usar logotipo sin permiso")
 
 
 PREP_STEPS = [

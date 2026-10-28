@@ -42,6 +42,7 @@ def header(active: str) -> str:
           <ul>{sub}<li><a href="index.html#otros-servicios">Reformas y acabados</a></li></ul>
         </details></li>
         <li><a href="trabajos.html"{cur("trabajos")}>Trabajos</a></li>
+        {('<li><a href="guia-acabados.html"' + cur('guia-acabados') + '>Guía</a></li>') if PROD else ''}
         <li><a href="empresa.html"{cur("empresa")}>Empresa</a></li>
         <li><a href="contacto.html"{cur("contacto")}>Contacto</a></li>
       </ul>
@@ -72,6 +73,7 @@ def footer() -> str:
       <ul>
         <li><a href="pintura-viviendas.html">Pintura y servicios</a></li>
         <li><a href="trabajos.html">Trabajos</a></li>
+        {'<li><a href="guia-acabados.html">Guía de acabados</a></li>' if PROD else ''}
         <li><a href="empresa.html">Empresa</a></li>
         <li><a href="../../blog/">Blog</a></li>
         <li><a href="privacidad.html">Privacidad</a></li>
@@ -124,7 +126,6 @@ def reviews_block() -> str:
 
 def home():
     feature, *minis = CASES
-    m = PEOPLE["mohamed"]
     services = SERVICES
     lead, *rest = services
     body = f"""
@@ -143,12 +144,14 @@ def home():
   </div>
 </section>
 
+{'''<section class="guide-home-hook"><div class="container guide-home-inner"><div><p class="eyebrow">Para guardar y compartir</p><h2>¿Pintura, estuco o microcemento?</h2><p>Una guía breve para saber qué mirar antes de elegir, aunque todavía no vayas a hacer la obra.</p></div><a class="btn btn-secondary" href="guia-acabados.html">Ver la guía de acabados</a></div></section>''' if PROD else ''}
+
 <section class="oficio" aria-labelledby="oficio-title">
   <div class="container oficio-grid">
-    {('<figure class="oficio-photo">' + photo("fachada-proceso-pintor", "Pintor del equipo trabajando en la reparación de una fachada", "(min-width: 1024px) 40vw, 100vw") + '<figcaption>En obra: reparación de una fachada antes de pintarla.</figcaption></figure>') if PROD else placeholder("Mohamed trabajando en una obra", "Retrato en obra, con luz natural.", "oficio-photo")}
+    {('<figure class="oficio-photo">' + photo("fachada-proceso-pintor", "Pintor del equipo trabajando en la reparación de una fachada", "(min-width: 1024px) 40vw, 100vw") + '<figcaption>En obra: reparación de una fachada antes de pintarla.</figcaption></figure>') if PROD else placeholder("Equipo trabajando en una obra", "Fotografía del trabajo en obra, con luz natural.", "oficio-photo")}
     <div class="oficio-text reveal">
-      <h2 id="oficio-title">{m['name']}, al frente del oficio</h2>
-      <p>Una empresa familiar con trato directo durante todo el proyecto. Mohamed valora cada superficie y supervisa la obra; Omar te atiende y coordina visitas y presupuestos.</p>
+      <h2 id="oficio-title">El oficio está en los detalles</h2>
+      <p>Trabajamos en familia y cuidamos la obra de principio a fin: revisamos la base, protegemos la casa y repasamos el acabado antes de entregar.</p>
       <p class="gremi">{gremi_line()}</p>
       <a class="btn-link" href="empresa.html">Conocer la empresa {icon('arrow-right')}</a>
     </div>

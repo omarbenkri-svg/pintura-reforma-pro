@@ -24,6 +24,7 @@ import common  # noqa: E402
 import content as C  # noqa: E402
 import theme_a as T  # noqa: E402
 import municipios as M  # noqa: E402
+import guia as G  # noqa: E402
 
 ROOT = C.ROOT
 ASSETS = ROOT / "assets"
@@ -50,15 +51,12 @@ def business() -> dict:
         "address": {"@type": "PostalAddress", "addressLocality": "Cabrils", "postalCode": "08348",
                     "addressRegion": "Barcelona", "addressCountry": "ES"},
         "areaServed": towns + [{"@type": "AdministrativeArea", "name": "Maresme"}],
-        "founder": {"@type": "Person", "name": CFG["holder"]},
         "memberOf": {"@type": "Organization", "name": "Gremi d'Empreses de Pintura de Barcelona i Comarques"},
         "openingHoursSpecification": [
             {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
              "opens": "08:00", "closes": "19:00"},
             {"@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "09:00", "closes": "14:00"},
         ],
-        "aggregateRating": {"@type": "AggregateRating", "ratingValue": C.RATING["value"],
-                            "reviewCount": str(C.RATING["count"]), "bestRating": "5"},
         "sameAs": ["https://www.instagram.com/pintayreformatuobra"],
         "hasOfferCatalog": {"@type": "OfferCatalog", "name": "Servicios", "itemListElement": [
             {"@type": "Offer", "itemOffered": {"@type": "Service", "name": s["name"], "url": f"{SITE}/{s['slug']}"}}
@@ -85,6 +83,12 @@ def schema_for(key: str, title: str) -> list:
         blocks.append({"@type": "FAQPage", "mainEntity": [
             {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": plain(a)}}
             for q, a in s["faq"] if plain(a)]})
+    if key == "guia-acabados":
+        blocks.append({"@type": "Article", "@id": f"{SITE}/guia-acabados#articulo",
+                       "headline": title, "description": "Cómo comparar pintura, estucos y microcemento según el soporte, el uso y el acabado buscado.",
+                       "inLanguage": "es", "author": {"@id": f"{SITE}/#negocio"},
+                       "publisher": {"@id": f"{SITE}/#negocio"},
+                       "mainEntityOfPage": f"{SITE}/guia-acabados"})
     if key != "index" and key != "404":
         crumbs = [("Inicio", f"{SITE}/")]
         if key in C.CASE_BY_SLUG:
@@ -137,6 +141,7 @@ gtag('js',new Date());gtag('config','{C.GA_ID}');</script>
 <link rel="stylesheet" href="{T.FONTS}">
 <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
 <link rel="stylesheet" href="/assets/css/site.css">
+{'<link rel="stylesheet" href="/assets/css/guia.css">' if key == 'guia-acabados' else ''}
 <link rel="icon" href="/logo%20.png">
 {ld}</head>"""
 
@@ -157,7 +162,10 @@ def page(key, title, desc, body, albums, origin, path=None, extra_ld=None) -> st
         parts.append(C.mobile_bar(origin))
     if albums:
         parts += [C.lightbox(), C.albums_json(albums)]
-    parts += [C.scripts(), "</body>\n</html>\n"]
+    parts += [C.scripts()]
+    if key == "guia-acabados":
+        parts.append('<script type="module" src="/assets/js/guia.js"></script>')
+    parts += ["</body>\n</html>\n"]
     return clean_links("\n".join(parts))
 
 
@@ -198,13 +206,16 @@ def sitemap(keys) -> None:
 def llms() -> None:
     lines = [f"# {CFG['brand']}", "",
              f"> {CFG['brand']} ({CFG['legal_name']}) es una empresa familiar de pintores con base en Cabrils (Barcelona), "
-             f"en el Gremi de Pintors desde {CFG['since']}. Pinta viviendas y aplica estucos y microcemento en el Maresme y Barcelona.",
+             f"agremiada en el Gremi de Pintors desde {CFG['since']} (fecha facilitada por la empresa). Pinta viviendas y aplica estucos y microcemento en el Maresme y Barcelona.",
              "", f"- Teléfono: {CFG['tel_display']} · WhatsApp: {CFG['wa_display']} · {CFG['email']}",
              "- Zona: Maresme y Barcelona, unos 40 km alrededor de Cabrils", "", "## Servicios", ""]
     lines += [f"- [{s['name']}]({SITE}/{s['slug']}): {s['short']}" for s in C.SERVICES]
     lines += ["", "## Obras documentadas", ""]
     lines += [f"- [{c['title']}]({SITE}/{c['slug']}): {plain(c['summary'])}" for c in C.CASES]
-    lines += ["", "## Más", "", f"- [Quiénes somos]({SITE}/empresa)", f"- [Solicitar presupuesto]({SITE}/contacto)",
+    lines += ["", "## Más", "", f"- [Quiénes somos]({SITE}/empresa)",
+              "- [Directorio oficial del Gremi](https://www.gremipintors.com/directori)",
+              f"- [Solicitar presupuesto]({SITE}/contacto)",
+              f"- [Guía para elegir entre pintura, estuco y microcemento]({SITE}/guia-acabados)",
               f"- [Blog]({SITE}/blog)"]
     (ROOT / "llms.txt").write_text("\n".join(lines) + "\n")
 
@@ -297,6 +308,12 @@ def main() -> None:
     for key, title, desc, body, albums, origin in build.pages_for(T):
         (ROOT / f"{key}.html").write_text(page(key, title, desc, body, albums, origin), encoding="utf-8")
         keys.append(key)
+    key = "guia-acabados"
+    body, albums = G.body()
+    (ROOT / f"{key}.html").write_text(page(key, "Pintura, estuco o microcemento: cómo elegir",
+        "Guía práctica para elegir entre pintura, estucos y microcemento según la superficie, su estado y el uso que tendrá. Con obras propias y una ficha gratuita.",
+        body, albums, "guia_acabados"), encoding="utf-8")
+    keys.append(key)
     for t in M.TOWNS:
         (ROOT / "municipios" / f"{t['slug']}.html").write_text(town_page(t), encoding="utf-8")
     sitemap(keys)

@@ -1,0 +1,53 @@
+.guide-hero,.guide-options,.guide-close{padding-block:var(--section)}
+.guide-hero{background:var(--surface)}
+.guide-hero-grid,.guide-tool-grid,.guide-pass-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,5rem);align-items:center}
+.guide-hero h1{font-size:clamp(2.7rem,5vw,4.7rem);max-width:13ch;margin-bottom:1.5rem}
+.guide-hero .lead{margin-bottom:1.5rem}
+.guide-hero figure{margin:0}
+.guide-hero figure img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:var(--radius-m)}
+.guide-hero figcaption{font-size:.85rem;color:var(--muted);margin-top:.5rem}
+.guide-tool,.guide-real,.guide-pocket,.guide-pass{padding-block:var(--section)}
+.guide-tool{background:#e7ebe7}
+.guide-tool-grid{align-items:start}
+.guide-tool-grid>div:first-child>p:last-child{color:var(--muted);max-width:40ch;margin-top:1rem}
+.guide-panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-m);padding:clamp(1.25rem,3vw,2.5rem)}
+.guide-fields{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.25rem}
+.guide-fields label{display:block;font-weight:600;margin-bottom:.4rem}
+.guide-fields select{width:100%;min-height:48px;padding:.65rem;background:var(--surface);border:1px solid var(--line-strong);border-radius:var(--radius-s)}
+.guide-result{border-top:1px solid var(--line);margin-top:2rem;padding-top:1.5rem}
+.guide-result[hidden]{display:none}
+.guide-result h3{font-size:clamp(1.5rem,2.4vw,2rem);margin-bottom:.75rem}
+.guide-result>p{color:var(--muted);margin-top:1rem}
+.guide-check{background:var(--bg);border-left:3px solid var(--accent);padding:1rem;margin-top:1rem}
+.guide-check p{margin-top:.4rem}
+.guide-result .actions{margin-block:1.5rem}
+.guide-detail{font-weight:600;text-underline-offset:4px}
+.guide-heading{display:flex;align-items:end;justify-content:space-between;gap:2rem;margin-bottom:2rem}
+.guide-heading>p{max-width:35ch;color:var(--muted)}
+.guide-heading h2{max-width:22ch}
+.guide-option-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;border-top:2px solid var(--text)}
+.guide-option-grid article{padding-top:1.5rem}
+.guide-option-grid article>span{font-size:.8rem;color:var(--accent);font-weight:700;letter-spacing:.06em}
+.guide-option-grid h3{font-size:1.7rem;margin-top:1.25rem}
+.guide-option-grid p{color:var(--muted);margin-block:1rem}
+.guide-option-grid a{font-weight:600;text-underline-offset:4px}
+.guide-real{background:var(--surface)}
+.guide-real-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.guide-real-grid img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:var(--radius-m)}
+.guide-real-grid span{display:block;padding:.8rem 0;border-bottom:1px solid var(--line);font-weight:600}
+.guide-pocket{background:var(--surface-2)}
+.guide-pocket .guide-heading p:last-child{margin-top:.8rem;color:var(--muted)}
+.guide-pocket-list{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:0 2rem;border-top:2px solid var(--text)}
+.guide-pocket-list li{display:flex;gap:1rem;border-bottom:1px solid var(--line-strong);padding:1.25rem 0}
+.guide-num{color:var(--accent);font-size:.8rem;font-weight:700;flex:none;padding-top:.15rem}
+.guide-pocket-list h3{font-size:1rem}
+.guide-pocket-list p{font-size:.9rem;color:var(--muted);margin-top:.4rem}
+.guide-pass{background:var(--text);color:var(--surface)}
+.guide-pass .eyebrow,.guide-pass p{color:#d6e0e2}
+.guide-pass p{margin-top:1rem}
+.guide-pass .btn-secondary{color:var(--text);background:var(--surface);border-color:var(--surface)}
+.guide-pass #guide-share-status{font-size:.8rem;max-width:35ch}
+.guide-close{display:flex;align-items:center;justify-content:space-between;gap:2rem}
+.guide-close p{color:var(--muted);margin-top:.75rem}
+@media(max-width:800px){.guide-hero-grid,.guide-tool-grid,.guide-pass-grid{grid-template-columns:1fr}.guide-heading{display:block}.guide-heading>p,.guide-heading>.btn{margin-top:1rem}}
+@media(max-width:600px){.guide-fields,.guide-option-grid,.guide-real-grid,.guide-pocket-list{grid-template-columns:1fr}.guide-hero h1{font-size:clamp(2.4rem,10vw,3.3rem)}.guide-close{display:block}.guide-close .btn{margin-top:1.5rem;width:100%}.guide-panel>.btn{width:100%}.guide-result .actions .btn{width:100%}}

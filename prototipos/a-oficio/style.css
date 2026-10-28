@@ -93,6 +93,12 @@ section > .container > h2, section.container > h2 { margin-bottom: clamp(1.5rem,
 }
 
 /* ---------- breadcrumb & page head ---------- */
+.guide-home-hook { background: var(--surface-2); border-block: 1px solid var(--line); padding-block: 2rem; }
+.guide-home-inner { display: flex; align-items: center; justify-content: space-between; gap: 2rem; }
+.guide-home-inner h2 { margin: 0 0 .5rem; }
+.guide-home-inner p:last-child { color: var(--muted); max-width: 55ch; }
+.guide-home-inner .btn { flex: none; }
+@media (max-width: 650px) { .guide-home-inner { display: block; } .guide-home-inner .btn { margin-top: 1.25rem; width: 100%; } }
 .breadcrumb ol { display: flex; flex-wrap: wrap; gap: .4rem; list-style: none; font-size: .875rem; color: var(--muted); margin-bottom: 1.25rem; }
 .breadcrumb li + li::before { content: "/"; margin-right: .4rem; color: var(--line-strong); }
 .breadcrumb a { text-decoration: none; }

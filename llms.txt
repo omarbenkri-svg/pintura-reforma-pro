@@ -1,6 +1,6 @@
 # BCN ProReforma
 
-> BCN ProReforma (Pintura, Reformas y Acabados de Obra) es una empresa familiar de pintores con base en Cabrils (Barcelona), en el Gremi de Pintors desde 1994. Pinta viviendas y aplica estucos y microcemento en el Maresme y Barcelona.
+> BCN ProReforma (Pintura, Reformas y Acabados de Obra) es una empresa familiar de pintores con base en Cabrils (Barcelona), agremiada en el Gremi de Pintors desde 1994 (fecha facilitada por la empresa). Pinta viviendas y aplica estucos y microcemento en el Maresme y Barcelona.
 
 - Teléfono: 639 05 88 19 · WhatsApp: 631 71 40 77 · bcnproreforma@gmail.com
 - Zona: Maresme y Barcelona, unos 40 km alrededor de Cabrils
@@ -22,5 +22,7 @@
 ## Más
 
 - [Quiénes somos](https://bcnproreforma.com/empresa)
+- [Directorio oficial del Gremi](https://www.gremipintors.com/directori)
 - [Solicitar presupuesto](https://bcnproreforma.com/contacto)
+- [Guía para elegir entre pintura, estuco y microcemento](https://bcnproreforma.com/guia-acabados)
 - [Blog](https://bcnproreforma.com/blog)

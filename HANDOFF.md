@@ -1,7 +1,18 @@
 # HANDOFF — bcnproreforma.com
 
-**Última actualización:** 2026-10-26 por Claude Code — incidencia DNS **resuelta** (ver abajo). Web v2 en producción; rama de trabajo `feat/web-v2`, igualada con `master`.
+**Última actualización:** 2026-10-28 por Codex — integración local de guía SEO/GEO; todavía sin push ni deploy. La web v2 anterior sigue en producción.
 **Próximo ejecutor:** Claude Code (Terminal)
+
+---
+
+## Iteración local 2026-10-28 — guía de acabados y GEO
+
+- Esta copia de trabajo está en `Desktop/⭐ bcnproreforma/sitio-integracion`, clon local de `Developer/pintura-reforma-pro`. El repositorio original no se ha editado.
+- Generador `prototipos/_build/build_site.py` actualizado: crea `/guia-acabados`, la enlaza desde la portada, navegación y pie, y la añade al sitemap y a `llms.txt`. La guía compara pintura, estucos y microcemento, muestra obras propias y ofrece una ficha PDF sin registro. Los 12 casos del selector son locales; el formulario de contacto existente permanece intacto.
+- Presentación comercial corregida: Omar no aparece en portada ni Empresa; Mohamed queda reservado a los datos legales y a la referencia discreta al directorio del Gremi. «Desde 1994» identifica la antigüedad en el Gremi según datos de la empresa, no la fundación del negocio.
+- Datos estructurados: la guía tiene `Article` y `BreadcrumbList`; se retiraron de `HousePainter` el `founder` y `aggregateRating`, que daban protagonismo o podían interpretarse como valoración propia no apta para ese marcado.
+- Verificación: 144 comprobaciones con Chrome en 24 páginas y cinco anchos más JS desactivado, todas en verde; 12 combinaciones del selector, enlaces/recursos locales, JSON-LD y `git diff --check` también comprobados. El cambio final de copy del Gremi se revalidó estáticamente tras esa pasada visual.
+- **Pendiente para publicación:** revisar el diff local, integrar los cambios en el repositorio original y obtener el OK de Omar antes de desplegar esta nueva funcionalidad. No afirmar que la página ya esté indexada ni citada por asistentes. Configurar medición real si se desea atribuir contactos originados en la guía; `window.track` sigue siendo simulada sin `GA_ID`.
 
 ---
 

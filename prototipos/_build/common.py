@@ -60,53 +60,31 @@ def contact_actions(origin: str, service_name: str | None = None, contact_href: 
 
 
 def company_body(theme) -> str:
-    m, o = PEOPLE["mohamed"], PEOPLE["omar"]
     principles = [
         ("Precio cerrado y por escrito", "El presupuesto detalla preparación, materiales, protección y lo que no incluye. Si algo cambia, lo hablamos antes."),
         ("La casa protegida", "Suelos, muebles y carpinterías cubiertos durante toda la obra, y limpieza al final de cada jornada."),
         ("Equipo propio", "Los mismos oficiales de principio a fin, sin subcontratas ni intermediarios."),
-        ("Un único contacto", "Omar coordina contigo fechas, cambios y dudas; Mohamed responde de la ejecución."),
+        ("Comunicación directa", "Hablamos contigo sobre fechas, cambios y dudas durante la obra."),
     ]
     towns = "".join(f'<li><a href="{"/municipios/" + MUNI_PAGES[t] if PROD else "../../municipios/" + MUNI_PAGES[t] + ".html"}">{e(t)}</a></li>' if t in MUNI_PAGES else f"<li>{e(t)}</li>" for t in MUNICIPIOS)
     return f"""
 <section class="page-head container">
   {breadcrumb([("index.html", "Inicio"), (None, "Empresa")])}
-  <h1>BCN ProReforma: pintores en Cabrils desde {CONFIG['since']}</h1>
-  <p class="lead">{CONFIG['brand']} es la marca de {CONFIG['legal_name']}, el oficio de {CONFIG['holder']}.
-  Pintamos, estucamos y aplicamos microcemento en viviendas del Maresme y Barcelona. {gremi_line()}</p>
+  <h1>Pintores y especialistas en acabados desde Cabrils</h1>
+  <p class="lead">Pintamos, estucamos y aplicamos microcemento en viviendas del Maresme y Barcelona. Nos interesa que la base quede bien preparada y que el acabado responda al uso real del espacio.</p>
 </section>
 
 <section class="facts-block container" aria-labelledby="facts-title">
   <h2 id="facts-title">Datos de la empresa</h2>
   <dl class="legal-list">
     <dt>Marca</dt><dd>{CONFIG['brand']}</dd>
-    <dt>Empresa</dt><dd>{CONFIG['legal_name']}, de {CONFIG['holder']}</dd>
-    <dt>Desde</dt><dd>{CONFIG['since']}, en el Gremi de Pintors de Barcelona</dd>
+    <dt>Nombre legal</dt><dd>{CONFIG['legal_name']}</dd>
+    <dt>Gremi</dt><dd>Agremiados desde {CONFIG['since']} (dato facilitado por la empresa). <a href="https://www.gremipintors.com/directori">Consulta el directorio oficial</a>.</dd>
     <dt>Especialidades</dt><dd>Pintura de casas y pisos, microcemento, estuco veneciano y pintura decorativa</dd>
     <dt>Base</dt><dd>Cabrils (Barcelona)</dd>
     <dt>Zona de trabajo</dt><dd>Maresme y Barcelona</dd>
     <dt>Contacto</dt><dd>{CONFIG['tel_display']} · {CONFIG['email']}</dd>
   </dl>
-</section>
-
-<section class="people container" aria-labelledby="people-title">
-  <h2 id="people-title" class="sr-only">Quién te atiende</h2>
-  <article class="person reveal">
-    {placeholder("Retrato de Mohamed en una obra", "Una foto real trabajando transmite más que un retrato de estudio.", "person-photo")}
-    <div class="person-text">
-      <h3>{m['name']}</h3>
-      <p class="role">{m['role']}</p>
-      <p>{m['text']}</p>
-    </div>
-  </article>
-  <article class="person reveal" style="--i:1">
-    {placeholder("Retrato de Omar", "Mejor en la oficina o en una visita, con ropa de trabajo.", "person-photo")}
-    <div class="person-text">
-      <h3>{o['name']}</h3>
-      <p class="role">{o['role']}</p>
-      <p>{o['text']}</p>
-    </div>
-  </article>
 </section>
 
 <section class="principles container" aria-labelledby="principles-title" {pend_attr("Compromisos tomados de la web actual: validar con Mohamed y Omar")}>
