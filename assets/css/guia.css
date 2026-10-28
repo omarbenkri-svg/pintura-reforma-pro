@@ -46,6 +46,7 @@
 .guide-pass .eyebrow,.guide-pass p{color:#d6e0e2}
 .guide-pass p{margin-top:1rem}
 .guide-pass .btn-secondary{color:var(--text);background:var(--surface);border-color:var(--surface)}
+#guide-share[hidden]{display:none}
 .guide-pass #guide-share-status{font-size:.8rem;max-width:35ch}
 .guide-close{display:flex;align-items:center;justify-content:space-between;gap:2rem}
 .guide-close p{color:var(--muted);margin-top:.75rem}
