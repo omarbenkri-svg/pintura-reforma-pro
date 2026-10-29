@@ -79,7 +79,7 @@ def company_body(theme) -> str:
   <dl class="legal-list">
     <dt>Marca</dt><dd>{CONFIG['brand']}</dd>
     <dt>Nombre legal</dt><dd>{CONFIG['legal_name']}</dd>
-    <dt>Gremi</dt><dd>Agremiados desde {CONFIG['since']} (dato facilitado por la empresa). <a href="https://www.gremipintors.com/directori">Consulta el directorio oficial</a>.</dd>
+    <dt>Gremi</dt><dd>Agremiados desde {CONFIG['since']} (dato facilitado por la empresa). <a href="https://www.gremipintors.com/directori#:~:text=Mohamed%20Ben%20Mesaud">Consulta el directorio oficial</a>.</dd>
     <dt>Especialidades</dt><dd>Pintura de casas y pisos, microcemento, estuco veneciano y pintura decorativa</dd>
     <dt>Base</dt><dd>Cabrils (Barcelona)</dd>
     <dt>Zona de trabajo</dt><dd>Maresme y Barcelona</dd>

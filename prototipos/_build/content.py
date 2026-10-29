@@ -625,7 +625,7 @@ PEOPLE = {
 
 def gremi_line() -> str:
     return pend('Agremiados en el Gremi de Pintors de Barcelona desde 1994 (dato facilitado por la empresa). '
-                '<a href="https://www.gremipintors.com/directori">Ver el directorio oficial</a>.',
+                '<a href="https://www.gremipintors.com/directori#:~:text=Mohamed%20Ben%20Mesaud">Ver el directorio oficial</a>.',
                 "La pertenencia se comprueba en el directorio; la fecha de alta es un dato facilitado por la empresa. No usar logotipo sin permiso")
 
 
