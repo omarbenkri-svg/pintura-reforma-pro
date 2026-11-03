@@ -1,9 +1,10 @@
-/* Shared behaviour for the three BCN ProReforma prototypes.
+/* Shared behaviour for the public site and the three BCN ProReforma prototypes.
  *
  * Progressive enhancement only: every page is fully readable and navigable
  * without this file. Nothing here hides essential content (lesson from the
  * invisible-H1 bug): motion only applies to `.reveal` blocks below the hero.
- * The lead form never sends data; a demo panel picks the simulated outcome.
+ * The public form delivers to the receiver in data-endpoint; prototypes have
+ * no endpoint and a demo panel picks the simulated outcome.
  */
 (function () {
   'use strict';
@@ -192,7 +193,8 @@
     var pre = form.querySelector('input[name="trabajo"][value="' + CSS.escape(params.get('servicio')) + '"]');
     if (pre) pre.checked = true;
   }
-  if (params.get('origen')) form.elements.origen.value = params.get('origen');
+  /* The origin ends up in the leads sheet: accept campaign-style labels only. */
+  if (/^[a-z0-9_-]{1,60}$/i.test(params.get('origen') || '')) form.elements.origen.value = params.get('origen');
   if (params.get('municipio')) form.elements.municipio.value = params.get('municipio');
 
   var rules = {
@@ -229,6 +231,12 @@
     });
     return first;
   }
+  /* «Faltan datos» stops being true as soon as every field is valid. */
+  function clearResolvedAlert() {
+    if (!attempted || !alertBox.classList.contains('is-invalid')) return;
+    var open = Object.keys(rules).some(function (name) { return !!rules[name](); });
+    if (!open) setAlert('', '');
+  }
   function selectedLabel() {
     var r = form.querySelector('input[name="trabajo"]:checked');
     return r ? r.parentElement.textContent.trim() : '';
@@ -247,10 +255,12 @@
   form.addEventListener('input', function (ev) {
     if (attempted && rules[ev.target.name]) showError(ev.target.name, rules[ev.target.name]());
     if (ev.target.name === 'municipio') townNote();
+    clearResolvedAlert();
     updateWhatsApp();
   });
   form.addEventListener('change', function (ev) {
     if (attempted && rules[ev.target.name]) showError(ev.target.name, rules[ev.target.name]());
+    clearResolvedAlert();
     updateWhatsApp();
   });
   updateWhatsApp();
@@ -271,7 +281,7 @@
     form.setAttribute('aria-busy', String(on));
   }
   function setAlert(kind, htmlText) {
-    alertBox.className = 'form-alert is-' + kind;
+    alertBox.className = kind ? 'form-alert is-' + kind : 'form-alert';
     alertBox.innerHTML = htmlText;
     alertBox.hidden = !htmlText;
   }

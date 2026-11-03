@@ -147,6 +147,10 @@ dialog.lightbox::backdrop { background: rgb(10 14 16 / .78); }
 
 /* ---------- lead form ---------- */
 .lead-form { display: grid; gap: 1.5rem; }
+/* The form needs JavaScript to deliver anything: without it, <noscript> offers the channels. */
+html:not(.js) .lead-form { display: none; }
+.form-noscript { display: grid; gap: 1rem; }
+.form-noscript .actions { display: flex; flex-wrap: wrap; align-items: center; gap: .75rem 1.5rem; }
 .field { display: grid; gap: .4rem; }
 .field label, .field legend { font-weight: 600; font-size: 1rem; }
 .optional { font-weight: 400; color: var(--muted); }
@@ -182,6 +186,7 @@ details.more summary { cursor: pointer; font-weight: 600; min-height: 32px; }
 .form-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .75rem 1.5rem; }
 .lead-form.is-sending .field, .lead-form.is-sending details { opacity: .65; pointer-events: none; }
 .form-alert { padding: 1rem 1.125rem; border-radius: var(--radius-s); border: 1px solid; display: grid; gap: .75rem; }
+.form-alert[hidden] { display: none; }
 .form-alert.is-invalid, .form-alert.is-error { background: var(--danger-bg); border-color: var(--danger); }
 .form-alert.is-network { background: var(--surface-2); border-color: var(--line-strong); }
 .alert-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1.25rem; }

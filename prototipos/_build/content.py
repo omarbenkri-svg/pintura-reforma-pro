@@ -772,7 +772,14 @@ def contact_form(origin: str = "contacto") -> str:
     <label class="demo-choice"><input type="radio" name="demo" value="error"> Error del receptor</label>
     <label class="demo-choice"><input type="radio" name="demo" value="network"> Conexión perdida al enviar</label>
   </div>"""
-    return f"""<form class="lead-form" data-lead-form{endpoint} novalidate>
+    return f"""<noscript><div class="form-noscript">
+  <p><strong>Para enviar este formulario hace falta JavaScript.</strong> Puedes pedir presupuesto directamente:</p>
+  <div class="actions">
+    <a class="btn btn-primary" href="{tel_url()}">{CALL_LABEL} al {CONFIG['tel_display']}</a>
+    <a class="btn-link" href="{wa_url(wa_message('formulario de contacto'))}">Escribir por WhatsApp al {CONFIG['wa_display']}</a>
+  </div>
+</div></noscript>
+<form class="lead-form" data-lead-form{endpoint} method="post" action="/contacto" novalidate>
   <div class="form-alert" role="alert" hidden></div>
 
   <div class="field">
