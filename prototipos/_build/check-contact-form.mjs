@@ -285,6 +285,24 @@ async function main() {
     await settle();
     assert.equal((await state()).success, true);
   });
+  await check('{status:"ok"}: acuse del receptor publicado hoy', async () => {
+    await load();
+    await evaluate(fill);
+    scenario = {status: 200, body: JSON.stringify({status: 'ok'})};
+    await evaluate(submit);
+    await settle();
+    assert.equal((await state()).success, true);
+  });
+  await check('{status:"error"}: error del receptor publicado hoy, sin perder lo escrito', async () => {
+    await load();
+    await evaluate(fill);
+    scenario = {status: 200, body: JSON.stringify({status: 'error', message: 'x'})};
+    await evaluate(submit);
+    await settle();
+    const s = await state();
+    assertKept(s);
+    assert.match(s.alertText, /No hemos podido registrar/);
+  });
   await check('{ok:false}: error, sin perder lo escrito', async () => {
     await load();
     await evaluate(fill);

@@ -292,8 +292,8 @@
       ' en ' + form.elements.municipio.value.trim() + '.');
     var text = kind === 'error'
       ? '<p><strong>No hemos podido registrar tu solicitud.</strong> Lo que has escrito sigue en el formulario.</p>'
-      : '<p><strong>No hemos podido confirmar si tu solicitud llegó.</strong> Se cortó la conexión mientras se enviaba. ' +
-        'Si reintentas, usaremos la misma referencia (' + ref + ') para no duplicarla.</p>';
+      : '<p><strong>No hemos podido confirmar si tu solicitud llegó.</strong> Lo que has escrito sigue en el formulario. ' +
+        'Si reintentas, usaremos la misma referencia (' + ref + ').</p>';
     setAlert(kind, text +
       '<div class="alert-actions">' +
       '<button type="button" class="btn btn-primary" data-retry>' +
@@ -328,9 +328,11 @@
   }
 
   /* Real delivery to the Apps Script receiver. text/plain avoids a CORS
-   * preflight that Apps Script cannot answer. Only a readable 2xx answer
-   * counts as received; an error answer keeps the data; a lost connection
-   * is reported as unconfirmed (it may or may not have arrived). */
+   * preflight that Apps Script cannot answer. Only an explicit acknowledgement
+   * counts as received: {ok:true} (kit-google/apps-script-leads.gs) or
+   * {status:'ok'} (the script deployed in May 2026). An explicit error keeps
+   * the data. Anything else, such as a Google sign-in page answered with a
+   * 200, or a lost connection, is unconfirmed: it may or may not have arrived. */
   function payload() {
     var el = form.elements;
     var q = new URLSearchParams(location.search);
@@ -371,11 +373,12 @@
       return res.text();
     }).then(function (text) {
       var data = null;
-      try { data = JSON.parse(text); } catch (err) { /* plain-text answer is fine */ }
+      try { data = JSON.parse(text); } catch (err) { /* not an acknowledgement */ }
       window.clearTimeout(timer);
       setBusy(false);
-      if (data && (data.ok === false || data.status === 'error' || data.result === 'error')) failure('error');
-      else done();
+      if (data && (data.ok === true || data.status === 'ok')) done();
+      else if (data && (data.ok === false || data.status === 'error' || data.result === 'error')) failure('error');
+      else failure('network');
     }).catch(function (err) {
       window.clearTimeout(timer);
       setBusy(false);
