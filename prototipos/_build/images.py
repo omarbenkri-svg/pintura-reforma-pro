@@ -1,10 +1,12 @@
 """Derive optimized WebP images for the prototypes from the site's own photos.
 
 Every source is a real photo already tracked in this repo. Nothing generated.
-Run from the repo root:  python3 prototipos/_build/images.py
+Run from the repo root:  python3 prototipos/_build/images.py [name ...]
+Names limit the run to those photos, so the others keep their exact bytes.
 """
 import os
 import subprocess
+import sys
 import tempfile
 from pathlib import Path
 
@@ -16,16 +18,17 @@ REAL = "images/projects/real"
 
 # name -> (source path relative to repo root, optional crop box as fractions l,t,r,b)
 PHOTOS = {
-    # Case 1: facade repair and painting
-    "fachada-antes-general": (f"{REAL}/rehabilitacion-fachada-mataro-08.webp", (0, 0, 1, 0.72)),  # crops out parked cars and a readable plate
+    # Case 1: facade repair and painting. Every crop removes the house number,
+    # the neighbour's number and readable plates: this is a client's home.
+    "fachada-antes-general": (f"{REAL}/rehabilitacion-fachada-mataro-08.webp", (0, 0, 1, 0.46)),
     "fachada-antes-pilar": (f"{REAL}/rehabilitacion-fachada-mataro-14.webp", None),
-    "fachada-antes-detalle": (f"{REAL}/rehabilitacion-fachada-mataro-13.webp", None),
+    "fachada-antes-detalle": (f"{REAL}/rehabilitacion-fachada-mataro-13.webp", (0.30, 0, 1, 1)),  # readable plate on the left
     "fachada-proceso-escalera": (f"{REAL}/rehabilitacion-fachada-mataro-19.webp", None),
-    "fachada-proceso-pintor": (f"{REAL}/rehabilitacion-fachada-mataro-09.webp", None),
-    "fachada-despues-general": (f"{REAL}/rehabilitacion-fachada-mataro-21.webp", None),
-    "fachada-despues-muro": (f"{REAL}/rehabilitacion-fachada-mataro-22.webp", None),
-    "fachada-despues-esquina": (f"{REAL}/rehabilitacion-fachada-mataro-26.webp", None),
-    "fachada-despues-entrada": (f"{REAL}/rehabilitacion-fachada-mataro-23.webp", None),
+    "fachada-proceso-pintor": (f"{REAL}/rehabilitacion-fachada-mataro-09.webp", (0.42, 0.495, 1, 0.885)),
+    "fachada-despues-general": (f"{REAL}/rehabilitacion-fachada-mataro-21.webp", (0, 0, 0.58, 1)),
+    "fachada-despues-muro": (f"{REAL}/rehabilitacion-fachada-mataro-22.webp", (0, 0.03, 0.63, 1)),
+    "fachada-despues-esquina": (f"{REAL}/rehabilitacion-fachada-mataro-26.webp", (0, 0, 1, 0.57)),
+    "fachada-despues-entrada": (f"{REAL}/rehabilitacion-fachada-mataro-23.webp", (0.35, 0, 1, 1)),
     # Case 2: exterior wood joinery varnish (attic enclosure)
     "madera-antes-general": (f"{REAL}/barnizado-madera-atico-02.webp", None),
     "madera-antes-marco": (f"{REAL}/barnizado-madera-atico-04.webp", None),
@@ -122,10 +125,16 @@ def crop_to(im: Image.Image, crop) -> Image.Image:
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     total = 0
+    only = set(sys.argv[1:])
     for name, (src, crop) in PHOTOS.items():
+        if only and name not in only:
+            continue
         im = crop_to(ImageOps.exif_transpose(Image.open(ROOT / src)).convert("RGB"), crop)
         total += export(name, im)
         print(f"{name:28s} {im.width}x{im.height}  <- {src}")
+    if only:
+        print(f"{total / 1e6:.1f} MB")
+        return
     missing = [f for f, _ in AIRDROP.values() if not (AIRDROP_DIR / f).exists()]
     if missing:
         print(f"AirDrop originals not found in {AIRDROP_DIR}: {len(missing)} (kept existing WebP files)")

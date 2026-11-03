@@ -391,7 +391,8 @@ def case(c):
     others = "".join(
         f'<li><a href="{o["slug"]}.html">{e(o["title"])}</a></li>' for o in CASES if o is not c
     )
-    review = f'<p class="case-review" {pend_attr(c["review"])}>{e(c["review"])}</p>' if c["review"] else ""
+    # Editorial notes are for review mode only: they must never reach the public site.
+    review = f'<p class="case-review" {pend_attr(c["review"])}>{e(c["review"])}</p>' if c["review"] and not PROD else ""
     body = f"""
 <section class="case-head">
   <div class="container case-head-grid">

@@ -64,10 +64,11 @@ def pend(text: str, note: str) -> str:
     """Inline text pending confirmation. Highlighted in review mode.
 
     In the public build the review note disappears; text that only says
-    something is pending is dropped altogether.
+    something is pending or unpublished is dropped altogether, and callers
+    leave out the block around it: the site never advertises what is missing.
     """
     if PROD:
-        return "" if re.search(r"pendientes?( de (indicar|confirmar))?\.?$", text.strip(), re.I) else text
+        return "" if re.search(r"pendientes?( de (indicar|confirmar))?\.?$|^no publicad[oa]s?$", text.strip(), re.I) else text
     return f'<span class="pend" data-note="{e(note)}">{text}</span>'
 
 
@@ -386,20 +387,20 @@ CASES = [
         "title": "Reparación y pintura de una fachada",
         "service": "Fachadas y exteriores",
         "summary": "Pilar y muro con el revoque desprendido. Reparación del soporte y fachada pintada de nuevo.",
-        "municipio": pend("Mataró", "Confirmar municipio: los archivos dicen Mataró y un álbum antiguo dice Vilassar de Mar"),
+        "municipio": pend("No publicado", "Confirmar municipio y permiso: los archivos dicen Mataró y un álbum antiguo dice Vilassar de Mar"),
         "need": "El revoque del pilar y del muro de la entrada estaba agrietado y desprendido, con la pintura degradada en toda la fachada.",
         "prep": pend("Saneado de las zonas desprendidas, reparación del revoque y regularización del muro antes de pintar.",
                      "Validar con Mohamed: materiales y sistema de reparación aplicados"),
         "finish": "Fachada en color crema, con puerta de garaje y rejas en gris.",
         "product": pend("Producto de acabado pendiente de indicar", "Indicar pintura de fachada utilizada (marca o tipo)"),
         "before": [
-            ("fachada-antes-general", "Fachada de la vivienda antes de la obra, con el revoque deteriorado junto a la puerta del garaje"),
             ("fachada-antes-pilar", "Pilar de la entrada con el revoque desprendido y grietas verticales"),
+            ("fachada-antes-general", "Muro de la vivienda antes de la obra, con el revoque deteriorado"),
             ("fachada-antes-detalle", "Detalle del pilar dañado junto a la reja"),
         ],
         "process": [
             ("fachada-proceso-escalera", "Reparación del muro con escalera, con las zonas saneadas a la vista"),
-            ("fachada-proceso-pintor", "Pintor trabajando en el muro junto a la puerta del garaje"),
+            ("fachada-proceso-pintor", "Pintor trabajando en el muro de la entrada"),
         ],
         "after": [
             ("fachada-despues-general", "Fachada terminada en color crema con la puerta del garaje gris"),
@@ -409,7 +410,7 @@ CASES = [
         ],
         "album": "fachadas",
         "cover": "fachada-despues-general",
-        "review": "Antes de publicar: se ve el número de la vivienda en varias fotos. Confirmar permiso del cliente o recortar.",
+        "review": "Número de vivienda recortado en todas las fotos. Falta confirmar el permiso del cliente.",
     },
     {
         "slug": "caso-carpinteria-madera",
@@ -514,16 +515,6 @@ def _series(prefix: str, numbers, alt_for) -> list[dict]:
     return [{"src": f"{REAL}/{prefix}-{n:02d}.webp", "alt": alt_for(n)} for n in numbers]
 
 
-def _fachada_alt(n: int) -> str:
-    if n <= 7:
-        return "Cornisa de ladrillo y muro de la fachada"
-    if n <= 17:
-        return "Pilar y muro con el revoque desprendido antes de la obra"
-    if n <= 19:
-        return "Reparación del muro con escalera"
-    return "Fachada terminada en color crema"
-
-
 SHARED_IMG = IMG_URL
 MC_ALBUM = [
     ("mc-bano-ducha-desague", "Ducha a ras de suelo con desagüe lineal"),
@@ -547,6 +538,18 @@ MC_ALBUM = [
     ("deco-pared-aguas", "Pared con acabado decorativo de aguas"),
 ]
 
+FACHADA_ALBUM = [
+    ("fachada-antes-pilar", "Pilar con el revoque desprendido antes de la obra"),
+    ("fachada-antes-detalle", "Detalle del pilar dañado"),
+    ("fachada-antes-general", "Muro con el revoque deteriorado antes de la obra"),
+    ("fachada-proceso-escalera", "Reparación del muro con escalera"),
+    ("fachada-proceso-pintor", "Pintor trabajando en el muro de la entrada"),
+    ("fachada-despues-general", "Fachada terminada en color crema"),
+    ("fachada-despues-muro", "Muro lateral reparado y pintado"),
+    ("fachada-despues-esquina", "Esquina de la fachada terminada, con aristas rectas"),
+    ("fachada-despues-entrada", "Escalera de entrada tras la pintura"),
+]
+
 ALBUMS = {
     "microcemento": {
         "title": "Microcemento y acabados decorativos",
@@ -557,13 +560,11 @@ ALBUMS = {
     },
     "fachadas": {
         "title": "Fachadas y exteriores",
-        "note": "Fotos de reparación y pintura de fachadas.",
+        "note": "Reparación y pintura de una fachada, del estado inicial al resultado.",
         "cover": "fachada-despues-general",
         "cover_alt": "Fachada terminada en color crema con la puerta del garaje gris",
-        "photos": [{"src": f"{IMG_URL}/fachada-antes-general-1200.webp",
-                    "alt": "Fachada antes de la obra, con el revoque deteriorado"}]
-        + _series("rehabilitacion-fachada-mataro",
-                  [*range(1, 8), *range(11, 20), *range(21, 29)], _fachada_alt),
+        # Cropped versions only: the originals show the house number.
+        "photos": [{"src": f"{IMG_URL}/{n}-1200.webp", "alt": a} for n, a in FACHADA_ALBUM],
     },
     "madera": {
         "title": "Carpintería de madera",
@@ -573,7 +574,8 @@ ALBUMS = {
         "photos": _series("barnizado-madera-atico", range(1, 16),
                           lambda n: "Carpintería de madera antes del barnizado" if n <= 8
                           else "Carpintería de madera barnizada")
-        + _series("restauracion-madera-exterior", range(1, 3), lambda n: "Carpintería exterior barnizada"),
+        # -02 is left out: it shows a person and an alarm sign with a phone number.
+        + _series("restauracion-madera-exterior", range(1, 2), lambda n: "Carpintería exterior barnizada"),
     },
     "comunidades": {
         "title": "Comunidades y garajes",

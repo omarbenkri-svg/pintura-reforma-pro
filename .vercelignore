@@ -43,3 +43,12 @@ images/materials
 
 # Unpublished page scaffold with placeholder content.
 /municipios/template.html
+
+# Originals of a client's home: they show the house number. Pages use cropped copies.
+/images/projects/real/rehabilitacion-fachada-mataro-*
+# Shows a person and an alarm sign with a phone number.
+/images/projects/real/restauracion-madera-exterior-02.webp
+
+# Duplicates that only exist as redirects to /municipios (vercel.json).
+/pintor-cabrils.html
+/pintor-vilassar-de-mar.html
