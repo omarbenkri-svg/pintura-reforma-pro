@@ -483,3 +483,21 @@ h3 { font-family: var(--font-body); font-weight: 600; letter-spacing: -.01em; }
   .quick-num { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
   .contact-quick .btn { flex: 1 1 0; }
 }
+
+/* ================================================================
+ * 2026-11 «oficio a la vista» applied to inner pages (services, cases,
+ * towns, company, legal): same asymmetric hero and fewer boxes.
+ * ================================================================ */
+.svc-hero, .case-head { overflow-x: clip; }
+.svc-hero-grid, .case-head-grid { grid-template-columns: 7fr 5fr; }
+.svc-hero h1, .case-head h1 { font-size: clamp(2.25rem, 1.3rem + 3vw, 3.5rem); line-height: 1.04; }
+.page-head h1 { font-size: clamp(2.25rem, 1.3rem + 3vw, 3.5rem); line-height: 1.04; }
+/* Inner pages: most own photos are narrow portrait phone shots, so they stay
+ * in a portrait column instead of bleeding (they would blur when enlarged). */
+.svc-hero-photo img, .case-hero-photo img { aspect-ratio: 4 / 5; max-height: min(74vh, 640px); border-radius: var(--radius-m); }
+.factor-grid div { background: none; border: 0; border-top: 2px solid var(--text); border-radius: 0; padding: 1rem 0 0; }
+.svc-includes h2, .svc-factors h2, .svc-photos h2, .case-step h2, .principles h2, .area h2, .facts-block h2 { font-size: clamp(1.75rem, 1.2rem + 1.8vw, 2.5rem); }
+@media (max-width: 1023px) {
+  .svc-hero-grid, .case-head-grid { grid-template-columns: 1fr; }
+  .svc-hero-photo img, .case-hero-photo img { aspect-ratio: 4 / 3; max-height: 56vh; }
+}

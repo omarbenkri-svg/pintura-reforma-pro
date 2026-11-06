@@ -184,7 +184,7 @@ SERVICES = [
         "short": "Casas y pisos enteros o por estancias: paredes, techos, puertas y fachadas, con la vivienda protegida.",
         "h1": "Pintura de casas y pisos en el Maresme y Barcelona",
         "intro": "Pintamos viviendas enteras o por estancias. Antes de abrir un bote tapamos muebles y suelos, reparamos grietas y golpes y preparamos cada pared para que el color quede uniforme y dure.",
-        "hero": ("fachada-despues-general", "Fachada de una vivienda reparada y pintada por nuestro equipo"),
+        "hero": ("fachada-despues-esquina", "Pilar y muro de una vivienda reparados y pintados por nuestro equipo"),
         "gallery": [],
         "includes": [
             "Protección de suelos, muebles, puertas y enchufes antes de empezar",
@@ -404,9 +404,9 @@ CASES = [
             ("fachada-proceso-pintor", "Pintor trabajando en el muro de la entrada"),
         ],
         "after": [
+            ("fachada-despues-esquina", "Esquina de la fachada terminada, con aristas rectas"),
             ("fachada-despues-general", "Fachada terminada en color crema con la puerta del garaje gris"),
             ("fachada-despues-muro", "Muro lateral reparado y pintado"),
-            ("fachada-despues-esquina", "Esquina de la fachada terminada, con aristas rectas"),
             ("fachada-despues-entrada", "Escalera de entrada y pilar reparado tras la pintura"),
         ],
         "album": "fachadas",
