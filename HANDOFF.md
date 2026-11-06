@@ -4,6 +4,14 @@
 
 **Última actualización:** 2026-11-06 por Claude Code. **Paquete urgente PUBLICADO** (commit `12ae03f`, deploy `ospu5lv6o`). Reversión: `vercel rollback pintura-reforma-obra-v1-jdan9a6nx-omarbenkri-svgs-projects.vercel.app --yes`. Receptor Apps Script actualizado a la versión 2 (misma URL /exec); para revertir, editar la implementación y elegir la «Versión 1 del 2 may 2026».
 
+## Diseño nuevo de portada y contacto PUBLICADO (2026-11-06)
+
+- Aprobado por Omar en el navegador. Commit `a58ad8f`, despliegue `4kfsb67yd`. Para volver al paquete urgente: `vercel rollback pintura-reforma-obra-v1-ospu5lv6o-omarbenkri-svgs-projects.vercel.app --yes`.
+- Portada «Pintura para renovar tu casa en el Maresme y Barcelona», con el pilar de la fachada antes y después, obras de pintura propias, preparación, otros acabados, proceso y preguntas. Contacto con Llamar y WhatsApp en la primera pantalla y tipos de trabajo en dos columnas en el móvil.
+- Tipografía: Cabinet Grotesk (Fontshare) y Geist (Google Fonts), cargadas desde sus CDN. Mejora pendiente: alojarlas en la propia web.
+- Verificado en producción: 8 archivos comparados idénticos al commit, sitemap 200 y archivos internos 404. Comprobaciones: páginas 180/180, textos, formulario y receptor en verde.
+- Pendiente: aplicar la nueva composición al resto de páginas (servicios, casos, empresa); los commits de guía y estucos de `feat/web-v2` (estucos tras validar con Mohamed); borrar las filas de prueba 2 a 9 de «Form Leads» (lo hace Omar).
+
 ## Paquete urgente 2026-11-06: contacto y confianza (local)
 
 - Detalle e inventario: `prototipos/docs/2026-11-inventario.md`. Preguntas para Mohamed: `prototipos/docs/2026-11-validacion-mohamed.md`.
