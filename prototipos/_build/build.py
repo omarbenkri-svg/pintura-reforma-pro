@@ -16,7 +16,7 @@ THEMES = {"a": "theme_a", "b": "theme_b", "c": "theme_c"}
 
 
 def pages_for(theme):
-    yield "index", "Pintura, estucos y microcemento en el Maresme", "Empresa familiar de Cabrils, miembro del Gremi de Pintors: pintura de casas y pisos, estuco veneciano y microcemento en el Maresme y la zona alta de Barcelona.", *theme.home(), "inicio"
+    yield "index", "Pintores en el Maresme y Barcelona: pintura de casas y pisos", "Empresa familiar de Cabrils, miembro del Gremi de Pintors: pintura de casas y pisos, estuco veneciano y microcemento en el Maresme y la zona alta de Barcelona.", *theme.home(), "inicio"
     for s in SERVICES:
         yield s["slug"], s["title"], s["short"], *theme.service(s), f"servicio {s['name'].lower()}"
     yield "trabajos", "Trabajos", "Obras documentadas con su estado inicial, la preparación y el resultado.", *theme.works(), "trabajos"

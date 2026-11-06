@@ -384,3 +384,102 @@ figcaption { font-size: .875rem; color: var(--muted); margin-top: .5rem; }
 /* GEO: company facts block */
 .facts-block { padding-bottom: var(--section); }
 .facts-block h2 { margin-bottom: 1.25rem; }
+
+/* ================================================================
+ * Proposal 2026-11 «oficio a la vista» (design-taste-frontend-v1, adapted):
+ * asymmetric composition, own photos with concrete captions, few cards,
+ * motion only on content that is already visible.
+ * ================================================================ */
+:root {
+  --font-body: "Geist", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Cabinet Grotesk", "Geist", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+h1, h2 { font-weight: 800; letter-spacing: -.025em; }
+h3 { font-family: var(--font-body); font-weight: 600; letter-spacing: -.01em; }
+.sec-head { max-width: 40rem; margin-bottom: clamp(1.75rem, 1rem + 2vw, 3rem); }
+.sec-head h2 { margin-bottom: .75rem; }
+.sec-head p:not(.eyebrow) { color: var(--muted); }
+
+/* hero: copy on the left, the work bleeding off the right edge */
+.hero-o { padding-block: clamp(1.75rem, 1rem + 2.5vw, 3.5rem) calc(var(--section) + 1rem); overflow-x: clip; }
+.hero-o-grid {
+  width: min(100% - 2rem, var(--container)); margin-inline: auto;
+  display: grid; grid-template-columns: 5fr 6fr; gap: clamp(2rem, 1rem + 4vw, 5rem); align-items: center;
+}
+.hero-o h1 { font-size: clamp(2.375rem, 1.4rem + 3.4vw, 4rem); line-height: 1.02; margin-bottom: 1.25rem; max-width: 14ch; }
+.hero-o .hero-desc { font-size: clamp(1.125rem, 1rem + .4vw, 1.3125rem); color: var(--muted); max-width: 42ch; margin-bottom: 1.75rem; }
+.hero-call { margin-top: .75rem; color: var(--muted); }
+.hero-call a { color: var(--text); font-weight: 600; }
+.hero-proof { list-style: none; display: grid; gap: .5rem; margin-top: 1.75rem; padding-top: 1.25rem; border-top: 1px solid var(--line); font-size: .9375rem; }
+.hero-proof li { display: flex; gap: .55rem; align-items: baseline; }
+.hero-proof .ph { color: var(--accent); flex: none; transform: translateY(.15em); }
+.hero-proof a { font-weight: 600; }
+.hero-o-media {
+  position: relative;
+  margin-right: calc((100vw - min(100vw - 2rem, var(--container))) / -2);
+}
+.hero-o-main img { width: 100%; aspect-ratio: 5 / 4; object-fit: cover; border-radius: var(--radius-m) 0 0 var(--radius-m); }
+.hero-o-main figcaption { padding-left: 42%; }
+.hero-o-inset {
+  position: absolute; left: -3.5rem; bottom: -2.75rem; width: 36%;
+  background: var(--bg); padding: .5rem; border-radius: var(--radius-m); box-shadow: var(--shadow);
+}
+.hero-o-inset img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radius-s); }
+.hero-o-inset figcaption { margin-top: .4rem; font-size: .8125rem; }
+.hero-o figcaption strong { color: var(--text); }
+
+/* own works: one large, two details */
+.obras { padding-block: var(--section); }
+.obras-grid { display: grid; grid-template-columns: 7fr 5fr; grid-template-rows: auto auto; gap: 1.5rem clamp(1.5rem, 1rem + 2vw, 3rem); margin-bottom: 1.5rem; }
+.obra-lead { grid-row: span 2; }
+.obra img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius-s); margin-bottom: .85rem; }
+.obra-lead img { aspect-ratio: 4 / 5; max-height: 42rem; }
+.obra h3 { font-size: 1.1875rem; margin-bottom: .35rem; }
+.obra h3 a { text-decoration: none; }
+.obra h3 a:hover { text-decoration: underline; }
+.obra p:not(.kicker) { color: var(--muted); max-width: 48ch; }
+
+.prep-lead { color: var(--muted); max-width: 52ch; margin: -1rem 0 2rem; }
+.prep .btn-link { margin-top: 1.5rem; }
+
+/* other finishes: zig-zag, smaller than painting */
+.espec { padding-block: var(--section); background: var(--surface-2); }
+.espec-row { display: grid; grid-template-columns: 4fr 7fr; gap: clamp(1.25rem, 1rem + 2vw, 3rem); align-items: center; padding-block: 1.25rem; border-top: 1px solid var(--line); }
+.espec-alt { grid-template-columns: 7fr 4fr; }
+.espec-alt img { order: 2; }
+.espec-row img { width: 100%; aspect-ratio: 4 / 3; max-height: 16rem; object-fit: cover; border-radius: var(--radius-s); }
+.espec-row h3 { font-size: 1.375rem; margin-bottom: .4rem; }
+.espec-row h3 a { text-decoration: none; }
+.espec-row p { color: var(--muted); max-width: 52ch; }
+.espec-more, .guide-line { margin-top: 1.5rem; color: var(--muted); max-width: 70ch; }
+.espec-more a, .guide-line a { color: var(--text); font-weight: 600; }
+
+/* contact: channels in the first screen, compact job types */
+.contact-quick { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.5rem; }
+.contact-quick .btn { gap: .5rem; }
+
+@media (max-width: 1023px) {
+  .hero-o-grid { grid-template-columns: 1fr; }
+  .hero-o-media { margin-top: .5rem; }
+  .hero-o-main img { aspect-ratio: 4 / 3; }
+  .hero-o-inset { left: 0; bottom: -2.25rem; width: 38%; }
+  .obras-grid { grid-template-columns: 1fr 1fr; }
+  .obra-lead { grid-column: 1 / -1; grid-row: auto; }
+  .obra-lead img { aspect-ratio: 4 / 3; }
+}
+@media (max-width: 767px) {
+  .hero-o h1 { max-width: none; }
+  .espec-row, .espec-alt { grid-template-columns: 1fr; }
+  .espec-alt img { order: 0; }
+  .contact-quick .btn { flex: 1 1 10rem; padding-inline: .75rem; }
+  .choice-grid { grid-template-columns: 1fr 1fr; }
+  .choice { padding: .55rem .65rem; gap: .5rem; font-size: .9375rem; line-height: 1.25; }
+}
+@media (max-width: 359px) {
+  .choice-grid { grid-template-columns: 1fr; }
+}
+.choice span { font-weight: 500; }
+@media (max-width: 479px) {
+  .quick-num { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .contact-quick .btn { flex: 1 1 0; }
+}

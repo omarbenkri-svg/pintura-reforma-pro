@@ -116,10 +116,11 @@ def contact_body(theme) -> str:
 <section class="page-head container">
   {breadcrumb([("index.html", "Inicio"), (None, "Contacto")])}
   <h1>{CTA_LABEL}</h1>
-  <p class="lead">Cuéntanos qué quieres renovar y en qué municipio. Revisaremos la información para indicarte el siguiente paso.</p>
-  <p class="quick-alt">Trabajamos para propietarios, comunidades y empresas que quieren renovar su casa, su piso o su local.</p>
-  <p class="quick-alt">¿Prefieres hablar? <a href="{tel_url()}" data-track="phone_click" data-origin="contacto">{CALL_LABEL} al {CONFIG['tel_display']}</a> o
-    <a href="{wa_url(wa_message('página de contacto'))}" data-track="whatsapp_click" data-origin="contacto">escribir por WhatsApp</a>.</p>
+  <p class="lead">Cuéntanos qué quieres renovar y en qué municipio. Te contactamos para concretar el siguiente paso.</p>
+  <div class="contact-quick">
+    <a class="btn btn-secondary" href="{tel_url()}" data-track="phone_click" data-origin="contacto">{icon('phone')} {CALL_LABEL}<span class="quick-num">· {CONFIG['tel_display']}</span></a>
+    <a class="btn btn-secondary" href="{wa_url(wa_message('página de contacto'))}" data-track="whatsapp_click" data-origin="contacto">{icon('whatsapp-logo')} WhatsApp<span class="quick-num">· {CONFIG['wa_display']}</span></a>
+  </div>
 </section>
 
 <div class="contact-layout container">

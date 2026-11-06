@@ -134,6 +134,8 @@ gtag('js',new Date());gtag('config','{C.GA_ID}');</script>
 {ga}<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="{T.FONTS}">
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link rel="stylesheet" href="{T.FONTS_DISPLAY}">
 <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
 <link rel="stylesheet" href="/assets/css/site.css">
 {'<link rel="stylesheet" href="/assets/css/guia.css">' if key == 'guia-acabados' else ''}

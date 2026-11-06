@@ -329,12 +329,12 @@ SECONDARY = [
 # Form values for "tipo de trabajo" (radio group).
 WORK_TYPES = [
     ("pintura-vivienda", "Pintura de vivienda"),
-    ("alisado", "Alisar paredes o quitar gotelé"),
-    ("lacado", "Lacar o barnizar carpinterías"),
+    ("alisado", "Alisar o quitar gotelé"),
+    ("lacado", "Lacar o barnizar"),
     ("microcemento", "Microcemento"),
-    ("decorativa", "Estuco o pintura decorativa"),
+    ("decorativa", "Estuco o decorativa"),
     ("exterior", "Fachada o exterior"),
-    ("comunidad", "Comunidad, garaje o local"),
+    ("comunidad", "Comunidad o local"),
     ("reforma", "Reforma o reparación"),
     ("otro", "Otro trabajo"),
 ]
@@ -606,9 +606,9 @@ ALBUMS = {
 # ---------------------------------------------------------------- home copy
 
 HERO = {
-    "eyebrow": "BCN ProReforma · Oficio familiar en Cabrils",
-    "h1": "Pintura, estucos y microcemento para casas y pisos del Maresme y Barcelona",
-    "desc": "Proyectos de pintura y revestimiento con la preparación y el acabado cuidados de principio a fin.",
+    "eyebrow": "Cabrils · Maresme · Barcelona",
+    "h1": "Pintura para renovar tu casa en el Maresme y Barcelona",
+    "desc": "Paredes, techos y fachadas que necesitan preparación y un acabado bien resuelto. Cuéntanos qué quieres renovar y en qué municipio.",
     "support": "Cuéntanos qué quieres renovar y en qué municipio. Revisaremos la información para indicarte el siguiente paso.",
 }
 

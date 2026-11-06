@@ -14,7 +14,10 @@ from common import breadcrumb, contact_actions
 LETTER = "A"
 NAME = "Oficio"
 DIR = "a-oficio"
-FONTS = "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+# Proposal 2026-11: Geist for text, Cabinet Grotesk (Fontshare) for headings.
+# Loaded from their CDNs for review; self-host only after approval and a licence check.
+FONTS = "https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&display=swap"
+FONTS_DISPLAY = "https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@700,800&display=swap"
 
 
 # ---------------------------------------------------------------- chrome
@@ -127,79 +130,69 @@ def reviews_block() -> str:
 
 
 def home():
-    feature, *minis = CASES
-    services = SERVICES
-    lead, *rest = services
+    """Proposal 2026-11 «oficio a la vista»: painting first, own works before promises."""
+    fachada = CASE_BY_SLUG["caso-fachada"]
+    garaje = CASE_BY_SLUG["caso-garaje-comunitario"]
+    madera = CASE_BY_SLUG["caso-carpinteria-madera"]
+    estuco = SERVICE_BY_SLUG["decorativa-estucos"]
+    micro = SERVICE_BY_SLUG["microcemento"]
+    gremi = '<a href="https://www.gremipintors.com/directori#:~:text=Mohamed%20Ben%20Mesaud">ver el directorio del Gremi</a>'
+    others = " · ".join(
+        (f'<a href="{slug}.html">{e(t)}</a>' if slug else e(t)) for t, d, slug in SECONDARY)
     body = f"""
-<section class="hero">
-  <div class="container hero-grid">
-    <div class="hero-copy">
+<section class="hero-o" aria-labelledby="hero-title">
+  <div class="hero-o-grid">
+    <div class="hero-o-copy">
       <p class="eyebrow">{HERO['eyebrow']}</p>
-      <h1>{HERO['h1']}</h1>
+      <h1 id="hero-title">{HERO['h1']}</h1>
       <p class="hero-desc">{HERO['desc']}</p>
-      {contact_actions("inicio_hero", None, "contacto.html?origen=inicio")}
+      {contact_actions("inicio_hero", "pintura de vivienda", contact_url("pintura-vivienda", "inicio"))}
+      <p class="hero-call">¿Prefieres hablar? <a href="{tel_url()}" data-track="phone_click" data-origin="inicio_hero">{CALL_LABEL} al {CONFIG['tel_display']}</a></p>
+      <ul class="hero-proof">
+        <li>{icon('check')}<span>Presupuesto por escrito, después de ver la obra</span></li>
+        <li>{icon('check')}<span>Empresa familiar con base en Cabrils</span></li>
+        <li>{icon('check')}<span>Agremiados en el Gremi de Pintors: {gremi}</span></li>
+      </ul>
     </div>
-    <figure class="hero-photo">
-      {photo("mc-bano-ducha-desague", "Ducha de obra revestida de microcemento, con desagüe lineal", "(min-width: 1024px) 40vw, 100vw", priority=True)}
-      <figcaption>Ducha de microcemento. Obra propia.</figcaption>
-    </figure>
-  </div>
-</section>
-
-{'''<section class="guide-home-hook"><div class="container guide-home-inner"><div><p class="eyebrow">Para guardar y compartir</p><h2>¿Pintura, estuco o microcemento?</h2><p>Una guía breve para saber qué mirar antes de elegir, aunque todavía no vayas a hacer la obra.</p></div><a class="btn btn-secondary" href="guia-acabados.html">Ver la guía de acabados</a></div></section>''' if PROD else ''}
-
-<section class="oficio" aria-labelledby="oficio-title">
-  <div class="container oficio-grid">
-    {('<figure class="oficio-photo">' + photo("fachada-proceso-pintor", "Pintor del equipo trabajando en la reparación de una fachada", "(min-width: 1024px) 40vw, 100vw") + '<figcaption>En obra: reparación de una fachada antes de pintarla.</figcaption></figure>') if PROD else placeholder("Equipo trabajando en una obra", "Fotografía del trabajo en obra, con luz natural.", "oficio-photo")}
-    <div class="oficio-text reveal">
-      <h2 id="oficio-title">El oficio está en los detalles</h2>
-      <p>Trabajamos en familia y cuidamos la obra de principio a fin: revisamos la base, protegemos la casa y repasamos el acabado antes de entregar.</p>
-      <p class="gremi">{gremi_line()}</p>
-      <a class="btn-link" href="empresa.html">Conocer la empresa {icon('arrow-right')}</a>
+    <div class="hero-o-media">
+      <figure class="hero-o-main">
+        {photo("fachada-despues-esquina", "Pilar y muro de una fachada reparados y pintados en color crema", "(min-width: 1024px) 52vw, 100vw", priority=True)}
+        <figcaption><strong>Después.</strong> Pilar reparado y pintado. Obra propia.</figcaption>
+      </figure>
+      <figure class="hero-o-inset">
+        {photo("fachada-antes-pilar", "Pilar de la misma fachada con el revoque desprendido antes de la obra", "(min-width: 1024px) 18vw, 40vw")}
+        <figcaption><strong>Antes.</strong> Revoque desprendido.</figcaption>
+      </figure>
     </div>
   </div>
 </section>
 
-<section class="works" aria-labelledby="works-title">
+<section class="obras" aria-labelledby="obras-title">
   <div class="container">
-    <h2 id="works-title">Trabajos documentados</h2>
-    <div class="works-grid">
-      <article class="work-feature reveal">
-        {before_after(feature)}
-        <div class="work-text">
-          <h3><a href="{feature['slug']}.html">{feature['title']}</a></h3>
-          <p>{feature['summary']}</p>
-        </div>
+    <div class="sec-head">
+      <p class="eyebrow">Obras propias</p>
+      <h2 id="obras-title">Trabajos de pintura, tal como quedaron</h2>
+      <p>Fotos de obras nuestras y lo que se hizo en cada una.</p>
+    </div>
+    <div class="obras-grid">
+      <article class="obra obra-lead reveal">
+        {photo("fachada-despues-general", "Fachada terminada en color crema con la puerta del garaje gris", "(min-width: 1024px) 45vw, 100vw")}
+        <p class="kicker">Fachada · reparación y pintura</p>
+        <h3><a href="{fachada['slug']}.html">{fachada['title']}</a></h3>
+        <p>{fachada['summary']}</p>
       </article>
-      <div class="work-side">
-        {"".join(f'''<article class="work-mini reveal" style="--i:{i + 1}">
-          {photo(c["cover"], dict(c["after"])[c["cover"]], "(min-width: 1024px) 15vw, 40vw")}
-          <div><h3><a href="{c['slug']}.html">{c['title']}</a></h3><p>{c['summary']}</p></div>
-        </article>''' for i, c in enumerate(minis))}
-        <a class="btn-link" href="trabajos.html">Ver todos los trabajos {icon('arrow-right')}</a>
-      </div>
+      <article class="obra reveal" style="--i:1">
+        {photo("garaje-despues-zocalo", "Pared de garaje con zócalo gris y franja roja de señalización", "(min-width: 1024px) 22vw, 50vw")}
+        <p class="kicker">Comunidad · garaje</p>
+        <h3><a href="{garaje['slug']}.html">Zócalo y señalización con corte limpio</a></h3>
+      </article>
+      <article class="obra reveal" style="--i:2">
+        {photo("madera-despues-terraza", "Cerramiento de madera de un ático barnizado", "(min-width: 1024px) 22vw, 50vw")}
+        <p class="kicker">Carpintería · barniz</p>
+        <h3><a href="{madera['slug']}.html">Madera recuperada en un ático</a></h3>
+      </article>
     </div>
-  </div>
-</section>
-
-<section class="services" id="servicios" aria-labelledby="services-title">
-  <div class="container">
-    <h2 id="services-title">Pintura, estucos y microcemento</h2>
-    <div class="services-grid">
-      <a class="service-card service-lead reveal" href="{lead['slug']}.html">
-        {photo(lead['hero'][0], lead['hero'][1], "(min-width: 1024px) 35vw, 100vw") if lead.get('hero') else placeholder(lead['photos'][0][0], lead['photos'][0][1])}
-        <h3>{lead['name']}</h3>
-        <p>{lead['short']}</p>
-        <span class="card-link">Ver el servicio {icon('arrow-right')}</span>
-      </a>
-      {"".join(f'''<a class="service-card reveal" style="--i:{i + 1}" href="{s['slug']}.html">
-        <h3>{s['name']}</h3><p>{s['short']}</p>
-        <span class="card-link">Ver el servicio {icon('arrow-right')}</span></a>''' for i, s in enumerate(rest))}
-      <div class="service-help">
-        <p>¿No sabes qué servicio necesitas? Cuéntanos qué quieres renovar y te orientamos.</p>
-        <a class="btn-link" href="contacto.html?origen=inicio_servicios">{CTA_LABEL} {icon('arrow-right')}</a>
-      </div>
-    </div>
+    <a class="btn-link" href="trabajos.html">Ver todos los trabajos {icon('arrow-right')}</a>
   </div>
 </section>
 
@@ -207,20 +200,42 @@ def home():
   <div class="container prep-grid">
     <figure class="prep-photo">
       {photo("fachada-proceso-escalera", "Muro en reparación con una escalera apoyada y las zonas saneadas a la vista", "(min-width: 1024px) 35vw, 100vw")}
-      <figcaption>Reparación del soporte antes de pintar la fachada.</figcaption>
+      <figcaption>Antes del color: reparar el soporte.</figcaption>
     </figure>
     <div>
-      <h2 id="prep-title">Protección y preparación: lo que explica el resultado y el precio</h2>
+      <p class="eyebrow">Qué incluye</p>
+      <h2 id="prep-title">Pintar bien empieza antes de abrir el bote</h2>
+      <p class="prep-lead">Por eso dos presupuestos de pintura no siempre son comparables: pregunta qué preparación incluye cada uno.</p>
       <ol class="prep-list">
         {"".join(f'<li class="reveal" style="--i:{i}"><h3>{e(t)}</h3><p>{e(d)}</p></li>' for i, (t, d) in enumerate(PREP_STEPS))}
       </ol>
+      <a class="btn-link" href="pintura-viviendas.html">Pintura de viviendas {icon('arrow-right')}</a>
     </div>
+  </div>
+</section>
+
+<section class="espec" id="servicios" aria-labelledby="espec-title">
+  <div class="container">
+    <div class="sec-head">
+      <p class="eyebrow">Otros acabados</p>
+      <h2 id="espec-title">Cuando la pared pide algo más que color</h2>
+    </div>
+    <div class="espec-row reveal">
+      {photo(estuco['hero'][0], "Pared con acabado decorativo de aguas, obra propia", "(min-width: 1024px) 30vw, 100vw")}
+      <div><h3><a href="{estuco['slug']}.html">{estuco['name']}</a></h3><p>{estuco['short']}</p></div>
+    </div>
+    <div class="espec-row espec-alt reveal">
+      {photo("mc-suelo-salon", "Suelo continuo de microcemento en una estancia amplia", "(min-width: 1024px) 30vw, 100vw")}
+      <div><h3><a href="{micro['slug']}.html">{micro['name']}</a></h3><p>{micro['short']}</p></div>
+    </div>
+    <p class="espec-more" id="otros-servicios">También: <a href="alisados-lacados.html">quitar gotelé y lacar puertas</a> · {others}.</p>
+    {'<p class="guide-line">¿Aún estás eligiendo? <a href="guia-acabados.html">Guía para comparar pintura, estuco y microcemento</a>, sin registro.</p>' if PROD else ''}
   </div>
 </section>
 
 <section class="process" aria-labelledby="process-title">
   <div class="container">
-    <h2 id="process-title">Cómo se organiza una obra</h2>
+    <h2 id="process-title">De la consulta al presupuesto</h2>
     <ol class="process-list" {pend_attr("Pasos y compromisos pendientes de validar con Omar")}>
       {"".join(f'<li class="reveal" style="--i:{i}"><span class="step-n" aria-hidden="true">{i + 1}</span><h3>{e(t)}</h3><p>{e(d)}</p></li>' for i, (t, d) in enumerate(PROCESS))}
     </ol>
@@ -228,15 +243,6 @@ def home():
 </section>
 
 {reviews_block()}
-
-<section class="others" id="otros-servicios" aria-labelledby="others-title">
-  <div class="container">
-    <h2 id="others-title">También hacemos reformas y acabados</h2>
-    <ul class="others-list">
-      {"".join(f'''<li class="reveal" style="--i:{i}"><h3>{e(t)}</h3><p>{e(d)}</p>{f'<a href="{slug}.html">Ver un caso</a>' if slug else f'<a href="{contact_url("reforma", "inicio_otros")}">{CTA_LABEL}</a>'}</li>''' for i, (t, d, slug) in enumerate(SECONDARY))}
-    </ul>
-  </div>
-</section>
 
 <section class="faq-contact" aria-labelledby="faq-title">
   <div class="container faq-grid">
