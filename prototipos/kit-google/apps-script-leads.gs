@@ -39,12 +39,17 @@ function doPost(e) {
 
     var sheet = SpreadsheetApp.openById(SHEET_ID).getSheetByName(SHEET_NAME);
     var headers = sheet.getLastColumn() ? sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0] : [];
+    var keys = headers.map(norm_);
+    if (keys.indexOf('status') !== -1 && data.status === undefined) data.status = 'Nuevo';
     Object.keys(data).forEach(function (k) {
-      if (headers.indexOf(k) === -1) { headers.push(k); sheet.getRange(1, headers.length).setValue(k); }
+      if (keys.indexOf(norm_(k)) === -1) {
+        headers.push(k); keys.push(norm_(k));
+        sheet.getRange(1, headers.length).setValue(k);
+      }
     });
 
     if (data.ref) {
-      var refCol = headers.indexOf('ref') + 1;
+      var refCol = keys.indexOf('ref') + 1;
       var last = sheet.getLastRow();
       if (refCol > 0 && last > 1) {
         var refs = sheet.getRange(2, refCol, last - 1, 1).getValues().map(function (r) { return r[0]; });
@@ -52,7 +57,9 @@ function doPost(e) {
       }
     }
 
-    sheet.appendRow(headers.map(function (h) { return data[h] !== undefined ? safe_(data[h]) : ''; }));
+    var byKey = {};
+    Object.keys(data).forEach(function (k) { byKey[norm_(k)] = data[k]; });
+    sheet.appendRow(keys.map(function (k) { return byKey[k] !== undefined ? safe_(byKey[k]) : ''; }));
     try {
       notify_(data);
     } catch (mailError) {
@@ -64,6 +71,11 @@ function doPost(e) {
   } finally {
     lock.releaseLock();
   }
+}
+
+/* «UTM_Source», «utm_source» and «Página» name the same column as their key. */
+function norm_(header) {
+  return String(header).trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '_');
 }
 
 /* A value starting with = + - @ would run as a spreadsheet formula. */

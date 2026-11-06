@@ -14,7 +14,10 @@ import vm from 'node:vm';
 
 const CODE = readFileSync(process.env.GS_FILE || 'prototipos/kit-google/apps-script-leads.gs', 'utf8');
 
-function world({rows = [['timestamp', 'nombre', 'telefono', 'email', 'servicio', 'metros', 'fuente', 'dispositivo', 'utm_source', 'utm_medium', 'utm_campaign', 'pagina', 'estado']], mailFails = false} = {}) {
+// Real header row of «Form Leads», read on 2026-11-06.
+const HEADERS = ['Timestamp', 'Nombre', 'Telefono', 'Email', 'Servicio', 'Metros', 'Fuente', 'Dispositivo', 'UTM_Source', 'UTM_Medium', 'UTM_Campaign', 'Pagina', 'Status'];
+
+function world({rows = [HEADERS], mailFails = false} = {}) {
   const grid = rows.map((r) => [...r]);
   const mails = [];
   const opened = [];
@@ -51,7 +54,7 @@ function world({rows = [['timestamp', 'nombre', 'telefono', 'email', 'servicio',
   vm.runInContext(CODE, context);
   const raw = (contents) => JSON.parse(context.doPost({postData: {contents}}).text);
   const post = (data) => raw(JSON.stringify(data));
-  const row = (n = grid.length - 1) => Object.fromEntries(grid[0].map((h, i) => [h, grid[n][i]]));
+  const row = (n = grid.length - 1) => Object.fromEntries(grid[0].map((h, i) => [h.toLowerCase(), grid[n][i]]));
   return {grid, mails, opened, post, raw, row};
 }
 
@@ -85,12 +88,21 @@ const cases = {
     assert.equal(r.origen, 'inicio');
     assert.equal(r.presupuesto, 'Todavía no lo sé');
   },
-  'respeta las columnas que ya existen': () => {
+  'escribe en las columnas que ya existen, aunque cambien mayúsculas o acentos': () => {
     const w = world();
     w.post(LEAD);
-    assert.equal(w.grid[0][2], 'telefono');
+    assert.deepEqual(w.grid[0].slice(0, 13), HEADERS, 'existing headers untouched');
+    assert.equal(w.grid[1][2], "'+34 600 000 000");
     assert.equal(w.grid[1][1], 'Prueba');
-    assert.equal(w.grid[0].length, new Set(w.grid[0]).size, 'no duplicated columns');
+    assert.equal(w.grid[1][10], '');
+    assert.equal(w.grid[1][11], '/contacto');
+    const lower = w.grid[0].map((h) => h.toLowerCase());
+    assert.equal(lower.length, new Set(lower).size, 'no duplicated columns');
+  },
+  'marca la fila como Nuevo en Status': () => {
+    const w = world();
+    w.post(LEAD);
+    assert.equal(w.row().status, 'Nuevo');
   },
   'un reintento con la misma referencia no duplica la fila ni el email': () => {
     const w = world();
