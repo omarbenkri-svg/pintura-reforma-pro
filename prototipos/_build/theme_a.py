@@ -15,7 +15,7 @@ LETTER = "A"
 NAME = "Oficio"
 DIR = "a-oficio"
 # Proposal 2026-11: Geist for text, Cabinet Grotesk (Fontshare) for headings.
-# Loaded from their CDNs for review; self-host only after approval and a licence check.
+# Approved by Omar on 2026-11-06. Loaded from their CDNs; self-hosting them is a later improvement.
 FONTS = "https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&display=swap"
 FONTS_DISPLAY = "https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@700,800&display=swap"
 

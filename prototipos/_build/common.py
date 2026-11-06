@@ -171,7 +171,7 @@ def privacy_body(theme) -> str:
 <section class="legal container narrow">
   <dl class="legal-list">{dl}</dl>
   <h2>Cookies y medición</h2>
-  <p>{pend("Esta web no usa cookies ni herramientas de medición de visitas. Para mostrar tipografías e iconos carga recursos de Google Fonts y unpkg, que reciben tu dirección IP al servirlos.",
+  <p>{pend("Esta web no usa cookies ni herramientas de medición de visitas. Para mostrar tipografías e iconos carga recursos de Google Fonts, Fontshare y unpkg, que reciben tu dirección IP al servirlos.",
            "Actualizar cuando se alojen las fuentes en la web o se instale medición")}</p>
 </section>
 """
