@@ -1,11 +1,11 @@
 {
-  "name": "Pintura, Reformas y Acabados de Obra",
-  "short_name": "BCN Pro Reforma",
-  "description": "Pintores y reformistas en Maresme, Barcelona y Costa Brava. Presupuesto cerrado en 48h.",
+  "name": "BCN ProReforma",
+  "short_name": "BCN ProReforma",
+  "description": "Pintura de viviendas, estucos y microcemento en el Maresme y Barcelona.",
   "start_url": "/",
   "display": "browser",
-  "background_color": "#0a1628",
-  "theme_color": "#2563EB",
+  "background_color": "#F7F4EE",
+  "theme_color": "#162D3B",
   "icons": [
     {
       "src": "/logo .png",

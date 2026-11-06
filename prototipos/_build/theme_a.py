@@ -58,7 +58,7 @@ def footer() -> str:
   <div class="container footer-grid">
     <div class="footer-about">
       <p class="footer-brand">{CONFIG['brand']}</p>
-      <p>{CONFIG['tagline']}. Empresa familiar con base en Cabrils, en el Gremi de Pintors desde {CONFIG['since']}.</p>
+      <p>{CONFIG['tagline']}. Empresa familiar con base en Cabrils, miembro del Gremi de Pintors.</p>
     </div>
     <div>
       <h2>Contacto</h2>
@@ -106,6 +106,8 @@ def faq_list(items, note=FAQ_NOTE) -> str:
 
 
 def reviews_block() -> str:
+    if PROD:
+        return ""  # withdrawn on 03/11/2026, see REVIEWS in content.py
     if not PROD:
         return f"""<section class="reviews container" aria-labelledby="reviews-title" {pend_attr("Opiniones: publicar solo reseñas con procedencia comprobada y permiso")}>
   <h2 id="reviews-title">Opiniones de clientes</h2>
@@ -160,7 +162,7 @@ def home():
 
 <section class="works" aria-labelledby="works-title">
   <div class="container">
-    <h2 id="works-title">Trabajos con antes y después</h2>
+    <h2 id="works-title">Trabajos documentados</h2>
     <div class="works-grid">
       <article class="work-feature reveal">
         {before_after(feature)}
@@ -260,16 +262,30 @@ def home():
 def service(s):
     case = CASE_BY_SLUG.get(s["case"]) if s["case"] else None
     origin = f"servicio_{s['slug']}"
-    related = (
-        f"""<article class="related-case">
+    more = "".join(
+        f'<p><a class="btn-link" href="{CASE_BY_SLUG[k]["slug"]}.html">{e(CASE_BY_SLUG[k]["title"])} {icon("arrow-right")}</a></p>'
+        for k in s.get("more_cases", []))
+    if case:
+        related = f"""<article class="related-case">
           {before_after(case)}
-          <div><p class="kicker">Caso relacionado</p><h3><a href="{case['slug']}.html">{case['title']}</a></h3><p>{case['summary']}</p></div>
+          <div><p class="kicker">Caso relacionado</p><h3><a href="{case['slug']}.html">{case['title']}</a></h3><p>{case['summary']}</p>{more}</div>
         </article>"""
-        if case else
-        f"""<div class="related-empty" {pend_attr("Documentar un caso propio de este servicio")}>
+    elif PROD:
+        related = ""  # the public site never advertises what is missing
+    else:
+        related = f"""<div class="related-empty" {pend_attr("Documentar un caso propio de este servicio")}>
           <p>Todavía no hemos publicado un caso documentado de este servicio.</p>
           <a class="btn-link" href="trabajos.html">Ver otros trabajos {icon('arrow-right')}</a></div>"""
-    )
+    photos = svc_gallery(s) + "".join(placeholder(t, d) for t, d in svc_slots(s))
+    work = ""
+    if photos or related:
+        row = f'<div class="svc-photo-row">{photos}</div>' if photos else ""
+        heading = "Así trabajamos" if photos else "Obras de este servicio"
+        work = f'''<section class="svc-photos container" aria-labelledby="ph-title">
+  <h2 id="ph-title">{heading}</h2>
+  {row}
+  {related}
+</section>'''
     others = "".join(
         f'<li><a href="{o["slug"]}.html">{e(o["name"])}</a></li>' for o in SERVICES if o is not s
     )
@@ -302,13 +318,7 @@ def service(s):
   </div>
 </section>
 
-<section class="svc-photos container" aria-labelledby="ph-title">
-  <h2 id="ph-title">Así trabajamos</h2>
-  <div class="svc-photo-row">
-    {svc_gallery(s)}{"".join(placeholder(t, d) for t, d in svc_slots(s))}
-  </div>
-  {related}
-</section>
+{work}
 
 <section class="svc-faq" aria-labelledby="sfaq-title">
   <div class="container faq-grid">
@@ -332,6 +342,10 @@ def service(s):
 # ---------------------------------------------------------------- works
 
 
+def muni_line(c) -> str:
+    return f'<p class="muni">{icon("map-pin")} {c["municipio"]}</p>' if c["municipio"] else ""
+
+
 def works():
     cases = "".join(f"""
     <article class="case-row reveal">
@@ -340,7 +354,7 @@ def works():
         <p class="kicker">{e(c['service'])}</p>
         <h3><a href="{c['slug']}.html">{c['title']}</a></h3>
         <p>{c['summary']}</p>
-        <p class="muni">{icon('map-pin')} {c['municipio']}</p>
+        {muni_line(c)}
       </div>
     </article>""" for c in CASES)
     albums = "".join(f"""
@@ -354,7 +368,7 @@ def works():
 <section class="page-head container">
   {breadcrumb([("index.html", "Inicio"), (None, "Trabajos")])}
   <h1>Trabajos</h1>
-  <p class="lead">Obras documentadas con su estado inicial, la preparación y el resultado. Más abajo, fotos agrupadas por tipo de trabajo.</p>
+  <p class="lead">Obras documentadas con su preparación y su resultado. Más abajo, fotos agrupadas por tipo de trabajo.</p>
 </section>
 <section class="cases container" aria-labelledby="cases-title">
   <h2 id="cases-title">Casos documentados</h2>
@@ -382,6 +396,9 @@ def case(c):
             f'<figure>{photo(n, a, "(min-width: 1024px) 30vw, 50vw")}<figcaption>{e(a)}</figcaption></figure>'
             for n, a in items) + "</div>"
 
+    finish = f"{c['finish']} {c['product']}." if c["product"] else c["finish"]
+    surface = pend("No publicadas", "Añadir solo si se conocen con certeza")
+    facts = [("Servicio", e(c['service'])), ("Municipio", c['municipio']), ("Superficie y duración", surface)]
     process = (
         f"""<section class="case-step container" aria-labelledby="st-proc">
       <h2 id="st-proc">Durante la obra</h2>
@@ -401,9 +418,7 @@ def case(c):
       <h1>{c['title']}</h1>
       <p class="lead">{c['summary']}</p>
       <dl class="case-facts">
-        <div><dt>Servicio</dt><dd>{e(c['service'])}</dd></div>
-        <div><dt>Municipio</dt><dd>{c['municipio']}</dd></div>
-        <div><dt>Superficie y duración</dt><dd>{pend("No publicadas", "Añadir solo si se conocen con certeza")}</dd></div>
+        {"".join(f'<div><dt>{t}</dt><dd>{v}</dd></div>' for t, v in facts if v)}
       </dl>
       {review}
     </div>
@@ -429,7 +444,7 @@ def case(c):
 {process}
 <section class="case-step container" aria-labelledby="st-after">
   <h2 id="st-after">Resultado</h2>
-  <p class="step-text">{c['finish']} {c['product']}.</p>
+  <p class="step-text">{finish}</p>
   {gallery(c['after'][1:], 'g-after')}
   {video_block(c)}
   <p>{album_trigger(c['album'], f"Ver las {len(ALBUMS[c['album']]['photos'])} fotos del álbum {ALBUMS[c['album']]['title'].lower()}", "btn-link")}</p>

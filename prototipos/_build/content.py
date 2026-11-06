@@ -205,7 +205,8 @@ SERVICES = [
             ("Muebles y suelo protegidos antes de pintar", "Enseña el cuidado de la casa, que es lo primero que pregunta el cliente."),
             ("Grieta reparada antes de la pintura", "La misma pared antes y después de prepararla."),
         ],
-        "case": None,
+        "case": "caso-fachada",
+        "more_cases": ["caso-garaje-comunitario"],
         "faq": [
             ("¿Tengo que vaciar la vivienda?", "No. Juntamos los muebles en el centro de cada estancia y los cubrimos; el suelo se protege con papel grueso o lona según sea parqué, mármol o baldosa."),
             ("¿Cuántas manos de pintura dais?", "Las que pida el soporte y el color, normalmente dos. Lo dejamos escrito en el presupuesto para que sepas exactamente qué se va a hacer."),
@@ -626,9 +627,10 @@ PEOPLE = {
 
 
 def gremi_line() -> str:
-    return pend('Agremiados en el Gremi de Pintors de Barcelona desde 1994 (dato facilitado por la empresa). '
+    # The directory proves membership, not the 1994 date: the year returns with the certificate.
+    return pend('Agremiados en el Gremi de Pintors de Barcelona. '
                 '<a href="https://www.gremipintors.com/directori#:~:text=Mohamed%20Ben%20Mesaud">Ver el directorio oficial</a>.',
-                "La pertenencia se comprueba en el directorio; la fecha de alta es un dato facilitado por la empresa. No usar logotipo sin permiso")
+                "La pertenencia se comprueba en el directorio. Añadir el año cuando haya justificante. No usar logotipo sin permiso")
 
 
 PREP_STEPS = [
@@ -648,24 +650,20 @@ PROCESS = [
 FAQ = [
     ("¿Protegéis los muebles y el suelo?",
      pend("Sí. Juntamos los muebles en el centro y los cubrimos con plástico; el suelo se protege con papel grueso o lona según el material. Al terminar retiramos todo y limpiamos.", WEB)),
-    ("¿El precio puede cambiar durante la obra?",
-     pend("El presupuesto firmado es el precio. Solo cambia si nos pides algo nuevo o si aparece un daño oculto: en ese caso te lo enseñamos con fotos y un presupuesto aparte antes de tocar nada.", WEB)),
     ("¿De qué depende el precio?",
-     "De la superficie real que hay que tratar, del estado de las paredes, de la técnica y el acabado elegidos y de los accesos. Por eso damos un presupuesto cerrado y por escrito después de ver la obra, no un precio por metro a ciegas."),
+     "De la superficie real que hay que tratar, del estado de las paredes, de la técnica y el acabado elegidos y de los accesos. Por eso damos el presupuesto por escrito después de ver la obra, no un precio por metro a ciegas."),
     ("¿Cuánto dura un baño de microcemento?",
      pend("Bien aplicado sobre un soporte sano y con el sellado adecuado, muchos años. Al no tener juntas, es fácil de limpiar. Te explicamos el mantenimiento al entregar la obra.", "Validar con Mohamed")),
     ("¿Puedo pedir presupuesto sin que vengáis a casa?",
-     "Puedes enviarnos fotos y medidas aproximadas por WhatsApp para una primera orientación. Para cerrar un precio necesitamos ver la obra."),
-    ("¿Pedís un adelanto?",
-     pend("Un 30 % a la firma, para materiales y reserva de fechas. El resto, durante la obra o al terminar, según su tamaño.", WEB)),
-    ("¿Qué horario tenéis en obra?",
-     pend("De lunes a viernes de 8:00 a 19:00 y sábados de 9:00 a 14:00. En locales podemos adaptarnos a otros horarios.", WEB)),
+     "Puedes enviarnos fotos y medidas aproximadas por WhatsApp para una primera orientación. Para darte un precio necesitamos ver la obra."),
     ("¿En qué zona trabajáis?",
      "En el Maresme y Barcelona, en un radio de unos 40 km desde Cabrils. Si no tienes claro si llegamos a tu municipio, pregúntanos."),
     ("¿Hacéis también reformas?",
      "Sí: baños, cocinas, humedades y reparaciones. Nuestra especialidad son la pintura, los estucos y el microcemento."),
 ]
-# Real reviews from the old Google Business Profile (confirmed by Omar, 20/10/2026).
+# Reviews from an earlier Google profile (Omar, 20/10/2026). Not published since
+# 03/11/2026: the verified profile has no reviews and nothing public backs them.
+# They only come back with proof. Kept for the prototypes.
 RATING = {"value": "4.9", "count": 23}
 REVIEWS = [
     ("Marta Gómez", "Vinieron recomendados por un amigo para empapelar y pintar el piso. Han sido muy finos trabajando, muy educados y dejaron todo limpio cada día."),

@@ -7,6 +7,7 @@ Writes the new pages to the repo root (index.html, microcemento.html, ...),
 assets to /assets, plus sitemap.xml and llms.txt. Existing /municipios and
 /blog pages are kept as they are and linked from the new pages.
 """
+import hashlib
 import json
 import os
 import re
@@ -47,16 +48,10 @@ def business() -> dict:
         "email": CFG["email"],
         "image": f"{SITE}/assets/img/og.jpg",
         "logo": f"{SITE}/logo%20.png",
-        "priceRange": "€€",
         "address": {"@type": "PostalAddress", "addressLocality": "Cabrils", "postalCode": "08348",
                     "addressRegion": "Barcelona", "addressCountry": "ES"},
         "areaServed": towns + [{"@type": "AdministrativeArea", "name": "Maresme"}],
         "memberOf": {"@type": "Organization", "name": "Gremi d'Empreses de Pintura de Barcelona i Comarques"},
-        "openingHoursSpecification": [
-            {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-             "opens": "08:00", "closes": "19:00"},
-            {"@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "09:00", "closes": "14:00"},
-        ],
         "sameAs": ["https://www.instagram.com/pintayreformatuobra"],
         "hasOfferCatalog": {"@type": "OfferCatalog", "name": "Servicios", "itemListElement": [
             {"@type": "Offer", "itemOffered": {"@type": "Service", "name": s["name"], "url": f"{SITE}/{s['slug']}"}}
@@ -147,6 +142,15 @@ gtag('js',new Date());gtag('config','{C.GA_ID}');</script>
 
 
 LINK = re.compile(r'href="(?!https?:|mailto:|tel:|/|#)([^"?#]*?)\.html([?#][^"]*)?"')
+VERSIONED = ("/assets/css/site.css", "/assets/css/guia.css", "/assets/js/app.js", "/assets/js/guia.js")
+
+
+def versioned(html: str) -> str:
+    """CSS and JS are cached for 30 days (vercel.json), so their URLs change with their content."""
+    for url in VERSIONED:
+        digest = hashlib.sha256((ROOT / url.lstrip("/")).read_bytes()).hexdigest()[:10]
+        html = html.replace(f'{url}"', f'{url}?v={digest}"')
+    return html
 
 
 def clean_links(html: str) -> str:
@@ -166,7 +170,7 @@ def page(key, title, desc, body, albums, origin, path=None, extra_ld=None) -> st
     if key == "guia-acabados":
         parts.append('<script type="module" src="/assets/js/guia.js"></script>')
     parts += ["</body>\n</html>\n"]
-    return clean_links("\n".join(parts))
+    return versioned(clean_links("\n".join(parts)))
 
 
 # ---------------------------------------------------------------- assets & files
@@ -206,7 +210,7 @@ def sitemap(keys) -> None:
 def llms() -> None:
     lines = [f"# {CFG['brand']}", "",
              f"> {CFG['brand']} ({CFG['legal_name']}) es una empresa familiar de pintores con base en Cabrils (Barcelona), "
-             f"agremiada en el Gremi de Pintors desde {CFG['since']} (fecha facilitada por la empresa). Pinta viviendas y aplica estucos y microcemento en el Maresme y Barcelona.",
+             "miembro del Gremi d'Empreses de Pintura de Barcelona i Comarques. Pinta viviendas y aplica estucos y microcemento en el Maresme y Barcelona.",
              "", f"- Teléfono: {CFG['tel_display']} · WhatsApp: {CFG['wa_display']} · {CFG['email']}",
              "- Zona: Maresme y Barcelona, unos 40 km alrededor de Cabrils", "", "## Servicios", ""]
     lines += [f"- [{s['name']}]({SITE}/{s['slug']}): {s['short']}" for s in C.SERVICES]
@@ -302,6 +306,75 @@ def town_page(t) -> str:
     return page(f"municipio-{slug}", title, desc, body, None, origin, path=f"/municipios/{slug}", extra_ld=ld)
 
 
+def reform_page() -> str:
+    """/reformas-mataro: secondary service, but the top page by impressions, so the URL stays."""
+    origin = "reformas_mataro"
+    cta = f"/contacto?servicio=reforma&amp;origen={origin}&amp;municipio=Matar%C3%B3"
+    cards = "".join(
+        f'<li><h3>{C.e(t)}</h3><p>{C.e(d)}</p></li>' for t, d, slug in C.SECONDARY if slug is None)
+    cards += "".join(
+        f'<li><h3><a href="/{s["slug"]}">{C.e(s["name"])}</a></h3><p>{C.e(s["short"])}</p></li>'
+        for s in (C.SERVICE_BY_SLUG[k] for k in ("pintura-viviendas", "alisados-lacados", "microcemento")))
+    cases = "".join(f"""
+    <article class="case-row">
+      {T.before_after(c)}
+      <div class="case-row-text">
+        <p class="kicker">{C.e(c['service'])} · obra propia</p>
+        <h3><a href="/{c['slug']}">{c['title']}</a></h3>
+        <p>{c['summary']}</p>
+      </div>
+    </article>""" for c in (C.CASE_BY_SLUG["caso-bano-microcemento"], C.CASE_BY_SLUG["caso-fachada"]))
+    faq = M.faq("Mataró")
+    body = f"""
+<section class="page-head container">
+  {common.breadcrumb([("/", "Inicio"), ("/municipios/pintor-mataro", "Mataró"), (None, "Reformas")])}
+  <h1>Reformas en Mataró: baños, cocinas y acabados</h1>
+  <p class="lead">Desde Cabrils coordinamos reformas de baños y cocinas en Mataró y nos ocupamos de los acabados: pintura, alisado de paredes y microcemento. Si solo quieres pintar, mira <a href="/municipios/pintor-mataro">pintura en Mataró</a>.</p>
+  <div class="actions">
+    <a class="btn btn-primary" href="{cta}" data-track="cta_presupuesto" data-origin="{origin}">{C.CTA_LABEL}</a>
+    <a class="btn-link" href="{C.wa_url(C.wa_message(origin, "una reforma") + "Mataró")}" data-track="whatsapp_click" data-origin="{origin}">{C.icon('whatsapp-logo')} {C.WA_LABEL}</a>
+  </div>
+</section>
+<section class="others" aria-labelledby="srv-title">
+  <div class="container">
+    <h2 id="srv-title">Qué hacemos en Mataró</h2>
+    <ul class="others-list">{cards}</ul>
+  </div>
+</section>
+<section class="cases container" aria-labelledby="cs-title">
+  <h2 id="cs-title">Obras documentadas</h2>
+  {cases}
+  <p><a class="btn-link" href="/trabajos">Ver todos los trabajos {C.icon('arrow-right')}</a></p>
+</section>
+<section class="svc-faq" aria-labelledby="fq-title">
+  <div class="container faq-grid">
+    <div>
+      <h2 id="fq-title">Preguntas sobre obras en Mataró</h2>
+      {T.faq_list(faq)}
+    </div>
+    <aside class="final-cta">
+      <h2>Pide presupuesto en Mataró</h2>
+      <p>Cuéntanos qué quieres reformar. Si tienes fotos, envíalas por WhatsApp.</p>
+      <a class="btn btn-primary" href="{cta}" data-track="cta_presupuesto" data-origin="{origin}_final">{C.CTA_LABEL}</a>
+      <a class="btn-link" href="tel:{CFG['tel']}" data-track="phone_click" data-origin="{origin}">{C.icon('phone')} {C.CALL_LABEL} al {CFG['tel_display']}</a>
+    </aside>
+  </div>
+</section>
+"""
+    title = "Reformas en Mataró: baños, cocinas y acabados"
+    desc = "Reformas de baños y cocinas en Mataró con los acabados resueltos: pintura, alisados y microcemento. Empresa familiar con base en Cabrils."
+    ld = [
+        {"@type": "Service", "name": title, "url": f"{SITE}/reformas-mataro", "provider": {"@id": f"{SITE}/#negocio"},
+         "areaServed": {"@type": "City", "name": "Mataró"}, "serviceType": ["Reforma de baño", "Reforma de cocina", "Pintura de viviendas"]},
+        {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in faq]},
+        {"@type": "BreadcrumbList", "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Inicio", "item": f"{SITE}/"},
+            {"@type": "ListItem", "position": 2, "name": "Mataró", "item": f"{SITE}/municipios/pintor-mataro"},
+            {"@type": "ListItem", "position": 3, "name": "Reformas", "item": f"{SITE}/reformas-mataro"}]},
+    ]
+    return page("reformas-mataro", title, desc, body, None, origin, path="/reformas-mataro", extra_ld=ld)
+
+
 def main() -> None:
     copy_assets()
     keys = []
@@ -311,11 +384,12 @@ def main() -> None:
     key = "guia-acabados"
     body, albums = G.body()
     (ROOT / f"{key}.html").write_text(page(key, "Pintura, estuco o microcemento: cómo elegir",
-        "Guía práctica para elegir entre pintura, estucos y microcemento según la superficie, su estado y el uso que tendrá. Con obras propias y una ficha gratuita.",
+        "Guía práctica para elegir entre pintura, estucos y microcemento según la superficie, su estado y el uso que tendrá. Con obras propias y una ficha con seis preguntas.",
         body, albums, "guia_acabados"), encoding="utf-8")
     keys.append(key)
     for t in M.TOWNS:
         (ROOT / "municipios" / f"{t['slug']}.html").write_text(town_page(t), encoding="utf-8")
+    (ROOT / "reformas-mataro.html").write_text(reform_page(), encoding="utf-8")
     sitemap(keys)
     llms()
     print(f"web pública: {len(keys)} páginas en la raíz, assets en /assets"

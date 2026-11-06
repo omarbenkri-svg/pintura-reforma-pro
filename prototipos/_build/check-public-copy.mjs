@@ -58,7 +58,6 @@ const BANNED = [
   [/\d+ ?% a la firma/i, 'condición de pago sin validar'],
   [/precios reales|ejemplo real/i, 'cifra presentada como real sin validar'],
   [/costa brava/i, 'cobertura no declarada'],
-  [/sant gervasi|sarri[aà]|pedralbes/i, 'especialización de zona sin validar'],
   // Reviews withdrawn on 2026-11-03: they come back only with proof
   [/4,9 de 5|con 23 rese|rese[nñ]a en google|marta g[oó]mez|jordi c\.|roberto s\.|elena m\./i, 'reseñas retiradas'],
   // Identity
@@ -105,7 +104,7 @@ for (const file of extras) {
   }
 }
 
-for (const path of ['municipios/template.html', 'reformas-mataro.html', 'pintor-cabrils.html', 'pintor-vilassar-de-mar.html']) {
+for (const path of ['municipios/template.html', 'pintor-cabrils.html', 'pintor-vilassar-de-mar.html']) {
   if (!ignore.has(path)) add('.vercelignore', `${path} no debe publicarse`);
 }
 for (const pattern of ['images/projects/real/rehabilitacion-fachada-mataro-*', 'images/projects/real/restauracion-madera-exterior-02.webp']) {
@@ -114,14 +113,12 @@ for (const pattern of ['images/projects/real/rehabilitacion-fachada-mataro-*', '
 
 const sitemap = readFileSync(join(ROOT, 'sitemap.xml'), 'utf8');
 for (const [, url] of sitemap.matchAll(/<loc>https:\/\/bcnproreforma\.com([^<]*)<\/loc>/g)) {
-  const path = url === '/' ? 'index.html' : `${url.slice(1)}.html`;
+  const path = url === '/' ? 'index.html' : existsSync(join(ROOT, url.slice(1), 'index.html')) ? `${url.slice(1)}/index.html` : `${url.slice(1)}.html`;
   if (!existsSync(join(ROOT, path))) add('sitemap.xml', `${url} no tiene archivo`);
   if (ignore.has(path)) add('sitemap.xml', `${url} está excluida del despliegue`);
 }
-const redirects = JSON.parse(readFileSync(join(ROOT, 'vercel.json'), 'utf8')).redirects;
-if (!redirects.some((r) => r.source === '/reformas-mataro' && r.destination === '/municipios/pintor-mataro')) {
-  add('vercel.json', '/reformas-mataro debe redirigir a /municipios/pintor-mataro');
-}
+// Top page by impressions in Search Console (508 of 1,180 on 2026-11-03): it must stay.
+if (!/<loc>https:\/\/bcnproreforma\.com\/reformas-mataro<\/loc>/.test(sitemap)) add('sitemap.xml', 'falta /reformas-mataro');
 
 if (problems.length) {
   console.log(problems.map((p) => `  FAIL  ${p}`).join('\n'));

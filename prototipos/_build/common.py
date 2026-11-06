@@ -61,9 +61,8 @@ def contact_actions(origin: str, service_name: str | None = None, contact_href: 
 
 def company_body(theme) -> str:
     principles = [
-        ("Precio cerrado y por escrito", "El presupuesto detalla preparación, materiales, protección y lo que no incluye. Si algo cambia, lo hablamos antes."),
+        ("Presupuesto por escrito", "El presupuesto detalla preparación, materiales, protección y lo que no incluye. Si algo cambia, lo hablamos antes."),
         ("La casa protegida", "Suelos, muebles y carpinterías cubiertos durante toda la obra, y limpieza al final de cada jornada."),
-        ("Equipo propio", "Los mismos oficiales de principio a fin, sin subcontratas ni intermediarios."),
         ("Comunicación directa", "Hablamos contigo sobre fechas, cambios y dudas durante la obra."),
     ]
     towns = "".join(f'<li><a href="{"/municipios/" + MUNI_PAGES[t] if PROD else "../../municipios/" + MUNI_PAGES[t] + ".html"}">{e(t)}</a></li>' if t in MUNI_PAGES else f"<li>{e(t)}</li>" for t in MUNICIPIOS)
@@ -79,7 +78,7 @@ def company_body(theme) -> str:
   <dl class="legal-list">
     <dt>Marca</dt><dd>{CONFIG['brand']}</dd>
     <dt>Nombre legal</dt><dd>{CONFIG['legal_name']}</dd>
-    <dt>Gremi</dt><dd>Agremiados desde {CONFIG['since']} (dato facilitado por la empresa). <a href="https://www.gremipintors.com/directori#:~:text=Mohamed%20Ben%20Mesaud">Consulta el directorio oficial</a>.</dd>
+    <dt>Gremi</dt><dd>Miembros del Gremi d'Empreses de Pintura de Barcelona i Comarques. <a href="https://www.gremipintors.com/directori#:~:text=Mohamed%20Ben%20Mesaud">Consulta el directorio oficial</a>.</dd>
     <dt>Especialidades</dt><dd>Pintura de casas y pisos, microcemento, estuco veneciano y pintura decorativa</dd>
     <dt>Base</dt><dd>Cabrils (Barcelona)</dd>
     <dt>Zona de trabajo</dt><dd>Maresme y Barcelona</dd>
@@ -96,7 +95,7 @@ def company_body(theme) -> str:
 
 <section class="area container" aria-labelledby="area-title">
   <h2 id="area-title">Dónde trabajamos</h2>
-  <p>En el Maresme y Barcelona, en un radio aproximado de 40 km desde Cabrils: casas y pisos de Alella, Teià, Cabrils, Sant Andreu de Llavaneres, Sant Vicenç de Montalt, Premià de Dalt, Vilassar de Dalt, Cabrera de Mar y Argentona, y en Barcelona, sobre todo en Sant Gervasi, Sarrià y Pedralbes. Estos son los municipios donde atendemos:</p>
+  <p>En el Maresme y Barcelona, en un radio aproximado de 40 km desde Cabrils: casas y pisos de Alella, Teià, Cabrils, Sant Andreu de Llavaneres, Sant Vicenç de Montalt, Premià de Dalt, Vilassar de Dalt, Cabrera de Mar y Argentona, y en Barcelona, incluidos Sant Gervasi, Sarrià y Pedralbes. Estos son los municipios donde atendemos:</p>
   <ul class="town-list">{towns}</ul>
 </section>
 
@@ -111,6 +110,8 @@ def company_body(theme) -> str:
 
 
 def contact_body(theme) -> str:
+    hours = pend("Horario de atención pendiente de confirmar.", "Indicar horario real de atención telefónica")
+    hours = f'<p class="hours">{hours}</p>' if hours else ""
     return f"""
 <section class="page-head container">
   {breadcrumb([("index.html", "Inicio"), (None, "Contacto")])}
@@ -135,7 +136,7 @@ def contact_body(theme) -> str:
       <li><span class="channel-label">{icon('envelope-simple')} Correo</span>
         <a href="mailto:{CONFIG['email']}">{CONFIG['email']}</a></li>
     </ul>
-    <p class="hours">{pend("Horario de atención pendiente de confirmar.", "Indicar horario real de atención telefónica")}</p>
+    {hours}
     <h2>Qué pasa después</h2>
     <ol class="next-steps">
       <li>Revisamos tu solicitud y te contactamos para concretar lo que necesitas.</li>
@@ -155,22 +156,22 @@ def privacy_body(theme) -> str:
         ("Responsable", f"{CONFIG['holder']} ({CONFIG['legal_name']}), NIF {CONFIG['nif']}, {CONFIG['fiscal_address']}."),
         ("Finalidad", "Responder a tu solicitud de presupuesto y, si lo aceptas, gestionar la obra."),
         ("Base legal", pend("Aplicación de medidas precontractuales a petición tuya", "Validar con asesoría")),
-        ("Conservación", pend("Plazo de conservación", "Definir plazo y criterio de borrado")),
-        ("Destinatarios", pend("Proveedores que alojan los datos de las solicitudes", "Nombrar los encargados reales del tratamiento según el receptor elegido")),
-        ("Derechos", f"Acceso, rectificación, supresión y demás derechos escribiendo a {CONFIG['email']}."),
+        ("Conservación", pend("Conservamos tus datos mientras atendemos tu solicitud y, si hay un encargo, durante los plazos que exige la ley. Después los borramos.", "Validar con asesoría; concretar un plazo si se decide")),
+        ("Destinatarios", pend("Las solicitudes se guardan en servicios de Google (hojas de cálculo y correo) y esta web se aloja en Vercel. Estos proveedores pueden tratar datos fuera del Espacio Económico Europeo con las garantías que prevé la normativa. No cedemos tus datos a nadie más, salvo obligación legal.", "Validar con asesoría")),
+        ("Derechos", f"Acceso, rectificación, supresión y demás derechos escribiendo a {CONFIG['email']}. También puedes reclamar ante la Agencia Española de Protección de Datos (aepd.es)."),
     ]
     dl = "".join(f"<dt>{t}</dt><dd>{d}</dd>" for t, d in rows)
     return f"""
 <section class="page-head container narrow">
   {breadcrumb([("index.html", "Inicio"), (None, "Privacidad")])}
   <h1>Privacidad</h1>
-  <p class="lead" {pend_attr("Borrador: requiere revisión legal antes de publicar")}>Borrador para revisar. No es un texto legal definitivo.</p>
+  <p class="lead" {pend_attr("Requiere revisión legal")}>Cómo tratamos los datos que nos envías por el formulario, por teléfono o por WhatsApp.</p>
 </section>
 <section class="legal container narrow">
   <dl class="legal-list">{dl}</dl>
   <h2>Cookies y medición</h2>
-  <p>{pend("Este prototipo no usa cookies ni herramientas de medición. El texto final dependerá de los scripts que se instalen.",
-           "Revisar el aviso de cookies con los scripts definitivos")}</p>
+  <p>{pend("Esta web no usa cookies ni herramientas de medición de visitas. Para mostrar tipografías e iconos carga recursos de Google Fonts y unpkg, que reciben tu dirección IP al servirlos.",
+           "Actualizar cuando se alojen las fuentes en la web o se instale medición")}</p>
 </section>
 """
 
@@ -186,7 +187,7 @@ def legal_body(theme) -> str:
         ("Domicilio fiscal", CONFIG["fiscal_address"]),
         ("Contacto", f"{CONFIG['email']} · {CONFIG['tel_display']}"),
         ("Actividad", "Pintura, revestimientos decorativos, microcemento y acabados de obra"),
-        ("Asociación", pend(f"Gremi d'Empreses de Pintura de Barcelona i Comarques, desde {CONFIG['since']}", "Confirmar con el certificado del Gremi")),
+        ("Asociación", pend("Gremi d'Empreses de Pintura de Barcelona i Comarques", "Añadir el año con el certificado del Gremi")),
     ]
     dl = "".join(f"<dt>{t}</dt><dd>{d}</dd>" for t, d in rows)
     return f"""
