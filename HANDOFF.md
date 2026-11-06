@@ -4,6 +4,14 @@
 
 **Última actualización:** 2026-11-06 por Claude Code. **Paquete urgente PUBLICADO** (commit `12ae03f`, deploy `ospu5lv6o`). Reversión: `vercel rollback pintura-reforma-obra-v1-jdan9a6nx-omarbenkri-svgs-projects.vercel.app --yes`. Receptor Apps Script actualizado a la versión 2 (misma URL /exec); para revertir, editar la implementación y elegir la «Versión 1 del 2 may 2026».
 
+## Paleta «grafito y amarillo cinta de pintor» y animación PUBLICADAS (2026-11-06)
+
+- Omar eligió la paleta C entre tres opciones que vio sobre su portada. Commit `58ba93a`, despliegue `6trxmklvi`. Para volver a la paleta cobre: `vercel rollback pintura-reforma-obra-v1-aq29osulc-omarbenkri-svgs-projects.vercel.app --yes`.
+- El amarillo `#E8B72F` (con texto `#151515`) se usa en botones, líneas y fondos. Los textos e iconos usan el ocre `--accent-ink` `#7A5A06`. Todos los pares cumplen WCAG AA.
+- Animación solo con CSS: el titular de la portada aparece palabra a palabra, las fotos se descubren y las secciones entran al hacer scroll. Todo termina visible y se desactiva si el visitante pide menos movimiento. **El H1 de las páginas interiores no se anima**: `check-pages` lo exige.
+- Verificado: 8 archivos comparados idénticos al commit y sitemap 200. Comprobaciones: páginas 180/180, textos, formulario y guía.
+- Aviso: el primer `git push` a `master` tras cada commit falla sin mensaje y el segundo entra. No ha afectado a nada, pero hay que revisar el push después de publicar.
+
 ## Diseño aplicado al resto de páginas PUBLICADO (2026-11-06)
 
 - Commit `04d4091`, despliegue `aq29osulc`. Para volver al diseño solo de portada y contacto: `vercel rollback pintura-reforma-obra-v1-4kfsb67yd-omarbenkri-svgs-projects.vercel.app --yes`.
