@@ -1,7 +1,24 @@
 # HANDOFF — bcnproreforma.com
 
-**Última actualización:** 2026-10-28 por Codex — integración local de guía SEO/GEO; todavía sin push ni deploy. La web v2 anterior sigue en producción.
 **Próximo ejecutor:** Claude Code (Terminal)
+
+**Última actualización:** 2026-11-06 por Claude Code. Rama local `fix/contacto-y-confianza` (worktree `Developer/pintura-reforma-pro-wt/fix-contacto`), **sin push ni despliegue**. Producción sigue en `f5cb712` (deploy `jdan9a6nx`).
+
+## Paquete urgente 2026-11-06: contacto y confianza (local)
+
+- Detalle e inventario: `prototipos/docs/2026-11-inventario.md`. Preguntas para Mohamed: `prototipos/docs/2026-11-validacion-mohamed.md`.
+- Formulario: el aviso vacío de 34 px ya no aparece. «Faltan datos» se oculta al corregir los campos. Sin JavaScript se ofrecen teléfono y WhatsApp. `method=post`. «Solicitud recibida» solo aparece con `ok:true` o `status:'ok'`.
+- **Receptor real (leído el 3/11):** pierde municipio, descripción, referencia, origen y presupuesto, y no deduplica. Hay que pegar `kit-google/apps-script-leads.gs`, ya corregido, en el **mismo** proyecto independiente y publicar una «Nueva versión». Requiere el OK de Omar.
+- Privacidad: se han recortado el número de vivienda y una matrícula, quitado el municipio, ocultado las notas internas en producción y excluido del despliegue los originales y una foto con persona y teléfono.
+- Textos: fuera las carencias, los compromisos sin validar, el año 1994 y las reseñas (decisión de Omar del 3/11). `/reformas-mataro` mantiene la URL (página con más impresiones) con contenido veraz.
+- Caché: CSS y JS llevan `?v=<hash>`.
+- Pruebas: `check-public-copy.mjs`, `check-contact-form.mjs` (bloquea cualquier envío real) y `check-apps-script.mjs`. `check-pages --site` cubre ahora el blog: 180/180.
+- **Perfil de Empresa verificado** («BcnProReforma», 0 reseñas, incompleto). El bloqueo del 2026 ya no está vigente.
+
+### No reintroducir
+- Reseñas, cifra 4,9/23, «desde 1994», «30 % a la firma», horario, «equipo propio», «gratis/24h», «garantizado». Solo vuelven con prueba; se retira la regla correspondiente de `check-public-copy.mjs` en el mismo commit.
+- Textos que anuncian lo que falta («Todavía no hemos publicado…», «No publicado»).
+- Fotos de la fachada sin recortar.
 
 ---
 
