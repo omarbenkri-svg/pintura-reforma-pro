@@ -4,6 +4,13 @@
 
 **Última actualización:** 2026-11-06 por Claude Code. **Paquete urgente PUBLICADO** (commit `12ae03f`, deploy `ospu5lv6o`). Reversión: `vercel rollback pintura-reforma-obra-v1-jdan9a6nx-omarbenkri-svgs-projects.vercel.app --yes`. Receptor Apps Script actualizado a la versión 2 (misma URL /exec); para revertir, editar la implementación y elegir la «Versión 1 del 2 may 2026».
 
+## Diseño aplicado al resto de páginas PUBLICADO (2026-11-06)
+
+- Commit `04d4091`, despliegue `aq29osulc`. Para volver al diseño solo de portada y contacto: `vercel rollback pintura-reforma-obra-v1-4kfsb67yd-omarbenkri-svgs-projects.vercel.app --yes`.
+- Servicios, casos, municipios, Mataró, empresa y páginas legales comparten ahora la escala de titulares y el bloque «Qué influye en el precio» sin tarjetas.
+- Las fotos de las páginas interiores van en una columna vertical, porque casi todas son verticales y estrechas; solo la portada lleva foto a sangre. La página de pintura y el caso de la fachada abren con la foto de la esquina, que es más nítida.
+- Verificado: 9 archivos comparados idénticos al commit, sitemap 200 y archivos internos 404. Comprobaciones: páginas 180/180, textos, formulario y guía.
+
 ## Diseño nuevo de portada y contacto PUBLICADO (2026-11-06)
 
 - Aprobado por Omar en el navegador. Commit `a58ad8f`, despliegue `4kfsb67yd`. Para volver al paquete urgente: `vercel rollback pintura-reforma-obra-v1-ospu5lv6o-omarbenkri-svgs-projects.vercel.app --yes`.
