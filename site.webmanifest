@@ -4,8 +4,8 @@
   "description": "Pintura de viviendas, estucos y microcemento en el Maresme y Barcelona.",
   "start_url": "/",
   "display": "browser",
-  "background_color": "#F7F4EE",
-  "theme_color": "#162D3B",
+  "background_color": "#F1EEE7",
+  "theme_color": "#151515",
   "icons": [
     {
       "src": "/logo .png",

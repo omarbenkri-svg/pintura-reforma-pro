@@ -27,7 +27,7 @@
 .guide-heading h2{max-width:22ch}
 .guide-option-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;border-top:2px solid var(--text)}
 .guide-option-grid article{padding-top:1.5rem}
-.guide-option-grid article>span{font-size:.8rem;color:var(--accent);font-weight:700;letter-spacing:.06em}
+.guide-option-grid article>span{font-size:.8rem;color:var(--accent-ink);font-weight:700;letter-spacing:.06em}
 .guide-option-grid h3{font-size:1.7rem;margin-top:1.25rem}
 .guide-option-grid p{color:var(--muted);margin-block:1rem}
 .guide-option-grid a{font-weight:600;text-underline-offset:4px}
@@ -39,7 +39,7 @@
 .guide-pocket .guide-heading p:last-child{margin-top:.8rem;color:var(--muted)}
 .guide-pocket-list{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:0 2rem;border-top:2px solid var(--text)}
 .guide-pocket-list li{display:flex;gap:1rem;border-bottom:1px solid var(--line-strong);padding:1.25rem 0}
-.guide-num{color:var(--accent);font-size:.8rem;font-weight:700;flex:none;padding-top:.15rem}
+.guide-num{color:var(--accent-ink);font-size:.8rem;font-weight:700;flex:none;padding-top:.15rem}
 .guide-pocket-list h3{font-size:1rem}
 .guide-pocket-list p{font-size:.9rem;color:var(--muted);margin-top:.4rem}
 .guide-pass{background:var(--text);color:var(--surface)}

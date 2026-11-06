@@ -144,7 +144,7 @@ def home():
   <div class="hero-o-grid">
     <div class="hero-o-copy">
       <p class="eyebrow">{HERO['eyebrow']}</p>
-      <h1 id="hero-title">{HERO['h1']}</h1>
+      <h1 id="hero-title">{" ".join(f'<span class="w" style="--i:{i}">{e(w)}</span>' for i, w in enumerate(HERO['h1'].split()))}</h1>
       <p class="hero-desc">{HERO['desc']}</p>
       {contact_actions("inicio_hero", "pintura de vivienda", contact_url("pintura-vivienda", "inicio"))}
       <p class="hero-call">¿Prefieres hablar? <a href="{tel_url()}" data-track="phone_click" data-origin="inicio_hero">{CALL_LABEL} al {CONFIG['tel_display']}</a></p>

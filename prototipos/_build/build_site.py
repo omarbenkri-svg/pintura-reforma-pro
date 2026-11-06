@@ -129,7 +129,7 @@ gtag('js',new Date());gtag('config','{C.GA_ID}');</script>
 <meta property="og:url" content="{SITE}{path}">
 <meta property="og:image" content="{SITE}/assets/img/og.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#162D3B">
+<meta name="theme-color" content="#151515">
 {gsc}<script>document.documentElement.classList.add('js');</script>
 {ga}<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
