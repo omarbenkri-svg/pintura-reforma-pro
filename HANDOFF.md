@@ -2,7 +2,7 @@
 
 **Próximo ejecutor:** Claude Code (Terminal)
 
-**Última actualización:** 2026-11-06 por Claude Code. Rama local `fix/contacto-y-confianza` (worktree `Developer/pintura-reforma-pro-wt/fix-contacto`), **sin push ni despliegue**. Producción sigue en `f5cb712` (deploy `jdan9a6nx`).
+**Última actualización:** 2026-11-06 por Claude Code. **Paquete urgente PUBLICADO** (commit `12ae03f`, deploy `ospu5lv6o`). Reversión: `vercel rollback pintura-reforma-obra-v1-jdan9a6nx-omarbenkri-svgs-projects.vercel.app --yes`. Receptor Apps Script actualizado a la versión 2 (misma URL /exec); para revertir, editar la implementación y elegir la «Versión 1 del 2 may 2026».
 
 ## Paquete urgente 2026-11-06: contacto y confianza (local)
 
@@ -14,6 +14,10 @@
 - Caché: CSS y JS llevan `?v=<hash>`.
 - Pruebas: `check-public-copy.mjs`, `check-contact-form.mjs` (bloquea cualquier envío real) y `check-apps-script.mjs`. `check-pages --site` cubre ahora el blog: 180/180.
 - **Perfil de Empresa verificado** («BcnProReforma», 0 reseñas, incompleto). El bloqueo del 2026 ya no está vigente.
+
+- Verificación en producción (6/11): los 12 archivos comparados son idénticos byte a byte al commit; las 29 URLs del sitemap responden 200; archivos internos, plantilla y fotos originales responden 404.
+- Prueba identificada con autorización de Omar: ref `BCN-20261106-NM9V` («PRUEBA CLAUDE (borrar)», tel. 600000000). Se recibió «Solicitud recibida», la fila 9 de «Form Leads» tiene municipio, descripción, origen y Status y el email llegó. **Omar: borra la fila 9 y las filas de prueba 2 a 8.**
+- La hoja «Form Leads» solo contenía filas de prueba: no se ha perdido ninguna solicitud real por el receptor antiguo.
 
 ### No reintroducir
 - Reseñas, cifra 4,9/23, «desde 1994», «30 % a la firma», horario, «equipo propio», «gratis/24h», «garantizado». Solo vuelven con prueba; se retira la regla correspondiente de `check-public-copy.mjs` en el mismo commit.
