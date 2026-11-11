@@ -10,9 +10,27 @@
   'use strict';
   var html = document.documentElement;
 
-  /* ---------- simulated measurement (no personal data, console only) ---------- */
+  /* ---------- measurement (no personal data) ----------
+   * Sends GA4 events when gtag is on the page (build with GA_ID; Consent Mode
+   * decides what is stored). Without gtag it only logs to the console.
+   * Internal names map to the GA4 names used in reports. */
+  var GA_EVENTS = {
+    phone_click: 'click_tel',
+    whatsapp_click: 'click_whatsapp',
+    lead_submit: 'form_submit',
+    lead_received: 'generate_lead'
+  };
   window.track = function (name, props) {
-    console.info('[medición simulada]', name, props || {});
+    var event = GA_EVENTS[name] || name;
+    if (typeof window.gtag === 'function') {
+      var params = {};
+      Object.keys(props || {}).forEach(function (k) {
+        if (props[k] !== null && props[k] !== undefined) params[k] = props[k];
+      });
+      window.gtag('event', event, params);
+    } else {
+      console.info('[medición simulada]', event, props || {});
+    }
   };
   document.addEventListener('click', function (ev) {
     var t = ev.target.closest('[data-track]');
