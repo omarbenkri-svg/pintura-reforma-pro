@@ -2,7 +2,33 @@
 
 **Próximo ejecutor:** Claude Code (Terminal)
 
-**Última actualización:** 2026-11-06 por Claude Code. **Paquete urgente PUBLICADO** (commit `12ae03f`, deploy `ospu5lv6o`). Reversión: `vercel rollback pintura-reforma-obra-v1-jdan9a6nx-omarbenkri-svgs-projects.vercel.app --yes`. Receptor Apps Script actualizado a la versión 2 (misma URL /exec); para revertir, editar la implementación y elegir la «Versión 1 del 2 may 2026».
+**Última actualización:** 2026-11-11 por Claude Code (agente técnico). Rama `feat/seo-geo-2026-11` (worktree `pintura-reforma-pro-wt/seo-geo`, desde `master` `ab1f531`) con el paquete SEO/GEO **en local, sin publicar**. Producción sigue en `ab1f531`.
+
+## Paquete SEO/GEO 2026-11-11 (rama `feat/seo-geo-2026-11`, SIN PUBLICAR)
+
+Decisiones de Omar aplicadas:
+- **Marca única «BcnProReforma»** (así escrita) en títulos, `og:site_name`, cabecera, pie, schema, `llms.txt`, manifest y blog. `legalName` sigue siendo «Pintura, Reformas y Acabados de Obra»; titular, Mohamed Ben Mesaud. `check-public-copy` rechaza «BCN Pro Reforma» y «BCN ProReforma».
+- **Horario confirmado: lunes a sábado, de 8:00 a 20:00.** Está en el JSON-LD (`openingHoursSpecification`), en el pie, en /contacto, en el blog y en `llms.txt`. `check-public-copy` solo acepta ese horario.
+- **Fórmula de precio: «Precio orientativo (sin IVA). Presupuesto cerrado tras visita.»** Se ha retirado la prohibición de «presupuesto/precio cerrado» de `check-public-copy`.
+- Gremi: nombre oficial «Gremi d'Empreses de Pintura de Barcelona i Comarques» en todos los textos, igual que en `memberOf`.
+
+Qué hay nuevo:
+- `HousePainter` (`/#negocio`): calle (C/ Doctor Masriera, 8), `geo` aproximado de Cabrils, horario y `priceRange` «€€». `sameAs` sale de `CONFIG["same_as"]`, de momento solo Instagram; añadir allí los perfiles de Google, Apple y directorios.
+- Precios: `content.PRICE_SECTIONS` (de `prototipos/docs/2026-11-precios-orientativos.md`) alimenta /precios-pintura, el bloque «Precios orientativos» de cada servicio (`content.PRICES`) y las `Offer` del JSON-LD (sin IVA, `valueAddedTaxIncluded: false`). El «por cara» del lacado no se publica. Mohamed debería revisar microcemento, marmorino y los plazos sin fuente.
+- Páginas nuevas: `/precios-pintura` y `/municipios/pintor-arenys-de-mar`, `pintor-premia-de-dalt`, `pintor-vilassar-de-dalt`, `pintor-teia`, `pintor-argentona` y `pintor-barcelona`. Sitemap: 36 URL.
+- /empresa: ficha de entidad (menciona a Mohamed Ben Mesaud como titular, por encargo del coordinador; contrasta con «No dar protagonismo a Mohamed»: Omar decide si se queda). `llms.txt`: versión de una línea, zonas y página de precios.
+- GA4: `window.track` (`prototipos/shared/app.js`) envía `click_tel`, `click_whatsapp`, `form_submit` y `generate_lead` (solo con respuesta confirmada del receptor) si existe `gtag`. Sin `GA_ID` solo escribe en la consola. El blog lleva un bloque `<!-- build:analytics -->` que regenera `build_site.py`: GA4 con Consent Mode si hay `GA_ID` y los mismos clics de teléfono/WhatsApp.
+- Blog: enlaces limpios, meta de Search Console, `BreadcrumbList` en los artículos, `Blog` en el índice, horario en el pie. El artículo de precios de piso está actualizado a noviembre de 2026 y enlaza /precios-pintura.
+- 404 sin `canonical` (sigue con `noindex`).
+- **IndexNow:** la clave es el archivo `c281f675c5c3ccb573a330d12470b270.txt` en la raíz (se publica). El script es `node scripts/indexnow.mjs`: envía todas las URL del sitemap a api.indexnow.org. Con `--dry-run` solo muestra el envío, y también acepta rutas sueltas (`/precios-pintura`). Se ejecuta **después** de publicar, nunca antes.
+- Kit de fichas de Google (`prototipos/kit-google/KIT-FICHAS-2026-11.md`): precios «desde» rellenados. Queda `{{enlace_resena_gbp}}`.
+
+Pasos para publicar (requieren el OK de Omar):
+1. `GA_ID=G-XXXX python3 prototipos/_build/build_site.py`, o sin `GA_ID` si aún no existe.
+2. Comprobaciones, con `python3 -m http.server 8181` y `8183` en la raíz: `node prototipos/_build/check-public-copy.mjs`, `node prototipos/_build/check-apps-script.mjs`, `PORT=8181 node prototipos/_build/check-contact-form.mjs`, `PORT=8181 node prototipos/_build/check-pages.mjs --site`, `PORT=8183 node prototipos/_build/check-guide-share.mjs` y `node scripts/check-hero-visibility.mjs`.
+3. Merge a `master`, `git push` (el primero puede fallar sin mensaje: repetir) y `vercel --prod`. Anotar el despliegue anterior para el `vercel rollback`.
+4. Comprobar en producción que /precios-pintura, los 6 municipios nuevos y `/c281f675c5c3ccb573a330d12470b270.txt` responden 200, y que el sitemap tiene 36 URL.
+5. `node scripts/indexnow.mjs`, y en Search Console enviar de nuevo el sitemap.
 
 ## Paleta «grafito y amarillo cinta de pintor» y animación PUBLICADAS (2026-11-06)
 
@@ -43,7 +69,7 @@
 - La hoja «Form Leads» solo contenía filas de prueba: no se ha perdido ninguna solicitud real por el receptor antiguo.
 
 ### No reintroducir
-- Reseñas, cifra 4,9/23, «desde 1994», «30 % a la firma», horario, «equipo propio», «gratis/24h», «garantizado». Solo vuelven con prueba; se retira la regla correspondiente de `check-public-copy.mjs` en el mismo commit.
+- Reseñas, cifra 4,9/23, «desde 1994», «30 % a la firma», un horario distinto de lunes a sábado 8:00-20:00, «equipo propio», «gratis/24h», «garantizado». Solo vuelven con prueba; se retira la regla correspondiente de `check-public-copy.mjs` en el mismo commit.
 - Textos que anuncian lo que falta («Todavía no hemos publicado…», «No publicado»).
 - Fotos de la fachada sin recortar.
 
@@ -77,7 +103,7 @@ Punto único de verdad del estado del proyecto. Cualquier agente lee esto ANTES 
 
 - **Titular (según facturas 2022-2023):** Mohamed Ben Mesaud, autónomo (NIF de tipo NIE), domicilio fiscal en Cabrils 08348. No es una sociedad: no hay «razón social» distinta del titular. NIF y dirección completa: en las facturas, no en este repo.
 - **Nombre comercial:** en facturas «Pintura en general y acabados de obra»; en la web «Pintura, Reforma y Acabado de Obras» y «Pinturas, Reformas y Acabados de Obra». Pendiente fijar uno solo.
-- **Marca web:** BCN Pro Reforma
+- **Marca web:** BcnProReforma (decisión de Omar, 11/11/2026; la misma en web, schema y fichas)
 - **Gremi:** agremiados en el Gremi de Pintors (Gremi d'Empreses de Pintura de Barcelona i Comarques) desde 1994, según Omar. Falta el enlace a la ficha o el certificado.
 - **Dominio:** bcnproreforma.com (GoDaddy)
 - **Tipo:** SAB — sin local físico público
@@ -254,7 +280,7 @@ Punto único de verdad del estado del proyecto. Cualquier agente lee esto ANTES 
 ## 🚫 No reintroducir
 
 - No reintroducir `/pintor-*.html` en raíz — ya tienen 301 redirects
-- No usar nombre "BCN Pro Reforma" en GBP (usar nombre legal)
+- No usar «BCN Pro Reforma» ni «BCN ProReforma»: la marca es «BcnProReforma» en todas partes
 - **No poner a Omar en la web ni dar protagonismo a Mohamed** (sin retratos ni tarjetas personales). Mohamed, solo la referencia discreta a su ficha del Gremi.
 - No reactivar Google Ads PMAX sin corregir targeting
 - No usar `gtm-tracking.js` (duplicaría eventos con tracking-unificado.js)
