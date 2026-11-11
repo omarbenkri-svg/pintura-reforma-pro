@@ -80,7 +80,18 @@ for (const file of pages) {
   if (/<dd>\s*<\/dd>/.test(html)) add(file, 'dato vacío en una lista');
   if (/<p class="(hours|muni)"[^>]*>\s*<\/p>/.test(html)) add(file, 'párrafo vacío');
   if (/class="svc-photo-row">\s*<\/div>/.test(html)) add(file, 'galería vacía');
-  if (/openingHoursSpecification/.test(html)) add(file, 'JSON-LD con horario sin confirmar');
+  // Hours confirmed by Omar (2026-11): Monday to Saturday, 08:00-20:00. Any other schedule is unproven.
+  const HOURS = JSON.stringify([{'@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'], opens: '08:00', closes: '20:00'}]);
+  for (const [, json] of html.matchAll(/application\/ld\+json">(.*?)<\/script>/gs)) {
+    let ld;
+    try { ld = JSON.parse(json); } catch { add(file, 'JSON-LD que no se puede leer'); continue; }
+    if (ld.openingHoursSpecification && JSON.stringify(ld.openingHoursSpecification) !== HOURS) {
+      add(file, 'JSON-LD con un horario distinto del confirmado');
+    }
+  }
+  const hours = text.match(/[^.]{0,40}\b\d{1,2}:\d{2} ?(h|horas)?\b a (las )?\d{1,2}:\d{2}[^.]{0,10}/i);
+  if (hours && !/Lunes a sábado, de 8:00 a 20:00/.test(hours[0])) add(file, `horario sin confirmar: «${hours[0].trim()}»`);
   if (/aggregateRating/.test(html)) add(file, 'JSON-LD con valoración');
   if (/rehabilitacion-fachada-mataro|restauracion-madera-exterior-02/.test(html)) {
     add(file, 'enlaza una foto con número de vivienda o persona identificable');

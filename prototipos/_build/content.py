@@ -51,6 +51,28 @@ CONFIG = {
     "since": "1994",
     "base": "Cabrils",
     "area": "Maresme y Barcelona",
+    # Confirmed by Omar (2026-11). Street as shown on Apple Business Connect.
+    "street": "C/ Doctor Masriera, 8",
+    "postal_code": "08348",
+    "locality": "Cabrils",
+    "region": "Barcelona",
+    "geo": (41.5247, 2.3700),  # Cabrils, approximate
+    "price_range": "€€",
+    "hours_text": "Lunes a sábado, de 8:00 a 20:00",
+    "hours": [{"days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+               "opens": "08:00", "closes": "20:00"}],
+    # Profiles of this business only (schema.org sameAs). Append GBP, Apple, directories here.
+    "same_as": ["https://www.instagram.com/pintayreformatuobra"],
+}
+
+# Orientative prices per service slug for Service.offers (schema.org). None or a
+# missing slug leaves the offer out. Shape: {"min": 8, "max": 14, "unit": "MTK",
+# "unit_text": "m²"} (UN/CEFACT unit code; "max" optional). Values pending.
+PRICES: dict[str, dict | None] = {
+    "pintura-viviendas": None,
+    "microcemento": None,
+    "decorativa-estucos": None,
+    "alisados-lacados": None,
 }
 
 # ---------------------------------------------------------------- helpers

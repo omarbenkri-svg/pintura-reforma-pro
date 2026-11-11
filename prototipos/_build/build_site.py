@@ -48,15 +48,37 @@ def business() -> dict:
         "email": CFG["email"],
         "image": f"{SITE}/assets/img/og.jpg",
         "logo": f"{SITE}/logo%20.png",
-        "address": {"@type": "PostalAddress", "addressLocality": "Cabrils", "postalCode": "08348",
-                    "addressRegion": "Barcelona", "addressCountry": "ES"},
+        "address": {"@type": "PostalAddress", "streetAddress": CFG["street"], "addressLocality": CFG["locality"],
+                    "postalCode": CFG["postal_code"], "addressRegion": CFG["region"], "addressCountry": "ES"},
+        "geo": {"@type": "GeoCoordinates", "latitude": CFG["geo"][0], "longitude": CFG["geo"][1]},
+        "openingHoursSpecification": [
+            {"@type": "OpeningHoursSpecification", "dayOfWeek": h["days"], "opens": h["opens"], "closes": h["closes"]}
+            for h in CFG["hours"]],
+        "priceRange": CFG["price_range"],
         "areaServed": towns + [{"@type": "AdministrativeArea", "name": "Maresme"}],
         "memberOf": {"@type": "Organization", "name": "Gremi d'Empreses de Pintura de Barcelona i Comarques"},
-        "sameAs": ["https://www.instagram.com/pintayreformatuobra"],
+        "sameAs": list(CFG["same_as"]),
         "hasOfferCatalog": {"@type": "OfferCatalog", "name": "Servicios", "itemListElement": [
             {"@type": "Offer", "itemOffered": {"@type": "Service", "name": s["name"], "url": f"{SITE}/{s['slug']}"}}
             for s in C.SERVICES]},
     }
+
+
+def offer(slug: str):
+    """Orientative price from C.PRICES as a schema.org Offer, or None when there is no price."""
+    p = C.PRICES.get(slug)
+    if not p or p.get("min") in (None, ""):
+        return None
+    spec = {"@type": "UnitPriceSpecification", "priceCurrency": "EUR"}
+    if p.get("max") not in (None, ""):
+        spec.update(minPrice=p["min"], maxPrice=p["max"])
+    else:
+        spec["price"] = p["min"]
+    if p.get("unit"):
+        spec["unitCode"] = p["unit"]
+    if p.get("unit_text"):
+        spec["unitText"] = p["unit_text"]
+    return {"@type": "Offer", "priceCurrency": "EUR", "priceSpecification": spec}
 
 
 def plain(text: str) -> str:
@@ -73,8 +95,11 @@ def schema_for(key: str, title: str) -> list:
             for q, a in C.FAQ if plain(a)]})
     if key in C.SERVICE_BY_SLUG:
         s = C.SERVICE_BY_SLUG[key]
-        blocks.append({"@type": "Service", "name": s["name"], "description": s["short"], "url": f"{SITE}/{key}",
-                       "provider": {"@id": f"{SITE}/#negocio"}, "areaServed": "Maresme y Barcelona"})
+        svc = {"@type": "Service", "name": s["name"], "description": s["short"], "url": f"{SITE}/{key}",
+               "provider": {"@id": f"{SITE}/#negocio"}, "areaServed": "Maresme y Barcelona"}
+        if offer(key):
+            svc["offers"] = offer(key)
+        blocks.append(svc)
         blocks.append({"@type": "FAQPage", "mainEntity": [
             {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": plain(a)}}
             for q, a in s["faq"] if plain(a)]})
@@ -214,6 +239,8 @@ def llms() -> None:
              f"> {CFG['brand']} ({CFG['legal_name']}) es una empresa familiar de pintores con base en Cabrils (Barcelona), "
              "miembro del Gremi d'Empreses de Pintura de Barcelona i Comarques. Pinta viviendas y aplica estucos y microcemento en el Maresme y Barcelona.",
              "", f"- Teléfono: {CFG['tel_display']} · WhatsApp: {CFG['wa_display']} · {CFG['email']}",
+             f"- Horario: {CFG['hours_text']}",
+             f"- Base: {CFG['locality']} {CFG['postal_code']} ({CFG['region']})",
              "- Zona: Maresme y Barcelona, unos 40 km alrededor de Cabrils", "", "## Servicios", ""]
     lines += [f"- [{s['name']}]({SITE}/{s['slug']}): {s['short']}" for s in C.SERVICES]
     lines += ["", "## Obras documentadas", ""]

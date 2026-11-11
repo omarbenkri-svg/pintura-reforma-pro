@@ -110,8 +110,7 @@ def company_body(theme) -> str:
 
 
 def contact_body(theme) -> str:
-    hours = pend("Horario de atención pendiente de confirmar.", "Indicar horario real de atención telefónica")
-    hours = f'<p class="hours">{hours}</p>' if hours else ""
+    hours = f'<p class="hours">{icon("clock")} {CONFIG["hours_text"]}</p>'
     return f"""
 <section class="page-head container">
   {breadcrumb([("index.html", "Inicio"), (None, "Contacto")])}

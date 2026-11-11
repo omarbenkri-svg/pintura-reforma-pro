@@ -69,6 +69,7 @@ def footer() -> str:
         <li><a href="{tel_url()}" data-track="phone_click" data-origin="pie">{CALL_LABEL} al {CONFIG['tel_display']}</a></li>
         <li><a href="{wa_url(wa_message('pie de página'))}" data-track="whatsapp_click" data-origin="pie">WhatsApp {CONFIG['wa_display']}</a></li>
         <li><a href="mailto:{CONFIG['email']}">{CONFIG['email']}</a></li>
+        <li>{CONFIG['hours_text']}</li>
       </ul>
     </div>
     <div>
