@@ -7,7 +7,7 @@ from content import (
     CONFIG, SERVICES, SERVICE_BY_SLUG, SECONDARY, CASES, CASE_BY_SLUG, ALBUMS, HERO, PEOPLE,
     PREP_STEPS, PROCESS, FAQ, FAQ_NOTE, CTA_LABEL, WA_LABEL, CALL_LABEL,
     PROD, RATING, REVIEWS, e, pend, pend_attr, wa_url, wa_message, tel_url, contact_url, photo, placeholder, icon,
-    album_trigger, gremi_line, case_pair, video_block, rich, svc_hero, svc_slots, svc_gallery,
+    album_trigger, gremi_line, price_note, case_pair, video_block, rich, svc_hero, svc_slots, svc_gallery,
 )
 from common import breadcrumb, contact_actions
 
@@ -42,7 +42,7 @@ def header(active: str) -> str:
       <ul class="nav-list">
         <li><details class="nav-sub">
           <summary{' class="is-active"' if svc_active else ''}>Pintura y servicios {icon('caret-down')}</summary>
-          <ul>{sub}<li><a href="index.html#otros-servicios">Reformas y acabados</a></li></ul>
+          <ul>{sub}<li><a href="index.html#otros-servicios">Reformas y acabados</a></li>{('<li><a href="precios-pintura.html"' + cur('precios-pintura') + '>Precios orientativos</a></li>') if PROD else ''}</ul>
         </details></li>
         <li><a href="trabajos.html"{cur("trabajos")}>Trabajos</a></li>
         {('<li><a href="guia-acabados.html"' + cur('guia-acabados') + '>Guía</a></li>') if PROD else ''}
@@ -61,7 +61,7 @@ def footer() -> str:
   <div class="container footer-grid">
     <div class="footer-about">
       <p class="footer-brand">{CONFIG['brand']}</p>
-      <p>{CONFIG['tagline']}. Empresa familiar con base en Cabrils, miembro del Gremi de Pintors.</p>
+      <p>{CONFIG['tagline']}. Empresa familiar con base en Cabrils, miembro del Gremi d'Empreses de Pintura de Barcelona i Comarques.</p>
     </div>
     <div>
       <h2>Contacto</h2>
@@ -77,6 +77,7 @@ def footer() -> str:
       <ul>
         <li><a href="pintura-viviendas.html">Pintura y servicios</a></li>
         <li><a href="trabajos.html">Trabajos</a></li>
+        {'<li><a href="precios-pintura.html">Precios orientativos</a></li>' if PROD else ''}
         {'<li><a href="guia-acabados.html">Guía de acabados</a></li>' if PROD else ''}
         <li><a href="empresa.html">Empresa</a></li>
         <li><a href="../../blog/">Blog</a></li>
@@ -152,7 +153,7 @@ def home():
       <ul class="hero-proof">
         <li>{icon('check')}<span>Presupuesto por escrito, después de ver la obra</span></li>
         <li>{icon('check')}<span>Empresa familiar con base en Cabrils</span></li>
-        <li>{icon('check')}<span>Agremiados en el Gremi de Pintors: {gremi}</span></li>
+        <li>{icon('check')}<span>Agremiados en el Gremi d'Empreses de Pintura de Barcelona i Comarques: {gremi}</span></li>
       </ul>
     </div>
     <div class="hero-o-media">
@@ -322,6 +323,7 @@ def service(s):
     <dl class="factor-grid">
       {"".join(f'<div class="reveal" style="--i:{i}"><dt>{e(t)}</dt><dd>{e(d)}</dd></div>' for i, (t, d) in enumerate(s['factors']))}
     </dl>
+    {price_note(s['slug'])}
   </div>
 </section>
 

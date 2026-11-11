@@ -16,13 +16,13 @@ THEMES = {"a": "theme_a", "b": "theme_b", "c": "theme_c"}
 
 
 def pages_for(theme):
-    yield "index", "Pintores en el Maresme y Barcelona: pintura de casas y pisos", "Empresa familiar de Cabrils, miembro del Gremi de Pintors: pintura de casas y pisos, estuco veneciano y microcemento en el Maresme y la zona alta de Barcelona.", *theme.home(), "inicio"
+    yield "index", "Pintores en el Maresme y Barcelona: pintura de casas y pisos", "Empresa familiar de Cabrils, miembro del Gremi d'Empreses de Pintura de Barcelona i Comarques: pintura de casas y pisos, estuco veneciano y microcemento en el Maresme y la zona alta de Barcelona.", *theme.home(), "inicio"
     for s in SERVICES:
         yield s["slug"], s["title"], s["short"], *theme.service(s), f"servicio {s['name'].lower()}"
     yield "trabajos", "Trabajos", "Obras documentadas con su estado inicial, la preparación y el resultado.", *theme.works(), "trabajos"
     for c in CASES:
         yield c["slug"], c["title"], c["summary"], *theme.case(c), c["slug"]
-    yield "empresa", "Pintores y especialistas en acabados en Cabrils", "BcnProReforma: pintura, estucos y microcemento en el Maresme y Barcelona. Miembros del Gremi de Pintors de Barcelona.", common.company_body(theme), None, "empresa"
+    yield "empresa", "Pintores y especialistas en acabados en Cabrils", "BcnProReforma: pintura, estucos y microcemento en el Maresme y Barcelona. Miembros del Gremi d'Empreses de Pintura de Barcelona i Comarques.", common.company_body(theme), None, "empresa"
     yield "contacto", PAGES["contacto"], "Cuéntanos qué quieres renovar y en qué municipio.", common.contact_body(theme), None, "contacto"
     yield "privacidad", "Privacidad", "Cómo tratamos los datos de quien nos pide presupuesto.", common.privacy_body(theme), None, "privacidad"
     yield "aviso-legal", "Aviso legal", "Titular, NIF y datos de contacto de BcnProReforma.", common.legal_body(theme), None, "aviso-legal"

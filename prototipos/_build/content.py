@@ -65,15 +65,87 @@ CONFIG = {
     "same_as": ["https://www.instagram.com/pintayreformatuobra"],
 }
 
-# Orientative prices per service slug for Service.offers (schema.org). None or a
-# missing slug leaves the offer out. Shape: {"min": 8, "max": 14, "unit": "MTK",
-# "unit_text": "m²"} (UN/CEFACT unit code; "max" optional). Values pending.
-PRICES: dict[str, dict | None] = {
-    "pintura-viviendas": None,
-    "microcemento": None,
-    "decorativa-estucos": None,
-    "alisados-lacados": None,
+# Entity fact sheet (prototipos/docs/2026-11-contenido-seo.md, section C) for /empresa and llms.txt.
+ENTITY_TEXT = (
+    "BcnProReforma es la empresa de pintura de Mohamed Ben Mesaud, pintor autónomo con base en Cabrils (Maresme, Barcelona) "
+    "y miembro del Gremi d'Empreses de Pintura de Barcelona i Comarques. Pinta viviendas por dentro y por fuera: paredes, "
+    "techos, fachadas y carpintería. También quita gotelé y alisa paredes, laca puertas y armarios, barniza madera, aplica "
+    "estuco veneciano y marmolizado y reviste baños y suelos con microcemento. Trabaja además en escaleras y garajes de "
+    "comunidades, y hace reformas de baño y cocina. Atiende el Maresme y Barcelona, en un radio de unos 40 km desde Cabrils. "
+    "Presupuesto por escrito tras visitar la obra. Contacto: teléfono 639 05 88 19, WhatsApp 631 71 40 77, de lunes a sábado "
+    "de 8:00 a 20:00. Web: bcnproreforma.com."
+)
+ENTITY_LINE = (
+    "BcnProReforma: empresa de pintura de Mohamed Ben Mesaud (autónomo, Cabrils, Maresme). Miembro del Gremi d'Empreses de "
+    "Pintura de Barcelona i Comarques. Pintura de viviendas, gotelé, lacados, estucos, microcemento, fachadas y comunidades "
+    "en el Maresme y Barcelona. Tel. 639 05 88 19 · WhatsApp 631 71 40 77 · L–S 8:00–20:00."
+)
+
+# Orientative prices, November 2026, VAT excluded (prototipos/docs/2026-11-precios-orientativos.md).
+# Single source for /precios-pintura, the price note on service pages and Offer
+# JSON-LD. Row: (id, label, from, to, per-unit suffix, UN/CEFACT unit code, unit text).
+PRICE_NOTE = "Precio orientativo (sin IVA). Presupuesto cerrado tras visita."
+PRICE_SECTIONS = [
+    ("Pintura de viviendas", [
+        ("pared", "Pintura plástica de paredes y techos (con material)", 7, 12, "/m²", "MTK", "m² de superficie pintada"),
+        ("techo", "Pintar techos", 7, 11, "/m²", "MTK", "m² de techo"),
+        ("habitacion", "Pintar una habitación (unos 12 m² de suelo, paredes y techo)", 250, 450, "", "C62", "habitación"),
+        ("piso60", "Piso de 60 m² vacío", 1400, 2000, "", "C62", "vivienda"),
+        ("piso80", "Piso de 80 m² vacío", 1800, 2600, "", "C62", "vivienda"),
+        ("piso80a", "Piso de 80 m² amueblado", 2100, 3000, "", "C62", "vivienda"),
+        ("piso100", "Piso de 100 m² vacío", 2200, 3200, "", "C62", "vivienda"),
+    ]),
+    ("Alisados, lacados y barnizados", [
+        ("gotele", "Quitar gotelé, alisar y pintar", 16, 28, "/m²", "MTK", "m² de pared"),
+        ("lacado_puerta", "Lacado de puerta de paso en casa (dos caras y marco)", 120, 220, "/puerta", "C62", "puerta"),
+        ("lacado_armario", "Lacado de armario empotrado", 70, 130, "/hoja", "C62", "hoja"),
+        ("barniz_ventana", "Barnizado de ventana de madera", 60, 120, "/ventana", "C62", "ventana"),
+        ("barniz_puerta", "Barnizado de puerta exterior de madera", 120, 250, "/puerta", "C62", "puerta"),
+    ]),
+    ("Estucos y microcemento", [
+        ("estuco", "Estuco veneciano", 40, 80, "/m²", "MTK", "m²"),
+        ("marmorino", "Estuco marmolizado (marmorino a la cal)", 45, 90, "/m²", "MTK", "m²"),
+        ("mc_suelo", "Microcemento en suelo interior", 60, 100, "/m²", "MTK", "m²"),
+        ("mc_bano", "Microcemento en baño (paredes y suelo)", 80, 130, "/m²", "MTK", "m²"),
+    ]),
+    ("Fachadas, comunidades y garajes", [
+        ("fachada", "Pintura de fachada sobre soporte sano", 14, 30, "/m²", "MTK", "m² de fachada"),
+        ("escalera", "Escalera de comunidad (paredes y techos)", 300, 600, "/planta", "C62", "planta"),
+        ("garaje", "Suelo de garaje con pintura epoxi", 15, 35, "/m²", "MTK", "m²"),
+        ("senal", "Señalización de plazas y circulación", 3, 6, "/metro lineal", "MTR", "metro lineal"),
+    ]),
+]
+PRICE_ROWS = {r[0]: r for _, rows in PRICE_SECTIONS for r in rows}
+# Rows shown (and marked up as offers) on each service page. A missing or empty entry shows nothing.
+PRICES: dict[str, list] = {
+    "pintura-viviendas": ["pared", "habitacion", "piso80"],
+    "alisados-lacados": ["gotele", "lacado_puerta", "lacado_armario"],
+    "decorativa-estucos": ["estuco", "marmorino"],
+    "microcemento": ["mc_suelo", "mc_bano"],
 }
+
+
+def euros(n) -> str:
+    return f"{n:,}".replace(",", ".") + " €"
+
+
+def price_from(row) -> str:
+    return f"{euros(row[2])}{row[4]}"
+
+
+def price_range(row) -> str:
+    return f"{row[2]:,} a {row[3]:,} €{row[4]}".replace(",", ".")
+
+
+def price_note(slug: str) -> str:
+    """Orientative prices of a service page, from PRICES. Empty without prices."""
+    rows = [PRICE_ROWS[k] for k in (PRICES.get(slug) or []) if k in PRICE_ROWS]
+    if not rows:
+        return ""
+    items = "".join(f'<li><span>{e(r[1])}</span> <strong>desde {e(price_from(r))}</strong></li>' for r in rows)
+    more = ' <a href="precios-pintura.html">Ver todos los precios orientativos</a>.' if PROD else ""
+    return (f'<div class="price-note"><h3>Precios orientativos</h3><ul>{items}</ul>'
+            f'<p>{PRICE_NOTE}{more}</p></div>')
 
 # ---------------------------------------------------------------- helpers
 
@@ -530,8 +602,10 @@ def svc_gallery(s, sizes: str = "(min-width: 1024px) 30vw, 50vw") -> str:
 
 
 def rich(text: str) -> str:
-    """Escape plain copy but keep our own pend() markup."""
-    return text if text.startswith('<span class="pend"') else e(text)
+    """Escape plain copy but keep our own pend() markup and [label](page.html) links."""
+    if text.startswith('<span class="pend"'):
+        return text
+    return re.sub(r"\[([^\]]+)\]\(([\w./#-]+)\)", r'<a href="\2">\1</a>', e(text))
 
 
 def _series(prefix: str, numbers, alt_for) -> list[dict]:
@@ -650,7 +724,7 @@ PEOPLE = {
 
 def gremi_line() -> str:
     # The directory proves membership, not the 1994 date: the year returns with the certificate.
-    return pend('Agremiados en el Gremi de Pintors de Barcelona. '
+    return pend('Agremiados en el Gremi d\'Empreses de Pintura de Barcelona i Comarques. '
                 '<a href="https://www.gremipintors.com/directori#:~:text=Mohamed%20Ben%20Mesaud">Ver el directorio oficial</a>.',
                 "La pertenencia se comprueba en el directorio. Añadir el año cuando haya justificante. No usar logotipo sin permiso")
 
@@ -673,7 +747,7 @@ FAQ = [
     ("¿Protegéis los muebles y el suelo?",
      pend("Sí. Juntamos los muebles en el centro y los cubrimos con plástico; el suelo se protege con papel grueso o lona según el material. Al terminar retiramos todo y limpiamos.", WEB)),
     ("¿De qué depende el precio?",
-     "De la superficie real que hay que tratar, del estado de las paredes, de la técnica y el acabado elegidos y de los accesos. Por eso damos el presupuesto por escrito después de ver la obra, no un precio por metro a ciegas."),
+     "De la superficie real que hay que tratar, del estado de las paredes, de la técnica y el acabado elegidos y de los accesos. " + ('Tienes rangos por m² y por vivienda en [precios orientativos de pintura](precios-pintura.html) (sin IVA). ' if PROD else "") + "El precio final va en un presupuesto por escrito después de ver la obra."),
     ("¿Cuánto dura un baño de microcemento?",
      pend("Bien aplicado sobre un soporte sano y con el sellado adecuado, muchos años. Al no tener juntas, es fácil de limpiar. Te explicamos el mantenimiento al entregar la obra.", "Validar con Mohamed")),
     ("¿Puedo pedir presupuesto sin que vengáis a casa?",
@@ -699,6 +773,9 @@ MUNI_PAGES = {
     "Alella": "pintor-alella", "Badalona": "pintor-badalona", "Cabrils": "pintor-cabrils",
     "El Masnou": "pintor-el-masnou", "Mataró": "pintor-mataro", "Montgat": "pintor-montgat",
     "Premià de Mar": "pintor-premia-de-mar", "Vilassar de Mar": "pintor-vilassar-de-mar",
+    "Arenys de Mar": "pintor-arenys-de-mar", "Premià de Dalt": "pintor-premia-de-dalt",
+    "Vilassar de Dalt": "pintor-vilassar-de-dalt", "Teià": "pintor-teia", "Argentona": "pintor-argentona",
+    "Barcelona": "pintor-barcelona",
 }
 
 FAQ_NOTE = "Respuestas en borrador: validar con Mohamed antes de publicar"

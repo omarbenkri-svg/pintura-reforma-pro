@@ -11,7 +11,7 @@ from content import (
     CONFIG, PEOPLE, MUNICIPIOS, MUNI_PAGES, PROD, CTA_LABEL, WA_LABEL, CALL_LABEL,
     e, pend, pend_attr, wa_url, wa_message, tel_url, icon, placeholder,
     head, proto_bar, skip_link, mobile_bar, lightbox, albums_json, scripts,
-    contact_form, gremi_line,
+    contact_form, gremi_line, ENTITY_TEXT,
 )
 
 
@@ -75,6 +75,7 @@ def company_body(theme) -> str:
 
 <section class="facts-block container" aria-labelledby="facts-title">
   <h2 id="facts-title">Datos de la empresa</h2>
+  {f'<p class="entity">{e(ENTITY_TEXT)}</p>' if PROD else ''}
   <dl class="legal-list">
     <dt>Marca</dt><dd>{CONFIG['brand']}</dd>
     <dt>Nombre legal</dt><dd>{CONFIG['legal_name']}</dd>

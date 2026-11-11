@@ -26,6 +26,7 @@ import content as C  # noqa: E402
 import theme_a as T  # noqa: E402
 import municipios as M  # noqa: E402
 import guia as G  # noqa: E402
+import precios as P  # noqa: E402
 
 ROOT = C.ROOT
 ASSETS = ROOT / "assets"
@@ -64,25 +65,22 @@ def business() -> dict:
     }
 
 
-def offer(slug: str):
-    """Orientative price from C.PRICES as a schema.org Offer, or None when there is no price."""
-    p = C.PRICES.get(slug)
-    if not p or p.get("min") in (None, ""):
-        return None
-    spec = {"@type": "UnitPriceSpecification", "priceCurrency": "EUR"}
-    if p.get("max") not in (None, ""):
-        spec.update(minPrice=p["min"], maxPrice=p["max"])
-    else:
-        spec["price"] = p["min"]
-    if p.get("unit"):
-        spec["unitCode"] = p["unit"]
-    if p.get("unit_text"):
-        spec["unitText"] = p["unit_text"]
-    return {"@type": "Offer", "priceCurrency": "EUR", "priceSpecification": spec}
+def offer_ld(row) -> dict:
+    """One price row of C.PRICE_SECTIONS as a schema.org Offer (VAT excluded)."""
+    _, label, low, high, _, code, unit = row
+    return {"@type": "Offer", "name": label, "priceCurrency": "EUR",
+            "priceSpecification": {"@type": "UnitPriceSpecification", "priceCurrency": "EUR",
+                                   "minPrice": low, "maxPrice": high, "unitCode": code, "unitText": unit,
+                                   "valueAddedTaxIncluded": False}}
+
+
+def offers(slug: str) -> list:
+    """Offers for a service page from C.PRICES; empty when it has no prices."""
+    return [offer_ld(C.PRICE_ROWS[k]) for k in (C.PRICES.get(slug) or []) if k in C.PRICE_ROWS]
 
 
 def plain(text: str) -> str:
-    return re.sub(r"<[^>]+>", "", text)
+    return re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", re.sub(r"<[^>]+>", "", text))
 
 
 def schema_for(key: str, title: str) -> list:
@@ -97,8 +95,8 @@ def schema_for(key: str, title: str) -> list:
         s = C.SERVICE_BY_SLUG[key]
         svc = {"@type": "Service", "name": s["name"], "description": s["short"], "url": f"{SITE}/{key}",
                "provider": {"@id": f"{SITE}/#negocio"}, "areaServed": "Maresme y Barcelona"}
-        if offer(key):
-            svc["offers"] = offer(key)
+        if offers(key):
+            svc["offers"] = offers(key)
         blocks.append(svc)
         blocks.append({"@type": "FAQPage", "mainEntity": [
             {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": plain(a)}}
@@ -121,6 +119,18 @@ def schema_for(key: str, title: str) -> list:
 
 # ---------------------------------------------------------------- page shell
 
+def ga_snippet() -> str:
+    """GA4 with Consent Mode (analytics denied until the visitor accepts). Empty without GA_ID."""
+    if not C.GA_ID:
+        return ""
+    return f"""<script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}
+gtag('consent','default',{{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied'}});
+try{{if(localStorage.getItem('consent-analytics')==='granted')gtag('consent','update',{{analytics_storage:'granted'}});}}catch(e){{}}
+gtag('js',new Date());gtag('config','{C.GA_ID}');</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id={C.GA_ID}"></script>
+"""
+
+
 def head(key: str, title: str, desc: str, path: str = None, extra_ld=None) -> str:
     path = path or ("/" if key == "index" else f"/{key}")
     full = f"{title} | {CFG['brand']}" if key != "index" else f"{title} | {CFG['brand']}"
@@ -131,14 +141,7 @@ def head(key: str, title: str, desc: str, path: str = None, extra_ld=None) -> st
         f'<script type="application/ld+json">{json.dumps({"@context": "https://schema.org", **b}, ensure_ascii=False)}</script>\n'
         for b in (extra_ld if extra_ld is not None else schema_for(key, title)))
     gsc = f'<meta name="google-site-verification" content="{C.GSC_TOKEN}">\n' if C.GSC_TOKEN else ""
-    ga = ""
-    if C.GA_ID:
-        ga = f"""<script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}
-gtag('consent','default',{{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied'}});
-try{{if(localStorage.getItem('consent-analytics')==='granted')gtag('consent','update',{{analytics_storage:'granted'}});}}catch(e){{}}
-gtag('js',new Date());gtag('config','{C.GA_ID}');</script>
-<script async src="https://www.googletagmanager.com/gtag/js?id={C.GA_ID}"></script>
-"""
+    ga = ga_snippet()
     return f"""<!doctype html>
 <html lang="es">
 <head>
@@ -239,13 +242,18 @@ def llms() -> None:
     lines = [f"# {CFG['brand']}", "",
              f"> {CFG['brand']} ({CFG['legal_name']}) es una empresa familiar de pintores con base en Cabrils (Barcelona), "
              "miembro del Gremi d'Empreses de Pintura de Barcelona i Comarques. Pinta viviendas y aplica estucos y microcemento en el Maresme y Barcelona.",
+             "", C.ENTITY_LINE,
              "", f"- Teléfono: {CFG['tel_display']} · WhatsApp: {CFG['wa_display']} · {CFG['email']}",
              f"- Horario: {CFG['hours_text']}",
              f"- Base: {CFG['locality']} {CFG['postal_code']} ({CFG['region']})",
              "- Zona: Maresme y Barcelona, unos 40 km alrededor de Cabrils", "", "## Servicios", ""]
     lines += [f"- [{s['name']}]({SITE}/{s['slug']}): {s['short']}" for s in C.SERVICES]
+    lines += [f"- [Precios orientativos de pintura]({SITE}/{P.SLUG}): por m² y por vivienda, sin IVA, noviembre de 2026"]
     lines += ["", "## Obras documentadas", ""]
     lines += [f"- [{c['title']}]({SITE}/{c['slug']}): {plain(c['summary'])}" for c in C.CASES]
+    lines += ["", "## Zonas", ""]
+    lines += [f"- [Pintor en {t['name']}]({SITE}/municipios/{t['slug']})" for t in M.TOWNS]
+    lines += [f"- [Reformas en Mataró]({SITE}/reformas-mataro)"]
     lines += ["", "## Más", "", f"- [Quiénes somos]({SITE}/empresa)",
               "- [Directorio oficial del Gremi](https://www.gremipintors.com/directori)",
               f"- [Solicitar presupuesto]({SITE}/contacto)",
@@ -254,9 +262,30 @@ def llms() -> None:
     (ROOT / "llms.txt").write_text("\n".join(lines) + "\n")
 
 
+BLOG_TAGS = re.compile(r"<!-- build:analytics -->.*?<!-- /build:analytics -->\n", re.S)
+# Hand-written blog pages do not load app.js: this sends the same GA4 click events.
+BLOG_TRACK = """<script>document.addEventListener('click',function(e){var a=e.target.closest('a[href^="tel:"],a[href*="wa.me/"]');
+if(!a)return;var n=a.href.indexOf('tel:')===0?'click_tel':'click_whatsapp',p={origen:a.dataset.location||'blog'};
+if(typeof window.gtag==='function')window.gtag('event',n,p);else console.info('[medición simulada]',n,p);});</script>
+"""
+
+
+def blog_tags() -> None:
+    """Refresh the analytics block of the hand-written blog pages (GA only with GA_ID)."""
+    block = "<!-- build:analytics -->\n" + ga_snippet() + BLOG_TRACK + "<!-- /build:analytics -->\n"
+    for f in sorted((ROOT / "blog").glob("*.html")):
+        html = f.read_text(encoding="utf-8")
+        if not BLOG_TAGS.search(html):
+            html = html.replace("</head>", block + "</head>", 1)
+        else:
+            html = BLOG_TAGS.sub(lambda m: block, html)
+        f.write_text(html, encoding="utf-8")
+
+
 def town_page(t) -> str:
     name, slug = t["name"], t["slug"]
     origin = f"municipio_{slug}"
+    faq = t.get("faq", []) + M.faq(name)
     cta = f"/contacto?origen={origin}&amp;municipio={name.replace(' ', '%20')}"
     svcs = [C.SERVICE_BY_SLUG[k] for k in t["services"]]
     cards = "".join(
@@ -279,7 +308,7 @@ def town_page(t) -> str:
   <div class="container svc-hero-grid">
     <div>
       {common.breadcrumb([("/", "Inicio"), ("/empresa", "Zonas"), (None, name)])}
-      <h1>Pintura, estucos y microcemento en {C.e(name)}</h1>
+      <h1>{C.e(t.get("h1") or f"Pintura, estucos y microcemento en {name}")}</h1>
       <p class="lead">{C.e(t['intro'])}</p>
       <div class="actions">
         <a class="btn btn-primary" href="{cta}" data-track="cta_presupuesto" data-origin="{origin}">{C.CTA_LABEL}</a>
@@ -308,7 +337,7 @@ def town_page(t) -> str:
   <div class="container faq-grid">
     <div>
       <h2 id="fq-title">Preguntas sobre obras en {C.e(name)}</h2>
-      {T.faq_list(M.faq(name))}
+      {T.faq_list(faq)}
     </div>
     <aside class="final-cta">
       <h2>Pide presupuesto en {C.e(name)}</h2>
@@ -321,14 +350,14 @@ def town_page(t) -> str:
   </div>
 </section>
 """
-    title = f"Pintura, estucos y microcemento en {name}"
-    desc = f"{t['intro'][:150]}"
+    title = t.get("title") or f"Pintura, estucos y microcemento en {name}"
+    desc = t.get("meta") or f"{t['intro'][:150]}"
     ld = [
         {"@type": "Service", "name": title, "url": f"{SITE}/municipios/{slug}", "provider": {"@id": f"{SITE}/#negocio"},
          "areaServed": {"@type": "City", "name": name},
          "serviceType": ["Pintura de viviendas", "Microcemento", "Estuco veneciano", "Alisado de paredes"]},
         {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}}
-                                             for q, a in M.faq(name)]},
+                                             for q, a in faq]},
         {"@type": "BreadcrumbList", "itemListElement": [
             {"@type": "ListItem", "position": 1, "name": "Inicio", "item": f"{SITE}/"},
             {"@type": "ListItem", "position": 2, "name": name, "item": f"{SITE}/municipios/{slug}"}]},
@@ -417,11 +446,15 @@ def main() -> None:
         "Guía práctica para elegir entre pintura, estucos y microcemento según la superficie, su estado y el uso que tendrá. Con obras propias y una ficha con seis preguntas.",
         body, albums, "guia_acabados"), encoding="utf-8")
     keys.append(key)
+    (ROOT / f"{P.SLUG}.html").write_text(page(P.SLUG, P.TITLE, P.DESC, P.body(), None, P.ORIGIN,
+                                              extra_ld=P.ld(SITE, offer_ld)), encoding="utf-8")
+    keys.append(P.SLUG)
     for t in M.TOWNS:
         (ROOT / "municipios" / f"{t['slug']}.html").write_text(town_page(t), encoding="utf-8")
     (ROOT / "reformas-mataro.html").write_text(reform_page(), encoding="utf-8")
     sitemap(keys)
     llms()
+    blog_tags()
     print(f"web pública: {len(keys)} páginas en la raíz, assets en /assets"
           f"{' (GA ' + C.GA_ID + ')' if C.GA_ID else ' (sin Analytics: falta GA_ID)'}")
 

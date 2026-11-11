@@ -54,7 +54,8 @@ const BANNED = [
   [/\d+ a[nñ]os de (oficio|experiencia|trayectoria)|m[aá]s de \d+ (a[nñ]os|proyectos)/i, 'antigüedad o volumen sin validar'],
   [/de referencia en|resultado eterno|mejor precio|consejos de expertos|gu[ií]a de expertos/i, 'superlativo sin prueba'],
   [/sin subcontrat|equipo propio/i, 'compromiso sin validar'],
-  [/precio cerrado|presupuesto cerrado|presupuesto firmado|precio firmado|sin sorpresas/i, 'compromiso sin validar'],
+  // «Presupuesto cerrado tras la visita» is the owner's price formula (2026-11-11).
+  [/presupuesto firmado|precio firmado|sin sorpresas/i, 'compromiso sin validar'],
   [/\d+ ?% a la firma/i, 'condición de pago sin validar'],
   [/precios reales|ejemplo real/i, 'cifra presentada como real sin validar'],
   [/costa brava/i, 'cobertura no declarada'],
@@ -91,7 +92,7 @@ for (const file of pages) {
     }
   }
   const hours = text.match(/[^.]{0,40}\b\d{1,2}:\d{2} ?(h|horas)?\b a (las )?\d{1,2}:\d{2}[^.]{0,10}/i);
-  if (hours && !/Lunes a sábado, de 8:00 a 20:00/.test(hours[0])) add(file, `horario sin confirmar: «${hours[0].trim()}»`);
+  if (hours && !/lunes a sábado,? de 8:00 a 20:00/i.test(hours[0])) add(file, `horario sin confirmar: «${hours[0].trim()}»`);
   if (/aggregateRating/.test(html)) add(file, 'JSON-LD con valoración');
   if (/rehabilitacion-fachada-mataro|restauracion-madera-exterior-02/.test(html)) {
     add(file, 'enlaza una foto con número de vivienda o persona identificable');
