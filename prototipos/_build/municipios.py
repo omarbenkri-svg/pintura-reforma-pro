@@ -205,7 +205,7 @@ TOWNS = [
 
 def faq(name: str) -> list:
     return [
-        (f"¿Trabajáis en {name}?", f"Sí. Tenemos la base en Cabrils y trabajamos en {name} y en todo el Maresme y Barcelona."),
+        (f"¿Trabajáis en {name}?", f"Sí. Tenemos la base en Cabrils y trabajamos en {name} y en todo el Maresme" + ("." if name == "Barcelona" else " y Barcelona.")),
         ("¿Cómo pido presupuesto?", "Por el formulario, por teléfono o por WhatsApp, con fotos si las tienes. Si hace falta, visitamos la obra y te enviamos el presupuesto por escrito."),
         ("¿Qué incluye el presupuesto?", "La preparación de las superficies, los materiales, la protección de la vivienda, lo que no está incluido y cómo se gestionan los cambios durante la obra."),
     ]

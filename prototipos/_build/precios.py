@@ -28,7 +28,7 @@ INCLUDED = [
     "Dos manos de pintura plástica de calidad media-alta, en blanco o en un color claro.",
     "Limpieza diaria y retirada de protecciones al terminar.",
 ]
-EXTRA = ("Quitar gotelé, tratar humedades, puertas, marcos y radiadores, colores intensos que pidan una tercera mano, "
+EXTRA = ("quitar gotelé, tratar humedades, puertas, marcos y radiadores, colores intensos que pidan una tercera mano, "
          "andamio y permisos municipales.")
 
 FACTORS = [
@@ -108,7 +108,7 @@ def body() -> str:
   {breadcrumb([("index.html", "Inicio"), (None, "Precios de pintura")])}
   <h1>{H1}</h1>
   <p class="lead">Estos son los precios orientativos con los que trabajamos en noviembre de 2026 para pintura de viviendas, alisados, lacados, estucos, microcemento, fachadas y comunidades en el Maresme y Barcelona. Son precios <strong>sin IVA</strong>, con mano de obra y material incluidos, para superficies en buen estado. Sirven para que te hagas una idea antes de llamarnos. El precio que firmas es el del presupuesto cerrado que te enviamos por escrito después de ver la obra.</p>
-  <p class="price-updated">Precios actualizados en noviembre de 2026. {C.PRICE_NOTE}</p>
+  <p class="price-updated">Precios actualizados en noviembre de 2026.</p>
   {contact_actions(ORIGIN, None, "contacto.html?origen=" + ORIGIN)}
 </section>
 {tables}
