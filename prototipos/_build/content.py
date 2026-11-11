@@ -67,8 +67,8 @@ CONFIG = {
 
 # Entity fact sheet (prototipos/docs/2026-11-contenido-seo.md, section C) for /empresa and llms.txt.
 ENTITY_TEXT = (
-    "BcnProReforma es la empresa de pintura de Mohamed Ben Mesaud, pintor autónomo con base en Cabrils (Maresme, Barcelona) "
-    "y miembro del Gremi d'Empreses de Pintura de Barcelona i Comarques. Pinta viviendas por dentro y por fuera: paredes, "
+    "BcnProReforma es una empresa de pintura con base en Cabrils (Maresme, Barcelona), "
+    "miembro del Gremi d'Empreses de Pintura de Barcelona i Comarques. Pinta viviendas por dentro y por fuera: paredes, "
     "techos, fachadas y carpintería. También quita gotelé y alisa paredes, laca puertas y armarios, barniza madera, aplica "
     "estuco veneciano y marmolizado y reviste baños y suelos con microcemento. Trabaja además en escaleras y garajes de "
     "comunidades, y hace reformas de baño y cocina. Atiende el Maresme y Barcelona, en un radio de unos 40 km desde Cabrils. "
@@ -76,7 +76,7 @@ ENTITY_TEXT = (
     "de 8:00 a 20:00. Web: bcnproreforma.com."
 )
 ENTITY_LINE = (
-    "BcnProReforma: empresa de pintura de Mohamed Ben Mesaud (autónomo, Cabrils, Maresme). Miembro del Gremi d'Empreses de "
+    "BcnProReforma: empresa de pintura con base en Cabrils (Maresme, Barcelona). Miembro del Gremi d'Empreses de "
     "Pintura de Barcelona i Comarques. Pintura de viviendas, gotelé, lacados, estucos, microcemento, fachadas y comunidades "
     "en el Maresme y Barcelona. Tel. 639 05 88 19 · WhatsApp 631 71 40 77 · L–S 8:00–20:00."
 )
