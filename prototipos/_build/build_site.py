@@ -125,6 +125,8 @@ def head(key: str, title: str, desc: str, path: str = None, extra_ld=None) -> st
     path = path or ("/" if key == "index" else f"/{key}")
     full = f"{title} | {CFG['brand']}" if key != "index" else f"{title} | {CFG['brand']}"
     robots = "noindex" if key == "404" else "index, follow"
+    # The 404 page is served at any missing URL, so it must not claim one.
+    canonical = "" if key == "404" else f'<link rel="canonical" href="{SITE}{path}">\n'
     ld = "".join(
         f'<script type="application/ld+json">{json.dumps({"@context": "https://schema.org", **b}, ensure_ascii=False)}</script>\n'
         for b in (extra_ld if extra_ld is not None else schema_for(key, title)))
@@ -145,8 +147,7 @@ gtag('js',new Date());gtag('config','{C.GA_ID}');</script>
 <title>{C.e(full)}</title>
 <meta name="description" content="{C.e(desc)}">
 <meta name="robots" content="{robots}">
-<link rel="canonical" href="{SITE}{path}">
-<meta property="og:type" content="website">
+{canonical}<meta property="og:type" content="website">
 <meta property="og:locale" content="es_ES">
 <meta property="og:site_name" content="{CFG['brand']}">
 <meta property="og:title" content="{C.e(title)}">
