@@ -62,7 +62,7 @@ const BANNED = [
   [/4,9 de 5|con 23 rese|rese[nñ]a en google|marta g[oó]mez|jordi c\.|roberto s\.|elena m\./i, 'reseñas retiradas'],
   // Identity
   [/\bOmar\b/, 'Omar no aparece en la web pública'],
-  [/BCN Pro Reforma/, 'la marca es BCN ProReforma'],
+  [/BCN Pro ?Reforma|Bcn Pro Reforma/i, 'la marca es BcnProReforma'],
   // Typographic leftovers from a removed value
   [/\. \.(?!\.)/, 'punto suelto de un dato retirado'],
 ];

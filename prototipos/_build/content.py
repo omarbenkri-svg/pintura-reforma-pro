@@ -1,4 +1,4 @@
-"""Shared content and components for the three BCN ProReforma prototypes.
+"""Shared content and components for the three BcnProReforma prototypes.
 
 All three prototypes render exactly this copy, these photos and this contact
 logic, so they can be compared on design alone. Copy is Spanish (castellano).
@@ -41,8 +41,8 @@ CONFIG = {
     "wa_display": "631 71 40 77",
     "email": "bcnproreforma@gmail.com",
     # Public brand (Omar, 20/10/2026) and the registered name for legal texts.
-    "brand": "BCN ProReforma",
-    "brand_web": "BCN ProReforma",
+    "brand": "BcnProReforma",
+    "brand_web": "BcnProReforma",
     "tagline": "Pintura, estucos y microcemento",
     "legal_name": "Pintura, Reformas y Acabados de Obra",
     "holder": "Mohamed Ben Mesaud",
@@ -691,7 +691,7 @@ def head(title: str, description: str, theme_css: str, fonts_url: str, letter: s
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>{e(title)} | Prototipo {letter} · BCN ProReforma</title>
+<title>{e(title)} | Prototipo {letter} · BcnProReforma</title>
 <meta name="description" content="{e(description)}">
 <script>document.documentElement.classList.add('js');</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">

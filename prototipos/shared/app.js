@@ -1,4 +1,4 @@
-/* Shared behaviour for the public site and the three BCN ProReforma prototypes.
+/* Shared behaviour for the public site and the three BcnProReforma prototypes.
  *
  * Progressive enhancement only: every page is fully readable and navigable
  * without this file. Nothing here hides essential content (lesson from the
